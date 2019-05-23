@@ -62,4 +62,5 @@ build/index.html
 build/assets/bundle
 
 
-
+# ignore configuration file
+config.json

@@ -3,7 +3,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { setLogoutData } from '../redux/actions/actions';
+import { setLogoutData, setLoginData } from '../redux/actions/actions';
+import { GoogleLogin } from 'react-google-login';
+import config from '../../config.json';
+import { requestLogin } from '../utils/requestServer';
 
 //  Image url handling is convoluted in scss , much easier to set inline and get images from root
 let logoIconStyle = { background: 'url(assets/img/pawslogo.png)', backgroundSize: '100%' };
@@ -13,6 +16,7 @@ class NavBar extends Component {
     constructor(props) {
         super(props);
         this.logOut = this.logOut.bind(this);
+        this.googleResponse = this.googleResponse.bind(this);
     }
 
     componentDidMount() {
@@ -29,6 +33,15 @@ class NavBar extends Component {
         event.preventDefault();
         this.props.setLogoutData();
     }
+
+    googleResponse(response) {
+        requestLogin(response).then((data) => {
+            this.props.actions.setLoginData({ username: data.user.name.givenName, token: data.token });
+        }).catch((error) => {
+            console.log('login failed', error);
+        });
+    }
+
 
     render() {
         const loginRedirectURL = 'https://cas.usask.ca/cas/login?service=' + encodeURIComponent((process.env.NODE_ENV == 'development') ? 'https://localhost:8888/' : 'https://gwf-hci.usask.ca/');
@@ -62,10 +75,26 @@ class NavBar extends Component {
                                     <span className="icon icon-log-out"></span> Logout
                                         </Link>
                                 :
-                                <a href={loginRedirectURL}>
-                                    <span style={logoIconStyle} className="paws-icon"></span>
-                                    <span>Login</span>
-                                </a>
+                                <span className='login-container'>
+                                    <span className='login-text'>Login</span>
+                                    <a href={loginRedirectURL}>
+                                        <span style={logoIconStyle} className="paws-icon"></span>
+                                    </a>
+                                    <GoogleLogin
+                                        theme='dark'
+                                        clientId={config.GOOGLE_CLIENT_ID}
+                                        buttonText=""
+                                        className='google-login-button'
+                                        onSuccess={this.googleResponse}
+                                        onFailure={this.googleResponse}
+                                        icon={false}
+                                        cookiePolicy={'single_host_origin'}>
+                                        <span className='login-internal'>
+                                            <span className="icon icon-google-plus"></span>
+                                        </span>
+                                    </GoogleLogin>
+                                </span>
+
                             }
                             </li>
                         </ul>

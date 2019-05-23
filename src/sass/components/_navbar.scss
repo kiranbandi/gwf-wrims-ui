@@ -3,17 +3,6 @@
         font-weight: bold;
         text-transform: uppercase;
     }
-    .paws-icon {
-        display: inline-block;
-        width: 55px;
-        height: 19px;
-        background-size: 100%;
-        margin-right: 10px;
-        vertical-align: top;
-        &+span {
-            font-size: 15px;
-        }
-    }
     #navbar span.icon {
         padding: 4px 5px;
         border: 3px solid #cfd2da;
@@ -30,5 +19,38 @@
     .navbar-nav {
         margin: 0px;
         padding: 0px 2px;
+    }
+    .login-container {
+        padding: 6px 5px 0px 20px;
+        display: inline-block;
+        .login-text {
+            font-size: 15px;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        .paws-icon {
+            display: inline-block;
+            width: 55px;
+            height: 19px;
+            background-size: 100%;
+            margin-right: 10px;
+            vertical-align: text-bottom;
+        }
+        .google-login-button {
+            background-color: transparent !important;
+            padding: 3px !important;
+            cursor: pointer;
+            box-shadow: none !important;
+            display: inline-block !important;
+            &>span {
+                padding: 0px !important;
+                .icon {
+                    font-size: 18px;
+                    padding: 0px !important;
+                    border: none !important;
+                }
+            }
+        }
     }
 }
