@@ -11,25 +11,22 @@ class Container extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            showPawsLoginLoader: false
-        }
+        this.state = { showPawsLoginLoader: false };
     }
 
     componentDidMount() {
         const { pawsTicket } = this.props.route;
         // if the base route was launched with a ticket then validate the ticket
-
         if (pawsTicket) {
             this.setState({ showPawsLoginLoader: true });
-            requestLogin(pawsTicket)
-                .then((user) => { this.props.actions.setLoginData(user) })
+            // isPAWS flag set to true to differentiate login from google login
+            requestLogin(pawsTicket, true)
+                .then((userData) => { this.props.actions.setLoginData(userData) })
                 .catch((err) => { console.log(err) })
                 .finally(() => {
                     this.setState({ showPawsLoginLoader: false });
-                })
+                });
         }
-
     }
 
     render() {

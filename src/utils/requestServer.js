@@ -5,17 +5,10 @@ import _ from 'lodash';
 
 var requestServer = {};
 
-requestServer.requestLogin = function(ticket) {
+requestServer.requestLogin = function(access_token, isPAWS) {
     return new Promise((resolve, reject) => {
-        axios.post(endPoints.login, { ticket, isDevSite: (process.env.NODE_ENV == 'development') })
-            .then((response) => {
-                if (response.data.isRegistered) {
-                    resolve(response.data);
-                } else {
-                    toastr["error"]("Sorry but we don't have your information on our records.Please drop a mail to our IT team to get registered", "User Not Registered");
-                    reject();
-                }
-            })
+        axios.post(isPAWS ? endPoints.loginPaws : endPoints.loginGoogle, { access_token, isDevSite: (process.env.NODE_ENV == 'development') })
+            .then((response) => { resolve(response.data) })
             .catch((err) => errorCallback(err, reject));
     });
 }

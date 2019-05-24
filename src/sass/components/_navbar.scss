@@ -37,16 +37,19 @@
             margin-right: 10px;
             vertical-align: text-bottom;
         }
+        // the base styling by the third part lib is set inline 
+        // so we have to manually override it !!
         .google-login-button {
             background-color: transparent !important;
-            padding: 3px !important;
+            padding: 0px !important;
             cursor: pointer;
             box-shadow: none !important;
             display: inline-block !important;
+            vertical-align: middle;
             &>span {
                 padding: 0px !important;
                 .icon {
-                    font-size: 18px;
+                    font-size: 25px;
                     padding: 0px !important;
                     border: none !important;
                 }

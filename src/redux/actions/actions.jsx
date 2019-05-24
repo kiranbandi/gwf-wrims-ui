@@ -12,27 +12,28 @@ export function loginSuccess(userDetails) {
 }
 
 export function logOutUser() {
+    // remove the token and the username from browser storage
     sessionStorage.removeItem('jwt');
     sessionStorage.removeItem('username');
-
+    // redirect user to home page once he logs out
     hashHistory.push("/");
     return { type: types.LOG_OUT };
 }
 
-export function setUserDetails(userDetails) {
-    return { type: types.SET_USER_DATA, userDetails };
+export function setUsername(username) {
+    return { type: types.SET_USERNAME, username };
 }
 
 export function setLoginData(userDetails) {
     return dispatch => {
-        dispatch(setUserDetails(userDetails));
+        dispatch(setUsername(userDetails.username));
         dispatch(loginSuccess(userDetails));
     };
 }
 
 export function setLogoutData() {
     return dispatch => {
-        dispatch(setUserDetails({}));
+        dispatch(setUsername(''));
         dispatch(logOutUser());
     };
 }

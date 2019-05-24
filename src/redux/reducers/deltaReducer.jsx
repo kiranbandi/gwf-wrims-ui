@@ -8,6 +8,8 @@ export default function deltaReducer(state = initialState.delta, action) {
       return Object.assign({}, state, { sessionStatus: true })
     case types.LOG_OUT:
       return Object.assign({}, state, { sessionStatus: false })
+    case types.SET_USERNAME:
+      return Object.assign({}, state, { username: action.username })
     default:
       return state;
   }

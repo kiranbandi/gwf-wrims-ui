@@ -31,15 +31,18 @@ class NavBar extends Component {
 
     logOut(event) {
         event.preventDefault();
-        this.props.setLogoutData();
+        this.props.actions.setLogoutData();
     }
 
     googleResponse(response) {
-        requestLogin(response).then((data) => {
-            this.props.actions.setLoginData({ username: data.user.name.givenName, token: data.token });
-        }).catch((error) => {
-            console.log('login failed', error);
-        });
+        if (response.accessToken) {
+            // set isPAWS flag to false so server knows we are authenticating with google and not paws
+            requestLogin(response.accessToken, false)
+                .then((userData) => { this.props.actions.setLoginData(userData); })
+                .catch((error) => {
+                    console.log('login failed', error);
+                });
+        }
     }
 
 
@@ -90,7 +93,7 @@ class NavBar extends Component {
                                         icon={false}
                                         cookiePolicy={'single_host_origin'}>
                                         <span className='login-internal'>
-                                            <span className="icon icon-google-plus"></span>
+                                            <span className="icon icon-google-plus-with-circle"></span>
                                         </span>
                                     </GoogleLogin>
                                 </span>
@@ -114,7 +117,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        setLogoutData: bindActionCreators(setLogoutData, dispatch)
+        actions: bindActionCreators({ setLogoutData, setLoginData }, dispatch)
     };
 }
 
