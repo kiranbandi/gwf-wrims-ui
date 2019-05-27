@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 
-export function line(data, xScale, yScale, lineWidth, lineWidthTickRatio) {
+export default function(data, xScale, yScale, lineWidth, lineWidthTickRatio) {
     var path = '';
 
     var lineNodes = data.nodes;

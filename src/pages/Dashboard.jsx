@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as d3 from 'd3';
+import attachZoom from '../utils/attachZoom';
 import { tubeMap } from '../utils/tubeMap';
 
 class DashboardRoot extends Component {
@@ -20,41 +21,12 @@ class DashboardRoot extends Component {
             .style('height', height + 'px');
 
         var map = tubeMap()
-            .width(width)
-            .height(height)
-            .margin({
-                top: 20,
-                right: 20,
-                bottom: 40,
-                left: 100,
-            })
-            .on("click", function (name) {
-                console.log(name);
-            });
 
         d3.json("/assets/files/sample.json").then(function (data) {
-            container
-                .datum(data).call(map);
+            container.datum(data).call(map);
+            attachZoom('tube-map');
 
-            var svg = container.select('svg');
-
-            var zoom = d3
-                .zoom()
-                .scaleExtent([0.5, 6])
-                .on('zoom', zoomed);
-
-            var zoomContainer = svg.call(zoom);
-            var initialScale = 2;
-            var initialTranslate = [100, 200];
-
-            zoom.scaleTo(zoomContainer, initialScale);
-            zoom.translateTo(zoomContainer, initialTranslate[0], initialTranslate[1]);
-
-            function zoomed() {
-                svg.select('g').attr('transform', d3.event.transform.toString());
-            }
         });
-
 
     }
 

@@ -1,7 +1,8 @@
 import * as d3 from 'd3';
-import { line } from './curve';
+import river from './curve';
 
 export default function() {
+
     var margin = { top: 80, right: 80, bottom: 20, left: 80 };
     var width = 760;
     var height = 640;
@@ -14,32 +15,32 @@ export default function() {
     var _data;
     var gMap;
 
-    var listeners = d3.dispatch('click');
 
     function map(selection) {
 
         selection.each(function(data) {
-            _data = transformData(data);
 
-            var minX = d3.min(_data.raw, function(line) {
+            _data = data;
+
+            var minX = d3.min(_data.lines, function(line) {
                 return d3.min(line.nodes, function(node) {
                     return node.coords[0];
                 });
             });
 
-            var maxX = d3.max(_data.raw, function(line) {
+            var maxX = d3.max(_data.lines, function(line) {
                 return d3.max(line.nodes, function(node) {
                     return node.coords[0];
                 });
             });
 
-            var minY = d3.min(_data.raw, function(line) {
+            var minY = d3.min(_data.lines, function(line) {
                 return d3.min(line.nodes, function(node) {
                     return node.coords[1];
                 });
             });
 
-            var maxY = d3.max(_data.raw, function(line) {
+            var maxY = d3.max(_data.lines, function(line) {
                 return d3.max(line.nodes, function(node) {
                     return node.coords[1];
                 });
@@ -78,30 +79,6 @@ export default function() {
         });
     }
 
-    map.width = function(w) {
-        if (!arguments.length) return width;
-        width = w;
-        return map;
-    };
-
-    map.height = function(h) {
-        if (!arguments.length) return height;
-        height = h;
-        return map;
-    };
-
-    map.margin = function(m) {
-        if (!arguments.length) return margin;
-        margin = m;
-        return map;
-    };
-
-    map.on = function() {
-        var value = listeners.on.apply(listeners, arguments);
-        return value === listeners ? map : value;
-    };
-
-
     function drawLines() {
         gMap
             .append('g')
@@ -111,57 +88,19 @@ export default function() {
             .enter()
             .append('path')
             .attr('d', function(d) {
-                return line(d, xScale, yScale, lineWidth, lineWidthTickRatio);
+                return river(d, xScale, yScale, lineWidth, lineWidthTickRatio);
             })
             .attr('id', function(d) {
                 return d.name;
             })
             .attr('stroke', function(d) {
-                return d.color;
+                return d.color || '#92cce3';
             })
             .attr('fill', 'none')
-            .attr('stroke-width', function(d) {
-                return d.highlighted ? lineWidth * 1.3 : lineWidth;
-            })
-            .classed('line', true);
-    }
-
-
-    function transformData(data) {
-        return {
-            raw: data.lines,
-            river: data.river,
-            lines: extractLines(data.lines)
-        };
-    }
-
-    function extractLines(data) {
-        var lines = [];
-
-        data.forEach(function(line) {
-            var lineObj = {
-                name: line.name,
-                title: line.label,
-                stations: [],
-                color: line.color,
-                shiftCoords: line.shiftCoords,
-                nodes: line.nodes,
-                highlighted: false,
-            };
-
-            lines.push(lineObj);
-
-            for (var node = 0; node < line.nodes.length; node++) {
-                var data = line.nodes[node];
-
-                if (!data.hasOwnProperty('name')) continue;
-
-                lineObj.stations.push(data.name);
-            }
-        });
-
-        return lines;
+            .attr('stroke-width', lineWidth)
+            .attr('class', 'river forward-flow')
     }
 
     return map;
+
 }

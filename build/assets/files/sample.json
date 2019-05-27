@@ -2,7 +2,6 @@
     "lines": [
 
         {
-            "color": "#AB4800",
             "shiftCoords": [0, 0],
             "nodes": [{
                     "coords": [10, 33]
@@ -61,7 +60,6 @@
             ]
         },
         {
-            "color": "#000000",
             "shiftCoords": [0, 0],
             "nodes": [{
                     "coords": [-6, -36]
