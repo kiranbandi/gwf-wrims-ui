@@ -12,9 +12,8 @@ class DashboardRoot extends Component {
 
     componentDidMount() {
 
-
-        var width = 800;
-        var height = 500;
+        var width = 1200;
+        var height = 800;
 
         var container = d3.select('#tube-map')
             .style('width', width + 'px')
@@ -33,7 +32,7 @@ class DashboardRoot extends Component {
                 console.log(name);
             });
 
-        d3.json("/assets/files/tubemapSample.json").then(function (data) {
+        d3.json("/assets/files/sample.json").then(function (data) {
             container
                 .datum(data).call(map);
 
