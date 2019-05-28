@@ -1434,128 +1434,128 @@
         {
             "name": "D17",
             "coords": [15, 9],
-            "id": "D17",
+            "id": "DEMAND_D17",
             "type": "agri"
         },
         {
             "name": "D18",
             "coords": [22, 41],
-            "id": "D18",
+            "id": "DEMAND_D18",
             "type": "demand"
         },
         {
             "name": "D20",
             "coords": [57, 33],
-            "id": "D20",
+            "id": "DEMAND_D20",
             "type": "demand"
         },
         {
             "name": "D19",
             "coords": [89, 22],
-            "id": "D19",
+            "id": "DEMAND_D19",
             "type": "agri"
         },
         {
             "name": "D7",
             "coords": [57, 55],
-            "id": "D7",
+            "id": "DEMAND_D7",
             "type": "demand"
         },
         {
             "name": "D8",
             "coords": [73, 47],
-            "id": "D8",
+            "id": "DEMAND_D8",
             "type": "agri"
         },
         {
             "name": "D6",
             "coords": [52, 77],
-            "id": "D6",
+            "id": "DEMAND_D6",
             "type": "demand"
         },
         {
             "name": "D9",
             "coords": [81, 44],
-            "id": "D9",
+            "id": "DEMAND_D9",
             "type": "demand"
         },
         {
             "name": "D12",
             "coords": [81, 34],
-            "id": "D12",
+            "id": "DEMAND_D12",
             "type": "demand"
         },
 
         {
             "name": "D10",
             "coords": [100, 49],
-            "id": "D10",
+            "id": "DEMAND_D10",
             "type": "agri"
         },
         {
             "name": "D11",
             "coords": [107, 33],
-            "id": "D11",
+            "id": "DEMAND_D11",
             "type": "agri"
         },
         {
             "name": "D13",
             "coords": [114, 22],
-            "id": "D13",
+            "id": "DEMAND_D13",
             "type": "demand"
         },
         {
             "name": "D23",
             "coords": [109, 82],
-            "id": "D23",
+            "id": "DEMAND_D23",
             "type": "agri"
         },
         {
             "name": "D16",
             "coords": [128, 87],
-            "id": "D16",
+            "id": "DEMAND_D16",
             "type": "agri"
         },
         {
             "name": "D24",
             "coords": [159, 85],
-            "id": "D24",
+            "id": "DEMAND_D24",
             "type": "agri"
         },
         {
             "name": "D21",
             "coords": [127, 38],
-            "id": "D21",
+            "id": "DEMAND_D21",
             "type": "demand"
         },
         {
             "name": "D15",
             "coords": [154, 45],
-            "id": "D15",
+            "id": "DEMAND_D15",
             "type": "demand"
         },
         {
             "name": "D14",
             "coords": [166, 60.5],
-            "id": "D14",
+            "id": "DEMAND_D14",
             "type": "agri"
         },
         {
             "name": "D22",
             "coords": [135, 55],
-            "id": "D22",
+            "id": "DEMAND_D22",
             "type": "agri"
         },
         {
             "name": "D25",
             "coords": [142, 64],
-            "id": "D25",
+            "id": "DEMAND_D25",
             "type": "demand"
         },
         {
             "name": "D26",
             "coords": [136, 68],
-            "id": "D26",
+            "id": "DEMAND_D26",
             "type": "demand"
         }
     ]

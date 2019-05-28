@@ -29,7 +29,7 @@ class TubeMap extends Component {
 
 
         const { tubeData = { lines: [], artifacts: [], labels: [], markers: [] },
-            width, height } = this.props;
+            width, height, fileCatalogInfo } = this.props;
 
         // find the max and min from all the nodes within the lines
         const minX = d3.min(tubeData.lines, (line) => d3.min(line.nodes, (node) => node.coords[0])),
@@ -83,8 +83,10 @@ class TubeMap extends Component {
                             labels={tubeData.labels} />
 
                         <Markers
+                            fileCatalogInfo={fileCatalogInfo}
                             xScale={xScale}
                             yScale={yScale}
+                            setPathData={this.props.setPathData}
                             markers={tubeData.markers} />
 
                     </g>

@@ -15,8 +15,15 @@ class DashboardRoot extends Component {
         this.state = {
             isSchematicLoading: false,
             SchematicData: { lines: [], artifacts: [], labels: [], markers: [] },
-            fileCatalogInfo: []
+            fileCatalogInfo: [],
+            pathData: []
         };
+
+        this.setPathData = this.setPathData.bind(this);
+    }
+
+    setPathData(pathData) {
+        this.setState({ pathData });
     }
 
     componentDidMount() {
@@ -48,7 +55,7 @@ class DashboardRoot extends Component {
 
 
     render() {
-        const { isSchematicLoading, SchematicData } = this.state;
+        const { isSchematicLoading, SchematicData, fileCatalogInfo, pathData } = this.state;
 
         //125px to offset the 30px margin on both sides and vertical scroll bar width
         let widthOfDashboard = document.body.getBoundingClientRect().width - 100,
@@ -59,9 +66,11 @@ class DashboardRoot extends Component {
                 {isSchematicLoading ?
                     <Loading className='loader' type='spin' height='100px' width='100px' color='#d6e5ff' delay={-1} /> :
                     <div className='dashboard-inner-root'>
-                        <TubeMap tubeData={SchematicData} width={tubeWidth} height={tubeWidth / 1.75} />
+                        <TubeMap setPathData={this.setPathData} tubeData={SchematicData} fileCatalogInfo={fileCatalogInfo} width={tubeWidth} height={tubeWidth / 1.75} />
+                        <div className='data-container'>
+                            {pathData.join(",")}
+                        </div>
                     </div>
-
                 }
             </div>
         );

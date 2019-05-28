@@ -9,7 +9,8 @@ endPointRoot = 'http://23.20.4.93:8081/api'
 var endPoints = {
     loginGoogle: endPointRoot + "/auth/google-login",
     loginPaws: endPointRoot + "/auth/paws-login",
-    getCatalog: endPointRoot + "/dss/get-catalog"
+    getCatalog: endPointRoot + "/dss/get-catalog",
+    getPathData: endPointRoot + "/dss/get-pathdata"
 }
 
 module.exports = endPoints;

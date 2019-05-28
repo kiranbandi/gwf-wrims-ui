@@ -21,6 +21,14 @@ requestServer.getFileCatalog = function() {
     });
 }
 
+requestServer.getPathData = function(path) {
+    return new Promise((resolve, reject) => {
+        axios.post(endPoints.getPathData, {...path })
+            .then((response) => { resolve(response.data) })
+            .catch((err) => errorCallback(err, reject));
+    });
+}
+
 function errorCallback(error, reject) {
     if (error.response && error.response.data) {
         toastr["error"](error.response.data.message, "ERROR");

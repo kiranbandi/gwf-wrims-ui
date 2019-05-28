@@ -7,6 +7,9 @@ export default function(containerID) {
     var zoom = d3
         .zoom()
         .scaleExtent([0.5, 6])
+        // we will use the double clicks for marker selections
+        //  this way there is no ambiguity with click events on the same dom node
+        .filter(() => !(d3.event.type == 'dblclick'))
         .on('zoom', zoomed);
 
     var zoomContainer = svg.call(zoom);

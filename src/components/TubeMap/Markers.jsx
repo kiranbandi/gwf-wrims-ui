@@ -1,11 +1,51 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
+import { getPathData } from '../../utils/requestServer';
 
 class Markers extends Component {
 
     constructor(props) {
         super(props);
+        this.onMarkerClick = this.onMarkerClick.bind(this);
+    }
+
+    onMarkerClick(marker) {
+        const { id = false } = marker,
+            { fileCatalogInfo } = this.props;
+
+        this.props.setPathData([]);
+
+        let pathIndex, path;
+        // if the id is valid and in the catalog file then
+        //  pull its data from the server
+        if (id) {
+            pathIndex = _.findIndex(fileCatalogInfo, (d) => d.b == id);
+            if (pathIndex > -1) {
+                path = fileCatalogInfo[pathIndex];
+                getPathData(path)
+                    .then((data) => {
+                        var dataByLine = data.split("\n");
+                        var dataList = [];
+                        _.map(dataByLine, (d, i) => {
+
+                            if (i == 0) {
+                                d = d.slice(1);
+                            }
+                            else if (i == (dataByLine.length - 1)) {
+                                d = d.slice(0, -1)
+                            }
+                            dataList = dataList.concat(d.split(/\s+/));
+                        })
+                        dataList = _.map(dataList, (d) => Number(d));
+
+                        this.props.setPathData(dataList);
+                    })
+                    .catch((error) => {
+                        alert('error fetching data');
+                    })
+            }
+        }
     }
 
     render() {
@@ -22,10 +62,14 @@ class Markers extends Component {
                 <g key={'marker-' + index} className='river-marker'
                     transform={"translate(" + xScale(coords[0]) + "," + yScale(coords[1]) + ") scale(" + (markerSizeScale) + ")"}>
                     <circle
+                        // probably the worst way to do this but im on a deadline so sue me !!
+                        onDoubleClick={this.onMarkerClick.bind(this, marker)}
                         cx='150' cy='150' r='200'
                         className={'type-' + type}>
                     </circle>
-                    <text x={name.length > 2 ? 10 : 75} y={210} fontSize='175px'>
+                    <text
+                        onDoubleClick={this.onMarkerClick.bind(this, marker)}
+                        x={name.length > 2 ? 10 : 75} y={210} fontSize='175px'>
                         {name}
                     </text>
                 </g>)
