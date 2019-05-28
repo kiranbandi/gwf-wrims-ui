@@ -14,7 +14,7 @@ class DashboardRoot extends Component {
         super(props);
         this.state = {
             isSchematicLoading: false,
-            SchematicData: { lines: [], artifacts: [], labels: [] },
+            SchematicData: { lines: [], artifacts: [], labels: [], markers: [] },
             fileCatalogInfo: []
         };
     }

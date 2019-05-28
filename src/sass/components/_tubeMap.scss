@@ -51,4 +51,21 @@
     .river-label {
         fill: #c6c6c6;
     }
+    .river-marker {
+        cursor: pointer;
+        circle {
+            &.type-agri {
+                fill: #51a83a;
+            }
+            &.type-inflow {
+                fill: #5c6b84;
+            }
+            &.type-demand {
+                fill: #428dff;
+            }
+        }
+        text {
+            fill: white;
+        }
+    }
 }

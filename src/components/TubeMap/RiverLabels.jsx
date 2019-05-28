@@ -17,9 +17,7 @@ export default (props) => {
                 fontSize={fontScale + 'px'}
                 className='river-label'>
                 {name}
-
             </text >)
-
     })
 
     return (<g className='river-labels-container'>{labelsList}</g>)

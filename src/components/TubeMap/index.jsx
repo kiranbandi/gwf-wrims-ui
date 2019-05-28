@@ -6,6 +6,7 @@ import _ from 'lodash';
 import RiverLines from './RiverLines';
 import Artifacts from './Artifacts';
 import RiverLabels from './RiverLabels';
+import Markers from './Markers';
 
 class TubeMap extends Component {
 
@@ -27,7 +28,7 @@ class TubeMap extends Component {
         var lineWidthTickRatio = 3 / 2;
 
 
-        const { tubeData = { lines: [], artifacts: [], labels: [] },
+        const { tubeData = { lines: [], artifacts: [], labels: [], markers: [] },
             width, height } = this.props;
 
         // find the max and min from all the nodes within the lines
@@ -63,20 +64,29 @@ class TubeMap extends Component {
             <div id='tube-map' style={{ 'width': width, 'height': height }}>
                 <svg style={{ 'width': '100%', 'height': '100%' }}>
                     <g className='zoomable'>
+
                         <RiverLines
                             lines={tubeData.lines}
                             xScale={xScale}
                             yScale={yScale}
                             lineWidth={lineWidth}
                             lineWidthTickRatio={lineWidthTickRatio} />
+
                         <Artifacts
                             xScale={xScale}
                             yScale={yScale}
                             artifacts={tubeData.artifacts} />
+
                         <RiverLabels
                             xScale={xScale}
                             yScale={yScale}
                             labels={tubeData.labels} />
+
+                        <Markers
+                            xScale={xScale}
+                            yScale={yScale}
+                            markers={tubeData.markers} />
+
                     </g>
                 </svg>
             </div>
