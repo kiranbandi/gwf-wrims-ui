@@ -1,0 +1,1259 @@
+{
+    "lines": [{
+            "name": "Bow River",
+            "color": "#5c6b84",
+            "type": "river",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [26, 6]
+                },
+                {
+                    "coords": [29, 11]
+                },
+                {
+                    "coords": [33, 14]
+                },
+                {
+                    "coords": [39, 16]
+                },
+                {
+                    "coords": [49, 18]
+                },
+                {
+                    "coords": [64, 18]
+                },
+                {
+                    "coords": [83, 18]
+                },
+                {
+                    "coords": [100, 18]
+                },
+                {
+                    "coords": [102, 19],
+                    "dir": "N"
+                },
+                {
+                    "coords": [115, 18]
+                },
+                {
+                    "coords": [124, 18]
+                },
+                {
+                    "coords": [133, 19]
+                },
+                {
+                    "coords": [142, 21]
+                },
+                {
+                    "coords": [150, 24]
+                },
+                {
+                    "coords": [156, 28]
+                },
+                {
+                    "coords": [163, 33]
+                },
+                {
+                    "coords": [168, 38]
+                },
+                {
+                    "coords": [171, 40]
+                },
+                {
+                    "coords": [180, 48]
+                },
+                {
+                    "coords": [185, 55]
+                },
+                {
+                    "coords": [188, 62]
+                },
+                {
+                    "coords": [187, 68]
+                },
+                {
+                    "coords": [187, 70]
+                },
+                {
+                    "coords": [187, 71]
+                }
+            ]
+        },
+        {
+            "name": "Threepoint Creek",
+            "color": "#5c6b84",
+            "type": "river",
+            "shiftCoords": [0, 0.5],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [2, 25]
+                },
+                {
+                    "coords": [5, 23]
+                },
+                {
+                    "coords": [8, 21]
+                },
+                {
+                    "coords": [11, 21]
+                },
+                {
+                    "coords": [14, 21]
+                },
+                {
+                    "coords": [16, 21]
+                },
+                {
+                    "coords": [19, 21]
+                },
+                {
+                    "coords": [23, 22]
+                },
+                {
+                    "coords": [27, 22]
+                },
+                {
+                    "coords": [32, 23]
+                },
+                {
+                    "coords": [35, 23]
+                },
+                {
+                    "coords": [38, 24]
+                },
+                {
+                    "coords": [42, 25]
+                },
+                {
+                    "coords": [46, 25]
+                },
+                {
+                    "coords": [49, 26]
+                }
+            ]
+        },
+        {
+            "name": "Sheep River",
+            "color": "#5c6b84",
+            "type": "river",
+            "shiftCoords": [-1, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [13, 38]
+                },
+                {
+                    "coords": [16, 37]
+                },
+                {
+                    "coords": [20, 35]
+                },
+                {
+                    "coords": [25, 33]
+                },
+                {
+                    "coords": [28, 32]
+                },
+                {
+                    "coords": [31, 31]
+                },
+                {
+                    "coords": [35, 29]
+                },
+                {
+                    "coords": [38, 28]
+                },
+                {
+                    "coords": [41, 28]
+                },
+                {
+                    "coords": [44, 27]
+                },
+                {
+                    "coords": [47, 27]
+                },
+                {
+                    "coords": [49, 26]
+                },
+                {
+                    "coords": [52, 27]
+                },
+                {
+                    "coords": [54, 27]
+                },
+                {
+                    "coords": [57, 27]
+                },
+                {
+                    "coords": [61, 28]
+                },
+                {
+                    "coords": [65, 29]
+                },
+                {
+                    "coords": [70, 31]
+                },
+                {
+                    "coords": [75, 33]
+                },
+                {
+                    "coords": [79, 34]
+                },
+                {
+                    "coords": [82, 34]
+                },
+                {
+                    "coords": [86, 34]
+                },
+                {
+                    "coords": [89, 34]
+                },
+                {
+                    "coords": [93, 34]
+                },
+                {
+                    "coords": [97, 33]
+                },
+                {
+                    "coords": [99, 33]
+                },
+                {
+                    "coords": [100, 32],
+                    "dir": "E"
+                }
+            ]
+        },
+        {
+            "name": "Tongue Creek",
+            "color": "#5c6b84",
+            "type": "river",
+            "reverse": false,
+            "shiftCoords": [-2, 0],
+            "nodes": [{
+                    "coords": [46, 43]
+                },
+                {
+                    "coords": [52, 41]
+                },
+                {
+                    "coords": [56, 40]
+                },
+                {
+                    "coords": [60, 39]
+                },
+                {
+                    "coords": [64, 39]
+                },
+                {
+                    "coords": [66, 39]
+                },
+                {
+                    "coords": [69, 40]
+                },
+                {
+                    "coords": [72, 40]
+                },
+                {
+                    "coords": [75, 40]
+                },
+                {
+                    "coords": [78, 39]
+                },
+                {
+                    "coords": [81, 39]
+                },
+                {
+                    "coords": [83, 39]
+                },
+                {
+                    "coords": [87, 40]
+                },
+                {
+                    "coords": [91, 40]
+                },
+                {
+                    "coords": [94, 41]
+                },
+                {
+                    "coords": [97, 41]
+                }
+            ]
+        },
+        {
+            "name": "Trap Creek",
+            "color": "#5c6b84",
+            "type": "river",
+            "reverse": false,
+            "shiftCoords": [0, 0],
+            "nodes": [{
+                    "coords": [13, 58]
+                },
+                {
+                    "coords": [19, 58]
+                },
+                {
+                    "coords": [25, 59]
+                },
+                {
+                    "coords": [30, 60]
+                },
+                {
+                    "coords": [34, 61]
+                },
+                {
+                    "coords": [37, 62]
+                },
+                {
+                    "coords": [40, 63]
+                },
+                {
+                    "coords": [42, 63]
+                },
+                {
+                    "coords": [44, 63]
+                },
+                {
+                    "coords": [47, 63]
+                },
+                {
+                    "coords": [50, 65]
+                },
+                {
+                    "coords": [52, 67]
+                },
+                {
+                    "coords": [54, 68]
+                },
+                {
+                    "coords": [55, 69],
+                    "dir": "S"
+                },
+                {
+                    "coords": [55, 70]
+                }
+            ]
+        },
+        {
+            "name": "Highwood River",
+            "color": "#5c6b84",
+            "type": "river",
+            "reverse": false,
+            "shiftCoords": [0, 0],
+            "nodes": [{
+                    "coords": [16, 68]
+                },
+                {
+                    "coords": [19, 70]
+                },
+                {
+                    "coords": [22, 71]
+                },
+                {
+                    "coords": [25, 72]
+                },
+                {
+                    "coords": [30, 72]
+                },
+                {
+                    "coords": [34, 72]
+                },
+                {
+                    "coords": [37, 72]
+                },
+                {
+                    "coords": [40, 72]
+                },
+                {
+                    "coords": [43, 72]
+                },
+                {
+                    "coords": [46, 71]
+                },
+                {
+                    "coords": [49, 71]
+                },
+                {
+                    "coords": [53, 71]
+                },
+                {
+                    "coords": [57, 69]
+                },
+                {
+                    "coords": [62, 68]
+                },
+                {
+                    "coords": [66, 67]
+                },
+                {
+                    "coords": [69, 65]
+                },
+                {
+                    "coords": [72, 64]
+                },
+                {
+                    "coords": [77, 62]
+                },
+                {
+                    "coords": [78, 61],
+                    "dir": "N"
+                },
+                {
+                    "coords": [82, 58]
+                },
+                {
+                    "coords": [84, 56]
+                },
+                {
+                    "coords": [87, 54]
+                },
+                {
+                    "coords": [89, 53]
+                },
+                {
+                    "coords": [91, 50]
+                },
+                {
+                    "coords": [93, 48]
+                },
+                {
+                    "coords": [95, 44]
+                },
+                {
+                    "coords": [97, 41]
+                },
+                {
+                    "coords": [98, 38],
+                    "dir": "N"
+                },
+                {
+                    "coords": [99, 34],
+                    "dir": "N"
+                },
+                {
+                    "coords": [101, 29]
+                },
+                {
+                    "coords": [102, 26]
+                },
+                {
+                    "coords": [102, 24],
+                    "dir": "N"
+                },
+                {
+                    "coords": [103, 22],
+                    "dir": "N"
+                },
+                {
+                    "coords": [103, 21],
+                    "dir": "N"
+                }
+            ]
+        },
+        {
+            "name": "Cataract Creek",
+            "color": "#5c6b84",
+            "type": "river",
+            "reverse": false,
+            "shiftCoords": [0, 0],
+            "nodes": [{
+                    "coords": [27, 97]
+                },
+                {
+                    "coords": [28, 92],
+                    "dir": "N"
+                },
+                {
+                    "coords": [30, 88]
+                },
+                {
+                    "coords": [33, 83]
+                },
+                {
+                    "coords": [35, 80]
+                },
+                {
+                    "coords": [37, 78]
+                },
+                {
+                    "coords": [40, 75]
+                },
+                {
+                    "coords": [42, 73]
+                },
+                {
+                    "coords": [43, 72],
+                    "dir": "N"
+                }
+            ]
+        },
+        {
+            "name": "Pekisko Creek",
+            "color": "#5c6b84",
+            "type": "river",
+            "reverse": false,
+            "shiftCoords": [0, 0],
+            "nodes": [{
+                    "coords": [62, 97]
+                },
+                {
+                    "coords": [63, 91],
+                    "dir": "N"
+                },
+                {
+                    "coords": [65, 86]
+                },
+                {
+                    "coords": [66, 82],
+                    "dir": "N"
+                },
+                {
+                    "coords": [68, 79]
+                },
+                {
+                    "coords": [70, 77]
+                },
+                {
+                    "coords": [72, 75]
+                },
+                {
+                    "coords": [73, 73],
+                    "dir": "N"
+                },
+                {
+                    "coords": [75, 71]
+                }
+            ]
+        },
+
+        {
+            "name": "Stimson Creek",
+            "color": "#5c6b84",
+            "type": "river",
+            "reverse": false,
+            "shiftCoords": [0, 0],
+            "nodes": [{
+                    "coords": [83, 100]
+                },
+                {
+                    "coords": [81, 97],
+                    "dir": "N"
+                },
+                {
+                    "coords": [80, 94],
+                    "dir": "N"
+                },
+                {
+                    "coords": [80, 92],
+                    "dir": "N"
+                },
+                {
+                    "coords": [80, 91],
+                    "dir": "N"
+                },
+                {
+                    "coords": [81, 89],
+                    "dir": "N"
+                },
+                {
+                    "coords": [81, 88],
+                    "dir": "N"
+                },
+                {
+                    "coords": [81, 85],
+                    "dir": "N"
+                },
+                {
+                    "coords": [80, 81],
+                    "dir": "N"
+                },
+                {
+                    "coords": [79, 79],
+                    "dir": "N"
+                },
+                {
+                    "coords": [78, 76],
+                    "dir": "N"
+
+                },
+                {
+                    "coords": [77, 73],
+                    "dir": "N"
+
+                },
+                {
+                    "coords": [75, 71],
+                    "dir": "N"
+                },
+                {
+                    "coords": [75, 68],
+                    "dir": "N"
+                },
+                {
+                    "coords": [76, 65],
+                    "dir": "N"
+                },
+                {
+                    "coords": [77, 63],
+                    "dir": "N"
+                },
+                {
+                    "coords": [77, 62],
+                    "dir": "N"
+                }
+            ]
+        }, {
+            "name": "Nanton Creek",
+            "color": "#5c6b84",
+            "type": "river",
+            "reverse": false,
+            "shiftCoords": [0, -1],
+            "nodes": [{
+                    "coords": [91, 95]
+                },
+                {
+                    "coords": [93, 91]
+                },
+                {
+                    "coords": [95, 88]
+                },
+                {
+                    "coords": [98, 85]
+                },
+                {
+                    "coords": [100, 83]
+                },
+                {
+                    "coords": [102, 81]
+                },
+                {
+                    "coords": [105, 79]
+                },
+                {
+                    "coords": [108, 77]
+                },
+                {
+                    "coords": [110, 76]
+                },
+                {
+                    "coords": [113, 75]
+                },
+                {
+                    "coords": [115, 74]
+                },
+                {
+                    "coords": [117, 73]
+                },
+                {
+                    "coords": [118, 73],
+                    "dir": "N"
+                }
+            ]
+        },
+        {
+            "name": "Women's Coulee Diversion",
+            "color": "#f7a02e",
+            "type": "diversion",
+            "reverse": false,
+            "shiftCoords": [0, 0],
+            "nodes": [{
+                    "coords": [118, 72]
+                },
+                {
+                    "coords": [101, 72]
+                },
+                {
+                    "coords": [101, 56],
+                    "dir": "N"
+                },
+                {
+                    "coords": [85, 56]
+                }
+            ]
+        },
+        {
+            "name": "Mosquito Creek",
+            "color": "#5c6b84",
+            "type": "river",
+            "reverse": false,
+            "shiftCoords": [0, 0],
+            "nodes": [{
+                    "coords": [118, 73]
+                },
+                {
+                    "coords": [121, 73]
+                },
+                {
+                    "coords": [125, 74]
+                },
+                {
+                    "coords": [128, 75]
+                },
+                {
+                    "coords": [130, 76]
+                },
+                {
+                    "coords": [133, 78]
+                },
+                {
+                    "coords": [135, 79]
+                },
+                {
+                    "coords": [137, 79]
+                },
+                {
+                    "coords": [140, 80]
+                },
+                {
+                    "coords": [142, 80]
+                },
+                {
+                    "coords": [145, 80]
+                },
+                {
+                    "coords": [147, 79]
+                },
+                {
+                    "coords": [148, 78],
+                    "dir": "N"
+                },
+                {
+                    "coords": [150, 77]
+                }
+            ]
+        },
+        {
+            "name": "Clear Lake Diversion",
+            "color": "#f7a02e",
+            "type": "diversion",
+            "reverse": false,
+            "shiftCoords": [0, 0],
+            "nodes": [{
+                    "coords": [148, 78]
+                },
+                {
+                    "coords": [148, 84],
+                    "dir": "N"
+                },
+                {
+                    "coords": [155, 84]
+                },
+                {
+                    "coords": [155, 91],
+                    "dir": "N"
+                }
+            ]
+        },
+        {
+            "name": "Little Bow River",
+            "color": "#5c6b84",
+            "type": "river",
+            "reverse": false,
+            "shiftCoords": [0, 0],
+            "nodes": [{
+                    "coords": [153, 67]
+                },
+                {
+                    "coords": [153, 64],
+                    "dir": "S"
+                },
+                {
+                    "coords": [151, 61]
+                },
+                {
+                    "coords": [150, 58],
+                    "dir": "s"
+                },
+                {
+                    "coords": [149, 56],
+                    "dir": "s"
+                },
+                {
+                    "coords": [148, 55],
+                    "dir": "s"
+                },
+                {
+                    "coords": [147, 53],
+                    "dir": "s"
+                },
+                {
+                    "coords": [146, 53],
+                    "dir": "s"
+                },
+                {
+                    "coords": [146, 52],
+                    "dir": "s"
+                },
+                {
+                    "coords": [145, 52],
+                    "dir": "s"
+                },
+                {
+                    "coords": [143, 52]
+                },
+                {
+                    "coords": [142, 52],
+                    "dir": "s"
+                },
+                {
+                    "coords": [140, 52]
+                },
+                {
+                    "coords": [138, 52]
+                },
+                {
+                    "coords": [136, 52]
+                },
+                {
+                    "coords": [134, 52]
+                },
+                {
+                    "coords": [133, 52],
+                    "dir": "s"
+                },
+                {
+                    "coords": [132, 52],
+                    "dir": "s"
+                },
+                {
+                    "coords": [131, 52],
+                    "dir": "s"
+                },
+                {
+                    "coords": [130, 52],
+                    "dir": "s"
+                }
+            ]
+        },
+        {
+            "name": "Frank Lake Diversion",
+            "color": "#f7a02e",
+            "type": "diversion",
+            "reverse": false,
+            "shiftCoords": [0, 0],
+            "nodes": [{
+                    "coords": [142, 52]
+                },
+                {
+                    "coords": [142, 45],
+                    "dir": "s"
+                },
+                {
+                    "coords": [134, 45]
+                },
+                {
+                    "coords": [134, 38],
+                    "dir": "s"
+                }
+            ]
+        },
+        {
+            "name": "Little Bow Diversion",
+            "color": "#f7a02e",
+            "type": "diversion",
+            "reverse": false,
+            "shiftCoords": [0, 0],
+            "nodes": [{
+                    "coords": [131, 52]
+                },
+                {
+                    "coords": [112, 52]
+                },
+                {
+                    "coords": [112, 47],
+                    "dir": "s"
+                },
+                {
+                    "coords": [94, 47]
+                }
+            ]
+        }, {
+            "name": "Twin Valley Reservoir / Unnamed outflow/inflow?",
+            "color": "#5c6b84",
+            "type": "river",
+            "reverse": false,
+            "shiftCoords": [0, 0],
+            "nodes": [{
+                "coords": [162, 77]
+            }, {
+                "coords": [164, 80]
+            }, {
+                "coords": [172, 80]
+            }, {
+                "coords": [176, 83]
+            }, {
+                "coords": [180, 87]
+            }, {
+                "coords": [183, 86]
+            }]
+        },
+        {
+            "name": "D17",
+            "color": "#51a83a",
+            "type": "irrigation-demand",
+            "reverse": false,
+            "shiftCoords": [0, 0],
+            "nodes": [{
+                    "coords": [10, 21]
+                },
+                {
+                    "coords": [14, 14]
+                },
+                {
+                    "coords": [16, 12]
+                }
+            ]
+        },
+        {
+            "name": "D18",
+            "color": "#428dff",
+            "type": "regular-demand",
+            "reverse": false,
+            "shiftCoords": [0, 1],
+            "nodes": [{
+                    "coords": [18, 36]
+                },
+                {
+                    "coords": [22, 40]
+                },
+                {
+                    "coords": [27, 43]
+                }
+            ]
+        },
+        {
+            "name": "D20",
+            "color": "#428dff",
+            "type": "regular-demand",
+            "reverse": false,
+            "shiftCoords": [0, 1],
+            "nodes": [{
+                "coords": [62, 28]
+            }, {
+                "coords": [61, 32],
+                "dir": "s"
+            }, {
+                "coords": [60, 33],
+                "dir": "s"
+            }]
+        },
+        {
+            "name": "D19",
+            "color": "#51a83a",
+            "type": "irrigation-demand",
+            "reverse": false,
+            "shiftCoords": [0, 0],
+            "nodes": [{
+                    "coords": [82, 34]
+                },
+                {
+                    "coords": [86, 29]
+                },
+                {
+                    "coords": [89, 26]
+                }
+            ]
+        },
+        {
+            "name": "D6",
+            "color": "#428dff",
+            "type": "regular-demand",
+            "reverse": false,
+            "shiftCoords": [0, 2],
+            "nodes": [{
+                    "coords": [53, 70]
+                },
+                {
+                    "coords": [54, 73],
+                    "dir": "s"
+                },
+                {
+                    "coords": [54, 76],
+                    "dir": "s"
+                }
+            ]
+        },
+        {
+            "name": "D7",
+            "color": "#428dff",
+            "type": "regular-demand",
+            "reverse": false,
+            "shiftCoords": [0, -2],
+            "nodes": [{
+                    "coords": [63, 68]
+                },
+                {
+                    "coords": [62, 65],
+                    "dir": "s"
+                },
+                {
+                    "coords": [61, 63],
+                    "dir": "s"
+                }
+            ]
+        },
+        {
+            "name": "D8",
+            "color": "#51a83a",
+            "type": "irrigation-demand",
+            "reverse": false,
+            "shiftCoords": [0, -2],
+            "nodes": [{
+                    "coords": [80, 59]
+                },
+                {
+                    "coords": [79, 56],
+                    "dir": "s"
+                }, {
+                    "coords": [78, 55],
+                    "dir": "e"
+                }
+            ]
+        },
+        {
+            "name": "D9",
+            "color": "#428dff",
+            "type": "regular-demand",
+            "reverse": false,
+            "shiftCoords": [-1, -1],
+            "nodes": [{
+                    "coords": [88, 53]
+                }, {
+                    "coords": [85, 50]
+                },
+                {
+                    "coords": [82, 49]
+                }
+            ]
+        },
+        {
+            "name": "D10",
+            "color": "#51a83a",
+            "type": "irrigation-demand",
+            "reverse": false,
+            "shiftCoords": [0, 2],
+            "nodes": [{
+                    "coords": [93, 48]
+                },
+                {
+                    "coords": [95, 49]
+                },
+                {
+                    "coords": [97, 50]
+                },
+                {
+                    "coords": [99, 50]
+                }
+            ]
+        },
+        {
+            "name": "D12",
+            "color": "#428dff",
+            "type": "regular-demand",
+            "reverse": false,
+            "shiftCoords": [-1, 0],
+            "nodes": [{
+                    "coords": [97, 38]
+                },
+                {
+                    "coords": [89, 37]
+                },
+                {
+                    "coords": [85, 37]
+                }
+            ]
+        },
+        {
+            "name": "D11",
+            "color": "#51a83a",
+            "type": "irrigation-demand",
+            "reverse": false,
+            "shiftCoords": [0, 0],
+            "nodes": [{
+                    "coords": [99, 35]
+                }, {
+                    "coords": [106, 35]
+                },
+                {
+                    "coords": [117, 36]
+                }
+            ]
+        },
+        {
+            "name": "D13",
+            "color": "#428dff",
+            "type": "regular-demand",
+            "reverse": false,
+            "shiftCoords": [0, 0],
+            "nodes": [{
+                    "coords": [102, 25]
+                },
+                {
+                    "coords": [109, 24]
+                },
+                {
+                    "coords": [116, 24]
+                }
+            ]
+        },
+        {
+            "name": "D23",
+            "color": "#51a83a",
+            "type": "irrigation-demand",
+            "reverse": false,
+            "shiftCoords": [0, 0],
+            "nodes": [{
+                    "coords": [110, 76]
+                },
+                {
+                    "coords": [111, 80],
+                    "dir": "s"
+                },
+                {
+                    "coords": [111, 85],
+                    "dir": "s"
+                },
+
+                {
+                    "coords": [112, 88],
+                    "dir": "s"
+                }
+            ]
+        },
+        {
+            "name": "D16",
+            "color": "#51a83a",
+            "type": "irrigation-demand",
+            "reverse": false,
+            "shiftCoords": [0, 0],
+            "nodes": [{
+                    "coords": [133, 79]
+                },
+                {
+                    "coords": [131, 83]
+                },
+                {
+                    "coords": [130, 86],
+                    "dir": "s"
+                },
+                {
+                    "coords": [130, 88],
+                    "dir": "s"
+                }
+            ]
+        },
+        {
+            "name": "D26",
+            "color": "#428dff",
+            "type": "regular-demand",
+            "reverse": false,
+            "shiftCoords": [0, 0],
+            "nodes": [{
+                "coords": [144, 79]
+            }, {
+                "coords": [142, 75]
+            }, {
+                "coords": [138, 71]
+            }]
+        },
+        {
+            "name": "D25",
+            "color": "#428dff",
+            "type": "regular-demand",
+            "reverse": false,
+            "shiftCoords": [0, 0],
+            "nodes": [{
+                    "coords": [150, 75]
+                },
+                {
+                    "coords": [148, 70]
+                },
+                {
+                    "coords": [146, 68]
+                }
+            ]
+        },
+        {
+            "name": "D24",
+            "color": "#51a83a",
+            "type": "irrigation-demand",
+            "reverse": false,
+            "shiftCoords": [0, 0],
+            "nodes": [{
+                    "coords": [150, 78]
+                },
+                {
+                    "coords": [150, 78]
+                }, {
+                    "coords": [158, 84]
+                }, {
+                    "coords": [160, 86]
+                }
+            ]
+        },
+        {
+            "name": "D14",
+            "color": "#51a83a",
+            "type": "irrigation-demand",
+            "reverse": false,
+            "shiftCoords": [0, 0],
+            "nodes": [{
+                "coords": [153, 63]
+            }, {
+                "coords": [160, 63]
+            }, {
+                "coords": [165, 63]
+            }]
+        },
+        {
+            "name": "D15",
+            "color": "#428dff",
+            "type": "regular-demand",
+            "reverse": false,
+            "shiftCoords": [0, 0],
+            "nodes": [{
+                    "coords": [149, 55]
+                },
+                {
+                    "coords": [158, 46]
+                }
+            ]
+        },
+        {
+            "name": "D21",
+            "color": "#428dff",
+            "type": "regular-demand",
+            "reverse": false,
+            "shiftCoords": [0, -1],
+            "nodes": [{
+                    "coords": [136, 52]
+                },
+                {
+                    "coords": [134, 46]
+                },
+                {
+                    "coords": [130, 42]
+                }
+            ]
+        },
+        {
+            "name": "D22",
+            "color": "#51a83a",
+            "type": "irrigation-demand",
+            "reverse": false,
+            "shiftCoords": [0, 0],
+            "nodes": [{
+                    "coords": [133, 52]
+                },
+                {
+                    "coords": [135, 55]
+                },
+                {
+                    "coords": [136, 57]
+                },
+                {
+                    "coords": [139, 60]
+                }
+            ]
+        }
+    ]
+}

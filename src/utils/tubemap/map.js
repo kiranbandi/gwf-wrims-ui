@@ -65,7 +65,7 @@ export default function() {
             }
 
             xScale.domain([minX, maxX]).range([margin.left, margin.left + maxXRange]);
-            yScale.domain([minY, maxY]).range([margin.top + maxYRange, margin.top]);
+            yScale.domain([maxY, minY]).range([margin.top + maxYRange, margin.top]);
             lineWidth = lineWidthMultiplier * (xScale(1) - xScale(0));
 
             svg = selection
@@ -74,7 +74,6 @@ export default function() {
                 .style('height', '100%');
 
             gMap = svg.append('g');
-
             drawLines();
         });
     }

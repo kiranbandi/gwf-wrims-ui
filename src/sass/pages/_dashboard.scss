@@ -6,7 +6,7 @@
         background: #ffffff;
         margin: 50px auto;
         .river {
-            stroke-dasharray: 4, 10;
+            stroke-dasharray: 10, 4;
             stroke-linecap: round;
             &.forward-flow {
                 animation: flow 1s linear infinite;
