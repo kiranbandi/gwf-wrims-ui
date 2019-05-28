@@ -1284,7 +1284,7 @@
         }, {
             "type": "reservoir",
             "coords": [181, 82],
-            "size": 1.75,
+            "size": 1.5,
             "name": "Traverse Reservoir"
         },
         {
@@ -1292,6 +1292,93 @@
             "coords": [98.5, 60],
             "size": 1,
             "name": "Women's Coulee Reservoir"
+
+        }
+    ],
+    "labels": [{
+            "name": "Bow River",
+            "coords": [45, 8]
+
+        },
+        {
+            "name": "Threepoint Creek",
+            "coords": [20, 18]
+
+        },
+        {
+            "name": "Sheep River",
+            "coords": [8, 31]
+
+        },
+        {
+            "name": "Trap Creek",
+            "coords": [10, 55]
+
+        },
+        {
+            "name": "Highwood River",
+            "coords": [8, 77]
+
+        },
+        {
+            "name": "Cataract Creek",
+            "coords": [8, 88]
+
+        },
+        {
+            "name": "Pekisko Creek",
+            "coords": [40, 92]
+
+        },
+
+        {
+            "name": "Stimson Creek",
+            "coords": [58, 102]
+
+        },
+        {
+            "name": "Nanton Creek",
+            "coords": [96, 92]
+
+        },
+        {
+            "name": "Mosquito Creek",
+            "coords": [110, 70]
+
+        },
+        {
+            "name": "Tongue Creek",
+            "coords": [37, 48]
+
+        },
+        {
+            "name": "Bow River",
+            "coords": [178, 44]
+
+        },
+        {
+            "name": "Little Bow River",
+            "coords": [153, 57]
+
+        },
+        {
+            "name": "Clear Lake Diversion",
+            "coords": [160, 96]
+
+        },
+        {
+            "name": "Frank Lake Diversion",
+            "coords": [137, 42]
+
+        },
+        {
+            "name": "Little Bow Diversion",
+            "coords": [97, 44]
+
+        },
+        {
+            "name": "Women's Coulee Diversion",
+            "coords": [105.5, 64]
 
         }
     ]

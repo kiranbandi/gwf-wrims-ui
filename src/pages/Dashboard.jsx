@@ -4,8 +4,9 @@ import { bindActionCreators } from 'redux';
 import { TubeMap } from '../components';
 import axios from 'axios';
 import toastr from '../utils/toastr';
+import { getFileCatalog } from '../utils/requestServer';
 import Loading from 'react-loading';
-
+import _ from 'lodash';
 
 class DashboardRoot extends Component {
 
@@ -13,16 +14,30 @@ class DashboardRoot extends Component {
         super(props);
         this.state = {
             isSchematicLoading: false,
-            SchematicData: { lines: [] }
+            SchematicData: { lines: [], artifacts: [], labels: [] },
+            fileCatalogInfo: []
         };
     }
 
     componentDidMount() {
 
+        var SchematicData = {}, fileCatalogInfo = [];
+
         this.setState({ 'isSchematicLoading': true });
-        axios.get("/assets/files/rivers-corrected.json")
+        axios.get("/assets/files/schematic.json")
             .then((response) => {
-                this.setState({ 'SchematicData': response.data })
+                SchematicData = _.clone(response.data);
+                return getFileCatalog();
+            })
+            .then((response) => {
+                // The server response is in a weird format 
+                //  so quick fix for now ignore lines that dont have pipe "|" symbol in them
+                const filteredResponse = _.filter(response.split("\n"), (d) => (d.indexOf('|') > -1));
+                fileCatalogInfo = _.map(filteredResponse, (row) => {
+                    const values = row.split("|");
+                    return { "a": values[1], "b": values[2], "c": values[3], "time": values[4] };
+                });
+                this.setState({ SchematicData, fileCatalogInfo });
             })
             .catch(() => {
                 toastr["error"]("Failed to load schematic", "ERROR");
@@ -38,7 +53,6 @@ class DashboardRoot extends Component {
         //125px to offset the 30px margin on both sides and vertical scroll bar width
         let widthOfDashboard = document.body.getBoundingClientRect().width - 100,
             tubeWidth = widthOfDashboard / 2;
-
 
         return (
             <div className='dashboard-page-root' >

@@ -13,7 +13,7 @@ export default (props) => {
                     d={riverCurve(d, xScale, yScale, lineWidth, lineWidthTickRatio)}
                     stroke={d.color || '#92cce3'}
                     strokeWidth={lineWidth}
-                    className={'river forward-flow'}>
+                    className={'river ' + (d.reverse ? 'reverse-flow' : 'forward-flow')}>
                 </path>
             })}
         </g>)

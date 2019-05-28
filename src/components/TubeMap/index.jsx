@@ -5,6 +5,7 @@ import attachZoom from '../../utils/attachZoom';
 import _ from 'lodash';
 import RiverLines from './RiverLines';
 import Artifacts from './Artifacts';
+import RiverLabels from './RiverLabels';
 
 class TubeMap extends Component {
 
@@ -26,7 +27,8 @@ class TubeMap extends Component {
         var lineWidthTickRatio = 3 / 2;
 
 
-        const { tubeData = { lines: [], artifacts: [] }, width, height } = this.props;
+        const { tubeData = { lines: [], artifacts: [], labels: [] },
+            width, height } = this.props;
 
         // find the max and min from all the nodes within the lines
         const minX = d3.min(tubeData.lines, (line) => d3.min(line.nodes, (node) => node.coords[0])),
@@ -71,6 +73,10 @@ class TubeMap extends Component {
                             xScale={xScale}
                             yScale={yScale}
                             artifacts={tubeData.artifacts} />
+                        <RiverLabels
+                            xScale={xScale}
+                            yScale={yScale}
+                            labels={tubeData.labels} />
                     </g>
                 </svg>
             </div>

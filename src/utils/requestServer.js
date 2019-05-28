@@ -13,6 +13,13 @@ requestServer.requestLogin = function(access_token, isPAWS) {
     });
 }
 
+requestServer.getFileCatalog = function() {
+    return new Promise((resolve, reject) => {
+        axios.get(endPoints.getCatalog)
+            .then((response) => { resolve(response.data) })
+            .catch((err) => errorCallback(err, reject));
+    });
+}
 
 function errorCallback(error, reject) {
     if (error.response && error.response.data) {
