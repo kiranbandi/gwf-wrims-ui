@@ -1,53 +1,8 @@
 .dashboard-page-root {
     height: 100%;
     text-align: center;
-    #tube-map {
+    .loader {
+        margin: 75px auto;
         display: inline-block;
-        background: #ffffff;
-        margin: 50px auto;
-        .river {
-            stroke-dasharray: 10, 4;
-            stroke-linecap: round;
-            &.forward-flow {
-                animation: flow 1s linear infinite;
-                -webkit-animation: flow 1s linear infinite;
-            }
-            &.reverse-flow {
-                animation: revflow 1s linear infinite;
-                -webkit-animation: revflow 1s linear infinite;
-            }
-        }
-        @keyframes flow {
-            from {
-                stroke-dashoffset: 14;
-            }
-            to {
-                stroke-dashoffset: 0;
-            }
-        }
-        @-webkit-keyframes flow {
-            from {
-                stroke-dashoffset: 14;
-            }
-            to {
-                stroke-dashoffset: 0;
-            }
-        }
-        @keyframes revflow {
-            from {
-                stroke-dashoffset: 0;
-            }
-            to {
-                stroke-dashoffset: 14;
-            }
-        }
-        @-webkit-keyframes revflow {
-            from {
-                stroke-dashoffset: 0;
-            }
-            to {
-                stroke-dashoffset: 14;
-            }
-        }
     }
 }

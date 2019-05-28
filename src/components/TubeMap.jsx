@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as d3 from 'd3';
 import attachZoom from '../utils/attachZoom';
-import { tubeMap } from '../utils/tubeMap';
-
+import riverCurve from '../utils/riverCurve';
+import _ from 'lodash';
 
 class TubeMap extends Component {
 
@@ -12,19 +12,66 @@ class TubeMap extends Component {
     }
 
     componentDidMount() {
-
-        var map = tubeMap()
-
-        d3.json("/assets/files/rivers-corrected.json").then(function (data) {
-            d3.select('#tube-map').datum(data).call(map);
-            attachZoom('tube-map');
-        });
-
+        attachZoom('tube-map');
     }
 
     render() {
+
+        var margin = { top: 80, right: 80, bottom: 20, left: 80 };
+        var xScale = d3.scaleLinear();
+        var yScale = d3.scaleLinear();
+        var lineWidth;
+        var lineWidthMultiplier = 0.8;
+        var lineWidthTickRatio = 3 / 2;
+
+
+        const { tubeData = { lines: [] }, width, height } = this.props;
+
+        // find the max and min from all the nodes within the lines
+        const minX = d3.min(tubeData.lines, (line) => d3.min(line.nodes, (node) => node.coords[0])),
+            maxX = d3.max(tubeData.lines, (line) => d3.max(line.nodes, (node) => node.coords[0])),
+            minY = d3.min(tubeData.lines, (line) => d3.min(line.nodes, (node) => node.coords[1])),
+            maxY = d3.max(tubeData.lines, (line) => d3.max(line.nodes, (node) => node.coords[1]));
+
+
+        const desiredAspectRatio = (maxX - minX) / (maxY - minY),
+            actualAspectRatio =
+                (width - margin.left - margin.right) /
+                (height - margin.top - margin.bottom);
+
+        const ratioRatio = actualAspectRatio / desiredAspectRatio;
+
+        let maxXRange, maxYRange;
+
+        // Note that we flip the sense of the y-axis here
+        if (desiredAspectRatio > actualAspectRatio) {
+            maxXRange = width - margin.left - margin.right;
+            maxYRange = (height - margin.top - margin.bottom) * ratioRatio;
+        } else {
+            maxXRange = (width - margin.left - margin.right) / ratioRatio;
+            maxYRange = height - margin.top - margin.bottom;
+        }
+
+        xScale.domain([minX, maxX]).range([margin.left, margin.left + maxXRange]);
+        yScale.domain([maxY, minY]).range([margin.top + maxYRange, margin.top]);
+        lineWidth = lineWidthMultiplier * (xScale(1) - xScale(0));
+
         return (
-            <div id='tube-map' style={{ width: 1200, height: 800 }}>
+            <div id='tube-map' style={{ 'width': width, 'height': height }}>
+                <svg style={{ 'width': '100%', 'height': '100%' }}>
+                    <g className='lines-container'>
+                        {_.map(tubeData.lines, (d, index) => {
+                            return <path
+                                key={'river-line-' + index}
+                                id={d.name}
+                                d={riverCurve(d, xScale, yScale, lineWidth, lineWidthTickRatio)}
+                                stroke={d.color || '#92cce3'}
+                                strokeWidth={lineWidth}
+                                className={'river forward-flow'}>
+                            </path>
+                        })}
+                    </g>
+                </svg>
             </div>
         );
     }

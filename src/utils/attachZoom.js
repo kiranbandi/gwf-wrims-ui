@@ -10,8 +10,8 @@ export default function(containerID) {
         .on('zoom', zoomed);
 
     var zoomContainer = svg.call(zoom);
-    var initialScale = 1;
-    var initialTranslate = [100, 200];
+    var initialScale = 1.10;
+    var initialTranslate = [50, 50];
 
     zoom.scaleTo(zoomContainer, initialScale);
     zoom.translateTo(zoomContainer, initialTranslate[0], initialTranslate[1]);
