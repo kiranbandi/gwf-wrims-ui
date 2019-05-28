@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as d3 from 'd3';
-import attachZoom from '../utils/attachZoom';
-import riverCurve from '../utils/riverCurve';
+import attachZoom from '../../utils/attachZoom';
 import _ from 'lodash';
+import RiverLines from './RiverLines';
+import Artifacts from './Artifacts';
 
 class TubeMap extends Component {
 
@@ -25,7 +26,7 @@ class TubeMap extends Component {
         var lineWidthTickRatio = 3 / 2;
 
 
-        const { tubeData = { lines: [] }, width, height } = this.props;
+        const { tubeData = { lines: [], artifacts: [] }, width, height } = this.props;
 
         // find the max and min from all the nodes within the lines
         const minX = d3.min(tubeData.lines, (line) => d3.min(line.nodes, (node) => node.coords[0])),
@@ -59,17 +60,17 @@ class TubeMap extends Component {
         return (
             <div id='tube-map' style={{ 'width': width, 'height': height }}>
                 <svg style={{ 'width': '100%', 'height': '100%' }}>
-                    <g className='lines-container'>
-                        {_.map(tubeData.lines, (d, index) => {
-                            return <path
-                                key={'river-line-' + index}
-                                id={d.name}
-                                d={riverCurve(d, xScale, yScale, lineWidth, lineWidthTickRatio)}
-                                stroke={d.color || '#92cce3'}
-                                strokeWidth={lineWidth}
-                                className={'river forward-flow'}>
-                            </path>
-                        })}
+                    <g className='zoomable'>
+                        <RiverLines
+                            lines={tubeData.lines}
+                            xScale={xScale}
+                            yScale={yScale}
+                            lineWidth={lineWidth}
+                            lineWidthTickRatio={lineWidthTickRatio} />
+                        <Artifacts
+                            xScale={xScale}
+                            yScale={yScale}
+                            artifacts={tubeData.artifacts} />
                     </g>
                 </svg>
             </div>

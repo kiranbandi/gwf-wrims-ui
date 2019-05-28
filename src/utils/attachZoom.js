@@ -17,7 +17,7 @@ export default function(containerID) {
     zoom.translateTo(zoomContainer, initialTranslate[0], initialTranslate[1]);
 
     function zoomed() {
-        svg.select('g').attr('transform', d3.event.transform.toString());
+        svg.select('g.zoomable').attr('transform', d3.event.transform.toString());
     }
 
 }

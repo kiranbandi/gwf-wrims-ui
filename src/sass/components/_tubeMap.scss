@@ -15,37 +15,37 @@
             animation: revflow 2s linear infinite;
             -webkit-animation: revflow 2s linear infinite;
         }
-    }
-    @keyframes flow {
-        from {
-            stroke-dashoffset: 14;
+        @keyframes flow {
+            from {
+                stroke-dashoffset: 14;
+            }
+            to {
+                stroke-dashoffset: 0;
+            }
         }
-        to {
-            stroke-dashoffset: 0;
+        @-webkit-keyframes flow {
+            from {
+                stroke-dashoffset: 14;
+            }
+            to {
+                stroke-dashoffset: 0;
+            }
         }
-    }
-    @-webkit-keyframes flow {
-        from {
-            stroke-dashoffset: 14;
+        @keyframes revflow {
+            from {
+                stroke-dashoffset: 0;
+            }
+            to {
+                stroke-dashoffset: 14;
+            }
         }
-        to {
-            stroke-dashoffset: 0;
-        }
-    }
-    @keyframes revflow {
-        from {
-            stroke-dashoffset: 0;
-        }
-        to {
-            stroke-dashoffset: 14;
-        }
-    }
-    @-webkit-keyframes revflow {
-        from {
-            stroke-dashoffset: 0;
-        }
-        to {
-            stroke-dashoffset: 14;
+        @-webkit-keyframes revflow {
+            from {
+                stroke-dashoffset: 0;
+            }
+            to {
+                stroke-dashoffset: 14;
+            }
         }
     }
 }

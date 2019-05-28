@@ -1,0 +1,12 @@
+.artifacts-container {
+    .reservoir {
+        &>g {
+            fill: white;
+            stroke-width: 8px;
+        }
+        circle {
+            fill: #00bdff;
+            stroke: #00bdff;
+        }
+    }
+}

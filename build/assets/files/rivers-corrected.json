@@ -77,6 +77,9 @@
                 },
                 {
                     "coords": [187, 71]
+                },
+                {
+                    "coords": [187, 80]
                 }
             ]
         },
@@ -718,6 +721,9 @@
                 },
                 {
                     "coords": [150, 77]
+                },
+                {
+                    "coords": [154, 77]
                 }
             ]
         },
@@ -750,6 +756,8 @@
             "reverse": false,
             "shiftCoords": [0, 0],
             "nodes": [{
+                    "coords": [153, 69]
+                }, {
                     "coords": [153, 67]
                 },
                 {
@@ -1254,6 +1262,37 @@
                     "coords": [139, 60]
                 }
             ]
+        }
+    ],
+    "artifacts": [{
+            "type": "reservoir",
+            "coords": [131.5, 31],
+            "size": 1,
+            "name": "Frank Lake"
+        },
+        {
+            "type": "reservoir",
+            "coords": [152.5, 92],
+            "size": 1,
+            "name": "Clear Lake"
+        },
+        {
+            "type": "reservoir",
+            "coords": [152.5, 69],
+            "size": 1.5,
+            "name": "Twin Valley"
+        }, {
+            "type": "reservoir",
+            "coords": [181, 82],
+            "size": 1.75,
+            "name": "Traverse Reservoir"
+        },
+        {
+            "type": "reservoir",
+            "coords": [98.5, 60],
+            "size": 1,
+            "name": "Women's Coulee Reservoir"
+
         }
     ]
 }
