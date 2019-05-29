@@ -29,7 +29,9 @@ class TubeMap extends Component {
 
 
         const { tubeData = { lines: [], artifacts: [], labels: [], markers: [] },
-            width, height, fileCatalogInfo } = this.props;
+            width, height, fileCatalogInfo, filterMesh } = this.props;
+
+        const { areDemandsVisible, visibleDemands } = filterMesh;
 
         // find the max and min from all the nodes within the lines
         const minX = d3.min(tubeData.lines, (line) => d3.min(line.nodes, (node) => node.coords[0])),
@@ -60,13 +62,47 @@ class TubeMap extends Component {
         yScale.domain([maxY, minY]).range([margin.top + maxYRange, margin.top]);
         lineWidth = lineWidthMultiplier * (xScale(1) - xScale(0));
 
+
+        let filteredLineData, filteredMarkers;
+
+        if (!areDemandsVisible) {
+            filteredLineData = _.filter(tubeData.lines, (d) => { return (d.type != 'regular-demand' && d.type != 'irrigation-demand') });
+            filteredMarkers = _.filter(tubeData.markers, (d) => { return (d.type != 'demand' && d.type != 'agri') });
+        }
+        else if (visibleDemands.length > 0) {
+
+
+            filteredLineData = _.filter(tubeData.lines, (d) => {
+                if (d.type == 'regular-demand' || d.type == 'irrigation-demand') {
+                    return visibleDemands.indexOf(d.name) > -1;
+                }
+                return true;
+            });
+
+            filteredMarkers = _.filter(tubeData.markers, (d) => {
+                if (d.type == 'demand' || d.type == 'agri') {
+                    return visibleDemands.indexOf(d.name) > -1;
+                }
+                return true;
+            });
+
+        }
+        else {
+            filteredLineData = _.clone(tubeData.lines);
+            filteredMarkers = _.clone(tubeData.markers);
+        }
+
+
+
+
+
         return (
             <div id='tube-map' style={{ 'width': width, 'height': height }}>
                 <svg style={{ 'width': '100%', 'height': '100%' }}>
                     <g className='zoomable'>
 
                         <RiverLines
-                            lines={tubeData.lines}
+                            lines={filteredLineData}
                             xScale={xScale}
                             yScale={yScale}
                             lineWidth={lineWidth}
@@ -86,7 +122,7 @@ class TubeMap extends Component {
                             fileCatalogInfo={fileCatalogInfo}
                             xScale={xScale}
                             yScale={yScale}
-                            markers={tubeData.markers} />
+                            markers={filteredMarkers} />
 
                     </g>
                 </svg>
@@ -95,4 +131,11 @@ class TubeMap extends Component {
     }
 }
 
-export default connect(null, null)(TubeMap);
+
+function mapStateToProps(state) {
+    return {
+        filterMesh: state.delta.filterMesh,
+    };
+}
+
+export default connect(mapStateToProps, null)(TubeMap);

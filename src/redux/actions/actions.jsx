@@ -38,10 +38,17 @@ export function setLogoutData() {
     };
 }
 
+export function setFilterDemand(visibleDemands) {
+    return { type: types.SET_FILTER_DEMAND, visibleDemands };
+}
+
 export function setFlowData(flowData) {
     return { type: types.SET_FLOW_DATA, flowData };
 }
 
+export function toggleDemandVisibility() {
+    return { type: types.SET_DEMAND_VISIBILITY };
+}
 
 
 

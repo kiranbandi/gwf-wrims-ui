@@ -1,0 +1,19 @@
+.filter-root-container {
+    margin: 50px 10px 20px 10px;
+    .demand-btn {
+        &.active-button {
+            border: 4px solid;
+        }
+    }
+    .inner-filter-box {
+        display: inline-block;
+        margin-left: 20px;
+        .filter-label {
+            margin-right: 10px;
+        }
+        .select-container-filter {
+            display: inline-block;
+            width: 400px;
+        }
+    }
+}

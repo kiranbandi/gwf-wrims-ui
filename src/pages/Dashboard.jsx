@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { TubeMap } from '../components';
+import { TubeMap,FilterPanel } from '../components';
 import axios from 'axios';
 import toastr from '../utils/toastr';
 import { getFileCatalog } from '../utils/requestServer';
@@ -62,6 +62,7 @@ class DashboardRoot extends Component {
                 {isSchematicLoading ?
                     <Loading className='loader' type='spin' height='100px' width='100px' color='#d6e5ff' delay={-1} /> :
                     <div className='dashboard-inner-root'>
+                        <FilterPanel tubeData={SchematicData} />
                         <TubeMap tubeData={SchematicData} fileCatalogInfo={fileCatalogInfo} width={tubeWidth} height={tubeWidth / 1.75} />
                         <div className='data-container'>
                             {flowData.join(",")}

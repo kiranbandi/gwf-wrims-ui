@@ -1,4 +1,6 @@
 export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
 export const LOG_OUT = 'LOG_OUT';
 export const SET_USERNAME = 'SET_USERNAME';
-export const SET_FLOW_DATA ='SET_FLOW_DATA';
+export const SET_FLOW_DATA = 'SET_FLOW_DATA';
+export const SET_DEMAND_VISIBILITY = 'SET_DEMAND_VISIBILITY';
+export const SET_FILTER_DEMAND = 'SET_FILTER_DEMAND';

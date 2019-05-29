@@ -12,6 +12,11 @@ export default function deltaReducer(state = initialState.delta, action) {
       return Object.assign({}, state, { username: action.username })
     case types.SET_FLOW_DATA:
       return Object.assign({}, state, { flowData: action.flowData })
+    case types.SET_DEMAND_VISIBILITY:
+      return Object.assign({}, state, { filterMesh: { ...state.filterMesh, areDemandsVisible: !state.filterMesh.areDemandsVisible } })
+    case types.SET_FILTER_DEMAND:
+      return Object.assign({}, state, { filterMesh: { ...state.filterMesh, visibleDemands: action.visibleDemands } })
+      
     default:
       return state;
   }
