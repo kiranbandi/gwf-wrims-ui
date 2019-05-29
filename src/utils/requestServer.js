@@ -15,7 +15,7 @@ requestServer.requestLogin = function(access_token, isPAWS) {
 
 requestServer.getFileCatalog = function() {
     return new Promise((resolve, reject) => {
-        axios.get(endPoints.getCatalog)
+        axios.get(endPoints.getCatalog, { headers: { 'authorization': 'Bearer ' + sessionStorage.jwt } })
             .then((response) => { resolve(response.data) })
             .catch((err) => errorCallback(err, reject));
     });
@@ -23,7 +23,7 @@ requestServer.getFileCatalog = function() {
 
 requestServer.getPathData = function(path) {
     return new Promise((resolve, reject) => {
-        axios.post(endPoints.getPathData, {...path })
+        axios.post(endPoints.getPathData, {...path }, { headers: { 'authorization': 'Bearer ' + sessionStorage.jwt } })
             .then((response) => { resolve(response.data) })
             .catch((err) => errorCallback(err, reject));
     });
