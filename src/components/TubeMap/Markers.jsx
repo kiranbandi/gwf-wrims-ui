@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { getPathData } from '../../utils/requestServer';
+import { setFlowData } from '../../redux/actions/actions';
+import { bindActionCreators } from 'redux';
 
 class Markers extends Component {
 
@@ -12,9 +14,7 @@ class Markers extends Component {
 
     onMarkerClick(marker) {
         const { id = false } = marker,
-            { fileCatalogInfo } = this.props;
-
-        this.props.setPathData([]);
+            { fileCatalogInfo, actions } = this.props;
 
         let pathIndex, path;
         // if the id is valid and in the catalog file then
@@ -38,8 +38,8 @@ class Markers extends Component {
                             dataList = dataList.concat(d.split(/\s+/));
                         })
                         dataList = _.map(dataList, (d) => Number(d));
-
-                        this.props.setPathData(dataList);
+                        //    make a call to redux action here 
+                        actions.setFlowData(dataList);
                     })
                     .catch((error) => {
                         alert('error fetching data');
@@ -79,4 +79,11 @@ class Markers extends Component {
     }
 }
 
-export default connect(null, null)(Markers);
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators({ setFlowData }, dispatch)
+    };
+}
+
+export default connect(null, mapDispatchToProps)(Markers);

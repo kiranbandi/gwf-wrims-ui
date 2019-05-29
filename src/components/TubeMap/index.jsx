@@ -86,7 +86,6 @@ class TubeMap extends Component {
                             fileCatalogInfo={fileCatalogInfo}
                             xScale={xScale}
                             yScale={yScale}
-                            setPathData={this.props.setPathData}
                             markers={tubeData.markers} />
 
                     </g>

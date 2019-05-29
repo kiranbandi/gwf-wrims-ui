@@ -9,7 +9,6 @@ authorization.checkloginStatus = function(nextState, replace) {
             pathname: '/',
             state: { nextPathname: nextState.location.pathname }
         });
-
     }
 }
 

@@ -5,8 +5,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { setLogoutData, setLoginData } from '../redux/actions/actions';
 import { GoogleLogin } from 'react-google-login';
-import config from '../../config.json';
 import { requestLogin } from '../utils/requestServer';
+
+// Google client ID for the GWF project 
+const GOOGLE_ID = '35101241949-nlhoc8npcecg7il8589aq194cc5cboab.apps.googleusercontent.com';
 
 //  Image url handling is convoluted in scss , much easier to set inline and get images from root
 let logoIconStyle = { background: 'url(assets/img/pawslogo.png)', backgroundSize: '100%' };
@@ -47,7 +49,7 @@ class NavBar extends Component {
 
 
     render() {
-        const loginRedirectURL = 'https://cas.usask.ca/cas/login?service=' + encodeURIComponent((process.env.NODE_ENV == 'development') ? 'https://localhost:8888/' : 'https://gwf-hci.usask.ca/');
+        const loginRedirectURL = 'https://cas.usask.ca/cas/login?service=' + encodeURIComponent('https://gwf-hci.usask.ca/');
 
         return (
             <nav className="navbar navbar-inverse navbar-fixed-top">
@@ -85,7 +87,7 @@ class NavBar extends Component {
                                     </a>
                                     <GoogleLogin
                                         theme='dark'
-                                        clientId={config.GOOGLE_CLIENT_ID}
+                                        clientId={GOOGLE_ID}
                                         buttonText=""
                                         className='google-login-button'
                                         onSuccess={this.googleResponse}

@@ -38,7 +38,9 @@ export function setLogoutData() {
     };
 }
 
-
+export function setFlowData(flowData) {
+    return { type: types.SET_FLOW_DATA, flowData };
+}
 
 
 

@@ -15,16 +15,10 @@ class DashboardRoot extends Component {
         this.state = {
             isSchematicLoading: false,
             SchematicData: { lines: [], artifacts: [], labels: [], markers: [] },
-            fileCatalogInfo: [],
-            pathData: []
+            fileCatalogInfo: []
         };
-
-        this.setPathData = this.setPathData.bind(this);
     }
 
-    setPathData(pathData) {
-        this.setState({ pathData });
-    }
 
     componentDidMount() {
 
@@ -55,20 +49,22 @@ class DashboardRoot extends Component {
 
 
     render() {
-        const { isSchematicLoading, SchematicData, fileCatalogInfo, pathData } = this.state;
+        const { isSchematicLoading, SchematicData, fileCatalogInfo } = this.state;
+
+        const { flowData } = this.props;
 
         //125px to offset the 30px margin on both sides and vertical scroll bar width
         let widthOfDashboard = document.body.getBoundingClientRect().width - 100,
-            tubeWidth = widthOfDashboard / 2;
+            tubeWidth = widthOfDashboard * 0.75;
 
         return (
             <div className='dashboard-page-root' >
                 {isSchematicLoading ?
                     <Loading className='loader' type='spin' height='100px' width='100px' color='#d6e5ff' delay={-1} /> :
                     <div className='dashboard-inner-root'>
-                        <TubeMap setPathData={this.setPathData} tubeData={SchematicData} fileCatalogInfo={fileCatalogInfo} width={tubeWidth} height={tubeWidth / 1.75} />
+                        <TubeMap tubeData={SchematicData} fileCatalogInfo={fileCatalogInfo} width={tubeWidth} height={tubeWidth / 1.75} />
                         <div className='data-container'>
-                            {pathData.join(",")}
+                            {flowData.join(",")}
                         </div>
                     </div>
                 }
@@ -83,5 +79,11 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(null, mapDispatchToProps)(DashboardRoot);
+function mapStateToProps(state) {
+    return {
+        flowData: state.delta.flowData
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardRoot);
 
