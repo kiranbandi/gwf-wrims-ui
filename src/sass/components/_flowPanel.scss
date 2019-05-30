@@ -1,0 +1,28 @@
+.flow-panel-root-container {
+    display: inline-block;
+    background: #1b1f2a;
+    margin: 10px auto;
+    border-radius: 7px;
+    margin-left: 20px;
+    vertical-align: top;
+    .title-bar {
+        margin-top: 30px;
+        margin-bottom: 10px;
+    }
+    .flow-inner-container {
+        svg.flow-data-chart {
+            margin: 0px auto;
+            display: block;
+            .flow-spark-line {
+                fill: none;
+                stroke: #1997c6;
+                stroke-width: 2px;
+            }
+            .flow-text {
+                fill: white;
+                font-weight: bold;
+                font-size: 17px;
+            }
+        }
+    }
+}

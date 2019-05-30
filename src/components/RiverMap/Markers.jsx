@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { getPathData } from '../../utils/requestServer';
+import { setFlowData } from '../../redux/actions/actions';
+import { bindActionCreators } from 'redux';
+import processFlowData from '../../utils/processFlowData';
 
 class Markers extends Component {
 
@@ -12,9 +15,7 @@ class Markers extends Component {
 
     onMarkerClick(marker) {
         const { id = false } = marker,
-            { fileCatalogInfo } = this.props;
-
-        this.props.setPathData([]);
+            { fileCatalogInfo, actions } = this.props;
 
         let pathIndex, path;
         // if the id is valid and in the catalog file then
@@ -23,41 +24,35 @@ class Markers extends Component {
             pathIndex = _.findIndex(fileCatalogInfo, (d) => d.b == id);
             if (pathIndex > -1) {
                 path = fileCatalogInfo[pathIndex];
+                // clear data and set is loading to false
+                actions.setFlowData({ dataList: [], path, isLoading: true });
                 getPathData(path)
                     .then((data) => {
-                        var dataByLine = data.split("\n");
-                        var dataList = [];
-                        _.map(dataByLine, (d, i) => {
-
-                            if (i == 0) {
-                                d = d.slice(1);
-                            }
-                            else if (i == (dataByLine.length - 1)) {
-                                d = d.slice(0, -1)
-                            }
-                            dataList = dataList.concat(d.split(/\s+/));
-                        })
-                        dataList = _.map(dataList, (d) => Number(d));
-
-                        this.props.setPathData(dataList);
+                        actions.setFlowData({ dataList: processFlowData(data), path, isLoading: false });
                     })
                     .catch((error) => {
                         alert('error fetching data');
+                        actions.setFlowData({ dataList: [], path, isLoading: false });
                     })
             }
+            else {
+                // if no id found set text to no data found 
+                actions.setFlowData({ dataList: [], path, isLoading: false });
+            }
+        }
+        else {
+            // if no id found set text to no data found 
+            actions.setFlowData({ dataList: [], path, isLoading: false });
         }
     }
 
     render() {
 
-        const { markers = [], xScale, yScale } = this.props;
-
-        const markerSizeScale = (xScale(1) - xScale(0)) / 60;
+        const { markers = [], xScale, yScale } = this.props,
+            markerSizeScale = (xScale(1) - xScale(0)) / 60;
 
         const markerList = _.map(markers, (marker, index) => {
-
-            const { name, coords, id, type = "agri" } = marker;
-
+            const { name, coords, type = "agri" } = marker;
             return (
                 <g key={'marker-' + index} className='river-marker'
                     transform={"translate(" + xScale(coords[0]) + "," + yScale(coords[1]) + ") scale(" + (markerSizeScale) + ")"}>
@@ -75,8 +70,15 @@ class Markers extends Component {
                 </g>)
         });
 
-        return (<g className='river-marker-container' > {markerList}</g>)
+        return (<g className='river-marker-container'>{markerList}</g>)
     }
 }
 
-export default connect(null, null)(Markers);
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators({ setFlowData }, dispatch)
+    };
+}
+
+export default connect(null, mapDispatchToProps)(Markers);

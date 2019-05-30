@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { TubeMap } from '../components';
+import { RiverMap, FilterPanel, FlowPanel } from '../components';
 import axios from 'axios';
 import toastr from '../utils/toastr';
-import { getFileCatalog } from '../utils/requestServer';
+import { getFileCatalog, getPathData } from '../utils/requestServer';
+import { setFlowData } from '../redux/actions/actions';
 import Loading from 'react-loading';
+import processFlowData from '../utils/processFlowData';
 import _ from 'lodash';
 
 class DashboardRoot extends Component {
@@ -15,22 +17,18 @@ class DashboardRoot extends Component {
         this.state = {
             isSchematicLoading: false,
             SchematicData: { lines: [], artifacts: [], labels: [], markers: [] },
-            fileCatalogInfo: [],
-            pathData: []
+            fileCatalogInfo: []
         };
-
-        this.setPathData = this.setPathData.bind(this);
     }
 
-    setPathData(pathData) {
-        this.setState({ pathData });
-    }
 
     componentDidMount() {
 
         var SchematicData = {}, fileCatalogInfo = [];
 
         this.setState({ 'isSchematicLoading': true });
+
+
         axios.get("/assets/files/schematic.json")
             .then((response) => {
                 SchematicData = _.clone(response.data);
@@ -44,6 +42,16 @@ class DashboardRoot extends Component {
                     const values = row.split("|");
                     return { "a": values[1], "b": values[2], "c": values[3], "time": values[4] };
                 });
+                // fetch flow data for first value in the catalog
+                return getPathData(fileCatalogInfo[0])
+            })
+            .then((data) => {
+                this.props.actions.setFlowData(
+                    {
+                        dataList: processFlowData(data),
+                        path: fileCatalogInfo[0],
+                        isLoading: false
+                    });
                 this.setState({ SchematicData, fileCatalogInfo });
             })
             .catch(() => {
@@ -55,21 +63,26 @@ class DashboardRoot extends Component {
 
 
     render() {
-        const { isSchematicLoading, SchematicData, fileCatalogInfo, pathData } = this.state;
+        const { isSchematicLoading, SchematicData, fileCatalogInfo } = this.state;
 
         //125px to offset the 30px margin on both sides and vertical scroll bar width
         let widthOfDashboard = document.body.getBoundingClientRect().width - 100,
-            tubeWidth = widthOfDashboard / 2;
+            mapWidth = widthOfDashboard * 0.65;
 
         return (
             <div className='dashboard-page-root' >
                 {isSchematicLoading ?
                     <Loading className='loader' type='spin' height='100px' width='100px' color='#d6e5ff' delay={-1} /> :
                     <div className='dashboard-inner-root'>
-                        <TubeMap setPathData={this.setPathData} tubeData={SchematicData} fileCatalogInfo={fileCatalogInfo} width={tubeWidth} height={tubeWidth / 1.75} />
-                        <div className='data-container'>
-                            {pathData.join(",")}
-                        </div>
+                        <FilterPanel schematicData={SchematicData} />
+                        <RiverMap
+                            schematicData={SchematicData}
+                            fileCatalogInfo={fileCatalogInfo}
+                            width={mapWidth}
+                            height={mapWidth / 1.75} />
+                        <FlowPanel
+                            width={widthOfDashboard * 0.35}
+                            height={mapWidth / 1.75} />
                     </div>
                 }
             </div>
@@ -79,7 +92,7 @@ class DashboardRoot extends Component {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({}, dispatch)
+        actions: bindActionCreators({setFlowData}, dispatch)
     };
 }
 
