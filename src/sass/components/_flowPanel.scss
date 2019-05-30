@@ -5,6 +5,10 @@
     border-radius: 7px;
     margin-left: 20px;
     vertical-align: top;
+    .title-bar {
+        margin-top: 30px;
+        margin-bottom: 10px;
+    }
     .flow-inner-container {
         svg.flow-data-chart {
             margin: 0px auto;

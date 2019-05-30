@@ -4,8 +4,10 @@ import { bindActionCreators } from 'redux';
 import { RiverMap, FilterPanel, FlowPanel } from '../components';
 import axios from 'axios';
 import toastr from '../utils/toastr';
-import { getFileCatalog } from '../utils/requestServer';
+import { getFileCatalog, getPathData } from '../utils/requestServer';
+import { setFlowData } from '../redux/actions/actions';
 import Loading from 'react-loading';
+import processFlowData from '../utils/processFlowData';
 import _ from 'lodash';
 
 class DashboardRoot extends Component {
@@ -25,6 +27,8 @@ class DashboardRoot extends Component {
         var SchematicData = {}, fileCatalogInfo = [];
 
         this.setState({ 'isSchematicLoading': true });
+
+
         axios.get("/assets/files/schematic.json")
             .then((response) => {
                 SchematicData = _.clone(response.data);
@@ -38,6 +42,16 @@ class DashboardRoot extends Component {
                     const values = row.split("|");
                     return { "a": values[1], "b": values[2], "c": values[3], "time": values[4] };
                 });
+                // fetch flow data for first value in the catalog
+                return getPathData(fileCatalogInfo[0])
+            })
+            .then((data) => {
+                this.props.actions.setFlowData(
+                    {
+                        dataList: processFlowData(data),
+                        path: fileCatalogInfo[0],
+                        isLoading: false
+                    });
                 this.setState({ SchematicData, fileCatalogInfo });
             })
             .catch(() => {
@@ -78,7 +92,7 @@ class DashboardRoot extends Component {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({}, dispatch)
+        actions: bindActionCreators({setFlowData}, dispatch)
     };
 }
 
