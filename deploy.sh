@@ -2,12 +2,14 @@
 # Script to update nginx server
 # create new build folder
 npm run build
+cd ..
+cd nginx
 # stop nginx server
-service nginx stop
+nginx -s stop
 # clear old assets
-rm -rf /var/www/html/
+rm -rf html/
 # copy new assets
-cp -a build/. /var/www/html/
+cp -a ../gwf-wrims-ui/build/. html/
 # restart nginx server
-service nginx restart
+nginx -s reload
 echo "Deploy complete successfully"
