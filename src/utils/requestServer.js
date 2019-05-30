@@ -7,7 +7,7 @@ var requestServer = {};
 
 requestServer.requestLogin = function(access_token, isPAWS) {
     return new Promise((resolve, reject) => {
-        axios.post(isPAWS ? endPoints.loginPaws : endPoints.loginGoogle, { access_token, isDevSite: false })
+        axios.post(isPAWS ? endPoints.loginPaws : endPoints.loginGoogle, { access_token, isDevSite: (process.env.NODE_ENV == 'development') })
             .then((response) => { resolve(response.data) })
             .catch((err) => errorCallback(err, reject));
     });

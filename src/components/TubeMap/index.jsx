@@ -92,10 +92,6 @@ class TubeMap extends Component {
             filteredMarkers = _.clone(tubeData.markers);
         }
 
-
-
-
-
         return (
             <div id='tube-map' style={{ 'width': width, 'height': height }}>
                 <svg style={{ 'width': '100%', 'height': '100%' }}>
