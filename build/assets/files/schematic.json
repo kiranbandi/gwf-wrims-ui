@@ -1,4 +1,8 @@
 {
+    "schemaTitle": {
+        "label": "Highwood Model",
+        "coords": [160, 0]
+    },
     "lines": [{
             "name": "Bow River",
             "color": "#5c6b84",
@@ -87,7 +91,7 @@
             "name": "Threepoint Creek",
             "color": "#5c6b84",
             "type": "river",
-            "shiftCoords": [0, 0.5],
+            "shiftCoords": [2, 1],
             "reverse": false,
             "nodes": [{
                     "coords": [2, 25]
@@ -132,7 +136,7 @@
                     "coords": [46, 25]
                 },
                 {
-                    "coords": [49, 26]
+                    "coords": [49, 30]
                 }
             ]
         },
@@ -657,7 +661,7 @@
             "color": "#f7a02e",
             "type": "diversion",
             "reverse": false,
-            "shiftCoords": [0, 0],
+            "shiftCoords": [-0.5, 0.5],
             "nodes": [{
                     "coords": [118, 72]
                 },
@@ -837,7 +841,7 @@
             "color": "#f7a02e",
             "type": "diversion",
             "reverse": false,
-            "shiftCoords": [0, 0],
+            "shiftCoords": [0, -1],
             "nodes": [{
                     "coords": [142, 52]
                 },
@@ -899,7 +903,7 @@
             "color": "#51a83a",
             "type": "irrigation-demand",
             "reverse": false,
-            "shiftCoords": [0, 0],
+            "shiftCoords": [0, 2],
             "nodes": [{
                     "coords": [10, 21]
                 },
@@ -1283,7 +1287,7 @@
             "name": "Twin Valley"
         }, {
             "type": "reservoir",
-            "coords": [181, 82],
+            "coords": [180, 81],
             "size": 1.5,
             "name": "Traverse Reservoir"
         },
@@ -1353,7 +1357,7 @@
         },
         {
             "name": "Bow River",
-            "coords": [178, 44]
+            "coords": [174, 44]
 
         },
         {
@@ -1378,7 +1382,7 @@
         },
         {
             "name": "Women's Coulee Diversion",
-            "coords": [105.5, 64]
+            "coords": [105, 64]
 
         }
     ],

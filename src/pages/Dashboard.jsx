@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { TubeMap,FilterPanel } from '../components';
+import { RiverMap, FilterPanel, FlowPanel } from '../components';
 import axios from 'axios';
 import toastr from '../utils/toastr';
 import { getFileCatalog } from '../utils/requestServer';
@@ -51,22 +51,24 @@ class DashboardRoot extends Component {
     render() {
         const { isSchematicLoading, SchematicData, fileCatalogInfo } = this.state;
 
-        const { flowData } = this.props;
-
         //125px to offset the 30px margin on both sides and vertical scroll bar width
         let widthOfDashboard = document.body.getBoundingClientRect().width - 100,
-            tubeWidth = widthOfDashboard * 0.75;
+            mapWidth = widthOfDashboard * 0.65;
 
         return (
             <div className='dashboard-page-root' >
                 {isSchematicLoading ?
                     <Loading className='loader' type='spin' height='100px' width='100px' color='#d6e5ff' delay={-1} /> :
                     <div className='dashboard-inner-root'>
-                        <FilterPanel tubeData={SchematicData} />
-                        <TubeMap tubeData={SchematicData} fileCatalogInfo={fileCatalogInfo} width={tubeWidth} height={tubeWidth / 1.75} />
-                        <div className='data-container'>
-                            {flowData.join(",")}
-                        </div>
+                        <FilterPanel schematicData={SchematicData} />
+                        <RiverMap
+                            schematicData={SchematicData}
+                            fileCatalogInfo={fileCatalogInfo}
+                            width={mapWidth}
+                            height={mapWidth / 1.75} />
+                        <FlowPanel
+                            width={widthOfDashboard * 0.35}
+                            height={mapWidth / 1.75} />
                     </div>
                 }
             </div>
@@ -80,11 +82,5 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-function mapStateToProps(state) {
-    return {
-        flowData: state.delta.flowData
-    };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(DashboardRoot);
+export default connect(null, mapDispatchToProps)(DashboardRoot);
 

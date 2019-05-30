@@ -1,19 +1,20 @@
-#tube-map {
+#river-map {
     display: inline-block;
     background: #1b1f2a;
     margin: 10px auto;
     border-radius: 7px;
+    vertical-align: top;
     .river {
         stroke-dasharray: 9, 5;
         stroke-linecap: round;
         fill: none;
         &.forward-flow {
-            animation: flow 2s linear infinite;
-            -webkit-animation: flow 2s linear infinite;
+            animation: flow 1s linear infinite;
+            -webkit-animation: flow 1s linear infinite;
         }
         &.reverse-flow {
-            animation: revflow 2s linear infinite;
-            -webkit-animation: revflow 2s linear infinite;
+            animation: revflow 1s linear infinite;
+            -webkit-animation: revflow 1s linear infinite;
         }
         @keyframes flow {
             from {
@@ -67,5 +68,9 @@
         text {
             fill: white;
         }
+    }
+    .river-model-title {
+        fill: white;
+        font-weight: bold;
     }
 }

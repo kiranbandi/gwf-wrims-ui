@@ -1,8 +1,10 @@
 .filter-root-container {
-    margin: 50px 10px 20px 10px;
+    margin: 30px 10px 20px 10px;
     .demand-btn {
         &.active-button {
-            border: 4px solid;
+            border: 3px solid #f3fbfe;
+            border-radius: 10px;
+            text-decoration: none;
         }
     }
     .inner-filter-box {

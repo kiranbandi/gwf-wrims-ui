@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 
-export default function(containerID) {
+export default function(containerID, initialZoomScale = { x: 0, y: 0, scale: 1 }) {
 
     var svg = d3.select('#' + containerID).select('svg');
 
@@ -13,11 +13,8 @@ export default function(containerID) {
         .on('zoom', zoomed);
 
     var zoomContainer = svg.call(zoom);
-    var initialScale = 1.10;
-    var initialTranslate = [50, 50];
-
-    zoom.scaleTo(zoomContainer, initialScale);
-    zoom.translateTo(zoomContainer, initialTranslate[0], initialTranslate[1]);
+    zoom.scaleTo(zoomContainer, initialZoomScale.scale);
+    zoom.translateTo(zoomContainer, initialZoomScale.x, initialZoomScale.y);
 
     function zoomed() {
         svg.select('g.zoomable').attr('transform', d3.event.transform.toString());

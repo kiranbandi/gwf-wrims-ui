@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { toggleDemandVisibility, setFilterDemand } from '../redux/actions/actions';
 import Select from 'react-select';
+import sortAlphaNum from '../utils/sortAlphaNum';
 
 class FilterPanel extends Component {
 
@@ -22,36 +23,25 @@ class FilterPanel extends Component {
     }
 
     render() {
-        const { filterMesh, tubeData = { lines: [], artifacts: [], labels: [], markers: [] } } = this.props,
+        const { filterMesh,
+            schematicData = { lines: [], artifacts: [], labels: [], markers: [] } } = this.props,
             { areDemandsVisible = false, visibleDemands = [] } = filterMesh;
 
-
-        const demandsList = _.map(_.filter(tubeData.lines,
+        // filter out all demands , then get the name of the demand and finally sort 
+        const demandsList = _.map(_.filter(schematicData.lines,
             (d) => { return (d.type == 'regular-demand' || d.type == 'irrigation-demand') }),
-            (d) => d.name);
+            (d) => d.name)
+            .sort(sortAlphaNum);
 
         // Merge the option Array text with the count of records present in each type
-        const modifiedOptionArray = _.map(demandsList, (option) => {
-            return {
-                label: option,
-                value: option
-            }
-        });
-
-        const selectedDemandList = _.map(visibleDemands, (name) => {
-            return {
-                label: name,
-                value: name
-            }
-        });
+        const modifiedOptionArray = _.map(demandsList, (option) => ({ label: option, value: option }));
 
         return (
-            <div className='filter-root-container'>
+            <div className='filter-root-container text-center'>
                 <button
-                    className={('btn btn-info demand-btn ') +
-                        (areDemandsVisible ? ' active-button' : '')}
-                    onClick={this.onDemandClick}
-                > TOGGLE ALL DEMANDS </button>
+                    className={('btn btn-primary demand-btn ') +
+                        (areDemandsVisible ? ' ' : 'active-button')}
+                    onClick={this.onDemandClick}> HIDE ALL DEMANDS </button>
 
                 <div className='inner-filter-box'>
                     <label className='filter-label'>Demand</label>
@@ -63,7 +53,7 @@ class FilterPanel extends Component {
                             isDisabled={!areDemandsVisible}
                             // react select needs a value and so we need to set it in a complicated way with a function
                             //  need to find a more elegant solution in future
-                            value={selectedDemandList}
+                            value={_.map(visibleDemands, (name) => ({ label: name, value: name }))}
                             options={modifiedOptionArray}
                             styles={{ option: (styles) => ({ ...styles, color: 'black', textAlign: 'left' }) }}
                             onChange={this.onSelectChange} />
