@@ -2,20 +2,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { toggleDemandVisibility, setFilterDemand } from '../redux/actions/actions';
+import { setFilterDemand, toggleLabelVisibility } from '../redux/actions/actions';
 import Select from 'react-select';
 import sortAlphaNum from '../utils/sortAlphaNum';
+import DemandFilter from './FilterComponents/DemandFilter.jsx'
 
 class FilterPanel extends Component {
 
     constructor(props) {
         super(props);
-        this.onDemandClick = this.onDemandClick.bind(this);
+        // this.onDemandClick = this.onDemandClick.bind(this);
+        this.onLabelToggleClick = this.onLabelToggleClick.bind(this); // *ADDED
         this.onSelectChange = this.onSelectChange.bind(this);
     }
 
-    onDemandClick() {
-        this.props.actions.toggleDemandVisibility();
+    // onDemandClick() {
+    //     this.props.actions.toggleDemandVisibility();
+    // }
+
+    // *ADDED
+    onLabelToggleClick() {
+        this.props.actions.toggleLabelVisibility();
     }
 
     onSelectChange(selectedValueList) {
@@ -23,9 +30,8 @@ class FilterPanel extends Component {
     }
 
     render() {
-        const { filterMesh,
-            schematicData = { lines: [], artifacts: [], labels: [], markers: [] } } = this.props,
-            { areDemandsVisible = false, visibleDemands = [] } = filterMesh;
+        const { filterMesh, schematicData = { lines: [], artifacts: [], labels: [], markers: [] } } = this.props,
+            { areDemandsVisible = false, visibleDemands = [], areLabelsVisible = false } = filterMesh; // *ADDED
 
         // filter out all demands , then get the name of the demand and finally sort 
         const demandsList = _.map(_.filter(schematicData.lines,
@@ -38,28 +44,45 @@ class FilterPanel extends Component {
 
         return (
             <div className='filter-root-container text-center'>
-                <button
-                    className={('btn btn-primary demand-btn ') +
-                        (areDemandsVisible ? ' ' : 'active-button')}
-                    onClick={this.onDemandClick}> HIDE ALL DEMANDS </button>
-
-                <div className='inner-filter-box'>
-                    <label className='filter-label'>Demand</label>
-                    <div className='select-container-filter'>
-                        <Select
-                            isClearable={true}
-                            name={'demand-select'}
-                            isMulti
-                            isDisabled={!areDemandsVisible}
-                            // react select needs a value and so we need to set it in a complicated way with a function
-                            //  need to find a more elegant solution in future
-                            value={_.map(visibleDemands, (name) => ({ label: name, value: name }))}
-                            options={modifiedOptionArray}
-                            styles={{ option: (styles) => ({ ...styles, color: 'black', textAlign: 'left' }) }}
-                            onChange={this.onSelectChange} />
+                {/* Adding new filter option */}
+                <div>
+                    {/* Adding a button to toggle all demands */}
+                    {/* <button
+                        className={('btn btn-primary demand-btn ') +
+                            (areDemandsVisible ? ' ' : 'active-button')}
+                        onClick={this.onDemandClick}> HIDE SELECTED DEMANDS </button> */}
+                    <DemandFilter />
+                    <div className='inner-filter-box'>
+                        <label className='filter-label'>Demand</label>
+                        {/* Allowing the user to select specific demands */}
+                        <div className='select-container-filter'>
+                            <Select
+                                isClearable={true}
+                                name={'demand-select'}
+                                isMulti
+                                isDisabled={!areDemandsVisible}
+                                // react select needs a value and so we need to set it in a complicated way with a function
+                                //  need to find a more elegant solution in future
+                                value={_.map(visibleDemands, (name) => ({ label: name, value: name }))}
+                                options={modifiedOptionArray}
+                                styles={{ option: (styles) => ({ ...styles, color: 'black', textAlign: 'left' }) }}
+                                onChange={this.onSelectChange} />
+                        </div>
                     </div>
                 </div>
+                <br></br>
 
+                {/* Adding new filter option */}
+                <div>
+
+                    {/* *ADDED */}
+                    {/* Adding a button to toggle all demands */}
+                    <button
+                        className={('btn btn-primary label-btn ') +
+                            (areLabelsVisible ? ' ' : 'active-button')}
+                        onClick={this.onLabelToggleClick}> HIDE LABELS </button>
+
+                </div>
             </div>);
     }
 }
@@ -72,7 +95,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({ toggleDemandVisibility, setFilterDemand }, dispatch)
+        actions: bindActionCreators({ setFilterDemand, toggleLabelVisibility }, dispatch) // *ADDED
     };
 }
 

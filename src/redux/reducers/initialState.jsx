@@ -5,7 +5,9 @@ export default {
     flowData: [],
     filterMesh: {
       areDemandsVisible: true,
-      visibleDemands: []
+      visibleDemands: [],
+      areLabelsVisible: true // *ADDED
     }
   }
 };
+

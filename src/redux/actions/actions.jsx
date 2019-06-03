@@ -50,7 +50,10 @@ export function toggleDemandVisibility() {
     return { type: types.SET_DEMAND_VISIBILITY };
 }
 
-
+// *ADDED
+export function toggleLabelVisibility() {
+    return { type: types.SET_LABEL_VISIBILITY };
+}
 
 
 

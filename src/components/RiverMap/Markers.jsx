@@ -8,6 +8,7 @@ import processFlowData from '../../utils/processFlowData';
 
 class Markers extends Component {
 
+
     constructor(props) {
         super(props);
         this.onMarkerClick = this.onMarkerClick.bind(this);
@@ -24,6 +25,7 @@ class Markers extends Component {
             pathIndex = _.findIndex(fileCatalogInfo, (d) => d.b == id);
             if (pathIndex > -1) {
                 path = fileCatalogInfo[pathIndex];
+                console.log(fileCatalogInfo) // *ADDED
                 // clear data and set is loading to false
                 actions.setFlowData({ dataList: [], path, isLoading: true });
                 getPathData(path)
@@ -44,6 +46,7 @@ class Markers extends Component {
             // if no id found set text to no data found 
             actions.setFlowData({ dataList: [], path, isLoading: false });
         }
+
     }
 
     render() {

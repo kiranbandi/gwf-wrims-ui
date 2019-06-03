@@ -7,6 +7,14 @@
             text-decoration: none;
         }
     }
+    // *ADDED
+    .label-btn {
+        &.active-button {
+            border: 3px solid #f3fbfe;
+            border-radius: 10px;
+            text-decoration: none;
+        }
+    }
     .inner-filter-box {
         display: inline-block;
         margin-left: 20px;

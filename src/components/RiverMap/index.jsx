@@ -8,6 +8,7 @@ import RiverLines from './RiverLines';
 import Artifacts from './Artifacts';
 import RiverLabels from './RiverLabels';
 import Markers from './Markers';
+import { filter } from 'minimatch';
 
 class RiverMap extends Component {
 
@@ -90,7 +91,8 @@ class RiverMap extends Component {
                         <RiverLabels
                             xScale={xScale}
                             yScale={yScale}
-                            labels={filteredData.labels} />
+                            labels={filteredData.labels}
+                            areLabelsVisible={filterMesh.areLabelsVisible} />
 
                         <Markers
                             fileCatalogInfo={fileCatalogInfo}
@@ -102,7 +104,7 @@ class RiverMap extends Component {
                     {/* Display the title from the schema */}
                     <text
                         className='river-model-title'
-                        fontSize={(width/45)+'px'}
+                        fontSize={(width / 45) + 'px'}
                         x={xScale(schemaTitle.coords[0])}
                         y={yScale(schemaTitle.coords[1])}>
                         {schemaTitle.label}

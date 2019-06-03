@@ -1,6 +1,6 @@
 export default function(filterMesh, schematicData) {
 
-    const { areDemandsVisible, visibleDemands } = filterMesh;
+    const { areDemandsVisible, visibleDemands, areLabelsVisible } = filterMesh;
     let { lines = [], artifacts = [], labels = [], markers = [] } = schematicData;
 
     if (!areDemandsVisible) {
