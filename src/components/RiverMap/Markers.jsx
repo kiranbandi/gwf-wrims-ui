@@ -25,7 +25,8 @@ class Markers extends Component {
             pathIndex = _.findIndex(fileCatalogInfo, (d) => d.b == id);
             if (pathIndex > -1) {
                 path = fileCatalogInfo[pathIndex];
-                console.log(fileCatalogInfo) // *ADDED
+                // console.log(fileCatalogInfo)
+
                 // clear data and set is loading to false
                 actions.setFlowData({ dataList: [], path, isLoading: true });
                 getPathData(path)

@@ -50,13 +50,16 @@ export function toggleDemandVisibility() {
     return { type: types.SET_DEMAND_VISIBILITY };
 }
 
-// *ADDED
 export function toggleLabelVisibility() {
     return { type: types.SET_LABEL_VISIBILITY };
 }
 
+export function setFilterInflow(visibleInflows) {
+    return { type: types.SET_FILTER_INFLOW, visibleInflows };
+}
 
-
-
+export function toggleInflowVisibility() {
+    return { type: types.SET_INFLOW_VISIBILITY };
+}
 
 

@@ -7,8 +7,14 @@
             text-decoration: none;
         }
     }
-    // *ADDED
     .label-btn {
+        &.active-button {
+            border: 3px solid #f3fbfe;
+            border-radius: 10px;
+            text-decoration: none;
+        }
+    }
+    .inflow-btn {
         &.active-button {
             border: 3px solid #f3fbfe;
             border-radius: 10px;

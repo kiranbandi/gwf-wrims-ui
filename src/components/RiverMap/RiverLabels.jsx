@@ -10,7 +10,7 @@ export default (props) => {
     const labelsList = _.map(labels, (label, index) => {
 
         const { name, coords } = label;
-        if (areLabelsVisible) {  // *Added
+        if (areLabelsVisible) {
             return (
                 <text key={'label-' + index}
                     x={xScale(coords[0])}

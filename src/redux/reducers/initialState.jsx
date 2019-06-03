@@ -6,7 +6,9 @@ export default {
     filterMesh: {
       areDemandsVisible: true,
       visibleDemands: [],
-      areLabelsVisible: true // *ADDED
+      areLabelsVisible: true,
+      areInflowsVisible: true,
+      visibleInflows: [],
     }
   }
 };

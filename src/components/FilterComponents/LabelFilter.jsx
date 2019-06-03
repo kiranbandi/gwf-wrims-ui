@@ -8,10 +8,9 @@ import sortAlphaNum from '../../utils/sortAlphaNum';
 class LabelFilter extends Component {
     constructor(props) {
         super(props);
-        this.onLabelToggleClick = this.onLabelToggleClick.bind(this); // *ADDED
+        this.onLabelToggleClick = this.onLabelToggleClick.bind(this);
     }
 
-    // *ADDED
     onLabelToggleClick() {
         this.props.actions.toggleLabelVisibility();
     }
@@ -19,7 +18,7 @@ class LabelFilter extends Component {
 
     render() {
         const { filterMesh, schematicData = { lines: [], artifacts: [], labels: [], markers: [] } } = this.props,
-            { areLabelsVisible = false } = filterMesh; // *ADDED
+            { areLabelsVisible = false } = filterMesh;
 
         return (
 
@@ -41,7 +40,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({ toggleLabelVisibility }, dispatch) // *ADDED
+        actions: bindActionCreators({ toggleLabelVisibility }, dispatch)
     };
 }
 

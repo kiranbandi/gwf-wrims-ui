@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import DemandFilter from './FilterComponents/DemandFilter.jsx'
 import LabelFilter from './FilterComponents/LabelFilter.jsx'
+import InflowFilter from './FilterComponents/InflowFilter.jsx';
 
 class FilterPanel extends Component {
 
@@ -19,7 +20,10 @@ class FilterPanel extends Component {
                 <DemandFilter schematicData={schematicData} />
                 <br></br>
                 <LabelFilter />
-            </div>);
+                <br></br>
+                <InflowFilter schematicData={schematicData} />
+            </div>
+        );
     }
 }
 
@@ -31,7 +35,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({}, dispatch) // *ADDED
+        actions: bindActionCreators({}, dispatch)
     };
 }
 
