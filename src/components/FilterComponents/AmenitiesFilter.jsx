@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -5,7 +6,7 @@ import { toggleInflowVisibility, setFilterInflow } from '../../redux/actions/act
 import Select from 'react-select';
 import sortAlphaNum from '../../utils/sortAlphaNum';
 
-class InflowFilter extends Component {
+class AmenitiesFilter extends Component {
     constructor(props) {
         super(props);
         this.onInflowClick = this.onInflowClick.bind(this);
@@ -36,7 +37,7 @@ class InflowFilter extends Component {
 
         return (
             <div>
-                <label className='filter-label filter-title'>Inflow</label>
+                <label className='filter-label filter-title'>Amenities</label>
                 <div className='inner-filter-box'>
                     <label className='filter-label'>Selection: </label>
                     {/* Allowing the user to select specific inflows */}
@@ -59,7 +60,7 @@ class InflowFilter extends Component {
                 <button
                     className={('btn btn-primary inflow-btn ') +
                         (areInflowsVisible ? ' ' : 'active-button')}
-                    onClick={this.onInflowClick}> HIDE SELECTED INFLOWS
+                    onClick={this.onInflowClick}> HIDE SELECTED AMENITIES
                 </button>
             </div>
         )
@@ -78,4 +79,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(InflowFilter);
+export default connect(mapStateToProps, mapDispatchToProps)(AmenitiesFilter);

@@ -1,35 +1,99 @@
 .filter-root-container {
     margin: 30px 10px 20px 10px;
+    // background-color: grey;
+    height: auto;
+    width: auto;
     .demand-btn {
+        margin: 5px;
+        border: 3px solid #f3fbfe00;
+        border-radius: 10px;
+        float: right;
         &.active-button {
             border: 3px solid #f3fbfe;
             border-radius: 10px;
-            text-decoration: none;
+            // text-decoration: none;
         }
     }
     .label-btn {
+        margin: 2px;
+        border: 3px solid #f3fbfe00;
+        border-radius: 10px;
         &.active-button {
             border: 3px solid #f3fbfe;
             border-radius: 10px;
-            text-decoration: none;
+            // text-decoration: none;
         }
     }
     .inflow-btn {
+        margin: 5px;
+        border: 3px solid #f3fbfe00;
+        border-radius: 10px;
+        float: right;
         &.active-button {
             border: 3px solid #f3fbfe;
             border-radius: 10px;
-            text-decoration: none;
+            // text-decoration: none;
         }
     }
     .inner-filter-box {
-        display: inline-block;
-        margin-left: 20px;
+        // display: inline-block;
+        // margin-left: 10px;
+        width: 100%;
+        min-height: 10px;
+        white-space: nowrap;
         .filter-label {
             margin-right: 10px;
+            text-decoration: none;
+            // color: grey;
         }
         .select-container-filter {
             display: inline-block;
-            width: 400px;
+            // width: 99%;
+            width: -moz-calc(100% - 80px);
+            width: -webkit-calc(100% - 80px);
+            width: calc(100% - 80px);
+            // -webkit-box-sizing: border-box;
+            // -moz-box-sizing: border-box;
+            // box-sizing: border-box;
+            // min-width: 0px;
         }
+    }
+    // Tested as a vertical line
+    .vr {
+        width: 5px;
+        height: 200px;
+        background-color: #000;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 300px;
+    }
+    .filter-div {
+        // background-color: white;
+        display: inline-block;
+        width: 20%;
+        min-width: 230px;
+        height: auto;
+        min-height: 150px;
+        vertical-align: text-top;
+        border-style: solid;
+        border-left-color: #171a1f;
+        border-right-color: #171a1f;
+        border-top-color: transparent;
+        border-bottom-color: transparent;
+        border-radius: 10px;
+        // margin: 10px;
+        padding: 10px;
+    }
+    .btn {
+        min-width: 120px;
+    }
+    .filter-general {
+        width: auto;
+        min-width: 150px;
+    }
+    .filter-title {
+        text-decoration: underline;
+        font-size: 20px;
     }
 }
