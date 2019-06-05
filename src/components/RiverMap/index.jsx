@@ -66,6 +66,7 @@ class RiverMap extends Component {
         yScale.domain([maxY, minY]).range([margin.top + maxYRange, margin.top]);
         lineWidth = lineWidthMultiplier * (xScale(1) - xScale(0));
 
+        console.log(filterMesh)
         // Apply mesh filter on the schematic Data 
         let filteredData = applyFilterMesh(filterMesh, schematicData);
 

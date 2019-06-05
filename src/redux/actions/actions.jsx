@@ -38,12 +38,14 @@ export function setLogoutData() {
     };
 }
 
-export function setFilterDemand(visibleDemands) {
-    return { type: types.SET_FILTER_DEMAND, visibleDemands };
-}
+
 
 export function setFlowData(flowData) {
     return { type: types.SET_FLOW_DATA, flowData };
+}
+
+export function setFilterDemand(visibleDemands) {
+    return { type: types.SET_FILTER_DEMAND, visibleDemands };
 }
 
 export function toggleDemandVisibility() {
@@ -62,4 +64,10 @@ export function toggleInflowVisibility() {
     return { type: types.SET_INFLOW_VISIBILITY };
 }
 
+export function setFilterAmenity(visibleAmenities) {
+    return { type: types.SET_FILTER_AMENITY, visibleAmenities };
+}
 
+export function toggleAmenityVisibility() {
+    return { type: types.SET_AMENITY_VISIBILITY };
+}
