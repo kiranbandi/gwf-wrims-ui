@@ -38,7 +38,6 @@ class GaugeFilter extends Component {
             <div>
                 <label className='filter-label filter-title'>Gauges</label>
                 <div className='inner-filter-box'>
-                    <label className='filter-label'>Selection: </label>
                     {/* Allowing the user to select specific inflows */}
                     <div className='select-container-filter'>
                         <Select
@@ -57,9 +56,9 @@ class GaugeFilter extends Component {
                 </div>
                 {/* Adding a button to toggle all demands */}
                 <button
-                    className={('btn btn-primary hide-btn ') +
-                        (areInflowsVisible ? ' ' : 'active-button')}
-                    onClick={this.onInflowClick}> HIDE SELECTED GAUGES
+                    className={('icon') +
+                        (areInflowsVisible ? ' icon-eye' : ' icon-eye-with-line')}
+                    onClick={this.onInflowClick}>
                 </button>
             </div>
         )

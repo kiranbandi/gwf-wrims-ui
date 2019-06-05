@@ -38,7 +38,6 @@ class DemandFilter extends Component {
             <div >
                 <label className='filter-label filter-title'>Demand</label>
                 <div className='inner-filter-box'>
-                    <label className='filter-label'>Selection:</label>
                     {/* Allowing the user to select specific demands */}
                     <div className='select-container-filter'>
                         <Select

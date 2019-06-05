@@ -38,7 +38,6 @@ class AmenitiesFilter extends Component {
             <div>
                 <label className='filter-label filter-title'>Amenities</label>
                 <div className='inner-filter-box'>
-                    <label className='filter-label'>Selection: </label>
                     {/* Allowing the user to select specific inflows */}
                     <div className='select-container-filter'>
                         <Select
@@ -57,9 +56,9 @@ class AmenitiesFilter extends Component {
                 </div>
                 {/* Adding a button to toggle all demands */}
                 <button
-                    className={('btn btn-primary hide-btn ') +
-                        (areAmenitiesVisible ? ' ' : 'active-button')}
-                    onClick={this.onAmenityClick}> HIDE SELECTED AMENITIES
+                    className={('icon') +
+                        (areAmenitiesVisible ? ' icon-eye' : ' icon-eye-with-line')}
+                    onClick={this.onAmenityClick}>
                 </button>
             </div>
         )
