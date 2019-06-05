@@ -57,7 +57,7 @@ class AmenitiesFilter extends Component {
                 </div>
                 {/* Adding a button to toggle all demands */}
                 <button
-                    className={('btn btn-primary amenity-btn ') +
+                    className={('btn btn-primary hide-btn ') +
                         (areAmenitiesVisible ? ' ' : 'active-button')}
                     onClick={this.onAmenityClick}> HIDE SELECTED AMENITIES
                 </button>

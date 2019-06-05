@@ -56,7 +56,7 @@ class Markers extends Component {
             markerSizeScale = (xScale(1) - xScale(0)) / 60;
         const markerList = _.map(markers, (marker, index) => {
             const { name, coords, type = "agri" } = marker;
-            console.log(name)
+            // console.log(name)
             if ((!!coords && coords.length > 0)) {
                 return (
                     <g key={'marker-' + index} className='river-marker'

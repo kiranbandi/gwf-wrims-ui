@@ -9,6 +9,7 @@ import { setFlowData } from '../redux/actions/actions';
 import Loading from 'react-loading';
 import processFlowData from '../utils/processFlowData';
 import _ from 'lodash';
+import LegendPanel from '../components/MapLegend/LegendPanel';
 
 class DashboardRoot extends Component {
 
@@ -83,6 +84,7 @@ class DashboardRoot extends Component {
                         <FlowPanel
                             width={widthOfDashboard * 0.35}
                             height={mapWidth / 1.75} />
+                        <LegendPanel />
                     </div>
                 }
             </div>
@@ -92,7 +94,7 @@ class DashboardRoot extends Component {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({setFlowData}, dispatch)
+        actions: bindActionCreators({ setFlowData }, dispatch)
     };
 }
 

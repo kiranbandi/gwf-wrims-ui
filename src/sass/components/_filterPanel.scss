@@ -4,7 +4,7 @@
     height: auto;
     width: auto;
     .hide-btn {
-        background: url(./images/but.png) no-repeat;
+        // background: url(./images/but.png) no-repeat;
         margin: 5px;
         border: 3px solid #f3fbfe00;
         border-radius: 10px;
@@ -85,5 +85,10 @@
     .filter-title {
         text-decoration: underline;
         font-size: 20px;
+    }
+    .icon {
+        float: right;
+        background-color: transparent;
+        border-color: transparent;
     }
 }

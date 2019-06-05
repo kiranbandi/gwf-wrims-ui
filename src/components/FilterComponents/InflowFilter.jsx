@@ -57,7 +57,7 @@ class InflowFilter extends Component {
                 </div>
                 {/* Adding a button to toggle all demands */}
                 <button
-                    className={('btn btn-primary inflow-btn ') +
+                    className={('btn btn-primary hide-btn ') +
                         (areInflowsVisible ? ' ' : 'active-button')}
                     onClick={this.onInflowClick}> HIDE SELECTED INFLOWS
                 </button>
