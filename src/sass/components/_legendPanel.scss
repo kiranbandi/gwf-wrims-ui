@@ -22,21 +22,13 @@
         }
     }
     .filter-div {
-        // background-color: white;
         display: inline-block;
-        width: 20%;
-        min-width: 200px;
-        height: 190px;
-        min-height: 150px;
         vertical-align: text-top;
-        border-style: solid;
-        border-left-color: #171a1f;
-        border-right-color: #171a1f;
-        border-top-color: transparent;
-        border-bottom-color: transparent;
-        border-radius: 10px;
-        // margin: 10px;
-        padding: 10px;
+        margin: 15px;
+        svg {
+            display: inline-block;
+            margin: 0px auto;
+        }
     }
     .filter-general {
         width: auto;
@@ -54,6 +46,8 @@
     margin: 10px auto;
     border-radius: 7px;
     vertical-align: top;
+    width: 96%;
+    text-align: center;
     .river {
         stroke-dasharray: 9, 5;
         stroke-linecap: round;
@@ -107,22 +101,18 @@
         circle {
             &.type-agri {
                 fill: #51a83a;
-                stroke: white;
                 stroke-width: 30px;
             }
             &.type-inflow {
                 fill: #5c6b84;
-                stroke: white;
                 stroke-width: 30px;
             }
             &.type-demand {
                 fill: #428dff;
-                stroke: white;
                 stroke-width: 30px;
             }
             &.type-reservoir {
                 fill: #00bdff;
-                stroke: white;
                 stroke-width: 30px;
             }
         }
@@ -150,6 +140,6 @@
     }
     .legend-label {
         fill: #c6c6c6;
-        font-weight: bold;
+        font-size: 15px;
     }
 }
