@@ -25,4 +25,71 @@
             }
         }
     }
+    //  temp serve code style
+    .metric-chart .tick>line {
+        opacity: 0.0 !important;
+    }
+    .metric-chart .tick>text {
+        opacity: 1 !important;
+    }
+    .metric-chart text {
+        fill: #565656;
+        font-size: 9px;
+        font-family: Helvetica, Arial, "sans serif";
+    }
+    .metric-chart rect.plot-background {
+        fill: white;
+    }
+    .metric-chart path.line {
+        fill: none;
+        stroke: #1997c6;
+        /*default, changed in each theme*/
+        stroke-width: 1.5px;
+        clip-path: url(#clip);
+    }
+    .metric-chart path.area {
+        fill: #1997c6;
+        opacity: 0.6;
+        clip-path: url(#clip);
+    }
+    .metric-chart .axis {
+        shape-rendering: crispEdges;
+    }
+    .metric-chart .axis.axis--x .domain {
+        display: none;
+    }
+    .metric-chart .axis.axis--x line {
+        stroke: white;
+        opacity: 0.4;
+    }
+    .metric-chart .context .axis.axis--x line {
+        display: none;
+    }
+    .metric-chart .axis.axis--y .domain {
+        display: none;
+    }
+    .metric-chart .axis.axis--y.title {
+        font-size: 13px;
+        font-weight: 100;
+    }
+    .metric-chart .axis.axis--y line {
+        stroke: #565656;
+        stroke-dasharray: 2, 2;
+        stroke-opacity: 0.3;
+    }
+    .metric-chart .context .brush .handle {
+        fill: #555;
+        width: 4px;
+    }
+    .metric-chart .context .brush .handle.mini {
+        fill: white;
+        stroke-width: 1px;
+        stroke: #555;
+        width: 7px;
+    }
+    .zoom {
+        cursor: move;
+        fill: none;
+        pointer-events: all;
+    }
 }
