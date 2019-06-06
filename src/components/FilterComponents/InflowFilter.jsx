@@ -35,19 +35,14 @@ class InflowFilter extends Component {
 
 
         return (
-            <div className='filter-container'>
-                {/* Adding a button to toggle all demands */}
-                <button
-                    className={('btn btn-primary inflow-btn ') +
-                        (areInflowsVisible ? ' ' : 'active-button')}
-                    onClick={this.onInflowClick}> HIDE SELECTED INFLOWS
-                    </button>
+            <div>
                 <div className='inner-filter-box'>
                     {/* Allowing the user to select specific inflows */}
                     <div className='select-container-filter'>
                         <Select
                             isClearable={true}
                             name={'inflow-select'}
+                            placeholder='Select Inflows...'
                             // defaultValue={'asdf'}
                             isMulti
                             isDisabled={!areInflowsVisible}
@@ -59,6 +54,12 @@ class InflowFilter extends Component {
                             onChange={this.onSelectChange} />
                     </div>
                 </div>
+                {/* Adding a button to toggle all demands */}
+                <button
+                    className={  "custom-icon-button inflow "+('icon') +
+                        (areInflowsVisible ? ' icon-eye' : ' icon-eye-with-line')}
+                    onClick={this.onInflowClick}>
+                </button>
             </div>
         )
     }

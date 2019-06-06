@@ -1,55 +1,54 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { toggleDemandVisibility, setFilterDemand } from '../../redux/actions/actions';
+import { toggleAmenityVisibility, setFilterAmenity } from '../../redux/actions/actions';
 import Select from 'react-select';
 import sortAlphaNum from '../../utils/sortAlphaNum';
 
-class DemandFilter extends Component {
+class AmenitiesFilter extends Component {
     constructor(props) {
         super(props);
-        this.onDemandClick = this.onDemandClick.bind(this);
+        this.onAmenityClick = this.onAmenityClick.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
     }
 
-    onDemandClick() {
-        this.props.actions.toggleDemandVisibility();
+    onAmenityClick() {
+        this.props.actions.toggleAmenityVisibility();
     }
 
     onSelectChange(selectedValueList) {
-        this.props.actions.setFilterDemand(_.map(selectedValueList, (d) => d.label));
+        this.props.actions.setFilterAmenity(_.map(selectedValueList, (d) => d.label));
     }
 
     render() {
         const { filterMesh, schematicData = { lines: [], artifacts: [], labels: [], markers: [] } } = this.props,
-            { areDemandsVisible = false, visibleDemands = [] } = filterMesh;
+            { areAmenitiesVisible = false, visibleAmenities = [] } = filterMesh;
 
         // filter out all demands , then get the name of the demand and finally sort 
-        const demandsList = _.map(_.filter(schematicData.lines,
-            (d) => { return (d.type == 'regular-demand' || d.type == 'irrigation-demand') }),
+        const amenitiesList = _.map(_.filter(schematicData.lines,
+            (d) => { return (d.type == 'diversion' || d.type == 'diversion') }),
             (d) => d.name)
             .sort(sortAlphaNum);
 
         // Merge the option Array text with the count of records present in each type
-        const modifiedOptionArray = _.map(demandsList, (option) => ({ label: option, value: option }));
+        const modifiedOptionArray = _.map(amenitiesList, (option) => ({ label: option, value: option }));
 
 
         return (
-            <div className='filter-container'>
-
+            <div>
                 <div className='inner-filter-box'>
-                    {/* Allowing the user to select specific demands */}
+                    {/* Allowing the user to select specific inflows */}
                     <div className='select-container-filter'>
                         <Select
                             isClearable={true}
-                            placeholder='Select Demands...'
-                            name={'demand-select'}
+                            name={'amenity-select'}
+                            placeholder='Select Amenities...'
                             // defaultValue={'asdf'}
                             isMulti
-                            isDisabled={!areDemandsVisible}
+                            isDisabled={!areAmenitiesVisible}
                             // react select needs a value and so we need to set it in a complicated way with a function
                             //  need to find a more elegant solution in future
-                            value={_.map(visibleDemands, (name) => ({ label: name, value: name }))}
+                            value={_.map(visibleAmenities, (name) => ({ label: name, value: name }))}
                             options={modifiedOptionArray}
                             styles={{ option: (styles) => ({ ...styles, color: 'black', textAlign: 'left' }) }}
                             onChange={this.onSelectChange} />
@@ -57,9 +56,9 @@ class DemandFilter extends Component {
                 </div>
                 {/* Adding a button to toggle all demands */}
                 <button
-                   className={  "custom-icon-button demand "+('icon') +
-                        (areDemandsVisible ? ' icon-eye' : ' icon-eye-with-line')}
-                    onClick={this.onDemandClick}>
+                   className={  "custom-icon-button diversion "+('icon') +
+                        (areAmenitiesVisible ? ' icon-eye' : ' icon-eye-with-line')}
+                    onClick={this.onAmenityClick}>
                 </button>
             </div>
         )
@@ -74,8 +73,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({ toggleDemandVisibility, setFilterDemand }, dispatch) // *ADDED
+        actions: bindActionCreators({ toggleAmenityVisibility, setFilterAmenity }, dispatch) // *ADDED
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DemandFilter);
+export default connect(mapStateToProps, mapDispatchToProps)(AmenitiesFilter);

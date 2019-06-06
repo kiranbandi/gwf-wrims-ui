@@ -7,17 +7,12 @@ export default (props) => {
     const { lines, xScale, yScale, lineWidth, lineWidthTickRatio } = props;
 
     _.map(lines, (line) => {
-
         const { shiftCoords = [0, 0] } = line;
-
         line.newNodes = _.map(line.nodes, (innerD) => {
             return { x: xScale(innerD.coords[0] + shiftCoords[0]), y: yScale(innerD.coords[1] + shiftCoords[1]) };
         })
-
     });
-
     const d3Line = line().x((d) => d.x).y((d) => d.y);
-
 
     return (
         <g className='lines-container'>
