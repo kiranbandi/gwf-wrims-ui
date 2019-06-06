@@ -57,7 +57,7 @@ class DemandFilter extends Component {
                 </div>
                 {/* Adding a button to toggle all demands */}
                 <button
-                   className={  "custom-icon-button demand "+('icon') +
+                    className={"custom-icon-button demand " + ('icon') +
                         (areDemandsVisible ? ' icon-eye' : ' icon-eye-with-line')}
                     onClick={this.onDemandClick}>
                 </button>

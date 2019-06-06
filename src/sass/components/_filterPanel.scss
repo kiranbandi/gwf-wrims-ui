@@ -6,7 +6,7 @@
         margin: 5px;
         border: 1.5px solid #f3fbfe00;
         border-radius: 10px;
-        float: right;
+        // float: right;
         &.active-button {
             border: 1.5px solid #f3fbfe;
             border-radius: 10px;
@@ -30,7 +30,6 @@
         border-radius: 4px;
         margin-top: 1px;
         margin-left: 0px;
-        font-size: 20px;
         &.demand {
             background: #428dff;
         }
@@ -45,33 +44,25 @@
         }
     }
     .inner-filter-box {
-        width: 87.5%;
+        width: 100%;
         min-height: 10px;
         white-space: nowrap;
         display: inline-block;
-        margin-right: 2px;
+        margin-right: 4px;
         .filter-label {
-            margin-right: 10px;
+            margin-right: 1px;
             text-decoration: none;
         }
         .select-container-filter {
             display: inline-block;
             width: 100%;
-            //Used for having text with selection bar
-            // width: -moz-calc(100% - 80px);
-            // width: -webkit-calc(100% - 80px);
-            // width: calc(100% - 80px);
+            margin-right: 2px;
+            min-width: 100px;
+            // Used for having text with selection bar
+            width: -moz-calc(100% - 40px);
+            width: -webkit-calc(100% - 40px);
+            width: calc(100% - 40px);
         }
-    }
-    // Tested as a vertical line
-    .vr {
-        width: 5px;
-        height: 200px;
-        background-color: #000;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 300px;
     }
     .filter-div {
         display: inline-block;
@@ -99,8 +90,9 @@
         font-size: 20px;
     }
     .icon {
-        float: right;
+        // float: right;
         background-color: transparent;
         border-color: transparent;
+        vertical-align: middle;
     }
 }
