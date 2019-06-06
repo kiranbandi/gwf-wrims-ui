@@ -52,15 +52,21 @@ class Markers extends Component {
 
     render() {
 
-        const { markers = [], xScale, yScale } = this.props,
+        let { markers = [], xScale, yScale, isSouthSask } = this.props,
             markerSizeScale = (xScale(1) - xScale(0)) / 60;
+
+        if (isSouthSask) {
+            markerSizeScale = markerSizeScale * 0.75;
+        }
+
+
         const markerList = _.map(markers, (marker, index) => {
             const { name, coords, type = "agri" } = marker;
-            // console.log(name)
+
             if ((!!coords && coords.length > 0)) {
                 return (
                     <g key={'marker-' + index} className='river-marker'
-                        transform={"translate(" + xScale(coords[0]) + "," + yScale(coords[1]) + ") scale(" + (markerSizeScale) + ")"}>
+                        transform={"translate(" + (+xScale(coords[0]) - (isSouthSask ? 10 : 0)) + "," + (+yScale(coords[1]) - (isSouthSask ? 10 : 0)) + ") scale(" + (markerSizeScale) + ")"}>
                         <circle
                             // probably the worst way to do this but im on a deadline so sue me !!
                             onDoubleClick={this.onMarkerClick.bind(this, marker)}

@@ -2,16 +2,22 @@ import React from 'react';
 
 export default (props) => {
 
-    const { artifacts = [], xScale, yScale } = props,
+    let { artifacts = [], xScale, yScale, isSouthSask } = props,
         // scale relative to the size of the screen
         reservoirIconScale = (xScale(1) - xScale(0)) / 55;
+
+
+        
+        if (isSouthSask) {
+            reservoirIconScale = reservoirIconScale * 0.75;
+        }
 
     const reservoirList = _.map(_.filter(artifacts, (d) => d.type = 'reservoir'),
         (reservoir, index) => {
 
             const { coords, size = 1 } = reservoir;
             return <g key={'reservoir-' + index} className='reservoir'
-                transform={"translate(" + xScale(coords[0]) + "," + yScale(coords[1]) + ") scale(" + (size * reservoirIconScale) + ")"}>
+                transform={"translate(" + (+xScale(coords[0]) - (isSouthSask ? 10 : 0)) + "," + (+yScale(coords[1]) - (isSouthSask ? 10 : 0)) + ") scale(" + (size * reservoirIconScale) + ")"}>
                 <circle cx='150' cy='150' r='200'></circle>
                 <g key={'reservoir-cyan-image'} className='river-marker'
                     transform={"translate(50, -15) scale(0.65)"}>
