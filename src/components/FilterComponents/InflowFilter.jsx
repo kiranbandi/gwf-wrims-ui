@@ -35,16 +35,14 @@ class InflowFilter extends Component {
 
 
         return (
-            <div>
+            <div className='filter-container'>
                 {/* Adding a button to toggle all demands */}
                 <button
                     className={('btn btn-primary inflow-btn ') +
                         (areInflowsVisible ? ' ' : 'active-button')}
                     onClick={this.onInflowClick}> HIDE SELECTED INFLOWS
                     </button>
-
                 <div className='inner-filter-box'>
-                    <label className='filter-label'>Inflow</label>
                     {/* Allowing the user to select specific inflows */}
                     <div className='select-container-filter'>
                         <Select

@@ -1,5 +1,9 @@
 .filter-root-container {
     margin: 30px 10px 20px 10px;
+    .filter-container {
+        display: inline-block;
+        margin: 10px;
+    }
     .demand-btn {
         &.active-button {
             border: 3px solid #f3fbfe;

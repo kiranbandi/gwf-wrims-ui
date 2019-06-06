@@ -35,7 +35,7 @@ class DemandFilter extends Component {
 
 
         return (
-            <div>
+            <div className='filter-container'>
                 {/* Adding a button to toggle all demands */}
                 <button
                     className={('btn btn-primary demand-btn ') +
@@ -44,7 +44,6 @@ class DemandFilter extends Component {
                     </button>
 
                 <div className='inner-filter-box'>
-                    <label className='filter-label'>Demand</label>
                     {/* Allowing the user to select specific demands */}
                     <div className='select-container-filter'>
                         <Select

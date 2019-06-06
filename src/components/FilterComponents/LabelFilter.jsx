@@ -22,7 +22,7 @@ class LabelFilter extends Component {
 
         return (
 
-            <div>
+            <div className='filter-container'>
                 <button
                     className={('btn btn-primary label-btn ') +
                         (areLabelsVisible ? ' ' : 'active-button')}

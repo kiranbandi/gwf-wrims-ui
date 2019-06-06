@@ -18,9 +18,7 @@ class FilterPanel extends Component {
         return (
             <div className='filter-root-container text-center'>
                 <DemandFilter schematicData={schematicData} />
-                <br></br>
                 <LabelFilter />
-                <br></br>
                 <InflowFilter schematicData={schematicData} />
             </div>
         );
