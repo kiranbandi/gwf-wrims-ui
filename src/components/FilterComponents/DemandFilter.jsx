@@ -35,16 +35,9 @@ class DemandFilter extends Component {
 
 
         return (
-            <div>
-                {/* Adding a button to toggle all demands */}
-                <button
-                    className={('btn btn-primary demand-btn ') +
-                        (areDemandsVisible ? ' ' : 'active-button')}
-                    onClick={this.onDemandClick}> HIDE SELECTED DEMANDS
-                    </button>
-
+            <div >
+                <label className='filter-label filter-title'>Demand</label>
                 <div className='inner-filter-box'>
-                    <label className='filter-label'>Demand</label>
                     {/* Allowing the user to select specific demands */}
                     <div className='select-container-filter'>
                         <Select
@@ -61,6 +54,12 @@ class DemandFilter extends Component {
                             onChange={this.onSelectChange} />
                     </div>
                 </div>
+                {/* Adding a button to toggle all demands */}
+                <button
+                    className={('icon') +
+                        (areDemandsVisible ? ' icon-eye' : ' icon-eye-with-line')}
+                    onClick={this.onDemandClick}>
+                </button>
             </div>
         )
     }

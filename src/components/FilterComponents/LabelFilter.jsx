@@ -23,10 +23,30 @@ class LabelFilter extends Component {
         return (
 
             <div>
-                <button
-                    className={('btn btn-primary label-btn ') +
-                        (areLabelsVisible ? ' ' : 'active-button')}
-                    onClick={this.onLabelToggleClick}> HIDE LABELS </button>
+                <div>
+                    <button
+                        className={('btn btn-primary label-btn ') +
+                            (areLabelsVisible ? ' ' : 'active-button')}
+                        onClick={this.onLabelToggleClick}> SELECT ALL
+                </button>
+                </div>
+
+                <div>
+                    <button
+                        className={('btn btn-primary label-btn ') +
+                            (areLabelsVisible ? ' ' : 'active-button')}
+                        onClick={this.onLabelToggleClick}> CLEAR ALL
+                </button>
+                </div>
+
+                <div>
+                    <button
+                        className={('btn btn-primary label-btn ') +
+                            (areLabelsVisible ? ' ' : 'active-button')}
+                        onClick={this.onLabelToggleClick}> HIDE LABELS
+                </button>
+                </div>
+
             </div>
         );
     }

@@ -5,7 +5,7 @@ import { toggleInflowVisibility, setFilterInflow } from '../../redux/actions/act
 import Select from 'react-select';
 import sortAlphaNum from '../../utils/sortAlphaNum';
 
-class InflowFilter extends Component {
+class GaugeFilter extends Component {
     constructor(props) {
         super(props);
         this.onInflowClick = this.onInflowClick.bind(this);
@@ -36,7 +36,7 @@ class InflowFilter extends Component {
 
         return (
             <div>
-                <label className='filter-label filter-title'>Inflow</label>
+                <label className='filter-label filter-title'>Gauges</label>
                 <div className='inner-filter-box'>
                     {/* Allowing the user to select specific inflows */}
                     <div className='select-container-filter'>
@@ -77,4 +77,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(InflowFilter);
+export default connect(mapStateToProps, mapDispatchToProps)(GaugeFilter);
