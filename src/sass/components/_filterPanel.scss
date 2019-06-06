@@ -49,13 +49,14 @@
         min-height: 10px;
         white-space: nowrap;
         display: inline-block;
+        margin-right: 2px;
         .filter-label {
             margin-right: 10px;
             text-decoration: none;
         }
         .select-container-filter {
             display: inline-block;
-            width: 99%;
+            width: 100%;
             //Used for having text with selection bar
             // width: -moz-calc(100% - 80px);
             // width: -webkit-calc(100% - 80px);

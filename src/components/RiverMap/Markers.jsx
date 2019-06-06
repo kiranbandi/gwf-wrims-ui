@@ -67,7 +67,7 @@ class Markers extends Component {
                             cx='150' cy='150' r='200'
                             className={'type-' + type}>
                         </circle>
-                        <path id="XMLID_845_"
+                        <path id="marker-image"
                             transform={type == 'demand' ? "translate(5, 0) scale(0.68)"
                                 : type == 'agri' ? "translate(5, 20) scale(0.58)"
                                     : "translate(0,0) scale(1.05)"}

@@ -18,7 +18,14 @@ export default {
       //Amenities
       areAmenitiesVisible: true,
       visibleAmenities: [],
+
+      //Irrigations
+      areIrrigationsVisible: true,
+      visibleIrrigations: [],
+
+      //Non-Irrigations
+      areNonIrrigationsVisible: true,
+      visibleNonIrrigations: [],
     }
   }
 };
-

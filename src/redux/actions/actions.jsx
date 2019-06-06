@@ -44,6 +44,8 @@ export function setFlowData(flowData) {
     return { type: types.SET_FLOW_DATA, flowData };
 }
 
+//Demand
+
 export function setFilterDemand(visibleDemands) {
     return { type: types.SET_FILTER_DEMAND, visibleDemands };
 }
@@ -52,9 +54,13 @@ export function toggleDemandVisibility() {
     return { type: types.SET_DEMAND_VISIBILITY };
 }
 
+//Label
+
 export function toggleLabelVisibility() {
     return { type: types.SET_LABEL_VISIBILITY };
 }
+
+//Inflow
 
 export function setFilterInflow(visibleInflows) {
     return { type: types.SET_FILTER_INFLOW, visibleInflows };
@@ -64,10 +70,32 @@ export function toggleInflowVisibility() {
     return { type: types.SET_INFLOW_VISIBILITY };
 }
 
+//Amenity
+
 export function setFilterAmenity(visibleAmenities) {
     return { type: types.SET_FILTER_AMENITY, visibleAmenities };
 }
 
 export function toggleAmenityVisibility() {
     return { type: types.SET_AMENITY_VISIBILITY };
+}
+
+//Irrigation
+
+export function setFilterIrrigation(visibleIrrigations) {
+    return { type: types.SET_FILTER_IRRIGATION, visibleIrrigations };
+}
+
+export function toggleIrrigationVisibility() {
+    return { type: types.SET_IRRIGATION_VISIBILITY };
+}
+
+//Non-Irrigation
+
+export function setFilterNonIrrigation(visibleNonIrrigations) {
+    return { type: types.SET_FILTER_NONIRRIGATION, visibleNonIrrigations };
+}
+
+export function toggleNonIrrigationVisibility() {
+    return { type: types.SET_NONIRRIGATION_VISIBILITY };
 }

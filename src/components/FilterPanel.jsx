@@ -6,7 +6,8 @@ import DemandFilter from './FilterComponents/DemandFilter.jsx'
 import LabelFilter from './FilterComponents/LabelFilter.jsx'
 import InflowFilter from './FilterComponents/InflowFilter.jsx';
 import AmenitiesFilter from './FilterComponents/AmenitiesFilter.jsx';
-import GaugeFilter from './FilterComponents/GaugeFilter.jsx';
+import IrrigationFilter from './FilterComponents/IrrigationFilter.jsx';
+import NonIrrigationFilter from './FilterComponents/NonIrrigationFilter.jsx';
 
 
 class FilterPanel extends Component {
@@ -20,20 +21,17 @@ class FilterPanel extends Component {
 
         return (
             <div className='filter-root-container '>
-
-                {/* <div className="vr" /> */}
                 <div className='filter-div'>
-                    <DemandFilter schematicData={schematicData} />
+                    <IrrigationFilter schematicData={schematicData} />
                 </div>
-                {/* <div className="vr" /> */}
+                <div className='filter-div'>
+                    <NonIrrigationFilter schematicData={schematicData} />
+                </div>
                 <div className='filter-div'>
                     <InflowFilter schematicData={schematicData} />
                 </div>
                 <div className='filter-div'>
                     <AmenitiesFilter schematicData={schematicData} />
-                </div>
-                <div className='filter-div'>
-                    <GaugeFilter schematicData={schematicData} />
                 </div>
                 <div className='filter-div filter-general'>
                     <LabelFilter />
