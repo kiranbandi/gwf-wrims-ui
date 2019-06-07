@@ -20,7 +20,7 @@ export default (props) => {
                 return <path
                     key={'river-line-' + index}
                     id={d.name}
-                    d={riverCurve(d,xScale,yScale,lineWidth,lineWidthTickRatio)}
+                    d={!props.isSouthSask ? riverCurve(d, xScale, yScale, lineWidth, lineWidthTickRatio) : d3Line(d.newNodes)}
                     stroke={d.color || '#92cce3'}
                     strokeWidth={lineWidth}
                     className={'river ' + (d.reverse ? 'reverse-flow' : 'forward-flow')}>
