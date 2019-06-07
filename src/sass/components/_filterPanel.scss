@@ -23,13 +23,14 @@
         }
     }
     button.custom-icon-button.icon {
+        margin-bottom: 2px;
         width: 35px;
         background: #1ca8dd;
         color: white;
-        height: 35px;
+        height: 38px;
         border-radius: 4px;
-        margin-top: 1px;
-        margin-left: 0px;
+        margin-top: 0px;
+        margin-left: 2px;
         &.demand {
             background: #428dff;
         }
@@ -66,11 +67,11 @@
     }
     .filter-div {
         display: inline-block;
-        width: 22%;
+        width: 21%;
         height: auto;
         min-height: 55px;
         vertical-align: text-top;
-        padding: 10px;
+        padding: 6px;
         border: none;
     }
     .btn {
