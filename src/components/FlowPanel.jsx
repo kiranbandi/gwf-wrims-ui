@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { line, scaleLinear, timeParse } from 'd3';
 import Loading from 'react-loading';
 import * as d3 from 'd3';
+import StatCard from '../components/StatCard';
 
 class FlowPanel extends Component {
 
@@ -59,6 +60,12 @@ class FlowPanel extends Component {
 
         return (
             <div className='flow-panel-root-container' style={{ width, height }}>
+                <StatCard
+                    title={"Test data"}
+                    major={90} minor={5}
+                    type={"success"}
+                    arrow={"positive"} />
+
                 <h4 className='title-bar text-center'>FLOW DATA - {path.b}</h4>
                 {isLoading ?
                     <Loading className='loader' type='spin' height='75px' width='75px' color='#d6e5ff' delay={-1} /> :
@@ -111,11 +118,11 @@ function makeTimeChart(dataList, path) {
         margin = {
             top: 20,
             right: 20,
-            bottom: +svg.attr("height")*(0.25),
+            bottom: +svg.attr("height") * (0.25),
             left: 40
         },
         margin2 = {
-            top: +svg.attr("height")*(0.8),
+            top: +svg.attr("height") * (0.8),
             right: 20,
             bottom: 50,
             left: 30
