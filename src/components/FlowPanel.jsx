@@ -62,9 +62,11 @@ class FlowPanel extends Component {
             <div className='flow-panel-root-container' style={{ width, height }}>
                 <StatCard
                     title={"Test data"}
-                    major={90} minor={5}
+                    major={90}
+                    minor={5}
                     type={"success"}
-                    arrow={"positive"} />
+                    arrow={"positive"}
+                    width={190} />
 
                 <h4 className='title-bar text-center'>FLOW DATA - {path.b}</h4>
                 {isLoading ?

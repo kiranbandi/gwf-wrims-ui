@@ -9,7 +9,8 @@ export default class StatCard extends Component {
 
     render() {
         return (
-            <div className={"statcard statcard-" + this.props.type}  >
+            <div className={"statcard statcard-" + this.props.type}
+                style={!!this.props.width ? { width: this.props.width + "px" } : { width: 200 }}>
                 <div className="p-a">
                     <span className="statcard-desc">{this.props.title}</span>
                     <h2 className="statcard-number">
