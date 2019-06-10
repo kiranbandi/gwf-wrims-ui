@@ -73,7 +73,7 @@ export default function(data) {
 
         let nodeName = node.name.toLowerCase();
 
-        if (nodeName.indexOf('FT_') >= 0) {
+        if (nodeName.indexOf('ft_') >= 0) {
             //    skip this node as it is a flow through
             return;
         } else if (nodeName[0] == 'i') {
@@ -94,13 +94,17 @@ export default function(data) {
         // first we ignore all links that are flow through
 
         let linkName = link.linkName.toLowerCase();
-        if (linkName.indexOf('FT_') >= 0) {
+        if (linkName.indexOf('ft_') >= 0) {
             return;
         } else {
 
             // temp fix for south sask river reverse all flows
             if (inputData.title.label == 'South Saskatchewan Model') {
                 link.reverse = !link.reverse;
+                let temp = link.linkTo;
+                link.linkTo = link.linkFrom;
+                link.linkFrom = temp;
+
             }
 
             var tempStore = {
@@ -117,16 +121,8 @@ export default function(data) {
                 "type": "river"
             }
 
-
-
             let linkFlowToNode = link.linkTo,
                 linkFromToNode = link.linkFrom;
-
-            // temp fix for south sask river reverse all flows
-            if (inputData.title.label == 'South Saskatchewan Model') {
-                linkFlowToNode = link.linkFrom;
-                linkFromToNode = link.linkTo;
-            }
 
             let nodeTo = _.find(schematicData.markers, (d) => d.nodeNum == linkFlowToNode),
                 nodeFrom = _.find(schematicData.markers, (d) => d.nodeNum == linkFromToNode);
