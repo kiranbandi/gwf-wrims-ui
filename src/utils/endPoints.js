@@ -10,7 +10,8 @@ var endPoints = {
     loginGoogle: endPointRoot + "/auth/google-login",
     loginPaws: endPointRoot + "/auth/paws-login",
     getCatalog: endPointRoot + "/dss/get-catalog",
-    getPathData: endPointRoot + "/dss/get-pathdata"
+    getPathData: endPointRoot + "/dss/get-pathdata",
+    getFlowData: endPointRoot + "/records/flow-data",
 }
 
 module.exports = endPoints;

@@ -17,7 +17,6 @@ export default class StatCard extends Component {
                         {this.props.major}%
                         <small className={"delta-indicator delta-" + this.props.arrow}>{this.props.minor}%</small>
                     </h2>
-                    <hr className="statcard-hr m-b-0" />
                 </div>
             </div >
         )

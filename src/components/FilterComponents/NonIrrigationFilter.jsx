@@ -25,8 +25,8 @@ class NonIrrigationFilter extends Component {
             { areNonIrrigationsVisible = false, visibleNonIrrigations = [] } = filterMesh;
 
         // filter out all demands , then get the name of the demand and finally sort 
-        const nonIrrigationsList = _.map(_.filter(schematicData.lines,
-            (d) => { return (d.type == 'regular-demand') }),
+        const nonIrrigationsList = _.map(_.filter(schematicData.markers,
+            (d) => { return (d.type == 'demand') }),
             (d) => d.name)
             .sort(sortAlphaNum);
 
@@ -55,7 +55,7 @@ class NonIrrigationFilter extends Component {
                     </div>
                     {/* Adding a button to toggle all demands */}
                     <button
-                        className={"custom-icon-button demand " + ('icon')}
+                        className={"custom-icon-button demand " + ('icon btn ') + (areNonIrrigationsVisible ? '' : 'outline')}
                         onClick={this.onNonIrrigationClick}>
                         <svg transform="translate(-3,3)" width="25" height="25"  >
                             <g>

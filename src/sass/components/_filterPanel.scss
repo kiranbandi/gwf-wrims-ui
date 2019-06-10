@@ -2,46 +2,79 @@
     margin: 30px 10px 5px 10px;
     height: auto;
     width: auto;
-    .hide-btn {
-        margin: 5px;
-        border: 1.5px solid #f3fbfe00;
-        border-radius: 10px;
-        // float: right;
-        &.active-button {
-            border: 1.5px solid #f3fbfe;
-            border-radius: 10px;
-        }
-    }
     .label-btn {
         margin: 2px;
-        border: 2px solid #f3fbfe00;
-        border-radius: 5px;
         height: 35px;
-        &.active-button {
-            border: 2px solid #f3fbfe;
-            // text-decoration: none;
+        color: #ffffff;
+        background-color: #1ca8dd;
+        border-color: #1997c6;
+        &.active {
+            color: #1997c6;
+            background-color: transparent;
+            border-color: #1997c6;
         }
     }
     button.custom-icon-button.icon {
         margin-bottom: 2px;
-        width: 35px;
-        background: #1ca8dd;
-        color: white;
+        min-width: 35px;
         height: 38px;
-        border-radius: 4px;
+        padding-left: 8px;
         margin-top: 0px;
-        margin-left: 2px;
+        margin-left: 1px;
+        &.eye {
+            padding-left: 4px;
+            width: 40px;
+            font-size: 20px;
+        }
         &.demand {
-            background: #428dff;
+            background-color: #428dff;
+            border-color: #428dff;
+            path {
+                fill: white;
+            }
+            &.outline {
+                color: #428dff;
+                background-color: transparent;
+                border-color: #428dff;
+                path {
+                    fill: #428dff;
+                }
+            }
         }
         &.diversion {
-            background: #f7a02e;
+            background-color: #f7a02e;
+            border-color: #f7a02e;
+            color: white;
+            &.outline {
+                color: #f7a02e;
+                background-color: transparent;
+                border-color: #f7a02e;
+            }
         }
         &.inflow {
-            background: #5c6b84;
+            background-color: #5c6b84;
+            border-color: #5c6b84;
+            color: white;
+            &.outline {
+                color: #5c6b84;
+                background-color: transparent;
+                border-color: #5c6b84;
+            }
         }
         &.agri {
-            background: #51a83a;
+            background-color: #51a83a;
+            border-color: #51a83a;
+            path {
+                fill: white;
+            }
+            &.outline {
+                color: #51a83a;
+                background-color: transparent;
+                border-color: #51a83a;
+                path {
+                    fill: #51a83a;
+                }
+            }
         }
     }
     .inner-filter-box {
@@ -67,7 +100,7 @@
     }
     .filter-div {
         display: inline-block;
-        width: 21%;
+        width: 22.75%;
         height: auto;
         min-height: 55px;
         vertical-align: text-top;

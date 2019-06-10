@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as d3 from 'd3';
 import attachZoom from '../../utils/attachZoom';
 import applyFilterMesh from '../../utils/applyFilterMesh';
+import { getFlowData } from '../../utils/requestServer';
+import { setFlowData } from '../../redux/actions/actions';
+
 import _ from 'lodash';
 import RiverLines from './RiverLines';
 import Artifacts from './Artifacts';
 import RiverLabels from './RiverLabels';
 import Markers from './Markers';
-import { filter } from 'minimatch';
 
 class RiverMap extends Component {
 
     constructor(props) {
         super(props);
+        this.onItemClick = this.onItemClick.bind(this);
     }
 
     componentDidMount() {
@@ -23,6 +27,51 @@ class RiverMap extends Component {
         attachZoom('river-map', initialZoomScale);
     }
 
+    onItemClick(itemType, params) {
+        const { schematicData, actions } = this.props;
+
+        let modelID = schematicData.selectedRegion,
+            threshold = 'base', number, type, name = params.name;
+
+        // ignore clicks on junctions for now
+        if (itemType == 'marker' && params.type == 'junction') {
+            return;
+        }
+        else if (itemType == 'marker' && (params.type == 'agri' || params.type == 'demand')) {
+            number = params.nodeNum;
+            type = 'demand';
+        }
+        else if (itemType == 'marker' && params.type == 'inflow') {
+            number = params.nodeNum;
+            type = 'inflow';
+        }
+        else if (itemType == 'artifact' && params.type == 'reservoir') {
+            number = params.nodeNum;
+            type = 'reservoir';
+        }
+        else if (itemType == 'link') {
+            number = params.linkNum;
+            type = 'link';
+        }
+
+        actions.setFlowData({ dataList: [], name, isLoading: true });
+        getFlowData({ modelID, threshold, number, type })
+            .then((records) => {
+
+                let dataList = _.map(records, (d) => (
+                    {
+                        'flow': (Math.round(Number(d.flow) * 1000) / 1000),
+                        'timestamp': d.timestamp
+                    }));
+
+                actions.setFlowData({ dataList, name, isLoading: false });
+            })
+            .catch((error) => {
+                console.log('error fetching and parsing flow data');
+                actions.setFlowData({ dataList: [], name, isLoading: false });
+            })
+    }
+
     render() {
 
         var margin = { top: 80, right: 80, bottom: 20, left: 80 };
@@ -30,10 +79,9 @@ class RiverMap extends Component {
         var yScale = d3.scaleLinear();
         var lineWidth;
         var lineWidthMultiplier = 0.8;
-        var lineWidthTickRatio = 3 / 2;
 
-        const { schematicData = { lines: [], artifacts: [], labels: [], markers: [], schemaTitle: {} },
-            width, height, fileCatalogInfo, filterMesh } = this.props;
+        const { schematicData = { lines: [], artifacts: [], labels: [], markers: [], title: {} },
+            width, height, filterMesh } = this.props;
 
 
         // find the max and min from all the nodes within the lines
@@ -66,17 +114,11 @@ class RiverMap extends Component {
         yScale.domain([maxY, minY]).range([margin.top + maxYRange, margin.top]);
         lineWidth = lineWidthMultiplier * (xScale(1) - xScale(0));
 
-        // console.log(filterMesh)
         // Apply mesh filter on the schematic Data 
         let filteredData = applyFilterMesh(filterMesh, schematicData);
 
-        const { schemaTitle = { coords: [], label: '' } } = schematicData;
+        const { title = { coords: [], label: '' } } = schematicData;
 
-        let isSouthSask = false;
-
-        if (schematicData.labels && schematicData.labels.length == 0) {
-            isSouthSask = true;
-        }
 
         return (
             <div id='river-map' style={{ 'width': width, 'height': height }}>
@@ -87,14 +129,13 @@ class RiverMap extends Component {
                             lines={filteredData.lines}
                             xScale={xScale}
                             yScale={yScale}
-                            lineWidth={lineWidth}
-                            isSouthSask={isSouthSask}
-                            lineWidthTickRatio={lineWidthTickRatio} />
+                            onItemClick={this.onItemClick}
+                            lineWidth={lineWidth} />
 
                         <Artifacts
                             xScale={xScale}
                             yScale={yScale}
-                            isSouthSask={isSouthSask}
+                            onItemClick={this.onItemClick}
                             artifacts={filteredData.artifacts} />
 
                         <RiverLabels
@@ -104,10 +145,9 @@ class RiverMap extends Component {
                             areLabelsVisible={filterMesh.areLabelsVisible} />
 
                         <Markers
-                            fileCatalogInfo={fileCatalogInfo}
                             xScale={xScale}
                             yScale={yScale}
-                            isSouthSask={isSouthSask}
+                            onItemClick={this.onItemClick}
                             markers={filteredData.markers} />
 
                     </g>
@@ -115,9 +155,9 @@ class RiverMap extends Component {
                     <text
                         className='river-model-title'
                         fontSize={(width / 45) + 'px'}
-                        x={xScale(schemaTitle.coords[0])}
-                        y={yScale(schemaTitle.coords[1])}>
-                        {schemaTitle.label}
+                        x={xScale(title.coords[0])}
+                        y={yScale(title.coords[1])}>
+                        {title.label}
                     </text>
                 </svg>
             </div >
@@ -132,4 +172,10 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps, null)(RiverMap);
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators({ setFlowData }, dispatch)
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RiverMap);

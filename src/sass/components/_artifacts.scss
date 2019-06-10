@@ -1,5 +1,6 @@
 .artifacts-container {
     .reservoir {
+        cursor: pointer;
         &>g {
             fill: black;
             stroke-width: 8px;
@@ -7,6 +8,17 @@
         circle {
             fill: #00bdff;
             stroke-width: 30px;
+        }
+    }
+    .sink {
+        cursor: pointer;
+        circle {
+            fill: #d75b5b;
+        }
+        text {
+            color: black;
+            font-size: 250px;
+            font-weight: bold;
         }
     }
 }

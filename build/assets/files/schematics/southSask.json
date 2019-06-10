@@ -1,0 +1,2745 @@
+{
+    "title": {
+        "label": "South Saskatchewan Model",
+        "coords": [0, 0]
+    },
+
+    "labels": [{ "name": "Saskatoon", "coords": [71, 44] },
+        { "name": "Cumberland Delta", "coords": [170, 40] },
+        { "name": "Diefenbaker Reservoir", "coords": [42, 101] }
+    ],
+
+    "demands": [{
+            "nodeNum": 11,
+            "name": "I306_1",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.070187, 0.942169]
+            }]
+        },
+        {
+            "nodeNum": 12,
+            "name": "I306_2",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.112299, 0.940964]
+            }]
+        },
+        {
+            "nodeNum": 13,
+            "name": "MW_103",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.157086, 0.93253]
+            }]
+        },
+        {
+            "nodeNum": 14,
+            "name": "QuAppelle_0",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.371658, 0.913253]
+            }]
+        },
+        {
+            "nodeNum": 15,
+            "name": "MD_1",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.222594, 0.808434]
+            }]
+        },
+        {
+            "nodeNum": 16,
+            "name": "MW_113",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.221925, 0.772289]
+            }]
+        },
+        {
+            "nodeNum": 17,
+            "name": "I116_4",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.362299, 0.777108]
+            }]
+        },
+        {
+            "nodeNum": 18,
+            "name": "I116_3",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.346257, 0.73494]
+            }]
+        },
+        {
+            "nodeNum": 19,
+            "name": "I116_2",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.329545, 0.698795]
+            }]
+        },
+        {
+            "nodeNum": 20,
+            "name": "I116_1",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.316845, 0.66506]
+            }]
+        },
+        {
+            "nodeNum": 21,
+            "name": "MD_2",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.277406, 0.420482]
+            }]
+        },
+        {
+            "nodeNum": 22,
+            "name": "MW_123",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.307487, 0.408434]
+            }]
+        },
+        {
+            "nodeNum": 23,
+            "name": "MD_3",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.291444, 0.291566]
+            }]
+        },
+        {
+            "nodeNum": 24,
+            "name": "MW_133",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.329545, 0.261446]
+            }]
+        },
+        {
+            "nodeNum": 25,
+            "name": "MW_139",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.31885, 0.228916]
+            }]
+        },
+        {
+            "nodeNum": 26,
+            "name": "MD_4",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.475936, 0.215663]
+            }]
+        },
+        {
+            "nodeNum": 27,
+            "name": "MW_143",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.504679, 0.196386]
+            }]
+        },
+        {
+            "nodeNum": 28,
+            "name": "FT_130",
+            "color": "#ff99ff",
+            "type": "FlowThru Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.523396, 0.410843]
+            }]
+        },
+        {
+            "nodeNum": 29,
+            "name": "MW_196",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.55615, 0.150602]
+            }]
+        },
+        {
+            "nodeNum": 30,
+            "name": "MW_193",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.613636, 0.072289]
+            }]
+        },
+        {
+            "nodeNum": 31,
+            "name": "MD_5",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.622995, 0.3]
+            }]
+        },
+        {
+            "nodeNum": 32,
+            "name": "MW_153",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.657086, 0.303614]
+            }]
+        },
+        {
+            "nodeNum": 33,
+            "name": "MD_6",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.701203, 0.309639]
+            }]
+        },
+        {
+            "nodeNum": 34,
+            "name": "MD_7",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.762701, 0.298795]
+            }]
+        },
+        {
+            "nodeNum": 35,
+            "name": "MW_173",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.791444, 0.30241]
+            }]
+        },
+        {
+            "nodeNum": 36,
+            "name": "FT_170",
+            "color": "#ff99ff",
+            "type": "FlowThru Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.824866, 0.074699]
+            }]
+        },
+        {
+            "nodeNum": 37,
+            "name": "MW_186",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.897059, 0.280723]
+            }]
+        },
+        {
+            "nodeNum": 38,
+            "name": "MD_8",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.92246, 0.333735]
+            }]
+        },
+        {
+            "nodeNum": 39,
+            "name": "MW_413",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.377005, 0.59759]
+            }]
+        },
+        {
+            "nodeNum": 40,
+            "name": "I416",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.407754, 0.593976]
+            }]
+        },
+        {
+            "nodeNum": 41,
+            "name": "MD_42",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.446524, 0.704819]
+            }]
+        },
+        {
+            "nodeNum": 42,
+            "name": "MW_423",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.480615, 0.73253]
+            }]
+        },
+        {
+            "nodeNum": 43,
+            "name": "I426",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.510027, 0.710843]
+            }]
+        },
+        {
+            "nodeNum": 44,
+            "name": "I414",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.47393, 0.444578]
+            }]
+        },
+        {
+            "nodeNum": 45,
+            "name": "MW_411",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.488636, 0.473494]
+            }]
+        },
+        {
+            "nodeNum": 46,
+            "name": "I436",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.535428, 0.756627]
+            }]
+        },
+        {
+            "nodeNum": 47,
+            "name": "MW_433",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.56484, 0.757831]
+            }]
+        },
+        {
+            "nodeNum": 48,
+            "name": "MD_43",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.581551, 0.704819]
+            }]
+        },
+        {
+            "nodeNum": 49,
+            "name": "MW_463",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.64238, 0.733735]
+            }]
+        },
+        {
+            "nodeNum": 50,
+            "name": "I456",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.582219, 0.514458]
+            }]
+        },
+        {
+            "nodeNum": 51,
+            "name": "MW_453",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.619652, 0.495181]
+            }]
+        },
+        {
+            "nodeNum": 52,
+            "name": "MW_483",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.78877, 0.745783]
+            }]
+        },
+        {
+            "nodeNum": 53,
+            "name": "MD_48",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.800802, 0.698795]
+            }]
+        },
+        {
+            "nodeNum": 54,
+            "name": "MD_49",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.775401, 0.555422]
+            }]
+        },
+        {
+            "nodeNum": 55,
+            "name": "MW_493",
+            "color": "#cc00cc",
+            "type": "Demand",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.737968, 0.528916]
+            }]
+        }
+    ],
+
+    "nonStorage": [{
+            "nodeNum": 56,
+            "name": "In30_SSR",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.034759, 0.856627]
+            }]
+        },
+        {
+            "nodeNum": 57,
+            "name": "AB_BRDR_J30",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.087567, 0.855422]
+            }]
+        },
+        {
+            "nodeNum": 58,
+            "name": "J_9",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.197861, 0.855422]
+            }]
+        },
+        {
+            "nodeNum": 59,
+            "name": "In9_LEMS",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.201872, 0.944578]
+            }]
+        },
+        {
+            "nodeNum": 60,
+            "name": "In1_SKLD",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.275401, 0.949398]
+            }]
+        },
+        {
+            "nodeNum": 61,
+            "name": "In76_SWIFTCCr",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.323529, 0.937349]
+            }]
+        },
+        {
+            "nodeNum": 62,
+            "name": "J_116",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.316845, 0.807229]
+            }]
+        },
+        {
+            "nodeNum": 63,
+            "name": "J_405",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.410428, 0.856627]
+            }]
+        },
+        {
+            "nodeNum": 64,
+            "name": "J_31",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.274733, 0.675904]
+            }]
+        },
+        {
+            "nodeNum": 65,
+            "name": "J_2",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.307487, 0.46988]
+            }]
+        },
+        {
+            "nodeNum": 66,
+            "name": "In2_GARD",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.255348, 0.463855]
+            }]
+        },
+        {
+            "nodeNum": 67,
+            "name": "J_32",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.369652, 0.381928]
+            }]
+        },
+        {
+            "nodeNum": 68,
+            "name": "In3_DUND",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.344251, 0.33253]
+            }]
+        },
+        {
+            "nodeNum": 69,
+            "name": "J_3",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.421791, 0.331325]
+            }]
+        },
+        {
+            "nodeNum": 70,
+            "name": "J1_RF",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.46992, 0.278313]
+            }]
+        },
+        {
+            "nodeNum": 71,
+            "name": "In4_SKTN",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.455882, 0.239759]
+            }]
+        },
+        {
+            "nodeNum": 72,
+            "name": "J_4",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.515374, 0.262651]
+            }]
+        },
+        {
+            "nodeNum": 73,
+            "name": "J_34",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.571524, 0.240964]
+            }]
+        },
+        {
+            "nodeNum": 74,
+            "name": "In34_STLO",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.574198, 0.320482]
+            }]
+        },
+        {
+            "nodeNum": 75,
+            "name": "J_5",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.620989, 0.237349]
+            }]
+        },
+        {
+            "nodeNum": 76,
+            "name": "In39_NSR",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.393717, 0.063855]
+            }]
+        },
+        {
+            "nodeNum": 77,
+            "name": "J_39",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.477273, 0.063855]
+            }]
+        },
+        {
+            "nodeNum": 78,
+            "name": "J_19",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.558155, 0.06506]
+            }]
+        },
+        {
+            "nodeNum": 79,
+            "name": "In5_PrinceA",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.619652, 0.151807]
+            }]
+        },
+        {
+            "nodeNum": 80,
+            "name": "J_35",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.661096, 0.231325]
+            }]
+        },
+        {
+            "nodeNum": 81,
+            "name": "In6_FORK",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.698529, 0.151807]
+            }]
+        },
+        {
+            "nodeNum": 82,
+            "name": "J_36",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.745321, 0.228916]
+            }]
+        },
+        {
+            "nodeNum": 83,
+            "name": "In7_NPWN",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.790775, 0.13494]
+            }]
+        },
+        {
+            "nodeNum": 84,
+            "name": "J_37",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.826872, 0.225301]
+            }]
+        },
+        {
+            "nodeNum": 85,
+            "name": "J_38",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.897059, 0.218072]
+            }]
+        },
+        {
+            "nodeNum": 86,
+            "name": "J_8",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.920455, 0.218072]
+            }]
+        },
+        {
+            "nodeNum": 87,
+            "name": "In8_TOBIN",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.920455, 0.131325]
+            }]
+        },
+        {
+            "nodeNum": 88,
+            "name": "J_51",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.464572, 0.53494]
+            }]
+        },
+        {
+            "nodeNum": 89,
+            "name": "In42_BRIR",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.493984, 0.586747]
+            }]
+        },
+        {
+            "nodeNum": 90,
+            "name": "In43_BLAC",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.536765, 0.560241]
+            }]
+        },
+        {
+            "nodeNum": 91,
+            "name": "J_44",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.602273, 0.649398]
+            }]
+        },
+        {
+            "nodeNum": 92,
+            "name": "In49_DELW",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.68984, 0.577108]
+            }]
+        },
+        {
+            "nodeNum": 93,
+            "name": "J_47",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.68516, 0.651807]
+            }]
+        },
+        {
+            "nodeNum": 94,
+            "name": "J_495",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.782086, 0.596386]
+            }]
+        },
+        {
+            "nodeNum": 97,
+            "name": "In48_LMAN",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.691845, 0.718072]
+            }]
+        },
+        {
+            "nodeNum": 98,
+            "name": "J2_RF",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.852941, 0.222892]
+            }]
+        },
+        {
+            "nodeNum": 99,
+            "name": "LDiefSpill",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.239305, 0.715663]
+            }]
+        },
+        {
+            "nodeNum": 100,
+            "name": "R7_Spill",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.837567, 0.312048]
+            }]
+        },
+        {
+            "nodeNum": 101,
+            "name": "R6_Spill",
+            "color": "#3399ff",
+            "type": "NonStorage",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.730615, 0.13494]
+            }]
+        }
+    ],
+    "sinks": [{
+            "nodeNum": 95,
+            "name": "Sink_00",
+            "color": "#00cc33",
+            "type": "Sink",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.838904, 0.593976]
+            }]
+        },
+        {
+            "nodeNum": 96,
+            "name": "Sink_0",
+            "color": "#00cc33",
+            "type": "Sink",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.97861, 0.215663]
+            }]
+        }
+    ],
+    "reservoirs": [{
+            "nodeNum": 1,
+            "name": "R1_LDief",
+            "color": "#ff0000",
+            "type": "Reservoir",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.280749, 0.857831]
+            }]
+        },
+        {
+            "nodeNum": 2,
+            "name": "R6_Cod",
+            "color": "#ff0000",
+            "type": "Reservoir",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.700535, 0.231325]
+            }]
+        },
+        {
+            "nodeNum": 3,
+            "name": "R7_Tobin",
+            "color": "#ff0000",
+            "type": "Reservoir",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.793449, 0.226506]
+            }]
+        },
+        {
+            "nodeNum": 4,
+            "name": "R41_Brod",
+            "color": "#ff0000",
+            "type": "Reservoir",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.412433, 0.666265]
+            }]
+        },
+        {
+            "nodeNum": 5,
+            "name": "R42_Bright",
+            "color": "#ff0000",
+            "type": "Reservoir",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.47393, 0.661446]
+            }]
+        },
+        {
+            "nodeNum": 6,
+            "name": "R43_Black",
+            "color": "#ff0000",
+            "type": "Reservoir",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.53877, 0.657831]
+            }]
+        },
+        {
+            "nodeNum": 7,
+            "name": "R45_Brad",
+            "color": "#ff0000",
+            "type": "Reservoir",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.60361, 0.573494]
+            }]
+        },
+        {
+            "nodeNum": 8,
+            "name": "R46_Zel",
+            "color": "#ff0000",
+            "type": "Reservoir",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.648396, 0.650602]
+            }]
+        },
+        {
+            "nodeNum": 9,
+            "name": "R48_LML",
+            "color": "#ff0000",
+            "type": "Reservoir",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.741979, 0.692771]
+            }]
+        },
+        {
+            "nodeNum": 10,
+            "name": "R49_Del",
+            "color": "#ff0000",
+            "type": "Reservoir",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                "coords": [0.741979, 0.60241]
+            }]
+        }
+    ],
+    "links": [{
+            "linkName": "In30_SSR_AB_BRDR_J30",
+            "linkNumber": 1,
+            "linkTo": 56,
+            "linkFrom": 57,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.087567, 0.855422]
+                },
+                {
+                    "coords": [0.034759, 0.856627]
+                }
+            ]
+        },
+        {
+            "linkName": "AB_BRDR_J30_J_9",
+            "linkNumber": 2,
+            "linkTo": 57,
+            "linkFrom": 58,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.197861, 0.855422]
+                },
+                {
+                    "coords": [0.087567, 0.855422]
+                }
+            ]
+        },
+        {
+            "linkName": "J_9_R1_LDief",
+            "linkNumber": 3,
+            "linkTo": 58,
+            "linkFrom": 1,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.280749, 0.857831]
+                },
+                {
+                    "coords": [0.197861, 0.855422]
+                }
+            ]
+        },
+        {
+            "linkName": "J_31_J_2",
+            "linkNumber": 5,
+            "linkTo": 64,
+            "linkFrom": 65,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.307487, 0.46988]
+                },
+                {
+                    "coords": [0.274733, 0.675904]
+                }
+            ]
+        },
+        {
+            "linkName": "J_2_J_32",
+            "linkNumber": 6,
+            "linkTo": 65,
+            "linkFrom": 67,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.369652, 0.381928]
+                },
+                {
+                    "coords": [0.307487, 0.46988]
+                }
+            ]
+        },
+        {
+            "linkName": "J_32_J_3",
+            "linkNumber": 7,
+            "linkTo": 67,
+            "linkFrom": 69,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.421791, 0.331325]
+                },
+                {
+                    "coords": [0.369652, 0.381928]
+                }
+            ]
+        },
+        {
+            "linkName": "J_3_J1_RF",
+            "linkNumber": 8,
+            "linkTo": 69,
+            "linkFrom": 70,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.46992, 0.278313]
+                },
+                {
+                    "coords": [0.421791, 0.331325]
+                }
+            ]
+        },
+        {
+            "linkName": "J1_RF_J_4",
+            "linkNumber": 9,
+            "linkTo": 70,
+            "linkFrom": 72,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.515374, 0.262651]
+                },
+                {
+                    "coords": [0.46992, 0.278313]
+                }
+            ]
+        },
+        {
+            "linkName": "J_4_J_34",
+            "linkNumber": 10,
+            "linkTo": 72,
+            "linkFrom": 73,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.571524, 0.240964]
+                },
+                {
+                    "coords": [0.515374, 0.262651]
+                }
+            ]
+        },
+        {
+            "linkName": "J_34_J_5",
+            "linkNumber": 11,
+            "linkTo": 73,
+            "linkFrom": 75,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.620989, 0.237349]
+                },
+                {
+                    "coords": [0.571524, 0.240964]
+                }
+            ]
+        },
+        {
+            "linkName": "J_5_J_35",
+            "linkNumber": 12,
+            "linkTo": 75,
+            "linkFrom": 80,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.661096, 0.231325]
+                },
+                {
+                    "coords": [0.620989, 0.237349]
+                }
+            ]
+        },
+        {
+            "linkName": "J_35_R6_Cod",
+            "linkNumber": 13,
+            "linkTo": 80,
+            "linkFrom": 2,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.700535, 0.231325]
+                },
+                {
+                    "coords": [0.661096, 0.231325]
+                }
+            ]
+        },
+        {
+            "linkName": "J_36_R7_Tobin",
+            "linkNumber": 15,
+            "linkTo": 82,
+            "linkFrom": 3,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.793449, 0.226506]
+                },
+                {
+                    "coords": [0.745321, 0.228916]
+                }
+            ]
+        },
+        {
+            "linkName": "J_37_J2_RF",
+            "linkNumber": 17,
+            "linkTo": 84,
+            "linkFrom": 98,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.852941, 0.222892]
+                },
+                {
+                    "coords": [0.826872, 0.225301]
+                }
+            ]
+        },
+        {
+            "linkName": "J_38_J_8",
+            "linkNumber": 18,
+            "linkTo": 85,
+            "linkFrom": 86,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.920455, 0.218072]
+                },
+                {
+                    "coords": [0.897059, 0.218072]
+                }
+            ]
+        },
+        {
+            "linkName": "J_8_Sink_0",
+            "linkNumber": 19,
+            "linkTo": 86,
+            "linkFrom": 96,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.97861, 0.215663]
+                },
+                {
+                    "coords": [0.920455, 0.218072]
+                }
+            ]
+        },
+        {
+            "linkName": "R1_LDief_J_405",
+            "linkNumber": 20,
+            "linkTo": 1,
+            "linkFrom": 63,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.410428, 0.856627]
+                },
+                {
+                    "coords": [0.280749, 0.857831]
+                }
+            ]
+        },
+        {
+            "linkName": "J_405_R41_Brod",
+            "linkNumber": 21,
+            "linkTo": 63,
+            "linkFrom": 4,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.412433, 0.666265]
+                },
+                {
+                    "coords": [0.410428, 0.856627]
+                }
+            ]
+        },
+        {
+            "linkName": "R1_LDief_J_116",
+            "linkNumber": 22,
+            "linkTo": 1,
+            "linkFrom": 62,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.316845, 0.807229]
+                },
+                {
+                    "coords": [0.280749, 0.857831]
+                }
+            ]
+        },
+        {
+            "linkName": "AB_BRDR_J30_I306_1",
+            "linkNumber": 23,
+            "linkTo": 57,
+            "linkFrom": 11,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.070187, 0.942169]
+                },
+                {
+                    "coords": [0.087567, 0.855422]
+                }
+            ]
+        },
+        {
+            "linkName": "AB_BRDR_J30_I306_2",
+            "linkNumber": 24,
+            "linkTo": 57,
+            "linkFrom": 12,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.112299, 0.940964]
+                },
+                {
+                    "coords": [0.087567, 0.855422]
+                }
+            ]
+        },
+        {
+            "linkName": "J_9_MW_103",
+            "linkNumber": 25,
+            "linkTo": 58,
+            "linkFrom": 13,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.157086, 0.93253]
+                },
+                {
+                    "coords": [0.197861, 0.855422]
+                }
+            ]
+        },
+        {
+            "linkName": "In9_LEMS_J_9",
+            "linkNumber": 26,
+            "linkTo": 59,
+            "linkFrom": 58,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.197861, 0.855422]
+                },
+                {
+                    "coords": [0.201872, 0.944578]
+                }
+            ]
+        },
+        {
+            "linkName": "In1_SKLD_R1_LDief",
+            "linkNumber": 27,
+            "linkTo": 60,
+            "linkFrom": 1,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.280749, 0.857831]
+                },
+                {
+                    "coords": [0.275401, 0.949398]
+                }
+            ]
+        },
+        {
+            "linkName": "In76_SWIFTCCr_R1_LDief",
+            "linkNumber": 28,
+            "linkTo": 61,
+            "linkFrom": 1,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.280749, 0.857831]
+                },
+                {
+                    "coords": [0.323529, 0.937349]
+                }
+            ]
+        },
+        {
+            "linkName": "R1_LDief_QuAppelle_0",
+            "linkNumber": 29,
+            "linkTo": 1,
+            "linkFrom": 14,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.371658, 0.913253]
+                },
+                {
+                    "coords": [0.280749, 0.857831]
+                }
+            ]
+        },
+        {
+            "linkName": "R1_LDief_MD_1",
+            "linkNumber": 30,
+            "linkTo": 1,
+            "linkFrom": 15,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.222594, 0.808434]
+                },
+                {
+                    "coords": [0.280749, 0.857831]
+                }
+            ]
+        },
+        {
+            "linkName": "R1_LDief_MW_113",
+            "linkNumber": 31,
+            "linkTo": 1,
+            "linkFrom": 16,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.221925, 0.772289]
+                },
+                {
+                    "coords": [0.280749, 0.857831]
+                }
+            ]
+        },
+        {
+            "linkName": "J_116_I116_1",
+            "linkNumber": 32,
+            "linkTo": 62,
+            "linkFrom": 20,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.316845, 0.66506]
+                },
+                {
+                    "coords": [0.316845, 0.807229]
+                }
+            ]
+        },
+        {
+            "linkName": "J_116_I116_2",
+            "linkNumber": 33,
+            "linkTo": 62,
+            "linkFrom": 19,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.329545, 0.698795]
+                },
+                {
+                    "coords": [0.316845, 0.807229]
+                }
+            ]
+        },
+        {
+            "linkName": "J_116_I116_3",
+            "linkNumber": 34,
+            "linkTo": 62,
+            "linkFrom": 18,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.346257, 0.73494]
+                },
+                {
+                    "coords": [0.316845, 0.807229]
+                }
+            ]
+        },
+        {
+            "linkName": "J_116_I116_4",
+            "linkNumber": 35,
+            "linkTo": 62,
+            "linkFrom": 17,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.362299, 0.777108]
+                },
+                {
+                    "coords": [0.316845, 0.807229]
+                }
+            ]
+        },
+        {
+            "linkName": "In2_GARD_J_2",
+            "linkNumber": 36,
+            "linkTo": 66,
+            "linkFrom": 65,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.307487, 0.46988]
+                },
+                {
+                    "coords": [0.255348, 0.463855]
+                }
+            ]
+        },
+        {
+            "linkName": "In3_DUND_J_3",
+            "linkNumber": 37,
+            "linkTo": 68,
+            "linkFrom": 69,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.421791, 0.331325]
+                },
+                {
+                    "coords": [0.344251, 0.33253]
+                }
+            ]
+        },
+        {
+            "linkName": "In39_NSR_J_39",
+            "linkNumber": 38,
+            "linkTo": 76,
+            "linkFrom": 77,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.477273, 0.063855]
+                },
+                {
+                    "coords": [0.393717, 0.063855]
+                }
+            ]
+        },
+        {
+            "linkName": "J_39_J_19",
+            "linkNumber": 39,
+            "linkTo": 77,
+            "linkFrom": 78,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.558155, 0.06506]
+                },
+                {
+                    "coords": [0.477273, 0.063855]
+                }
+            ]
+        },
+        {
+            "linkName": "J_19_MW_193",
+            "linkNumber": 40,
+            "linkTo": 78,
+            "linkFrom": 30,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.613636, 0.072289]
+                },
+                {
+                    "coords": [0.558155, 0.06506]
+                }
+            ]
+        },
+        {
+            "linkName": "J_19_MW_196",
+            "linkNumber": 41,
+            "linkTo": 78,
+            "linkFrom": 29,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.55615, 0.150602]
+                },
+                {
+                    "coords": [0.558155, 0.06506]
+                }
+            ]
+        },
+        {
+            "linkName": "J_19_J_5",
+            "linkNumber": 42,
+            "linkTo": 78,
+            "linkFrom": 75,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.620989, 0.237349]
+                },
+                {
+                    "coords": [0.558155, 0.06506]
+                }
+            ]
+        },
+        {
+            "linkName": "In5_PrinceA_J_5",
+            "linkNumber": 43,
+            "linkTo": 79,
+            "linkFrom": 75,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.620989, 0.237349]
+                },
+                {
+                    "coords": [0.619652, 0.151807]
+                }
+            ]
+        },
+        {
+            "linkName": "In6_FORK_R6_Cod",
+            "linkNumber": 44,
+            "linkTo": 81,
+            "linkFrom": 2,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.700535, 0.231325]
+                },
+                {
+                    "coords": [0.698529, 0.151807]
+                }
+            ]
+        },
+        {
+            "linkName": "In7_NPWN_R7_Tobin",
+            "linkNumber": 45,
+            "linkTo": 83,
+            "linkFrom": 3,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.793449, 0.226506]
+                },
+                {
+                    "coords": [0.790775, 0.13494]
+                }
+            ]
+        },
+        {
+            "linkName": "In8_TOBIN_J_8",
+            "linkNumber": 46,
+            "linkTo": 87,
+            "linkFrom": 86,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.920455, 0.218072]
+                },
+                {
+                    "coords": [0.920455, 0.131325]
+                }
+            ]
+        },
+        {
+            "linkName": "J_2_MD_2",
+            "linkNumber": 47,
+            "linkTo": 65,
+            "linkFrom": 21,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.277406, 0.420482]
+                },
+                {
+                    "coords": [0.307487, 0.46988]
+                }
+            ]
+        },
+        {
+            "linkName": "J_2_MW_123",
+            "linkNumber": 48,
+            "linkTo": 65,
+            "linkFrom": 22,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.307487, 0.408434]
+                },
+                {
+                    "coords": [0.307487, 0.46988]
+                }
+            ]
+        },
+        {
+            "linkName": "J_3_MD_3",
+            "linkNumber": 49,
+            "linkTo": 69,
+            "linkFrom": 23,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.291444, 0.291566]
+                },
+                {
+                    "coords": [0.421791, 0.331325]
+                }
+            ]
+        },
+        {
+            "linkName": "J_3_MW_133",
+            "linkNumber": 50,
+            "linkTo": 69,
+            "linkFrom": 24,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.329545, 0.261446]
+                },
+                {
+                    "coords": [0.421791, 0.331325]
+                }
+            ]
+        },
+        {
+            "linkName": "J_3_MW_139",
+            "linkNumber": 51,
+            "linkTo": 69,
+            "linkFrom": 25,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.31885, 0.228916]
+                },
+                {
+                    "coords": [0.421791, 0.331325]
+                }
+            ]
+        },
+        {
+            "linkName": "J_3_FT_130",
+            "linkNumber": 52,
+            "linkTo": 69,
+            "linkFrom": 28,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.523396, 0.410843]
+                },
+                {
+                    "coords": [0.421791, 0.331325]
+                }
+            ]
+        },
+        {
+            "linkName": "In4_SKTN_J_4",
+            "linkNumber": 53,
+            "linkTo": 71,
+            "linkFrom": 72,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.515374, 0.262651]
+                },
+                {
+                    "coords": [0.455882, 0.239759]
+                }
+            ]
+        },
+        {
+            "linkName": "J_4_MD_4",
+            "linkNumber": 54,
+            "linkTo": 72,
+            "linkFrom": 26,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.475936, 0.215663]
+                },
+                {
+                    "coords": [0.515374, 0.262651]
+                }
+            ]
+        },
+        {
+            "linkName": "J_4_MW_143",
+            "linkNumber": 55,
+            "linkTo": 72,
+            "linkFrom": 27,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.504679, 0.196386]
+                },
+                {
+                    "coords": [0.515374, 0.262651]
+                }
+            ]
+        },
+        {
+            "linkName": "In34_STLO_J_34",
+            "linkNumber": 56,
+            "linkTo": 74,
+            "linkFrom": 73,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.571524, 0.240964]
+                },
+                {
+                    "coords": [0.574198, 0.320482]
+                }
+            ]
+        },
+        {
+            "linkName": "J_5_MD_5",
+            "linkNumber": 57,
+            "linkTo": 75,
+            "linkFrom": 31,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.622995, 0.3]
+                },
+                {
+                    "coords": [0.620989, 0.237349]
+                }
+            ]
+        },
+        {
+            "linkName": "J_5_MW_153",
+            "linkNumber": 58,
+            "linkTo": 75,
+            "linkFrom": 32,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.657086, 0.303614]
+                },
+                {
+                    "coords": [0.620989, 0.237349]
+                }
+            ]
+        },
+        {
+            "linkName": "R6_Cod_MD_6",
+            "linkNumber": 59,
+            "linkTo": 2,
+            "linkFrom": 33,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.701203, 0.309639]
+                },
+                {
+                    "coords": [0.700535, 0.231325]
+                }
+            ]
+        },
+        {
+            "linkName": "R7_Tobin_MD_7",
+            "linkNumber": 60,
+            "linkTo": 3,
+            "linkFrom": 34,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.762701, 0.298795]
+                },
+                {
+                    "coords": [0.793449, 0.226506]
+                }
+            ]
+        },
+        {
+            "linkName": "R7_Tobin_MW_173",
+            "linkNumber": 61,
+            "linkTo": 3,
+            "linkFrom": 35,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.791444, 0.30241]
+                },
+                {
+                    "coords": [0.793449, 0.226506]
+                }
+            ]
+        },
+        {
+            "linkName": "J_37_FT_170",
+            "linkNumber": 62,
+            "linkTo": 84,
+            "linkFrom": 36,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.824866, 0.074699]
+                },
+                {
+                    "coords": [0.826872, 0.225301]
+                }
+            ]
+        },
+        {
+            "linkName": "J_38_MW_186",
+            "linkNumber": 63,
+            "linkTo": 85,
+            "linkFrom": 37,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.897059, 0.280723]
+                },
+                {
+                    "coords": [0.897059, 0.218072]
+                }
+            ]
+        },
+        {
+            "linkName": "J_8_MD_8",
+            "linkNumber": 64,
+            "linkTo": 86,
+            "linkFrom": 38,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.92246, 0.333735]
+                },
+                {
+                    "coords": [0.920455, 0.218072]
+                }
+            ]
+        },
+        {
+            "linkName": "R41_Brod_MW_413",
+            "linkNumber": 65,
+            "linkTo": 4,
+            "linkFrom": 39,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.377005, 0.59759]
+                },
+                {
+                    "coords": [0.412433, 0.666265]
+                }
+            ]
+        },
+        {
+            "linkName": "R41_Brod_I416",
+            "linkNumber": 66,
+            "linkTo": 4,
+            "linkFrom": 40,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.407754, 0.593976]
+                },
+                {
+                    "coords": [0.412433, 0.666265]
+                }
+            ]
+        },
+        {
+            "linkName": "R41_Brod_R42_Bright",
+            "linkNumber": 67,
+            "linkTo": 4,
+            "linkFrom": 5,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.47393, 0.661446]
+                },
+                {
+                    "coords": [0.412433, 0.666265]
+                }
+            ]
+        },
+        {
+            "linkName": "R42_Bright_R43_Black",
+            "linkNumber": 68,
+            "linkTo": 5,
+            "linkFrom": 6,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.53877, 0.657831]
+                },
+                {
+                    "coords": [0.47393, 0.661446]
+                }
+            ]
+        },
+        {
+            "linkName": "R43_Black_J_44",
+            "linkNumber": 69,
+            "linkTo": 6,
+            "linkFrom": 91,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.602273, 0.649398]
+                },
+                {
+                    "coords": [0.53877, 0.657831]
+                }
+            ]
+        },
+        {
+            "linkName": "J_44_R46_Zel",
+            "linkNumber": 70,
+            "linkTo": 91,
+            "linkFrom": 8,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.648396, 0.650602]
+                },
+                {
+                    "coords": [0.602273, 0.649398]
+                }
+            ]
+        },
+        {
+            "linkName": "R46_Zel_J_47",
+            "linkNumber": 71,
+            "linkTo": 8,
+            "linkFrom": 93,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.68516, 0.651807]
+                },
+                {
+                    "coords": [0.648396, 0.650602]
+                }
+            ]
+        },
+        {
+            "linkName": "J_47_R49_Del",
+            "linkNumber": 72,
+            "linkTo": 93,
+            "linkFrom": 10,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.741979, 0.60241]
+                },
+                {
+                    "coords": [0.68516, 0.651807]
+                }
+            ]
+        },
+        {
+            "linkName": "J_47_R48_LML",
+            "linkNumber": 73,
+            "linkTo": 93,
+            "linkFrom": 9,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.741979, 0.692771]
+                },
+                {
+                    "coords": [0.68516, 0.651807]
+                }
+            ]
+        },
+        {
+            "linkName": "R49_Del_J_495",
+            "linkNumber": 74,
+            "linkTo": 10,
+            "linkFrom": 94,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.782086, 0.596386]
+                },
+                {
+                    "coords": [0.741979, 0.60241]
+                }
+            ]
+        },
+        {
+            "linkName": "J_495_Sink_00",
+            "linkNumber": 75,
+            "linkTo": 94,
+            "linkFrom": 95,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.838904, 0.593976]
+                },
+                {
+                    "coords": [0.782086, 0.596386]
+                }
+            ]
+        },
+        {
+            "linkName": "R48_LML_MD_48",
+            "linkNumber": 76,
+            "linkTo": 9,
+            "linkFrom": 53,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.800802, 0.698795]
+                },
+                {
+                    "coords": [0.741979, 0.692771]
+                }
+            ]
+        },
+        {
+            "linkName": "R48_LML_MW_483",
+            "linkNumber": 77,
+            "linkTo": 9,
+            "linkFrom": 52,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.78877, 0.745783]
+                },
+                {
+                    "coords": [0.741979, 0.692771]
+                }
+            ]
+        },
+        {
+            "linkName": "R49_Del_MD_49",
+            "linkNumber": 78,
+            "linkTo": 10,
+            "linkFrom": 54,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.775401, 0.555422]
+                },
+                {
+                    "coords": [0.741979, 0.60241]
+                }
+            ]
+        },
+        {
+            "linkName": "R49_Del_MW_493",
+            "linkNumber": 79,
+            "linkTo": 10,
+            "linkFrom": 55,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.737968, 0.528916]
+                },
+                {
+                    "coords": [0.741979, 0.60241]
+                }
+            ]
+        },
+        {
+            "linkName": "In49_DELW_R49_Del",
+            "linkNumber": 80,
+            "linkTo": 92,
+            "linkFrom": 10,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.741979, 0.60241]
+                },
+                {
+                    "coords": [0.68984, 0.577108]
+                }
+            ]
+        },
+        {
+            "linkName": "In48_LMAN_R48_LML",
+            "linkNumber": 81,
+            "linkTo": 97,
+            "linkFrom": 9,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.741979, 0.692771]
+                },
+                {
+                    "coords": [0.691845, 0.718072]
+                }
+            ]
+        },
+        {
+            "linkName": "R46_Zel_MW_463",
+            "linkNumber": 82,
+            "linkTo": 8,
+            "linkFrom": 49,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.64238, 0.733735]
+                },
+                {
+                    "coords": [0.648396, 0.650602]
+                }
+            ]
+        },
+        {
+            "linkName": "J_44_R45_Brad",
+            "linkNumber": 83,
+            "linkTo": 91,
+            "linkFrom": 7,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.60361, 0.573494]
+                },
+                {
+                    "coords": [0.602273, 0.649398]
+                }
+            ]
+        },
+        {
+            "linkName": "R45_Brad_I456",
+            "linkNumber": 84,
+            "linkTo": 7,
+            "linkFrom": 50,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.582219, 0.514458]
+                },
+                {
+                    "coords": [0.60361, 0.573494]
+                }
+            ]
+        },
+        {
+            "linkName": "R45_Brad_MW_453",
+            "linkNumber": 85,
+            "linkTo": 7,
+            "linkFrom": 51,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.619652, 0.495181]
+                },
+                {
+                    "coords": [0.60361, 0.573494]
+                }
+            ]
+        },
+        {
+            "linkName": "R43_Black_I436",
+            "linkNumber": 86,
+            "linkTo": 6,
+            "linkFrom": 46,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.535428, 0.756627]
+                },
+                {
+                    "coords": [0.53877, 0.657831]
+                }
+            ]
+        },
+        {
+            "linkName": "R43_Black_MW_433",
+            "linkNumber": 87,
+            "linkTo": 6,
+            "linkFrom": 47,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.56484, 0.757831]
+                },
+                {
+                    "coords": [0.53877, 0.657831]
+                }
+            ]
+        },
+        {
+            "linkName": "R43_Black_MD_43",
+            "linkNumber": 88,
+            "linkTo": 6,
+            "linkFrom": 48,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.581551, 0.704819]
+                },
+                {
+                    "coords": [0.53877, 0.657831]
+                }
+            ]
+        },
+        {
+            "linkName": "In43_BLAC_R43_Black",
+            "linkNumber": 89,
+            "linkTo": 90,
+            "linkFrom": 6,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.53877, 0.657831]
+                },
+                {
+                    "coords": [0.536765, 0.560241]
+                }
+            ]
+        },
+        {
+            "linkName": "In42_BRIR_R42_Bright",
+            "linkNumber": 90,
+            "linkTo": 89,
+            "linkFrom": 5,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.47393, 0.661446]
+                },
+                {
+                    "coords": [0.493984, 0.586747]
+                }
+            ]
+        },
+        {
+            "linkName": "R42_Bright_J_51",
+            "linkNumber": 91,
+            "linkTo": 5,
+            "linkFrom": 88,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.464572, 0.53494]
+                },
+                {
+                    "coords": [0.47393, 0.661446]
+                }
+            ]
+        },
+        {
+            "linkName": "J_51_J_3",
+            "linkNumber": 92,
+            "linkTo": 88,
+            "linkFrom": 69,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.421791, 0.331325]
+                },
+                {
+                    "coords": [0.464572, 0.53494]
+                }
+            ]
+        },
+        {
+            "linkName": "J_51_I414",
+            "linkNumber": 93,
+            "linkTo": 88,
+            "linkFrom": 44,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.47393, 0.444578]
+                },
+                {
+                    "coords": [0.464572, 0.53494]
+                }
+            ]
+        },
+        {
+            "linkName": "J_51_MW_411",
+            "linkNumber": 94,
+            "linkTo": 88,
+            "linkFrom": 45,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.488636, 0.473494]
+                },
+                {
+                    "coords": [0.464572, 0.53494]
+                }
+            ]
+        },
+        {
+            "linkName": "R42_Bright_MD_42",
+            "linkNumber": 95,
+            "linkTo": 5,
+            "linkFrom": 41,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.446524, 0.704819]
+                },
+                {
+                    "coords": [0.47393, 0.661446]
+                }
+            ]
+        },
+        {
+            "linkName": "R42_Bright_MW_423",
+            "linkNumber": 96,
+            "linkTo": 5,
+            "linkFrom": 42,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.480615, 0.73253]
+                },
+                {
+                    "coords": [0.47393, 0.661446]
+                }
+            ]
+        },
+        {
+            "linkName": "R42_Bright_I426",
+            "linkNumber": 97,
+            "linkTo": 5,
+            "linkFrom": 43,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.510027, 0.710843]
+                },
+                {
+                    "coords": [0.47393, 0.661446]
+                }
+            ]
+        },
+        {
+            "linkName": "J2_RF_J_38",
+            "linkNumber": 98,
+            "linkTo": 98,
+            "linkFrom": 85,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.897059, 0.218072]
+                },
+                {
+                    "coords": [0.852941, 0.222892]
+                }
+            ]
+        },
+        {
+            "linkName": "R1_LDief_LDiefSpill",
+            "linkNumber": 99,
+            "linkTo": 1,
+            "linkFrom": 99,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.239305, 0.715663]
+                },
+                {
+                    "coords": [0.280749, 0.857831]
+                }
+            ]
+        },
+        {
+            "linkName": "LDiefSpill_J_31",
+            "linkNumber": 100,
+            "linkTo": 99,
+            "linkFrom": 64,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.274733, 0.675904]
+                },
+                {
+                    "coords": [0.239305, 0.715663]
+                }
+            ]
+        },
+        {
+            "linkName": "R7_Tobin_R7_Spill",
+            "linkNumber": 101,
+            "linkTo": 3,
+            "linkFrom": 100,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.837567, 0.312048]
+                },
+                {
+                    "coords": [0.793449, 0.226506]
+                }
+            ]
+        },
+        {
+            "linkName": "R7_Spill_J_37",
+            "linkNumber": 102,
+            "linkTo": 100,
+            "linkFrom": 84,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.826872, 0.225301]
+                },
+                {
+                    "coords": [0.837567, 0.312048]
+                }
+            ]
+        },
+        {
+            "linkName": "R6_Cod_R6_Spill",
+            "linkNumber": 103,
+            "linkTo": 2,
+            "linkFrom": 101,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.730615, 0.13494]
+                },
+                {
+                    "coords": [0.700535, 0.231325]
+                }
+            ]
+        },
+        {
+            "linkName": "R6_Spill_J_36",
+            "linkNumber": 104,
+            "linkTo": 101,
+            "linkFrom": 82,
+            "color": "#000000",
+            "shiftCoords": [0, 0],
+            "reverse": false,
+            "nodes": [{
+                    "coords": [0.745321, 0.228916]
+                },
+                {
+                    "coords": [0.730615, 0.13494]
+                }
+            ]
+        }
+    ]
+}

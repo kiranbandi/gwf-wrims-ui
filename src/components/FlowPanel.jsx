@@ -13,72 +13,61 @@ class FlowPanel extends Component {
     }
 
     componentDidMount() {
-        const { flowData = {}, width, height } = this.props,
-            { dataList = [], path = {} } = flowData;
-
+        const { flowData = {} } = this.props, { dataList = [] } = flowData;
+        const timePeriodList = _.map(dataList, (d) => d.flow);
         if (dataList.length > 0) {
-            makeTimeChart(dataList, path);
+            makeTimeChart(timePeriodList);
         }
-
-
     }
 
-
     componentDidUpdate() {
-
-
-        const { flowData = {}, width, height } = this.props,
-            { dataList = [], path = {} } = flowData;
-
-
+        const { flowData = {} } = this.props, { dataList = [] } = flowData;
+        const timePeriodList = _.map(dataList, (d) => d.flow);
         if (dataList.length > 0) {
-            makeTimeChart(dataList, path);
+            makeTimeChart(timePeriodList);
         }
-
-
     }
     render() {
 
         const { flowData = {}, width, height } = this.props,
-            { dataList = [], path = {}, isLoading = false } = flowData,
-            margin = 20,
+            { dataList = [], name = '', isLoading = false } = flowData,
             innerWidth = width - 40,
-            innerHeight = height - 100;
-
-        const xScale = scaleLinear()
-            .domain([0, dataList.length - 1])
-            .range([margin, innerWidth - margin]);
-
-        const yScale = scaleLinear()
-            .domain([_.max(dataList), _.min(dataList)])
-            .range([margin, innerHeight - margin])
-
-        const lineData = _.map(dataList, (d, i) => ({ x: xScale(i), y: yScale(d) }));
-
-        const d3Line = line().x((d) => d.x).y((d) => d.y);
+            innerHeight = height - (height / 2.75);
 
 
         return (
             <div className='flow-panel-root-container' style={{ width, height }}>
-                <StatCard
-                    title={"Test data"}
-                    major={90}
-                    minor={5}
-                    type={"success"}
-                    arrow={"positive"}
-                    width={190} />
-
-                <h4 className='title-bar text-center'>FLOW DATA - {path.b}</h4>
+                <h4 className='title-bar text-center'>FLOW DATA {name ? " - " + name : ""}</h4>
                 {isLoading ?
-                    <Loading className='loader' type='spin' height='75px' width='75px' color='#d6e5ff' delay={-1} />
-                    : <div className='flow-inner-container'>
+                    <Loading className='loader' type='spin' height='75px' width='75px' color='#d6e5ff' delay={-1} /> :
+                    <div className='flow-inner-container'>
+                        <div className='metrics-container'>
+                            <StatCard
+                                title={"Test data"}
+                                major={90}
+                                minor={5}
+                                type={"success"}
+                                arrow={"positive"}
+                                width={innerWidth / 3.1} />
+                            <StatCard
+                                title={"Test data"}
+                                major={90}
+                                minor={5}
+                                type={"info"}
+                                arrow={"positive"}
+                                width={innerWidth / 3.1} />
+                            <StatCard
+                                title={"Test data"}
+                                major={90}
+                                minor={5}
+                                type={"primary"}
+                                arrow={"negative"}
+                                width={innerWidth / 3.1} />
+                        </div>
+
                         {dataList.length <= 0 ?
                             <h4 className='title-bar text-center m-a-lg'>No Data Available</h4> :
-                            <svg height={innerHeight + 10} width={innerWidth} className='flow-data-chart metric-chart'>
-                                {/* <path className='flow-spark-line' d={d3Line(lineData)}></path> */}
-                                <text className='flow-text' x={(width / 2) - 150} y={innerHeight + 10}>
-                                    {'Time Period - ' + path.time.split("-").join(" - ")}
-                                </text>
+                            <svg height={innerHeight} width={innerWidth} className='flow-data-chart metric-chart'>
                             </svg>}
                     </div>
                 }
@@ -96,38 +85,31 @@ export default connect(mapStateToProps)(FlowPanel);
 
 
 // temp stopgap implementation
-function makeTimeChart(dataList, path) {
-
+function makeTimeChart(dataList) {
 
     var metricCount = dataList;
-
     var metricMonths = [];
+    var initalYear = 1928;
 
-    var parseTime = timeParse("%d%b%Y");
-
-    var initalYear = parseTime(path.time.split("-")[0]).getFullYear();
-
-
-
-    for (let y = 0, constraint = (dataList.length / 12); y < constraint; y++) {
+    //  since data is in weeks we divide by 52.
+    for (let y = 0, constraint = (dataList.length / 52); y < constraint; y++) {
         for (let m = 0; m < 12; m++) {
             metricMonths.push(("" + (initalYear + y) + "-" + ((m < 9) ? "0" + (m + 1) : m + 1)));
         }
     }
 
-
     var svg = d3.select("svg.metric-chart"),
         margin = {
             top: 20,
             right: 20,
-            bottom: +svg.attr("height") * (0.25),
+            bottom: +svg.attr("height") * (0.30),
             left: 40
         },
         margin2 = {
-            top: +svg.attr("height") * (0.8),
+            top: +svg.attr("height") * (0.775),
             right: 20,
-            bottom: 50,
-            left: 30
+            bottom: 25,
+            left: 40
         },
         width = +svg.attr("width") - margin.left - margin.right,
         height = +svg.attr("height") - margin.top - margin.bottom,

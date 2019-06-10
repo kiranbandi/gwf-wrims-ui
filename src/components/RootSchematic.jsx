@@ -25,7 +25,6 @@ export default class RootSchematic extends Component {
                     <div className='image-container' style={backgroundStyle}>
                         <div className='selection-box' id='highwood' onClick={this.props.onRegionSelect} style={{ top: width * 0.245, left: 0.175 * width }}></div>
                         <div className='selection-box' id='southSask' onClick={this.props.onRegionSelect} style={{ top: width * 0.15, left: 0.7 * width }}></div>
-                        <div className='selection-box' id='cumberlandDelta' onClick={this.props.onRegionSelect} style={{ top: width * 0.01, left: 0.85 * width }}></div>
                     </div>
                 </div>
             </div>
