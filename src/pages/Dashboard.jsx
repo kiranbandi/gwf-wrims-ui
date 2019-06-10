@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { RiverMap, FilterPanel, FlowPanel, RootSchematic } from '../components';
+import { RiverMap, FilterPanel, FlowPanel, RootSchematic, VerticalSlider } from '../components';
 import axios from 'axios';
 import toastr from '../utils/toastr';
 import { setFlowData } from '../redux/actions/actions';
@@ -44,7 +44,12 @@ class DashboardRoot extends Component {
 
         //125px to offset the 30px margin on both sides and vertical scroll bar width
         let widthOfDashboard = document.body.getBoundingClientRect().width - 100,
-            mapWidth = widthOfDashboard * 0.65;
+            mapWidth = widthOfDashboard * 0.65,
+            widthOfSlider = 100;
+
+        // reduce the width of the slider from the map
+        mapWidth = mapWidth - widthOfSlider;
+
 
         return (
             <div className='dashboard-page-root' >
@@ -60,11 +65,13 @@ class DashboardRoot extends Component {
                                 schematicData={SchematicData}
                                 width={mapWidth}
                                 height={mapWidth / 1.75} />
+                            <VerticalSlider
+                                width={widthOfSlider}
+                                height={mapWidth / 1.75} />
                             <FlowPanel
                                 width={widthOfDashboard * 0.35}
                                 height={mapWidth / 1.75} />
                             <LegendPanel />
-
                         </div>}
                     </div>
                 }

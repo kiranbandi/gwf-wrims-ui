@@ -1,7 +1,6 @@
 /*global $*/
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { line, scaleLinear, timeParse } from 'd3';
 import Loading from 'react-loading';
 import * as d3 from 'd3';
 import StatCard from '../components/StatCard';
