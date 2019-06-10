@@ -43,14 +43,14 @@ class FlowPanel extends Component {
                     <div className='flow-inner-container'>
                         <div className='metrics-container'>
                             <StatCard
-                                title={"Test data"}
+                                title={"Summer Flow"}
                                 major={90}
                                 minor={5}
                                 type={"success"}
                                 arrow={"positive"}
                                 width={innerWidth / 3.1} />
                             <StatCard
-                                title={"Test data"}
+                                title={"Winter Flow"}
                                 major={90}
                                 minor={5}
                                 type={"info"}
@@ -91,8 +91,8 @@ function makeTimeChart(dataList) {
     var metricMonths = [];
     var initalYear = 1928;
 
-    //  since data is in weeks we divide by 52.
-    for (let y = 0, constraint = (dataList.length / 52); y < constraint; y++) {
+    //  since data is in months we divide by 12.
+    for (let y = 0, constraint = (dataList.length / 12); y < constraint; y++) {
         for (let m = 0; m < 12; m++) {
             metricMonths.push(("" + (initalYear + y) + "-" + ((m < 9) ? "0" + (m + 1) : m + 1)));
         }
