@@ -34,7 +34,8 @@ class DashboardRoot extends Component {
         this.setState({ 'isSchematicLoading': true });
 
         if (selectedRegion == 'highwood') {
-            axios.get("/assets/files/" + event.target.id + "schematic.json")
+            // axios.get("/assets/files/conceptSchematic.json")            
+            axios.get("/assets/files/" + event.target.id + "Schematic.json")
                 .then((response) => {
                     SchematicData = _.clone(response.data);
                     return getFileCatalog();
@@ -67,7 +68,8 @@ class DashboardRoot extends Component {
         }
 
         else if (selectedRegion == 'southSask') {
-            axios.get("/assets/files/" + event.target.id + "schematic.json")
+            axios.get("/assets/files/" + event.target.id + "Schematic.json")
+
                 .then((response) => {
                     SchematicData = _.clone(response.data);
 
