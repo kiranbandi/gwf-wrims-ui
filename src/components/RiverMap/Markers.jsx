@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import _ from 'lodash';
-import { getPathData } from '../../utils/requestServer';
-import { setFlowData } from '../../redux/actions/actions';
-import { bindActionCreators } from 'redux';
-import processFlowData from '../../utils/processFlowData';
 
-class Markers extends Component {
-
+export default class Markers extends Component {
 
     constructor(props) {
         super(props);
@@ -15,39 +9,7 @@ class Markers extends Component {
     }
 
     onMarkerClick(marker) {
-        const { id = false } = marker,
-            { fileCatalogInfo, actions } = this.props;
-
-        let pathIndex, path;
-        // if the id is valid and in the catalog file then
-        //  pull its data from the server
-        if (id) {
-            pathIndex = _.findIndex(fileCatalogInfo, (d) => d.b == id);
-            if (pathIndex > -1) {
-                path = fileCatalogInfo[pathIndex];
-                // console.log(fileCatalogInfo)
-
-                // clear data and set is loading to false
-                actions.setFlowData({ dataList: [], path, isLoading: true });
-                getPathData(path)
-                    .then((data) => {
-                        actions.setFlowData({ dataList: processFlowData(data), path, isLoading: false });
-                    })
-                    .catch((error) => {
-                        alert('error fetching data');
-                        actions.setFlowData({ dataList: [], path, isLoading: false });
-                    })
-            }
-            else {
-                // if no id found set text to no data found 
-                actions.setFlowData({ dataList: [], path, isLoading: false });
-            }
-        }
-        else {
-            // if no id found set text to no data found 
-            actions.setFlowData({ dataList: [], path, isLoading: false });
-        }
-
+        this.props.onItemClick('marker', marker);
     }
 
     render() {
@@ -71,10 +33,10 @@ class Markers extends Component {
             if ((!!coords && coords.length > 0)) {
                 return (
                     <g key={'marker-' + index} className='river-marker'
+                        // probably the worst way to do this but im on a deadline so sue me !!
+                        onDoubleClick={this.onMarkerClick.bind(this, marker)}
                         transform={"translate(" + (+xScale(coords[0]) - (tempOffset)) + "," + (+yScale(coords[1]) - (tempOffset)) + ") scale(" + (markerSizeScaleTemp) + ")"}>
                         <circle
-                            // probably the worst way to do this but im on a deadline so sue me !!
-                            onDoubleClick={this.onMarkerClick.bind(this, marker)}
                             cx='150' cy='150' r='200'
                             className={'type-' + type}>
                         </circle>
@@ -105,12 +67,3 @@ class Markers extends Component {
         return (<g className='river-marker-container'>{markerList}</g>)
     }
 }
-
-
-function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators({ setFlowData }, dispatch)
-    };
-}
-
-export default connect(null, mapDispatchToProps)(Markers);

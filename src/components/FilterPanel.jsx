@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import DemandFilter from './FilterComponents/DemandFilter.jsx'
 import LabelFilter from './FilterComponents/LabelFilter.jsx'
 import InflowFilter from './FilterComponents/InflowFilter.jsx';
 import AmenitiesFilter from './FilterComponents/AmenitiesFilter.jsx';

@@ -29,6 +29,14 @@ requestServer.getPathData = function(path) {
     });
 }
 
+requestServer.getFlowData = function(params) {
+    return new Promise((resolve, reject) => {
+        axios.post(endPoints.getFlowData, {...params }, { headers: { 'authorization': 'Bearer ' + sessionStorage.jwt } })
+            .then((response) => { resolve(response.data) })
+            .catch((err) => errorCallback(err, reject));
+    });
+}
+
 function errorCallback(error, reject) {
     if (error.response && error.response.data) {
         toastr["error"](error.response.data.message, "ERROR");
