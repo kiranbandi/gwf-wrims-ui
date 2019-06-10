@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { RiverMap, FilterPanel, FlowPanel, RootSchematic, VerticalSlider } from '../components';
 import axios from 'axios';
 import toastr from '../utils/toastr';
-import { setFlowData } from '../redux/actions/actions';
 import Loading from 'react-loading';
 import processSchematic from '../utils/processSchematic';
 import _ from 'lodash';
 import LegendPanel from '../components/MapLegend/LegendPanel';
 
 
-class DashboardRoot extends Component {
+export default class DashboardRoot extends Component {
 
     constructor(props) {
         super(props);
@@ -79,12 +76,4 @@ class DashboardRoot extends Component {
         );
     }
 }
-
-function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators({ setFlowData }, dispatch)
-    };
-}
-
-export default connect(null, mapDispatchToProps)(DashboardRoot);
 

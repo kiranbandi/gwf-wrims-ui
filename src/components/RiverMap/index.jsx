@@ -28,48 +28,56 @@ class RiverMap extends Component {
     }
 
     onItemClick(itemType, params) {
-        const { schematicData, actions } = this.props;
+        let { schematicData, actions, flowData = {} } = this.props,
+            { flowParams = { threshold: 'base' }, isLoading = false } = flowData;
 
-        let modelID = schematicData.selectedRegion,
-            threshold = 'base', number, type, name = params.name;
+        // if there is a call in progress ignore the click
+        if (!isLoading) {
 
-        // ignore clicks on junctions for now
-        if (itemType == 'marker' && params.type == 'junction') {
-            return;
-        }
-        else if (itemType == 'marker' && (params.type == 'agri' || params.type == 'demand')) {
-            number = params.nodeNum;
-            type = 'demand';
-        }
-        else if (itemType == 'marker' && params.type == 'inflow') {
-            number = params.nodeNum;
-            type = 'inflow';
-        }
-        else if (itemType == 'artifact' && params.type == 'reservoir') {
-            number = params.nodeNum;
-            type = 'reservoir';
-        }
-        else if (itemType == 'link') {
-            number = params.linkNum;
-            type = 'link';
+            let modelID = schematicData.selectedRegion,
+                threshold = flowParams.threshold, number, type, name = params.name;
+
+            // ignore clicks on junctions for now
+            if (itemType == 'marker' && params.type == 'junction') {
+                return;
+            }
+            else if (itemType == 'marker' && (params.type == 'agri' || params.type == 'demand')) {
+                number = params.nodeNum;
+                type = 'demand';
+            }
+            else if (itemType == 'marker' && params.type == 'inflow') {
+                number = params.nodeNum;
+                type = 'inflow';
+            }
+            else if (itemType == 'artifact' && params.type == 'reservoir') {
+                number = params.nodeNum;
+                type = 'reservoir';
+            }
+            else if (itemType == 'link') {
+                number = params.linkNum;
+                type = 'link';
+            }
+
+            flowParams = { modelID, threshold, number, type };
+
+            actions.setFlowData({ dataList: [], name, flowParams, isLoading: true });
+            getFlowData(flowParams)
+                .then((records) => {
+
+                    let dataList = _.map(records, (d) => (
+                        {
+                            'flow': (Math.round(Number(d.flow) * 1000) / 1000),
+                            'timestamp': d.timestamp
+                        }));
+
+                    actions.setFlowData({ dataList, name, flowParams, isLoading: false });
+                })
+                .catch((error) => {
+                    console.log('error fetching and parsing flow data');
+                    actions.setFlowData({ dataList: [], name, flowParams, isLoading: false });
+                })
         }
 
-        actions.setFlowData({ dataList: [], name, isLoading: true });
-        getFlowData({ modelID, threshold, number, type })
-            .then((records) => {
-
-                let dataList = _.map(records, (d) => (
-                    {
-                        'flow': (Math.round(Number(d.flow) * 1000) / 1000),
-                        'timestamp': d.timestamp
-                    }));
-
-                actions.setFlowData({ dataList, name, isLoading: false });
-            })
-            .catch((error) => {
-                console.log('error fetching and parsing flow data');
-                actions.setFlowData({ dataList: [], name, isLoading: false });
-            })
     }
 
     render() {
@@ -168,7 +176,8 @@ class RiverMap extends Component {
 
 function mapStateToProps(state) {
     return {
-        filterMesh: state.delta.filterMesh,
+        flowData: state.delta.flowData,
+        filterMesh: state.delta.filterMesh
     };
 }
 

@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import 'rc-slider/assets/index.css';
 import Slider from 'rc-slider';
+import { getFlowData } from '../utils/requestServer';
+import { setFlowData } from '../redux/actions/actions';
 
 const marks = {
     0: <strong>Base</strong>,
@@ -11,24 +13,50 @@ const marks = {
     100: <strong>10%</strong>
 };
 
-function log(value) {
-    console.log(value); //eslint-disable-line
-}
-
 class VerticalSlider extends Component {
 
     constructor(props) {
         super(props);
+        this.onSliderChange = this.onSliderChange.bind(this);
     }
 
-    render() {
+    onSliderChange(value) {
+        let { actions, flowData = {} } = this.props, { flowParams = null, name, isLoading = false } = flowData;
 
-        const { width, height } = this.props;
+        if (!!flowParams && !isLoading) {
+            flowParams.threshold = value == 100 ? 'ten' : value == 50 ? 'five' : 'base';
+            actions.setFlowData({ dataList: [], name, flowParams, isLoading: true });
+            getFlowData(flowParams)
+                .then((records) => {
+                    let dataList = _.map(records, (d) => (
+                        {
+                            'flow': (Math.round(Number(d.flow) * 1000) / 1000),
+                            'timestamp': d.timestamp
+                        }));
+                    actions.setFlowData({ dataList, name, flowParams, isLoading: false });
+                })
+                .catch((error) => {
+                    console.log('error fetching and parsing flow data');
+                    actions.setFlowData({ dataList: [], name, flowParams, isLoading: false });
+                })
+        }
+
+    }
+
+
+
+    render() {
+        let { width, height, flowData = {} } = this.props,
+            { flowParams = { threshold: 'base' } } = flowData, { threshold = 'base' } = flowParams;
+
+        let sliderValue = threshold == 'ten' ? 100 : threshold == 'five' ? 50 : 0;
+
+
         return (
             <div className='vertical-slider-container' style={{ 'width': width, 'height': height }}>
                 <div className='inner-slider' style={{ 'width': width, 'height': height * 0.80, 'marginBottom': height * 0.1 }}>
                     <p className='slider-title'>Decrease Supply</p>
-                    <Slider vertical min={0} marks={marks} step={null} onChange={log} defaultValue={0} />
+                    <Slider vertical value={sliderValue} min={0} marks={marks} step={null} onChange={this.onSliderChange} defaultValue={0} />
                 </div>
             </div>
         );
@@ -38,13 +66,13 @@ class VerticalSlider extends Component {
 
 function mapStateToProps(state) {
     return {
-        filterMesh: state.delta.filterMesh
+        flowData: state.delta.flowData
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({}, dispatch)
+        actions: bindActionCreators({ setFlowData }, dispatch)
     };
 }
 
