@@ -1,10 +1,9 @@
 import React from 'react';
 import { line } from 'd3';
-import riverCurve from '../../utils/riverCurve';
 
 export default (props) => {
 
-    const { lines, xScale, yScale, lineWidth, lineWidthTickRatio } = props;
+    const { lines, xScale, yScale, lineWidth } = props;
 
     _.map(lines, (line) => {
         const { shiftCoords = [0, 0] } = line;
@@ -20,10 +19,9 @@ export default (props) => {
                 return <path
                     key={'river-line-' + index}
                     id={d.name}
-                    d={!props.isSouthSask ? riverCurve(d, xScale, yScale, lineWidth, lineWidthTickRatio) : d3Line(d.newNodes)}
-                    stroke={d.color || '#92cce3'}
+                    d={d3Line(d.newNodes)}
                     strokeWidth={lineWidth}
-                    className={'river ' + (d.reverse ? 'reverse-flow' : 'forward-flow')}>
+                    className={'flowLine type-' + (d.type) + " " + (d.reverse ? 'reverse-flow' : 'forward-flow')}>
                 </path>
             })}
         </g>)

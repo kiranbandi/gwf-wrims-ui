@@ -30,7 +30,6 @@ class RiverMap extends Component {
         var yScale = d3.scaleLinear();
         var lineWidth;
         var lineWidthMultiplier = 0.8;
-        var lineWidthTickRatio = 3 / 2;
 
         const { schematicData = { lines: [], artifacts: [], labels: [], markers: [], schemaTitle: {} },
             width, height, fileCatalogInfo, filterMesh } = this.props;
@@ -72,11 +71,6 @@ class RiverMap extends Component {
 
         const { schemaTitle = { coords: [], label: '' } } = schematicData;
 
-        let isSouthSask = false;
-
-        if (schematicData.labels && schematicData.labels.length == 0) {
-            isSouthSask = true;
-        }
 
         return (
             <div id='river-map' style={{ 'width': width, 'height': height }}>
@@ -87,14 +81,11 @@ class RiverMap extends Component {
                             lines={filteredData.lines}
                             xScale={xScale}
                             yScale={yScale}
-                            lineWidth={lineWidth}
-                            isSouthSask={isSouthSask}
-                            lineWidthTickRatio={lineWidthTickRatio} />
+                            lineWidth={lineWidth}/>
 
                         <Artifacts
                             xScale={xScale}
                             yScale={yScale}
-                            isSouthSask={isSouthSask}
                             artifacts={filteredData.artifacts} />
 
                         <RiverLabels
@@ -107,7 +98,6 @@ class RiverMap extends Component {
                             fileCatalogInfo={fileCatalogInfo}
                             xScale={xScale}
                             yScale={yScale}
-                            isSouthSask={isSouthSask}
                             markers={filteredData.markers} />
 
                     </g>

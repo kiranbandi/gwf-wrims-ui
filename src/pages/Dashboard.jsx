@@ -7,10 +7,10 @@ import toastr from '../utils/toastr';
 import { getFileCatalog, getPathData } from '../utils/requestServer';
 import { setFlowData } from '../redux/actions/actions';
 import Loading from 'react-loading';
-import processFlowData from '../utils/processFlowData';
+import processSchematic from '../utils/processSchematic';
 import _ from 'lodash';
 import LegendPanel from '../components/MapLegend/LegendPanel';
-import { EventEmitter } from 'events';
+
 
 class DashboardRoot extends Component {
 
@@ -27,79 +27,19 @@ class DashboardRoot extends Component {
 
     onRegionSelect(event) {
 
-        const selectedRegion = event.target.id;
-
-        var SchematicData = {}, fileCatalogInfo = [];
+        const selectedRegion = event.target.id || 'highwood';
 
         this.setState({ 'isSchematicLoading': true });
-
-        if (selectedRegion == 'highwood') {
-            axios.get("/assets/files/" + event.target.id + "schematic.json")
-                .then((response) => {
-                    SchematicData = _.clone(response.data);
-                    return getFileCatalog();
-                })
-                .then((response) => {
-                    // The server response is in a weird format 
-                    //  so quick fix for now ignore lines that dont have pipe "|" symbol in them
-                    const filteredResponse = _.filter(response.split("\n"), (d) => (d.indexOf('|') > -1));
-                    fileCatalogInfo = _.map(filteredResponse, (row) => {
-                        const values = row.split("|");
-                        return { "a": values[1], "b": values[2], "c": values[3], "time": values[4] };
-                    });
-                    // fetch flow data for first value in the catalog
-                    return getPathData(fileCatalogInfo[0])
-                })
-                .then((data) => {
-                    this.props.actions.setFlowData(
-                        {
-                            dataList: processFlowData(data),
-                            path: fileCatalogInfo[0],
-                            isLoading: false
-                        });
-                    this.setState({ SchematicData, fileCatalogInfo });
-                })
-                .catch(() => {
-                    toastr["error"]("Failed to load schematic", "ERROR");
-                })
-                // turn off file processing loader
-                .finally(() => { this.setState({ 'isSchematicLoading': false }) });
-        }
-
-        else if (selectedRegion == 'southSask') {
-            axios.get("/assets/files/" + event.target.id + "schematic.json")
-                .then((response) => {
-                    SchematicData = _.clone(response.data);
-
-                    const alpha = 200;
-
-                    SchematicData.markers.map((d, i) => {
-                        d.coords = [d.coords[0] * alpha, d.coords[1] * (alpha / 2)];
-                    })
-
-                    SchematicData.artifacts.map((d, i) => {
-                        d.coords = [d.coords[0] * alpha, d.coords[1] * (alpha / 2)];
-                    })
-
-                    SchematicData.lines.map((d, i) => {
-                        d.nodes = d.nodes.map((innerD) => {
-
-                            return {
-                                'coords': [innerD.coords[0] * alpha, innerD.coords[1] * (alpha / 2)]
-                            }
-                        })
-                    })
-
-
-
-                    this.setState({ SchematicData });
-                })
-                .catch(() => {
-                    toastr["error"]("Failed to load schematic", "ERROR");
-                })
-                // turn off file processing loader
-                .finally(() => { this.setState({ 'isSchematicLoading': false }) });
-        }
+        axios.get("/assets/files/schematics/" + selectedRegion + ".json")
+            .then((response) => {
+                let SchematicData = processSchematic(response.data);
+                this.setState({ SchematicData });
+            })
+            .catch(() => {
+                toastr["error"]("Failed to load schematic", "ERROR");
+            })
+            // turn off file processing loader
+            .finally(() => { this.setState({ 'isSchematicLoading': false }) });
 
     }
 
