@@ -70,6 +70,7 @@ class DashboardRoot extends Component {
                                 width={widthOfDashboard * 0.35}
                                 height={mapWidth / 1.75} />
                             <LegendPanel />
+
                         </div>}
                     </div>
                 }

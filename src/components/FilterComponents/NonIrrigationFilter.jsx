@@ -42,7 +42,7 @@ class NonIrrigationFilter extends Component {
                     <div className='select-container-filter'>
                         <Select
                             isClearable={true}
-                            placeholder='Select Non-Irrigation Demands...'
+                            placeholder='Select Non-Irrigations...'
                             name={'non-irrigation-select'}
                             isMulti
                             isDisabled={!areNonIrrigationsVisible}
@@ -53,13 +53,26 @@ class NonIrrigationFilter extends Component {
                             styles={{ option: (styles) => ({ ...styles, color: 'black', textAlign: 'left' }) }}
                             onChange={this.onSelectChange} />
                     </div>
+                    {/* Adding a button to toggle all demands */}
+                    <button
+                        className={"custom-icon-button demand " + ('icon')}
+                        onClick={this.onNonIrrigationClick}>
+                        <svg transform="translate(-3,3)" width="25" height="25"  >
+                            <g>
+                                <path id="marker-image"
+                                    transform={"translate(0, 0) " + (areNonIrrigationsVisible ? "scale(0.060)" : "scale(0.050)")}
+                                    fill="white"
+                                    d={
+                                        areNonIrrigationsVisible ? "M300,240.715V155l-120,85.715V155h-30V85h-30v70H90V35H30v120H0v230h420V155L300,240.715z M160,335h-40 v-40h40V335z M230,335h-40v-40h40V335z M300,335h-40v-40h40V335z"
+                                            : "M365.714,249.905v-60.952l-146.286,60.952v-60.952h-54.857v-85.333H128v85.333H91.429V42.667H54.857v146.286H0v280.381 h512V188.952L365.714,249.905z M201.143,432.762h-36.571V396.19h36.571V432.762z M274.286,432.762h-36.571V396.19h36.571V432.762z"
+                                            + " M347.429,432.762h-36.571V396.19h36.571V432.762z M475.429,432.762H384v-73.143H128v73.143H36.571V225.524h146.286v24.381v54.857"
+                                            + " l50.638-21.099l95.648-39.853v6.095v54.857l50.638-21.099l95.648-39.853V432.762z"
+                                    }
+                                />
+                            </g>
+                        </svg>
+                    </button>
                 </div>
-                {/* Adding a button to toggle all demands */}
-                <button
-                    className={"custom-icon-button demand " + ('icon') +
-                        (areNonIrrigationsVisible ? ' icon-eye' : ' icon-eye-with-line')}
-                    onClick={this.onNonIrrigationClick}>
-                </button>
             </div>
         )
     }

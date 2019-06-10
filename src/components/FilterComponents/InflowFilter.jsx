@@ -53,13 +53,13 @@ class InflowFilter extends Component {
                             styles={{ option: (styles) => ({ ...styles, color: 'black', textAlign: 'left' }) }}
                             onChange={this.onSelectChange} />
                     </div>
+                    {/* Adding a button to toggle all demands */}
+                    <button
+                        className={"custom-icon-button inflow " + ('icon') +
+                            (areInflowsVisible ? ' icon-eye' : ' icon-eye-with-line')}
+                        onClick={this.onInflowClick}>
+                    </button>
                 </div>
-                {/* Adding a button to toggle all demands */}
-                <button
-                    className={  "custom-icon-button inflow "+('icon') +
-                        (areInflowsVisible ? ' icon-eye' : ' icon-eye-with-line')}
-                    onClick={this.onInflowClick}>
-                </button>
             </div>
         )
     }
