@@ -3,6 +3,12 @@
         "label": "South Saskatchewan Model",
         "coords": [0, 0]
     },
+
+    "labels": [{ "name": "Saskatoon", "coords": [71, 44] },
+        { "name": "Cumberland Delta", "coords": [170, 40] },
+        { "name": "Diefenbaker Reservoir", "coords": [42, 101] }
+    ],
+
     "demands": [{
             "nodeNum": 11,
             "name": "I306_1",

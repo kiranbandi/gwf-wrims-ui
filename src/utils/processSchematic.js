@@ -146,4 +146,4 @@ export default function(data) {
     return schematicData;
 }
 
-var specialCases = ["J_LBowDiv_J_HW8", "J_WCDiv_J_HW7", "J_MosqCr_MW_302_ClearL", "J_HW9_MW_401_FrankL"]
+var specialCases = ["J_LBowDiv_J_HW8", "J_WCDiv_J_HW7"]

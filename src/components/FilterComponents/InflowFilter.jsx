@@ -55,7 +55,7 @@ class InflowFilter extends Component {
                     </div>
                     {/* Adding a button to toggle all demands */}
                     <button
-                        className={"custom-icon-button inflow " + ('icon') +
+                        className={"eye custom-icon-button inflow " + ('icon btn ') + (areInflowsVisible ? '' : 'outline') +
                             (areInflowsVisible ? ' icon-eye' : ' icon-eye-with-line')}
                         onClick={this.onInflowClick}>
                     </button>

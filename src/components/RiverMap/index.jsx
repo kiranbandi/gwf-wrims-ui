@@ -31,7 +31,7 @@ class RiverMap extends Component {
         var lineWidth;
         var lineWidthMultiplier = 0.8;
 
-        const { schematicData = { lines: [], artifacts: [], labels: [], markers: [], schemaTitle: {} },
+        const { schematicData = { lines: [], artifacts: [], labels: [], markers: [], title: {} },
             width, height, fileCatalogInfo, filterMesh } = this.props;
 
 
@@ -65,11 +65,10 @@ class RiverMap extends Component {
         yScale.domain([maxY, minY]).range([margin.top + maxYRange, margin.top]);
         lineWidth = lineWidthMultiplier * (xScale(1) - xScale(0));
 
-        // console.log(filterMesh)
         // Apply mesh filter on the schematic Data 
         let filteredData = applyFilterMesh(filterMesh, schematicData);
 
-        const { schemaTitle = { coords: [], label: '' } } = schematicData;
+        const { title = { coords: [], label: '' } } = schematicData;
 
 
         return (
@@ -81,7 +80,7 @@ class RiverMap extends Component {
                             lines={filteredData.lines}
                             xScale={xScale}
                             yScale={yScale}
-                            lineWidth={lineWidth}/>
+                            lineWidth={lineWidth} />
 
                         <Artifacts
                             xScale={xScale}
@@ -105,9 +104,9 @@ class RiverMap extends Component {
                     <text
                         className='river-model-title'
                         fontSize={(width / 45) + 'px'}
-                        x={xScale(schemaTitle.coords[0])}
-                        y={yScale(schemaTitle.coords[1])}>
-                        {schemaTitle.label}
+                        x={xScale(title.coords[0])}
+                        y={yScale(title.coords[1])}>
+                        {title.label}
                     </text>
                 </svg>
             </div >

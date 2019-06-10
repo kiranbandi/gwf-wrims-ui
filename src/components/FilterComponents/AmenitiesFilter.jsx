@@ -55,7 +55,7 @@ class AmenitiesFilter extends Component {
                     </div>
                     {/* Adding a button to toggle all demands */}
                     <button
-                        className={"custom-icon-button diversion " + ('icon') +
+                        className={"eye custom-icon-button diversion " + ('icon btn ') + (areAmenitiesVisible ? '' : 'outline') +
                             (areAmenitiesVisible ? ' icon-eye' : ' icon-eye-with-line')}
                         onClick={this.onAmenityClick}>
                     </button>

@@ -1,8 +1,15 @@
 {
     "title": {
         "label": "Highwood Model",
-        "coords": [160, 0]
+        "coords": [170, 0]
     },
+
+    "labels": [{ "name": "Sink Bow River", "coords": [75, 5] },
+        { "name": "Frank Lake Diversion", "coords": [120, 24] },
+        { "name": "Little Bow Diversion", "coords": [75, 45] },
+        { "name": "Women's Coulee Diversion", "coords": [75, 67] },
+        { "name": "Clear Lake Diversion", "coords": [124, 66] }
+    ],
     "demands": [{
             "nodeNum": 18,
             "name": "Irr_101",
