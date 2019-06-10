@@ -70,8 +70,8 @@ class FlowPanel extends Component {
 
                 <h4 className='title-bar text-center'>FLOW DATA - {path.b}</h4>
                 {isLoading ?
-                    <Loading className='loader' type='spin' height='75px' width='75px' color='#d6e5ff' delay={-1} /> :
-                    <div className='flow-inner-container'>
+                    <Loading className='loader' type='spin' height='75px' width='75px' color='#d6e5ff' delay={-1} />
+                    : <div className='flow-inner-container'>
                         {dataList.length <= 0 ?
                             <h4 className='title-bar text-center m-a-lg'>No Data Available</h4> :
                             <svg height={innerHeight + 10} width={innerWidth} className='flow-data-chart metric-chart'>

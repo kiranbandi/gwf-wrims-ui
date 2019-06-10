@@ -5,14 +5,113 @@ import { getPathData } from '../../utils/requestServer';
 import { setFlowData } from '../../redux/actions/actions';
 import { bindActionCreators } from 'redux';
 import processFlowData from '../../utils/processFlowData';
+import * as d3 from 'd3';
+
+
 
 class Markers extends Component {
-
-
     constructor(props) {
         super(props);
         this.onMarkerClick = this.onMarkerClick.bind(this);
     }
+
+    componentDidMount() {
+        const { flowData = {}, width, height } = this.props,
+            { dataList = [], path = {}, isLoading = false } = flowData;
+
+        let { markers = [], xScale, yScale, isSouthSask } = this.props,
+            markerSizeScale = (xScale(1) - xScale(0)) / 60;
+
+        let data = {}, threshold = 50;
+        // console.log(dataList)
+        if (dataList.length > 0) {
+            const markerList = _.map(markers, (marker, index) => {
+                const { name, coords, type = "agri", mockdata = {} } = marker;
+                // console.log(index)
+
+                var dataNum = 0;
+                for (var i = 0; i < dataList.length; i++) {
+
+                    //Add first index
+                    if (i == 0) {
+                        data[dataNum] = dataList[i];
+                    } else {
+
+                        // data bigger than threshold
+                        if (dataList[i] > threshold) {
+                            // if at even index
+                            if (dataNum % 2 == 0) {
+                                data[dataNum] = data[dataNum] + dataList[i]
+                            }
+                            else {
+                                dataNum++;
+                                data[dataNum] = dataList[i];
+                            }
+                            //data smaller than threshold
+                        } else {
+                            if (dataNum % 2 != 0) {
+                                data[dataNum] = data[dataNum] + dataList[i]
+                            } else {
+                                dataNum++;
+                                data[dataNum] = dataList[i]
+                            }
+                        }
+
+                    }
+                }
+                makeTimeChart(data, path, index)
+            });
+        }
+    }
+
+    // componentDidUpdate() {
+    //     const { flowData = {}, width, height } = this.props,
+    //         { dataList = [], path = {}, isLoading = false } = flowData;
+
+    //     let { markers = [], xScale, yScale, isSouthSask } = this.props,
+    //         markerSizeScale = (xScale(1) - xScale(0)) / 60;
+
+    //     let data = {}, threshold = 50;
+
+    //     if (dataList.length > 0) {
+    //         const markerList = _.map(markers, (marker, index) => {
+    //             const { name, coords, type = "agri", mockdata = {} } = marker;
+    //             // console.log(index)
+
+    //             var dataNum = 0;
+    //             for (var i = 0; i < dataList.length; i++) {
+
+    //                 //Add first index
+    //                 if (i == 0) {
+    //                     data[dataNum] = dataList[i];
+    //                 } else {
+
+    //                     // data bigger than threshold
+    //                     if (dataList[i] > threshold) {
+    //                         // if at even index
+    //                         if (dataNum % 2 == 0) {
+    //                             data[dataNum] = data[dataNum] + dataList[i]
+    //                         }
+    //                         else {
+    //                             dataNum++;
+    //                             data[dataNum] = dataList[i];
+    //                         }
+    //                         //data smaller than threshold
+    //                     } else {
+    //                         if (dataNum % 2 != 0) {
+    //                             data[dataNum] = data[dataNum] + dataList[i]
+    //                         } else {
+    //                             dataNum++;
+    //                             data[dataNum] = dataList[i]
+    //                         }
+    //                     }
+
+    //                 }
+    //             }
+    //             makeTimeChart(data, path, index)
+    //         });
+    //     }
+    // }
 
     onMarkerClick(marker) {
         const { id = false } = marker,
@@ -51,6 +150,8 @@ class Markers extends Component {
     }
 
     render() {
+        const { flowData = {}, width, height } = this.props,
+            { dataList = [], path = {}, isLoading = false } = flowData;
 
         let { markers = [], xScale, yScale, isSouthSask } = this.props,
             markerSizeScale = (xScale(1) - xScale(0)) / 60;
@@ -61,8 +162,9 @@ class Markers extends Component {
 
 
         const markerList = _.map(markers, (marker, index) => {
-            const { name, coords, type = "agri" } = marker;
-
+            const { name, coords, type = "agri", mockdata = {} } = marker;
+            // console.log(index)
+            // makeTimeChart(dataList, path, index)
             if ((!!coords && coords.length > 0)) {
                 return (
                     <g key={'marker-' + index} className='river-marker'
@@ -87,6 +189,11 @@ class Markers extends Component {
                         <title>
                             {name}
                         </title>
+                        <g height={1000} width={1000} className={'flow-data-chart doughnut-chart' + index} transform="translate(150, 150)"></g>
+                        {/* <svg className='doughnut-chart'> */}
+
+                        {/* </svg> */}
+                        {/* <div id="my_dataviz"></div> */}
                     </g>
 
                 );
@@ -106,4 +213,64 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(null, mapDispatchToProps)(Markers);
+function mapStateToProps(state) {
+    return {
+        flowData: state.delta.flowData
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Markers);
+
+// temp stopgap implementation
+function makeTimeChart(data, path, index, threshold = 50) {
+    // set the dimensions and margins of the graph
+    var width = 500, height = 500, margin = 40;
+    // console.log("doughnut-chart" + index)
+    // The radius of the pieplot is half the width or half the height (smallest one). I substract a bit of margin.
+    var radius = Math.min(width, height) / 2 - margin
+
+    // append the svg object to the div called 'my_dataviz'
+    var svg = d3.select("g.doughnut-chart" + index)
+        .append("g")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g");
+    // .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+    // Create dummy data
+    // var data = {
+    //     // 1: 40, 2: 5, 3: 20, 4: 10
+    // }
+
+    var colorList = ["blue", "red"]
+    // console.log(dataList)
+
+
+
+    // set the color scale
+    var color = d3.scaleOrdinal()
+        .domain(data)
+        .range(colorList)
+
+    // Compute the position of each group on the pie:
+    var pie = d3.pie()
+        .sort(null) // Do not sort group by size
+        .value(function (d) { return d.value; })
+    var data_ready = pie(d3.entries(data))
+
+    // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
+    svg
+        .selectAll('whatever')
+        .data(data_ready)
+        .enter()
+        .append('path')
+        .attr('d', d3.arc()
+            .innerRadius(radius + 50)         // This is the size of the donut hole
+            .outerRadius(radius + 100)
+        )
+        .attr('fill', function (d) { return (color(d.data.key)) })
+        .attr("stroke", "black")
+        .style("stroke-width", "2px")
+        .style("opacity", 0.7)
+
+}
