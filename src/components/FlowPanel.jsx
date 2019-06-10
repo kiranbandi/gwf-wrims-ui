@@ -32,7 +32,7 @@ class FlowPanel extends Component {
         const { flowData = {}, width, height } = this.props,
             { dataList = [], name = '', isLoading = false } = flowData,
             innerWidth = width - 40,
-            innerHeight = height - 275;
+            innerHeight = height - (height / 2.75);
 
 
         return (
@@ -91,25 +91,25 @@ function makeTimeChart(dataList) {
     var metricMonths = [];
     var initalYear = 1928;
 
-    for (let y = 0, constraint = (dataList.length / 12); y < constraint; y++) {
+    //  since data is in weeks we divide by 52.
+    for (let y = 0, constraint = (dataList.length / 52); y < constraint; y++) {
         for (let m = 0; m < 12; m++) {
             metricMonths.push(("" + (initalYear + y) + "-" + ((m < 9) ? "0" + (m + 1) : m + 1)));
         }
     }
 
-
     var svg = d3.select("svg.metric-chart"),
         margin = {
             top: 20,
             right: 20,
-            bottom: +svg.attr("height") * (0.25),
+            bottom: +svg.attr("height") * (0.30),
             left: 40
         },
         margin2 = {
-            top: +svg.attr("height") * (0.8),
+            top: +svg.attr("height") * (0.775),
             right: 20,
-            bottom: 50,
-            left: 30
+            bottom: 25,
+            left: 40
         },
         width = +svg.attr("width") - margin.left - margin.right,
         height = +svg.attr("height") - margin.top - margin.bottom,
