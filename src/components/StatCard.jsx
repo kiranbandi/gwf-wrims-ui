@@ -163,7 +163,7 @@ export default class StatCard extends Component {
                     <div>
                         <span>
                             <svg className={"icon" + this.props.icon} width="23" height="23"
-                                transform={"translate(-2, 5)"} marginLeft="1px">
+                                transform={"translate(-2, 5)"} >
                             </svg>
                         </span>
                         <span className="statcard-lead-num statcard-major" transform={"translate(-5, 0)"}>
