@@ -47,21 +47,24 @@ class FlowPanel extends Component {
                                 minor={5}
                                 type={"success"}
                                 arrow={"positive"}
-                                width={innerWidth / 3.1} />
+                                width={innerWidth / 3.1}
+                                icon="snow" />
                             <StatCard
                                 title={"Winter Flow"}
                                 major={90}
                                 minor={5}
                                 type={"info"}
                                 arrow={"positive"}
-                                width={innerWidth / 3.1} />
+                                width={innerWidth / 3.1}
+                                icon="sun" />
                             <StatCard
-                                title={"Test data"}
+                                title={"Sturgeon"}
                                 major={90}
                                 minor={5}
                                 type={"primary"}
                                 arrow={"negative"}
-                                width={innerWidth / 3.1} />
+                                width={innerWidth / 3.1}
+                                icon="fish" />
                         </div>
 
                         {dataList.length <= 0 ?
