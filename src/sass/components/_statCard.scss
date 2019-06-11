@@ -14,8 +14,8 @@
 //     stroke: blue;
 //     stroke-width: 2px;
 // }
-.statcard-lead-num {
-    font-size: 18px;
+.statcard-major {
+    font-size: 16px;
 }
 
 .card-icon {
@@ -24,4 +24,17 @@
     // border: 5px;
     // stroke: blue;
     // background-color: blue;
+}
+
+.p-a {
+    padding: 5px;
+}
+
+.delta-indicator {
+    font-size: 8px;
+}
+
+.statcard-desc {
+    font-size: 9px;
+    text-decoration: underline;
 }

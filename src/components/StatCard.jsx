@@ -28,7 +28,7 @@ export default class StatCard extends Component {
 
             svg.append("path")
                 .attr("class", "card-icon")
-                .attr("transform", "translate(0, 0) scale(0.06)")
+                .attr("transform", "translate(0, 0) scale(0.04)")
                 .attr("d", "m498.899 340.374-203.696-84.374 203.697-84.374c7.654-3.17 11.288-11.945 8.118-19.599s-11.945-11.288-19.599-8.118l-203.706 84.378 84.378-203.707c3.17-7.654-.464-16.428-8.118-19.599-7.654-3.169-16.428.464-19.599 8.118l-84.374 203.698-84.374-203.697c-3.17-7.654-11.944-11.287-19.599-8.118-7.654 3.17-11.288 11.945-8.118 19.599l84.378 203.707-203.706-84.379c-7.653-3.17-16.429.464-19.599 8.118-3.17 7.654.464 16.428 8.118 19.599l203.697 84.374-203.696 84.374c-7.654 3.17-11.288 11.945-8.118 19.599s11.945 11.288 19.599 8.118l203.706-84.378-84.379 203.707c-3.17 7.654.464 16.428 8.118 19.599 7.654 3.169 16.428-.464 19.599-8.118l84.374-203.698 84.374 203.697c3.17 7.654 11.944 11.287 19.599 8.118 7.654-3.17 11.288-11.945 8.118-19.599l-84.378-203.707 203.706 84.378c7.653 3.17 16.429-.464 19.599-8.118 3.17-7.653-.465-16.428-8.119-19.598z")
                 .attr("fill", "#2d7dff")
                 .attr("stroke", "black")
@@ -36,7 +36,7 @@ export default class StatCard extends Component {
 
             svg.append("path")
                 .attr("class", "card-icon")
-                .attr("transform", "translate(0, 0) scale(0.06)")
+                .attr("transform", "translate(0, 0) scale(0.04)")
                 .attr("d", "m359.973 507.018c7.654-3.17 11.288-11.945 8.118-19.599l-84.378-203.707 203.706 84.378c7.653 3.17 16.429-.464 19.599-8.118s-.464-16.428-8.118-19.599l-203.697-84.373 203.697-84.374c7.654-3.17 11.288-11.945 8.118-19.599s-11.945-11.288-19.599-8.118l-203.706 84.378 84.378-203.707c3.17-7.654-.464-16.428-8.118-19.599-7.654-3.169-16.428.464-19.599 8.118l-84.374 203.698v78.407l84.374 203.696c3.17 7.654 11.944 11.287 19.599 8.118z")
                 .attr("fill", "#0050ff")
                 .attr("stroke", "black")
@@ -44,7 +44,7 @@ export default class StatCard extends Component {
 
             svg.append("path")
                 .attr("class", "card-icon")
-                .attr("transform", "translate(0, 0) scale(0.06)")
+                .attr("transform", "translate(0, 0) scale(0.04)")
                 .attr("d", "m178.224 95.943-67.08-27.786c-7.654-3.17-11.288-11.945-8.118-19.599 3.171-7.654 11.944-11.288 19.599-8.118l53.222 22.045 22.045-53.222c3.17-7.654 11.945-11.288 19.599-8.118s11.288 11.945 8.118 19.599l-27.786 67.08c-2.289 5.526-10.09 12.055-19.599 8.119z")
                 .attr("fill", "#5aaaff")
                 .attr("stroke", "black")
@@ -53,7 +53,7 @@ export default class StatCard extends Component {
 
             svg.append("path")
                 .attr("class", "card-icon")
-                .attr("transform", "translate(0, 0) scale(0.06)")
+                .attr("transform", "translate(0, 0) scale(0.04)")
                 .attr("d", "m1.146 217.489c-3.17-7.654.464-16.428 8.118-19.599l53.222-22.045-22.045-53.222c-3.17-7.654.464-16.428 8.118-19.599 7.654-3.168 16.429.464 19.599 8.118l27.785 67.08c3.17 7.654-.464 16.428-8.118 19.599l-67.08 27.786c-9.627 3.987-17.329-2.636-19.599-8.118z")
                 .attr("fill", "#5aaaff")
                 .attr("stroke", "black")
@@ -61,7 +61,7 @@ export default class StatCard extends Component {
 
             svg.append("path")
                 .attr("class", "card-icon")
-                .attr("transform", "translate(0, 0) scale(0.06)")
+                .attr("transform", "translate(0, 0) scale(0.04)")
                 .attr("d", "m333.776 95.943 67.08-27.786c7.654-3.17 11.288-11.945 8.118-19.599-3.171-7.654-11.944-11.288-19.599-8.118l-53.222 22.045-22.045-53.221c-3.17-7.654-11.945-11.288-19.599-8.118s-11.288 11.945-8.118 19.599l27.786 67.08c2.289 5.525 10.09 12.054 19.599 8.118z")
                 .attr("fill", "#2d7dff")
                 .attr("stroke", "black")
@@ -69,7 +69,7 @@ export default class StatCard extends Component {
 
             svg.append("path")
                 .attr("class", "card-icon")
-                .attr("transform", "translate(0, 0) scale(0.06)")
+                .attr("transform", "translate(0, 0) scale(0.04)")
                 .attr("d", "m510.854 217.489c3.17-7.654-.464-16.428-8.118-19.599l-53.222-22.045 22.045-53.222c3.17-7.654-.464-16.428-8.118-19.599-7.654-3.168-16.429.464-19.599 8.118l-27.785 67.08c-3.17 7.654.464 16.428 8.118 19.599l67.08 27.786c9.628 3.987 17.329-2.636 19.599-8.118z")
                 .attr("fill", "#2d7dff")
                 .attr("stroke", "black")
@@ -77,7 +77,7 @@ export default class StatCard extends Component {
 
             svg.append("path")
                 .attr("class", "card-icon")
-                .attr("transform", "translate(0, 0) scale(0.06)")
+                .attr("transform", "translate(0, 0) scale(0.04)")
                 .attr("d", "m178.224 416.057-67.08 27.786c-7.654 3.17-11.288 11.945-8.118 19.599 3.171 7.654 11.944 11.288 19.599 8.118l53.222-22.045 22.045 53.222c3.17 7.654 11.945 11.288 19.599 8.118s11.288-11.945 8.118-19.599l-27.786-67.08c-2.289-5.526-10.09-12.055-19.599-8.119z")
                 .attr("fill", "#5aaaff")
                 .attr("stroke", "black")
@@ -85,7 +85,7 @@ export default class StatCard extends Component {
 
             svg.append("path")
                 .attr("class", "card-icon")
-                .attr("transform", "translate(0, 0) scale(0.06)")
+                .attr("transform", "translate(0, 0) scale(0.04)")
                 .attr("d", "m1.146 294.511c-3.17 7.654.464 16.428 8.118 19.599l53.222 22.045-22.045 53.222c-3.17 7.654.464 16.428 8.118 19.599 7.654 3.168 16.429-.464 19.599-8.118l27.785-67.08c3.17-7.654-.464-16.428-8.118-19.599l-67.08-27.786c-9.627-3.987-17.329 2.636-19.599 8.118z")
                 .attr("fill", "#5aaaff")
                 .attr("stroke", "black")
@@ -93,7 +93,7 @@ export default class StatCard extends Component {
 
             svg.append("path")
                 .attr("class", "card-icon")
-                .attr("transform", "translate(0, 0) scale(0.06)")
+                .attr("transform", "translate(0, 0) scale(0.04)")
                 .attr("d", "m333.776 416.057 67.08 27.786c7.654 3.17 11.288 11.945 8.118 19.599-3.171 7.654-11.944 11.288-19.599 8.118l-53.222-22.045-22.045 53.222c-3.17 7.654-11.945 11.288-19.599 8.118s-11.288-11.945-8.118-19.599l27.786-67.08c2.289-5.526 10.09-12.055 19.599-8.119z")
                 .attr("fill", "#2d7dff")
                 .attr("stroke", "black")
@@ -101,7 +101,7 @@ export default class StatCard extends Component {
 
             svg.append("path")
                 .attr("class", "card-icon")
-                .attr("transform", "translate(0, 0) scale(0.06)")
+                .attr("transform", "translate(0, 0) scale(0.04)")
                 .attr("d", "m510.854 294.511c3.17 7.654-.464 16.428-8.118 19.599l-53.222 22.045 22.045 53.222c3.17 7.654-.464 16.428-8.118 19.599-7.654 3.168-16.429-.464-19.599-8.118l-27.785-67.08c-3.17-7.654.464-16.428 8.118-19.599l67.08-27.786c9.628-3.987 17.329 2.636 19.599 8.118z")
                 .attr("fill", "#2d7dff")
                 .attr("stroke", "black")
@@ -109,7 +109,7 @@ export default class StatCard extends Component {
 
             svg.append("path")
                 .attr("class", "card-icon")
-                .attr("transform", "translate(0, 0) scale(0.06)")
+                .attr("transform", "translate(0, 0) scale(0.04)")
                 .attr("d", "m256 112.467c-79.145 0-143.533 64.389-143.533 143.533s64.388 143.533 143.533 143.533 143.533-64.388 143.533-143.533-64.388-143.533-143.533-143.533zm0 257.066c-62.603 0-113.533-50.931-113.533-113.533s50.93-113.533 113.533-113.533 113.533 50.93 113.533 113.533-50.93 113.533-113.533 113.533z")
                 .attr("fill", "#5aaaff")
                 .attr("stroke", "black")
@@ -117,7 +117,7 @@ export default class StatCard extends Component {
 
             svg.append("path")
                 .attr("class", "card-icon")
-                .attr("transform", "translate(0, 0) scale(0.06)")
+                .attr("transform", "translate(0, 0) scale(0.04)")
                 .attr("d", "m399.533 256c0-79.145-64.389-143.533-143.533-143.533v30c62.603 0 113.533 50.931 113.533 113.533s-50.93 113.533-113.533 113.533v30c79.145 0 143.533-64.388 143.533-143.533z")
                 .attr("fill", "#2d7dff")
                 .attr("stroke", "black")
@@ -138,7 +138,7 @@ export default class StatCard extends Component {
                 .attr("class", "icon-graphic")
                 .append("path")
                 .attr("class", "card-icon")
-                .attr("transform", "translate(0, 0) scale(0.06)")
+                .attr("transform", "translate(0, 0) scale(0.045)")
                 .attr("d", "M495,267.5v-40h-74.324c-3.799-33.108-16.904-63.424-36.634-88.257l52.61-52.61l-28.285-28.284 l-52.609,52.609c-24.834-19.731-55.15-32.835-88.257-36.634V0h-40v74.324c6.565-0.753,13.236-1.154,20-1.154v348.66 c-6.764,0-13.435-0.401-20-1.154V495h40v-74.324c33.107-3.799,63.423-16.904,88.257-36.634l52.609,52.609l28.285-28.284 l-52.61-52.61c19.731-24.833,32.835-55.149,36.634-88.257H495z")
                 .attr("fill", "#FFCD00")
                 .attr("stroke", "black")
@@ -146,7 +146,7 @@ export default class StatCard extends Component {
 
             svg.append("path")
                 .attr("class", "card-icon")
-                .attr("transform", "translate(0, 0) scale(0.06)")
+                .attr("transform", "translate(0, 0) scale(0.045)")
                 .attr("d", "M247.5,73.17c-6.764,0-13.435,0.401-20,1.154c-33.107,3.799-63.423,16.904-88.257,36.634 L86.634,58.349L58.349,86.633l52.61,52.61c-19.731,24.833-32.835,55.149-36.634,88.257H0v40h74.324 c3.799,33.108,16.904,63.424,36.634,88.257l-52.61,52.61l28.285,28.284l52.609-52.609c24.834,19.731,55.15,32.835,88.257,36.634 c6.565,0.753,13.236,1.154,20,1.154V73.17z")
                 .attr("fill", "#FFDA44")
                 .attr("stroke", "black")
@@ -162,10 +162,11 @@ export default class StatCard extends Component {
                     <span className="statcard-desc">{this.props.title}</span>
                     <div>
                         <span>
-                            <svg className={"icon" + this.props.icon} width="35" height="35" transform={"translate(-15, 10)"}>
+                            <svg className={"icon" + this.props.icon} width="23" height="23"
+                                transform={"translate(-2, 5)"} marginLeft="1px">
                             </svg>
                         </span>
-                        <span className="statcard-lead-num">
+                        <span className="statcard-lead-num statcard-major" transform={"translate(-5, 0)"}>
                             {this.props.major}%
                             <sub className={"delta-indicator delta-" + this.props.arrow}>{this.props.minor}%</sub>
                         </span>

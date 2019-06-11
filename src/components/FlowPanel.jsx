@@ -43,7 +43,7 @@ class FlowPanel extends Component {
                     <div className='flow-inner-container'>
                         <div className='metrics-container'>
                             <StatCard
-                                title={"Test data"}
+                                title={"Summer Flow"}
                                 major={90}
                                 minor={5}
                                 type={"success"}
@@ -51,7 +51,7 @@ class FlowPanel extends Component {
                                 width={innerWidth / 3.1}
                                 icon="snow" />
                             <StatCard
-                                title={"Test data"}
+                                title={"Winter Flow"}
                                 major={90}
                                 minor={5}
                                 type={"info"}
@@ -59,7 +59,7 @@ class FlowPanel extends Component {
                                 width={innerWidth / 3.1}
                                 icon="sun" />
                             <StatCard
-                                title={"Test data"}
+                                title={"Sturgeon"}
                                 major={90}
                                 minor={5}
                                 type={"primary"}
