@@ -43,25 +43,25 @@ class FlowPanel extends Component {
                         <div className='metrics-container'>
                             <StatCard
                                 title={"Summer Flow"}
-                                major={90}
-                                minor={5}
+                                major={4310}
+                                minor={'12%'}
                                 type={"success"}
+                                arrow={"negative"}
+                                width={innerWidth / 3.1}
+                                icon="sun" />
+                            <StatCard
+                                title={"Winter Flow"}
+                                major={2000}
+                                minor={'5%'}
+                                type={"primary"}
                                 arrow={"positive"}
                                 width={innerWidth / 3.1}
                                 icon="snow" />
                             <StatCard
-                                title={"Winter Flow"}
+                                title={"Spawning Rate"}
                                 major={90}
-                                minor={5}
+                                minor={'15%'}
                                 type={"info"}
-                                arrow={"positive"}
-                                width={innerWidth / 3.1}
-                                icon="sun" />
-                            <StatCard
-                                title={"Sturgeon"}
-                                major={90}
-                                minor={5}
-                                type={"primary"}
                                 arrow={"negative"}
                                 width={innerWidth / 3.1}
                                 icon="fish" />

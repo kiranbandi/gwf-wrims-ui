@@ -1,5 +1,8 @@
 .root-schema-container {
     margin: 40px 0px;
+    .schema-selection-container {
+        display: inline-block;
+    }
     .text-primary {
         text-transform: capitalize;
         margin-bottom: 15px;

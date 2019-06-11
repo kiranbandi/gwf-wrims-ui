@@ -128,7 +128,7 @@ export default class StatCard extends Component {
                 .attr("class", "icon-graphic")
                 .append("path")
                 .attr("class", "card-icon")
-                .attr("transform", "translate(0, 0) scale(0.06)")
+                .attr("transform", "translate(0,-2.5) scale(0.075)")
                 .attr("d", fish)
                 .attr("fill", "#80C7EA")
                 .attr("stroke", "black")
@@ -160,15 +160,13 @@ export default class StatCard extends Component {
                 style={!!this.props.width ? { width: this.props.width + "px" } : { width: 200 }}>
                 <div className="p-a">
                     <span className="statcard-desc">{this.props.title}</span>
-                    <div>
-                        <span>
-                            <svg className={"icon" + this.props.icon} width="23" height="23"
-                                transform={"translate(-2, 5)"} >
+                    <div className='statcard-content'>
+                            <svg className={"icon" + this.props.icon} width="35" height="35"
+                                transform={"scale(1.45)"} >
                             </svg>
-                        </span>
                         <span className="statcard-lead-num statcard-major" transform={"translate(-5, 0)"}>
-                            {this.props.major}%
-                            <sub className={"delta-indicator delta-" + this.props.arrow}>{this.props.minor}%</sub>
+                            {this.props.major}
+                            {this.props.minor && <sub className={"delta-indicator delta-" + this.props.arrow}>{this.props.minor}</sub>}
                         </span>
                     </div>
                 </div>
