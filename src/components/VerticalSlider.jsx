@@ -6,6 +6,7 @@ import 'rc-slider/assets/index.css';
 import Slider from 'rc-slider';
 import { getFlowData } from '../utils/requestServer';
 import { setFlowData } from '../redux/actions/actions';
+import toastr from '../utils/toastr';
 
 const marks = {
     0: <strong>Base</strong>,
@@ -23,24 +24,28 @@ class VerticalSlider extends Component {
     onSliderChange(value) {
         let { actions, flowData = {} } = this.props, { flowParams = null, name, isLoading = false } = flowData;
 
-        if (!!flowParams && !isLoading) {
-            flowParams.threshold = value == 100 ? 'ten' : value == 50 ? 'five' : 'base';
-            actions.setFlowData({ dataList: [], name, flowParams, isLoading: true });
-            getFlowData(flowParams)
-                .then((records) => {
-                    let dataList = _.map(records, (d) => (
-                        {
-                            'flow': (Math.round(Number(d.flow) * 1000) / 1000),
-                            'timestamp': d.timestamp
-                        }));
-                    actions.setFlowData({ dataList, name, flowParams, isLoading: false });
-                })
-                .catch((error) => {
-                    console.log('error fetching and parsing flow data');
-                    actions.setFlowData({ dataList: [], name, flowParams, isLoading: false });
-                })
+        if (!isLoading) {
+            if (!!flowParams) {
+                flowParams.threshold = value == 100 ? 'ten' : value == 50 ? 'five' : 'base';
+                actions.setFlowData({ dataList: [], name, flowParams, isLoading: true });
+                getFlowData(flowParams)
+                    .then((records) => {
+                        let dataList = _.map(records, (d) => (
+                            {
+                                'flow': (Math.round(Number(d.flow) * 1000) / 1000),
+                                'timestamp': d.timestamp
+                            }));
+                        actions.setFlowData({ dataList, name, flowParams, isLoading: false });
+                    })
+                    .catch((error) => {
+                        console.log('error fetching and parsing flow data');
+                        actions.setFlowData({ dataList: [], name, flowParams, isLoading: false });
+                    })
+            }
+            else {
+                toastr["warning"]("Please select a node first on the schematic", "Error");
+            }
         }
-
     }
 
 
