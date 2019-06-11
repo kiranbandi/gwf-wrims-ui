@@ -10,6 +10,9 @@
         fill: none;
         stroke: #5c6b84;
         cursor: pointer;
+        &.highlight {
+            stroke: red !important;
+        }
         &.type-agri {
             stroke: #51a83a;
         }
@@ -88,6 +91,11 @@
         }
         text {
             fill: white;
+        }
+        &.highlight {
+            circle {
+                fill: red !important;
+            }
         }
     }
     .river-model-title {

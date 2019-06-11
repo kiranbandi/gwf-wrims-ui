@@ -89,7 +89,8 @@ class RiverMap extends Component {
         var lineWidthMultiplier = 0.8;
 
         const { schematicData = { lines: [], artifacts: [], labels: [], markers: [], title: {} },
-            width, height, filterMesh } = this.props;
+            width, height, filterMesh, flowData = {} } = this.props,
+            { name = '' } = flowData;
 
 
         // find the max and min from all the nodes within the lines
@@ -137,12 +138,14 @@ class RiverMap extends Component {
                             lines={filteredData.lines}
                             xScale={xScale}
                             yScale={yScale}
+                            highlightName={name}
                             onItemClick={this.onItemClick}
                             lineWidth={lineWidth} />
 
                         <Artifacts
                             xScale={xScale}
                             yScale={yScale}
+                            highlightName={name}
                             onItemClick={this.onItemClick}
                             artifacts={filteredData.artifacts} />
 
@@ -155,6 +158,7 @@ class RiverMap extends Component {
                         <Markers
                             xScale={xScale}
                             yScale={yScale}
+                            highlightName={name}
                             onItemClick={this.onItemClick}
                             markers={filteredData.markers} />
 
