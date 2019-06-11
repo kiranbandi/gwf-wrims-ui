@@ -14,7 +14,7 @@ export default class Markers extends Component {
 
     render() {
 
-        let { markers = [], xScale, yScale } = this.props,
+        let { markers = [], xScale, yScale, highlightName = '' } = this.props,
             markerSizeScale = (xScale(1) - xScale(0)) / 90;
 
         const markerList = _.map(markers, (marker, index) => {
@@ -32,7 +32,7 @@ export default class Markers extends Component {
 
             if ((!!coords && coords.length > 0)) {
                 return (
-                    <g key={'marker-' + index} className='river-marker'
+                    <g key={'marker-' + index} className={'river-marker' + ((highlightName == marker.name) ? ' highlight' : '')}
                         // probably the worst way to do this but im on a deadline so sue me !!
                         onDoubleClick={this.onMarkerClick.bind(this, marker)}
                         transform={"translate(" + (+xScale(coords[0]) - (tempOffset)) + "," + (+yScale(coords[1]) - (tempOffset)) + ") scale(" + (markerSizeScaleTemp) + ")"}>

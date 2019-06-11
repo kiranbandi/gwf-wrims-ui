@@ -36,7 +36,9 @@ class FlowPanel extends Component {
 
         return (
             <div className='flow-panel-root-container' style={{ width, height }}>
-                <h4 className='title-bar text-center'>FLOW DATA {name ? " - " + name : ""}</h4>
+                <h4 className='title-bar text-center'>FLOW DATA
+                {name.length > 0 && <strong style={{ marginLeft: 10 }}>{name}</strong>}
+                </h4>
                 {isLoading ?
                     <Loading className='loader' type='spin' height='75px' width='75px' color='#d6e5ff' delay={-1} /> :
                     <div className='flow-inner-container'>

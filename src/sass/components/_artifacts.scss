@@ -9,6 +9,11 @@
             fill: #00bdff;
             stroke-width: 30px;
         }
+        &.highlight {
+            circle {
+                fill: red;
+            }
+        }
     }
     .sink {
         cursor: pointer;
