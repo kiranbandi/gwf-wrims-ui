@@ -2,15 +2,28 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
 import tileMap from '../utils/tileMap';
+import Switch from "react-switch";
 
 //  Image url handling is convoluted in scss , much easier to set inline and get images from root
-let backgroundStyle = { background: 'url(assets/img/overall.png)', backgroundSize: '100%' };
+let backgroundStyleSchematic = { background: 'url(assets/img/overall.png)', backgroundSize: '100%' };
+let backgroundStyleMap = { background: 'url(assets/img/saskbasin.png)', backgroundSize: '100%' };
 
 export default class RootSchematic extends Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            isMapShown: false
+        };
+
         this.getTiles = this.getTiles.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+
+    handleChange(isMapShown) {
+        this.setState({ isMapShown });
     }
 
     getTiles(width, height) {
@@ -33,20 +46,48 @@ export default class RootSchematic extends Component {
 
     render() {
 
-        let { width = 1000, selectedPlace } = this.props;
+        let { width = 1000, selectedPlace } = this.props, { isMapShown } = this.state;
         // downscale by 20%
         width = width * .75;
-        backgroundStyle = { ...backgroundStyle, width: width, height: width / 2.15 };
+        backgroundStyleMap = { ...backgroundStyleMap, width: width, height: width / 2.15 };
+        backgroundStyleSchematic = { ...backgroundStyleSchematic, width: width, height: width / 2.15 };
 
         return (
             <div className='root-schema-container'>
                 <div className='schema-selection-container' style={{ width: width }}>
-                    <h2 className='text-primary'>Select a <b>Region</b> to Investigate or Pick a <b>Place</b></h2>
-                    <div id='root-schema' className='image-container' style={backgroundStyle}>
-                        <svg className='tile-container' width={width} height={width / 2.15}>
-                            {this.getTiles(width, width / 2.15)}
-                        </svg>
+                    <h2 className='text-primary switch-custom-label'>Basin Map</h2>
+                    <div className='switch-container'>
+                        <label htmlFor="material-switch">
+                            <Switch
+                                checked={isMapShown}
+                                onChange={this.handleChange}
+                                onColor="#86d3ff"
+                                onHandleColor="#2693e6"
+                                handleDiameter={30}
+                                uncheckedIcon={false}
+                                checkedIcon={false}
+                                boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
+                                activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
+                                height={20}
+                                width={48}
+                                className="react-switch"
+                                id="material-switch"
+                            />
+                        </label>
                     </div>
+                    <h2 className='text-primary'>Select a <b>Region</b> to Investigate or Pick a <b>Place</b></h2>
+                    {isMapShown ?
+                        <div id='root-schema' className='image-container' style={backgroundStyleMap}>
+                            <div className='selection-box' id='highwood' onClick={this.props.onRegionSelect} style={{ top: width * 0.275, left: 0.15 * width }}></div>
+                            <div className='selection-box' id='southSask' onClick={this.props.onRegionSelect} style={{ top: width * 0.32, left: 0.45 * width }}></div>
+                        </div>
+                        :
+                        <div id='root-schema' className='image-container' style={backgroundStyleSchematic}>
+                            <svg className='tile-container' width={width} height={width / 2.15}>
+                                {this.getTiles(width, width / 2.15)}
+                            </svg>
+                        </div>}
+
                 </div>
                 <div className='place-selection-container'>
                     <h2 className='text-primary'>Places of Interest</h2>
@@ -71,3 +112,6 @@ export default class RootSchematic extends Component {
         );
     }
 }
+
+
+// image courtesy of South East Alberta Watershed Alliance

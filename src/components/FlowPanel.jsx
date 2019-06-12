@@ -32,7 +32,7 @@ class FlowPanel extends Component {
         const { flowData = {}, width, height } = this.props,
             { dataList = [], name = '', isLoading = false, flowParams = { threshold: 'base' } } = flowData,
             innerWidth = width - 40,
-            innerHeight = height - (height / 2.75);
+            innerHeight = height - (175);
 
         const { summerFlow = { major: '', minor: '' },
             winterFlow = { major: '', minor: '' },
@@ -47,6 +47,7 @@ class FlowPanel extends Component {
                     <Loading className='loader' type='spin' height='75px' width='75px' color='#d6e5ff' delay={-1} /> :
                     <div className='flow-inner-container'>
                         <div className='metrics-container'>
+                            <p className='exclaimatory-text'>* All values are in 1000m<sup>3</sup>/week</p>
                             <StatCard
                                 title={"Summer Flow"}
                                 major={summerFlow.major || 'N/A'}
