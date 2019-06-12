@@ -3,9 +3,36 @@
     .schema-selection-container {
         display: inline-block;
     }
+    .place-selection-container {
+        display: inline-block;
+        vertical-align: top;
+        margin-left: 2%;
+        .list-container {
+            margin-top: 15px;
+            p {
+                margin: 4.5% 0%;
+                background: #1a1c22;
+                padding: 3% 5%;
+                border-radius: 5px;
+                font-size: 15px;
+                font-weight: bold;
+                color: white;
+                cursor: pointer;
+                &:hover {
+                    background: #5b84c3;
+                }
+                &.highwood {
+                    border-left: 7.5px solid #618f98;
+                }
+                &.selected-button {
+                    background: red;
+                }
+            }
+        }
+    }
     .text-primary {
-        text-transform: capitalize;
         margin-bottom: 15px;
+        font-size: 1.75em;
     }
     .image-container {
         display: inline-block;
