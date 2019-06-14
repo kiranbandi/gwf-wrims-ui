@@ -15,51 +15,53 @@ export default function(xyString) {
         changeState: function(state) { this.currentState = state; }
     };
 
+    var nodeDir = {};
 
     var schematicData = { lines: [], artifacts: [], labels: [], markers: [], title: {} }
 
     axios.get(xyString).then((response) => {
-
-        
-
-        var newNode = {
+ 
+        var tNode = {
             name: "",
             nodeNum: -1,
             type: "",
             coords: []
         }
 
-        var linkNode = {
+        var tLink = {
             name: "",
             linkNum: -1,
-            linkTo: -1,
             linkFrom: -1,
+            linkTo: -1,
             type: "river",
             nodes: [],
             reverse: false
         }
 
+        var minx, miny, maxx, maxy;
+        minx = miny = Number.POSITIVE_INFINITY;
+        maxx = maxy = Number.NEGATIVE_INFINITY;
+
         var types = ["reservoir", "nonStorage", "demand", "sink"];
 
         var specialCases = ["J_LBowDiv_J_HW8", "J_WCDiv_J_HW7"]
 
-        var word = "";
+        var line = "";
 
         for (const c of response.data) {
             if (!["\r", "\n"].includes(c)) {
-                word = word.concat(c);
+                line = line.concat(c);
             } else {
-                if (word !== "") {
-                    console.log(word);
+                if (line !== "") {
                     switch (stateObj.currentState) {
 
                         case states.INITIAL:
                             {
-                                if (word === "node") {
+                                if (line === "node") {
                                     stateObj.changeState(states.READING_NODE);
                                     break;
                                 }
-                                else if (word === "link") {
+                                else if (line === "link") {
                                     stateObj.changeState(states.READING_LINK);
                                     break;
                                 }
@@ -69,52 +71,52 @@ export default function(xyString) {
 
                         case states.READING_NODE:
                             {
-                                let splitWord = word.split(" ");
+                                let words = line.split(" ");
 
-                                switch (splitWord[0]) {
+                                switch (words[0]) {
                                     case "name":
                                         {
-                                            newNode.name = splitWord[1].toLowerCase();
+                                            tNode.name = words[1].toLowerCase();
                                             break;
                                         }
                                     case "num":
                                         {
-                                            newNode.num = Number(splitWord[1]);
+                                            tNode.nodeNum = Number(words[1]);
                                             break;
                                         }
                                     case "ntype":
                                         {
-                                            let typeStr = types[Number(splitWord[1])];
+                                            let typeStr = types[Number(words[1]) - 1];
 
                                             switch (typeStr) {
 
                                                 case "reservoir":
                                                 case "sink":
-                                                    newNode.type = typeStr;
+                                                    tNode.type = typeStr;
                                                     break;
 
                                                 case "nonStorage":
                                                     {
-                                                        if (newNode.name.indexOf('artificial') >= 0) {
-                                                            resetNode(newNode);
+                                                        if (tNode.name.indexOf('artificial') >= 0) {
+                                                            resetNode(tNode);
                                                             stateObj.changeState(states.INITIAL);
-                                                        } else if (newNode.name[0] == 'i') {
-                                                            newNode.type = 'inflow'
+                                                        } else if (tNode.name[0] == 'i') {
+                                                            tNode.type = 'inflow'
                                                         } else {
-                                                            newNode.type = 'junction'
+                                                            tNode.type = 'junction'
                                                         }
                                                         break;
                                                     }
 
                                                 case "demand":
                                                     {
-                                                        if (newNode.name.indexOf('ft_') >= 0) {
-                                                            resetNode(newNode);
+                                                        if (tNode.name.indexOf('ft_') >= 0) {
+                                                            resetNode(tNode);
                                                             stateObj.changeState(states.INITIAL);
-                                                        } else if (newNode.name[0] == 'i') {
-                                                            newNode.type = 'agri'
+                                                        } else if (tNode.name[0] == 'i') {
+                                                            tNode.type = 'agri'
                                                         } else {
-                                                            newNode.type = 'demand'
+                                                            tNode.type = 'demand'
                                                         }
                                                         break;
                                                     }
@@ -132,70 +134,110 @@ export default function(xyString) {
 
                         case states.READING_NODE_POS:
                             {
-                                let splitWord = word.split(" ");
+                                let words = line.split(" ");
 
-                                switch (splitWord[0]) {
+                                switch (words[0]) {
 
                                     case "0":
                                         {
-                                            newNode.coords.push(Number(splitWord[1]));
+                                            tNode.coords.push(Number(words[1]));
+                                            
+                                            if (tNode.coords[0] < minx) {
+                                                minx = tNode.coords[0];
+                                            }
+
+                                            if (tNode.coords[0] > maxx) {
+                                                maxx = tNode.coords[0];
+                                            }
+
                                             break;
                                         }
                                     case "1":
                                         {
-                                            newNode.coords.push(Number(splitWord[1]));
+                                            tNode.coords.push(Number(words[1]));
 
-                                            if ((newNode.type === "reservoir") || (newNode.type === "sink")) {
+                                            if (tNode.coords[1] < miny) {
+                                                miny = tNode.coords[1];
+                                            }
 
-                                                newNode.size = 1;
-                                                schematicData.artifacts.push(Object.assign({}, newNode));
-                                                resetNode(newNode);
+                                            if (tNode.coords[1] > maxy) {
+                                                maxy = tNode.coords[1];
+                                            }
+
+                                            if ((tNode.type === "reservoir") || (tNode.type === "sink")) {
+                                                tNode.size = 1;
+                                                nodeDir[tNode.nodeNum] = {coords: tNode.coords, type: tNode.type}; 
+                                                schematicData.artifacts.push(Object.assign({}, tNode));
+                                                resetNode(tNode);
                                                 stateObj.changeState(states.INITIAL);
                                             } else {
-                                                schematicData.markers.push(Object.assign({}, newNode));
-                                                resetNode(newNode);
+                                                nodeDir[tNode.nodeNum] = {coords: tNode.coords, type: tNode.type}; 
+                                                schematicData.markers.push(Object.assign({}, tNode));
+                                                resetNode(tNode);
                                                 stateObj.changeState(states.INITIAL);
                                             }
+
                                             break;
                                         }
                                 }
                                 break;
                             }
 
-                            // case states.READING_LINK:
-                            //     {
+                            case states.READING_LINK:
+                                {
+                                    let words = line.split(" ");
 
-                            //         let splitWord = word.split(" ");
+                                    switch (words[0]) {
+                                        case "lname":
+                                            {
+                                                tLink.name = words[1].toLowerCase();
+                                                break;
+                                            }
+                                        case "lnum":
+                                            {
+                                                tLink.linkNum = Number(words[1]);
+                                                break;
+                                            }
+                                        case "fromnum":
+                                            {
+                                                tLink.linkFrom = Number(words[1]);
+                                                break;
+                                            }
+                                        case "tonum":
+                                            {
+                                                tLink.linkTo = Number(words[1]);
+                                                
+                                                tLink.nodes.push({coords: nodeDir[tLink.linkFrom].coords});
+                                                tLink.nodes.push({coords: nodeDir[tLink.linkTo].coords});
 
-                            //         switch (splitWord[0]) {
+                                                if (specialCases.includes(tLink.linkName)) {
+                                                    tLink.type = 'diversion';
+                                                } else if (nodeDir[tLink.linkTo].type === 'demand' || nodeDir[tLink.linkTo].type === 'agri') {
+                                                    tLink.type = nodeDir[tLink.linkTo].type;
+                                                } else if (nodeDir[tLink.linkFrom].type === 'inflow') {
+                                                    tLink.type = nodeDir[tLink.linkFrom].type;
+                                                }
 
-                            //             case "lname":
-                            //                 {
+                                                schematicData.lines.push(Object.assign({}, tLink));
+                                                resetLink(tLink);
+                                                stateObj.changeState(states.INITIAL);
 
-                            //                 }
-                            //             case "lnum":
-                            //                 {
-
-                            //                 }
-                            //             case "fromnum":
-                            //                 {
-
-                            //                 }
-                            //             case "tonum":
-                            //                 {
-
-                            //                 }
-                            //         }
-                            //     }
+                                                break;
+                                            }
+                                    }
+                                    break;
+                                }
                     }
 
-                    word = "";
+                    line = "";
                 }
             }
         }
-
         console.log(schematicData.artifacts);
         console.log(schematicData.markers);
+
+
+        console.log("\n\n" + `(${minx}, ${miny})    (${maxx}, ${maxy})`);
         
 
     });
@@ -203,22 +245,22 @@ export default function(xyString) {
 }
 
 function resetNode(node) {
-    node = {
-        name: "",
-        nodeNum: -1,
-        type: "",
-        coords: []
-    }
+        node.name = "";
+        node.nodeNum = -1;
+        node.type = "";
+        node.coords = [];
+
+        if (node.size !== undefined) { 
+            delete node.size; 
+        }
 }
 
-function resetLink() {
-    linkNode = {
-        name: "",
-        linkNum: -1,
-        linkTo: -1,
-        linkFrom: -1,
-        type: "river",
-        nodes: [],
-        reverse: false
-    }
+function resetLink(link) {
+        link.name= "";
+        link.linkNum= -1
+        link.linkTo= -1
+        link.linkFrom = -1;
+        link.type = "river";
+        link.nodes = [];
+        link.reverse = false;
 }
