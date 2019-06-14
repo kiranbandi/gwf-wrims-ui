@@ -19,8 +19,25 @@ export default function(xyString) {
 
     var schematicData = { lines: [], artifacts: [], labels: [], markers: [], title: {} }
 
+    var dim = {
+        minx: Number.POSITIVE_INFINITY,
+        miny: Number.POSITIVE_INFINITY,
+        maxx: Number.NEGATIVE_INFINITY,
+        maxy: Number.NEGATIVE_INFINITY,
+
+        margin: {
+            left: 50,
+            top: 10,
+            right: 50,
+            bottom: 10
+        },
+
+        width: -1,
+        height: -1
+    }
+
     axios.get(xyString).then((response) => {
- 
+
         var tNode = {
             name: "",
             nodeNum: -1,
@@ -38,13 +55,11 @@ export default function(xyString) {
             reverse: false
         }
 
-        var minx, miny, maxx, maxy;
-        minx = miny = Number.POSITIVE_INFINITY;
-        maxx = maxy = Number.NEGATIVE_INFINITY;
-
         var types = ["reservoir", "nonStorage", "demand", "sink"];
 
         var specialCases = ["J_LBowDiv_J_HW8", "J_WCDiv_J_HW7"]
+
+        var alpha = 200;
 
         var line = "";
 
@@ -60,8 +75,7 @@ export default function(xyString) {
                                 if (line === "node") {
                                     stateObj.changeState(states.READING_NODE);
                                     break;
-                                }
-                                else if (line === "link") {
+                                } else if (line === "link") {
                                     stateObj.changeState(states.READING_LINK);
                                     break;
                                 }
@@ -141,13 +155,13 @@ export default function(xyString) {
                                     case "0":
                                         {
                                             tNode.coords.push(Number(words[1]));
-                                            
-                                            if (tNode.coords[0] < minx) {
-                                                minx = tNode.coords[0];
+
+                                            if (tNode.coords[0] < dim.minx) {
+                                                dim.minx = tNode.coords[0];
                                             }
 
-                                            if (tNode.coords[0] > maxx) {
-                                                maxx = tNode.coords[0];
+                                            if (tNode.coords[0] > dim.maxx) {
+                                                dim.maxx = tNode.coords[0];
                                             }
 
                                             break;
@@ -156,23 +170,23 @@ export default function(xyString) {
                                         {
                                             tNode.coords.push(Number(words[1]));
 
-                                            if (tNode.coords[1] < miny) {
-                                                miny = tNode.coords[1];
+                                            if (tNode.coords[1] < dim.miny) {
+                                                dim.miny = tNode.coords[1];
                                             }
 
-                                            if (tNode.coords[1] > maxy) {
-                                                maxy = tNode.coords[1];
+                                            if (tNode.coords[1] > dim.maxy) {
+                                                dim.maxy = tNode.coords[1];
                                             }
 
                                             if ((tNode.type === "reservoir") || (tNode.type === "sink")) {
                                                 tNode.size = 1;
-                                                nodeDir[tNode.nodeNum] = {coords: tNode.coords, type: tNode.type}; 
-                                                schematicData.artifacts.push(Object.assign({}, tNode));
+                                                nodeDir[tNode.nodeNum] = Object.assign({}, tNode);
+                                                schematicData.artifacts.push(nodeDir[tNode.nodeNum]);
                                                 resetNode(tNode);
                                                 stateObj.changeState(states.INITIAL);
                                             } else {
-                                                nodeDir[tNode.nodeNum] = {coords: tNode.coords, type: tNode.type}; 
-                                                schematicData.markers.push(Object.assign({}, tNode));
+                                                nodeDir[tNode.nodeNum] = Object.assign({}, tNode);
+                                                schematicData.markers.push(nodeDir[tNode.nodeNum]);
                                                 resetNode(tNode);
                                                 stateObj.changeState(states.INITIAL);
                                             }
@@ -183,32 +197,33 @@ export default function(xyString) {
                                 break;
                             }
 
-                            case states.READING_LINK:
-                                {
-                                    let words = line.split(" ");
+                        case states.READING_LINK:
+                            {
+                                let words = line.split(" ");
 
-                                    switch (words[0]) {
-                                        case "lname":
-                                            {
-                                                tLink.name = words[1].toLowerCase();
-                                                break;
-                                            }
-                                        case "lnum":
-                                            {
-                                                tLink.linkNum = Number(words[1]);
-                                                break;
-                                            }
-                                        case "fromnum":
-                                            {
-                                                tLink.linkFrom = Number(words[1]);
-                                                break;
-                                            }
-                                        case "tonum":
-                                            {
-                                                tLink.linkTo = Number(words[1]);
-                                                
-                                                tLink.nodes.push({coords: nodeDir[tLink.linkFrom].coords});
-                                                tLink.nodes.push({coords: nodeDir[tLink.linkTo].coords});
+                                switch (words[0]) {
+                                    case "lname":
+                                        {
+                                            tLink.name = words[1].toLowerCase();
+                                            break;
+                                        }
+                                    case "lnum":
+                                        {
+                                            tLink.linkNum = Number(words[1]);
+                                            break;
+                                        }
+                                    case "fromnum":
+                                        {
+                                            tLink.linkFrom = Number(words[1]);
+                                            break;
+                                        }
+                                    case "tonum":
+                                        {
+                                            tLink.linkTo = Number(words[1]);
+
+                                            if (nodeDir[tLink.linkFrom] && nodeDir[tLink.linkTo]) {
+                                                tLink.nodes.push({ coords: nodeDir[tLink.linkFrom].coords });
+                                                tLink.nodes.push({ coords: nodeDir[tLink.linkTo].coords });
 
                                                 if (specialCases.includes(tLink.linkName)) {
                                                     tLink.type = 'diversion';
@@ -219,48 +234,54 @@ export default function(xyString) {
                                                 }
 
                                                 schematicData.lines.push(Object.assign({}, tLink));
-                                                resetLink(tLink);
-                                                stateObj.changeState(states.INITIAL);
-
-                                                break;
                                             }
-                                    }
-                                    break;
+
+                                            resetLink(tLink);
+                                            stateObj.changeState(states.INITIAL);
+                                            break;
+                                        }
                                 }
+                                break;
+                            }
                     }
 
                     line = "";
                 }
             }
         }
-        console.log(schematicData.artifacts);
-        console.log(schematicData.markers);
 
+        dim.width = (dim.maxx - dim.minx) + (dim.margin.left + dim.margin.right);
+        dim.height = (dim.maxy - dim.miny) + (dim.margin.top + dim.margin.bottom);
 
-        console.log("\n\n" + `(${minx}, ${miny})    (${maxx}, ${maxy})`);
-        
+        for (const key of Object.keys(nodeDir)) {
+            nodeDir[key].coords[0] = (((nodeDir[key].coords[0] - dim.minx) + dim.margin.left) / dim.width) * alpha;
+            nodeDir[key].coords[1] = (((nodeDir[key].coords[1] - dim.miny) + dim.margin.top) / dim.height) * (alpha / 2);
+        }
+
+        console.log(dim);
+
+        console.log(schematicData);
 
     });
-
 }
 
 function resetNode(node) {
-        node.name = "";
-        node.nodeNum = -1;
-        node.type = "";
-        node.coords = [];
+    node.name = "";
+    node.nodeNum = -1;
+    node.type = "";
+    node.coords = [];
 
-        if (node.size !== undefined) { 
-            delete node.size; 
-        }
+    if (node.size !== undefined) {
+        delete node.size;
+    }
 }
 
 function resetLink(link) {
-        link.name= "";
-        link.linkNum= -1
-        link.linkTo= -1
-        link.linkFrom = -1;
-        link.type = "river";
-        link.nodes = [];
-        link.reverse = false;
+    link.name = "";
+    link.linkNum = -1
+    link.linkTo = -1
+    link.linkFrom = -1;
+    link.type = "river";
+    link.nodes = [];
+    link.reverse = false;
 }

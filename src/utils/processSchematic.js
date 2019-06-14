@@ -139,6 +139,7 @@ export default function(data) {
             schematicData.lines.push(tempStore);
         }
     })
+    console.log(schematicData);
 
     return schematicData;
 }

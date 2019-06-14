@@ -24,8 +24,7 @@ class Parser extends Component {
 
     componentDidMount()
     {
-        console.log("PING");
-        xyParser("assets/files/xy/parserTest.xy");
+        xyParser("assets/files/xy/southSask.xy");
     }
 
     
