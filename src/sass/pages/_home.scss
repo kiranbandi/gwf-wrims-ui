@@ -47,4 +47,19 @@
           &>ul {
               font-size: 1.25em;
           }
+          &>div {
+              text-align: center;
+          }
       }
+
+      .video-tray {
+        width: max-content;
+        height: max-content;
+        display: inline-flex;
+        &>div {
+            padding-right: 1vw;
+            padding-left: 1vw;
+        }
+      }
+
+      
