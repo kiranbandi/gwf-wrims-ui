@@ -2,19 +2,28 @@ import axios from 'axios';
 
 
 export default function(xyFilePath) {
-
+    
+    /* state system to make parsing easy */
+    
+        // possible states for the parser
     var states = {
             INITIAL: "INITIAL",
             READING_NODE: "READING_NODE",
             READING_NODE_POS: "READING_NODE_POS",
             READING_LINK: "READING_LINK",
         },
-
-        stateObj = {
-            currentState: states.INITIAL,
-            changeState: function(state) { this.currentState = state; }
+        
+        // constructor function change states and keep track 
+        stateManager = function() {
+            let currentState = states.INITIAL;
+            this.getCurrentState = () => { return currentState; };
+            this.changeState = (state) => { currentState = state; };
         },
 
+        // instance of the constructor function
+        stateObj = new stateManager(),
+
+        // temprorary node that gets modified every time a node is read
         tNode = {
             name: "",
             nodeNum: -1,
@@ -22,6 +31,7 @@ export default function(xyFilePath) {
             coords: []
         },
 
+        // function to reset the temporary node
         resetNode = () => {
             tNode.name = "";
             tNode.nodeNum = -1;
@@ -33,6 +43,7 @@ export default function(xyFilePath) {
             }
         },
 
+        // temprorary link that gets modified every time a link is read
         tLink = {
             name: "",
             linkNum: -1,
@@ -43,6 +54,7 @@ export default function(xyFilePath) {
             reverse: false
         },
 
+        // function to reset the temporary node
         resetLink = () => {
             tLink.name = "";
             tLink.linkNum = -1
@@ -53,15 +65,19 @@ export default function(xyFilePath) {
             tLink.reverse = false;
         },
 
+        // an associated array to make the process of finding the
+        // corresponding nodes for the links an O(1) process
         nodeDir = {},
 
+        // object to store all the schematic data
         schematicData = { lines: [], artifacts: [], labels: [], markers: [], title: {} },
 
+        // object to store the dimension info of the relative view 
         dim = {
-            minx: Number.POSITIVE_INFINITY,
-            miny: Number.POSITIVE_INFINITY,
-            maxx: Number.NEGATIVE_INFINITY,
-            maxy: Number.NEGATIVE_INFINITY,
+            minX: Number.POSITIVE_INFINITY,
+            minY: Number.POSITIVE_INFINITY,
+            maxX: Number.NEGATIVE_INFINITY,
+            maxY: Number.NEGATIVE_INFINITY,
 
             margin: {
                 left: 50,
@@ -74,6 +90,7 @@ export default function(xyFilePath) {
             height: -1
         },
 
+        // constant for the computations of node coordinates
         alpha = 200;
 
     axios.get(xyFilePath).then((response) => {
@@ -88,7 +105,7 @@ export default function(xyFilePath) {
             if (!["\r", "\n"].includes(c)) {
                 line = line.concat(c);
             } else if (line !== "") {
-                switch (stateObj.currentState) {
+                switch (stateObj.getCurrentState()) {
 
                     case states.INITIAL:
                         {
@@ -173,12 +190,12 @@ export default function(xyFilePath) {
                                     {
                                         tNode.coords.push(Number(words[1]));
 
-                                        if (tNode.coords[0] < dim.minx) {
-                                            dim.minx = tNode.coords[0];
+                                        if (tNode.coords[0] < dim.minX) {
+                                            dim.minX = tNode.coords[0];
                                         }
 
-                                        if (tNode.coords[0] > dim.maxx) {
-                                            dim.maxx = tNode.coords[0];
+                                        if (tNode.coords[0] > dim.maxX) {
+                                            dim.maxX = tNode.coords[0];
                                         }
 
                                         break;
@@ -187,12 +204,12 @@ export default function(xyFilePath) {
                                     {
                                         tNode.coords.push(Number(words[1]));
 
-                                        if (tNode.coords[1] < dim.miny) {
-                                            dim.miny = tNode.coords[1];
+                                        if (tNode.coords[1] < dim.minY) {
+                                            dim.minY = tNode.coords[1];
                                         }
 
-                                        if (tNode.coords[1] > dim.maxy) {
-                                            dim.maxy = tNode.coords[1];
+                                        if (tNode.coords[1] > dim.maxY) {
+                                            dim.maxY = tNode.coords[1];
                                         }
 
                                         if ((tNode.type === "reservoir") || (tNode.type === "sink")) {
@@ -261,19 +278,19 @@ export default function(xyFilePath) {
                             break;
                         }
                 }
-
                 line = "";
             }
         }
 
-        dim.width = (dim.maxx - dim.minx) + (dim.margin.left + dim.margin.right);
-        dim.height = (dim.maxy - dim.miny) + (dim.margin.top + dim.margin.bottom);
+        dim.width = (dim.maxX - dim.minX) + (dim.margin.left + dim.margin.right);
+        dim.height = (dim.maxY - dim.minY) + (dim.margin.top + dim.margin.bottom);
 
-        for (const key of Object.keys(nodeDir)) {
-            nodeDir[key].coords[0] = (((nodeDir[key].coords[0] - dim.minx) + dim.margin.left) / dim.width) * alpha;
-            nodeDir[key].coords[1] = (((nodeDir[key].coords[1] - dim.miny) + dim.margin.top) / dim.height) * (alpha / 2);
-        }
+        Object.keys(nodeDir).forEach((key) => {
+            nodeDir[key].coords[0] = (((nodeDir[key].coords[0] - dim.minX) + dim.margin.left) / dim.width) * alpha;
+            nodeDir[key].coords[1] = (((nodeDir[key].coords[1] - dim.minY) + dim.margin.top) / dim.height) * (alpha / 2);
+        });
 
+        console.log(nodeDir);
         console.log(schematicData);
     });
 }
