@@ -14,7 +14,7 @@ export default class RiverLines extends Component {
     }
 
     render() {
-        const { lines, xScale, yScale, lineWidth } = this.props;
+        const { lines, xScale, yScale, lineWidth, highlightName = '' } = this.props;
 
         _.map(lines, (line) => {
             const { shiftCoords = [0, 0] } = line;
@@ -33,7 +33,7 @@ export default class RiverLines extends Component {
                         id={d.name}
                         d={d3Line(d.newNodes)}
                         strokeWidth={lineWidth}
-                        className={'flowLine type-' + (d.type) + " " + (d.reverse ? 'reverse-flow' : 'forward-flow')}>
+                        className={((highlightName == d.name) ? 'highlight ' : ' ') + 'flowLine type-' + (d.type) + " " + (d.reverse ? 'reverse-flow' : 'forward-flow')}>
                     </path>
                 })}
             </g>)
