@@ -16,7 +16,6 @@ export default class Markers extends Component {
         const { flowData = {}, width, height } = this.props,
             { dataList = [], path = {}, isLoading = false } = flowData;
 
-
         let { markers = [], xScale, yScale, highlightName = '' } = this.props,
             markerSizeScale = (xScale(1) - xScale(0)) / 90;
 
@@ -31,7 +30,6 @@ export default class Markers extends Component {
                 markerSizeScaleTemp = markerSizeScale * 0.70;
                 tempOffset = tempOffset * 0.70;
             }
-
 
             if ((!!coords && coords.length > 0)) {
                 return (
@@ -61,14 +59,10 @@ export default class Markers extends Component {
                         <DoughnutChart
                             index={index}
                         />
-
                     </g>
-
                 );
             }
         });
-
-
 
         return (<g className='river-marker-container'>{markerList}</g>)
     }
