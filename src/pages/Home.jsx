@@ -26,14 +26,14 @@ class Home extends Component {
     this.setState({
       isVidPlaying: true,
       currentVidID: event.target.getVideoData().video_id
-    });    
+    });
   }
 
   _onEnd(event) {
     this.setState({
       isVidPlaying: false,
       currentVidID: undefined
-    }); 
+    });
   }
 
   render() {
@@ -49,6 +49,8 @@ class Home extends Component {
     else {
       widthOfPage = 0.75 * widthOfPage;
     }
+
+    console.log(widthOfPage);
 
     return (
       <div>
@@ -72,49 +74,41 @@ class Home extends Component {
             the strategic needs of the Canadian economy in adapting to change and managing risks of uncertain water futures
             extreme events. End-user needs will be our beacon and will drive strategy and shape our science. </p>
           <h1>Dashboard Demonstration</h1>
-          {this.state.isVidPlaying ?
-            <div>
+          <div>
+            <div className="video-list" style={{height: ((widthOfPage/2)+"px")}}>
               <YouTube
                 containerClassName='youtube-container'
-                videoId={this.state.currentVidID}
-                opts={{ width: widthOfPage, height: widthOfPage / 2 }}
-                onReady={this._onReady}
-                onEnd={this._onEnd} />
+                videoId="xrpzzGsfy7o"
+                opts={{ width: widthOfPage / 4, height: widthOfPage / 8 }}
+                onPlay={this._onPlay} />
+              <YouTube
+                containerClassName='youtube-container'
+                videoId="kOvwu_0z2jM"
+                opts={{ width: widthOfPage / 4, height: widthOfPage / 8 }}
+                onPlay={this._onPlay} />
+              <YouTube
+                containerClassName='youtube-container'
+                videoId="QW206F8BTzE"
+                opts={{ width: widthOfPage / 4, height: widthOfPage / 8 }}
+                onPlay={this._onPlay} />
+              <YouTube
+                containerClassName='youtube-container'
+                videoId="NNAkYbNBeK0"
+                opts={{ width: widthOfPage / 4, height: widthOfPage / 8 }}
+                onPlay={this._onPlay} />
+              <YouTube
+                containerClassName='youtube-container'
+                videoId="Y74jb1V_DOg"
+                opts={{ width: widthOfPage / 4, height: widthOfPage / 8 }}
+                onPlay={this._onPlay} />
             </div>
-            :
-            <div>
-              <div className="video-tray">
-                <YouTube
-                  containerClassName='youtube-container'
-                  videoId="xrpzzGsfy7o"
-                  opts={{ width: widthOfPage / 3, height: widthOfPage / 6 }}
-                  onPlay={this._onPlay} />
-                <YouTube
-                  containerClassName='youtube-container'
-                  videoId="kOvwu_0z2jM"
-                  opts={{ width: widthOfPage / 3, height: widthOfPage / 6 }}
-                  onPlay={this._onPlay} />
-                <YouTube
-                  containerClassName='youtube-container'
-                  videoId="QW206F8BTzE"
-                  opts={{ width: widthOfPage / 3, height: widthOfPage / 6 }}
-                  onPlay={this._onPlay} />
-              </div>
-              <div className="video-tray">
-                <YouTube
-                  containerClassName='youtube-container'
-                  videoId="NNAkYbNBeK0"
-                  opts={{ width: widthOfPage / 3, height: widthOfPage / 6 }}
-                  onPlay={this._onPlay} />
-                <YouTube
-                  containerClassName='youtube-container'
-                  videoId="Y74jb1V_DOg"
-                  opts={{ width: widthOfPage / 3, height: widthOfPage / 6 }}
-                  onPlay={this._onPlay} />
-              </div>
-
-            </div>
-          }
+            <YouTube
+              containerClassName='current-video'
+              videoId={this.state.currentVidID}
+              opts={{ width: widthOfPage, height: widthOfPage / 2 }}
+              onReady={this._onReady}
+              onEnd={this._onEnd} />
+          </div>
 
         </div>
 

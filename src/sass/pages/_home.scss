@@ -48,18 +48,22 @@
               font-size: 1.25em;
           }
           &>div {
-              text-align: center;
+              display: -webkit-box;
           }
       }
 
-      .video-tray {
-        width: max-content;
-        height: max-content;
-        display: inline-flex;
+      .video-list {
+        height: max-content;  
+        padding: 0vw 1vw;
         &>div {
-            padding-right: 1vw;
-            padding-left: 1vw;
+            padding: .5vw 0vw;
         }
+        overflow-y: scroll;
+        
+      }
+
+      .current-video {
+        height: max-content;  
       }
 
       
