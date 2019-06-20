@@ -1,18 +1,18 @@
 import axios from 'axios';
 
 
-export default function(xyFilePath) {
-    
+export default function(xyFileData) {
+
     /* state system to make parsing easy */
-    
-        // possible states for the parser
+
+    // possible states for the parser
     var states = {
             INITIAL: "INITIAL",
             READING_NODE: "READING_NODE",
             READING_NODE_POS: "READING_NODE_POS",
             READING_LINK: "READING_LINK",
         },
-        
+
         // constructor function change states and keep track 
         stateManager = function() {
             let currentState = states.INITIAL;
@@ -93,204 +93,203 @@ export default function(xyFilePath) {
         // constant for the computations of node coordinates
         alpha = 200;
 
-    axios.get(xyFilePath).then((response) => {
+    // axios.get(xyFilePath).then((response) => {
 
-        var types = ["reservoir", "nonStorage", "demand", "sink"];
+    var types = ["reservoir", "nonStorage", "demand", "sink"];
 
-        var specialCases = ["J_LBowDiv_J_HW8", "J_WCDiv_J_HW7"];
+    var specialCases = ["J_LBowDiv_J_HW8", "J_WCDiv_J_HW7"];
 
-        var line = "";
+    var line = "";
 
-        for (const c of response.data) {
-            if (!["\r", "\n"].includes(c)) {
-                line = line.concat(c);
-            } else if (line !== "") {
-                switch (stateObj.getCurrentState()) {
+    for (const c of xyFileData) {
+        if (!["\r", "\n"].includes(c)) {
+            line = line.concat(c);
+        } else if (line !== "") {
+            switch (stateObj.getCurrentState()) {
 
-                    case states.INITIAL:
-                        {
-                            if (line === "node") {
-                                stateObj.changeState(states.READING_NODE);
-                            } else if (line === "link") {
-                                stateObj.changeState(states.READING_LINK);
-                            }
-                            break;
+                case states.INITIAL:
+                    {
+                        if (line === "node") {
+                            stateObj.changeState(states.READING_NODE);
+                        } else if (line === "link") {
+                            stateObj.changeState(states.READING_LINK);
                         }
+                        break;
+                    }
 
-                    case states.READING_NODE:
-                        {
-                            let words = line.split(" ");
+                case states.READING_NODE:
+                    {
+                        let words = line.split(" ");
 
-                            switch (words[0]) {
-                                case "name":
-                                    {
-                                        tNode.name = words[1];
-                                        break;
-                                    }
-                                case "num":
-                                    {
-                                        tNode.nodeNum = Number(words[1]);
-                                        break;
-                                    }
-                                case "ntype":
-                                    {
-                                        let typeStr = types[Number(words[1]) - 1];
+                        switch (words[0]) {
+                            case "name":
+                                {
+                                    tNode.name = words[1];
+                                    break;
+                                }
+                            case "num":
+                                {
+                                    tNode.nodeNum = Number(words[1]);
+                                    break;
+                                }
+                            case "ntype":
+                                {
+                                    let typeStr = types[Number(words[1]) - 1];
 
-                                        switch (typeStr) {
+                                    switch (typeStr) {
 
-                                            case "reservoir":
-                                            case "sink":
-                                                tNode.type = typeStr;
+                                        case "reservoir":
+                                        case "sink":
+                                            tNode.type = typeStr;
+                                            break;
+
+                                        case "nonStorage":
+                                            {
+                                                if (tNode.name.toLowerCase().indexOf('artificial') >= 0) {
+                                                    resetNode();
+                                                    stateObj.changeState(states.INITIAL);
+                                                } else if (tNode.name[0] == 'i') {
+                                                    tNode.type = 'inflow'
+                                                } else {
+                                                    tNode.type = 'junction'
+                                                }
                                                 break;
-
-                                            case "nonStorage":
-                                                {
-                                                    if (tNode.name.toLowerCase().indexOf('artificial') >= 0) {
-                                                        resetNode();
-                                                        stateObj.changeState(states.INITIAL);
-                                                    } else if (tNode.name[0] == 'i') {
-                                                        tNode.type = 'inflow'
-                                                    } else {
-                                                        tNode.type = 'junction'
-                                                    }
-                                                    break;
-                                                }
-
-                                            case "demand":
-                                                {
-                                                    if (tNode.name.toLowerCase().indexOf('ft_') >= 0) {
-                                                        resetNode();
-                                                        stateObj.changeState(states.INITIAL);
-                                                    } else if (tNode.name[0] == 'i') {
-                                                        tNode.type = 'agri'
-                                                    } else {
-                                                        tNode.type = 'demand'
-                                                    }
-                                                    break;
-                                                }
-                                        }
-                                        break;
-                                    }
-                                case "pos":
-                                    {
-                                        stateObj.changeState(states.READING_NODE_POS);
-                                        break;
-                                    }
-                            }
-                            break;
-                        }
-
-                    case states.READING_NODE_POS:
-                        {
-                            let words = line.split(" ");
-
-                            switch (words[0]) {
-
-                                case "0":
-                                    {
-                                        tNode.coords.push(Number(words[1]));
-
-                                        if (tNode.coords[0] < dim.minX) {
-                                            dim.minX = tNode.coords[0];
-                                        }
-
-                                        if (tNode.coords[0] > dim.maxX) {
-                                            dim.maxX = tNode.coords[0];
-                                        }
-
-                                        break;
-                                    }
-                                case "1":
-                                    {
-                                        tNode.coords.push(Number(words[1]));
-
-                                        if (tNode.coords[1] < dim.minY) {
-                                            dim.minY = tNode.coords[1];
-                                        }
-
-                                        if (tNode.coords[1] > dim.maxY) {
-                                            dim.maxY = tNode.coords[1];
-                                        }
-
-                                        if ((tNode.type === "reservoir") || (tNode.type === "sink")) {
-                                            tNode.size = 1;
-                                            nodeDir[tNode.nodeNum] = Object.assign({}, tNode);
-                                            schematicData.artifacts.push(nodeDir[tNode.nodeNum]);
-                                        } else {
-                                            nodeDir[tNode.nodeNum] = Object.assign({}, tNode);
-                                            schematicData.markers.push(nodeDir[tNode.nodeNum]);
-                                        }
-
-                                        resetNode();
-                                        stateObj.changeState(states.INITIAL);
-
-                                        break;
-                                    }
-                            }
-                            break;
-                        }
-
-                    case states.READING_LINK:
-                        {
-                            let words = line.split(" ");
-
-                            switch (words[0]) {
-                                case "lname":
-                                    {
-                                        tLink.name = words[1];
-                                        break;
-                                    }
-                                case "lnum":
-                                    {
-                                        tLink.linkNum = Number(words[1]);
-                                        break;
-                                    }
-                                case "fromnum":
-                                    {
-                                        tLink.linkFrom = Number(words[1]);
-                                        break;
-                                    }
-                                case "tonum":
-                                    {
-                                        tLink.linkTo = Number(words[1]);
-
-                                        if (nodeDir[tLink.linkFrom] && nodeDir[tLink.linkTo]) {
-                                            tLink.nodes.push({ coords: nodeDir[tLink.linkFrom].coords });
-                                            tLink.nodes.push({ coords: nodeDir[tLink.linkTo].coords });
-
-                                            if (specialCases.includes(tLink.linkName)) {
-                                                tLink.type = 'diversion';
-                                            } else if (nodeDir[tLink.linkTo].type === 'demand' || nodeDir[tLink.linkTo].type === 'agri') {
-                                                tLink.type = nodeDir[tLink.linkTo].type;
-                                            } else if (nodeDir[tLink.linkFrom].type === 'inflow') {
-                                                tLink.type = nodeDir[tLink.linkFrom].type;
                                             }
 
-                                            schematicData.lines.push(Object.assign({}, tLink));
+                                        case "demand":
+                                            {
+                                                if (tNode.name.toLowerCase().indexOf('ft_') >= 0) {
+                                                    resetNode();
+                                                    stateObj.changeState(states.INITIAL);
+                                                } else if (tNode.name[0] == 'i') {
+                                                    tNode.type = 'agri'
+                                                } else {
+                                                    tNode.type = 'demand'
+                                                }
+                                                break;
+                                            }
+                                    }
+                                    break;
+                                }
+                            case "pos":
+                                {
+                                    stateObj.changeState(states.READING_NODE_POS);
+                                    break;
+                                }
+                        }
+                        break;
+                    }
+
+                case states.READING_NODE_POS:
+                    {
+                        let words = line.split(" ");
+
+                        switch (words[0]) {
+
+                            case "0":
+                                {
+                                    tNode.coords.push(Number(words[1]));
+
+                                    if (tNode.coords[0] < dim.minX) {
+                                        dim.minX = tNode.coords[0];
+                                    }
+
+                                    if (tNode.coords[0] > dim.maxX) {
+                                        dim.maxX = tNode.coords[0];
+                                    }
+
+                                    break;
+                                }
+                            case "1":
+                                {
+                                    tNode.coords.push(Number(words[1]));
+
+                                    if (tNode.coords[1] < dim.minY) {
+                                        dim.minY = tNode.coords[1];
+                                    }
+
+                                    if (tNode.coords[1] > dim.maxY) {
+                                        dim.maxY = tNode.coords[1];
+                                    }
+
+                                    if ((tNode.type === "reservoir") || (tNode.type === "sink")) {
+                                        tNode.size = 1;
+                                        nodeDir[tNode.nodeNum] = Object.assign({}, tNode);
+                                        schematicData.artifacts.push(nodeDir[tNode.nodeNum]);
+                                    } else {
+                                        nodeDir[tNode.nodeNum] = Object.assign({}, tNode);
+                                        schematicData.markers.push(nodeDir[tNode.nodeNum]);
+                                    }
+
+                                    resetNode();
+                                    stateObj.changeState(states.INITIAL);
+
+                                    break;
+                                }
+                        }
+                        break;
+                    }
+
+                case states.READING_LINK:
+                    {
+                        let words = line.split(" ");
+
+                        switch (words[0]) {
+                            case "lname":
+                                {
+                                    tLink.name = words[1];
+                                    break;
+                                }
+                            case "lnum":
+                                {
+                                    tLink.linkNum = Number(words[1]);
+                                    break;
+                                }
+                            case "fromnum":
+                                {
+                                    tLink.linkFrom = Number(words[1]);
+                                    break;
+                                }
+                            case "tonum":
+                                {
+                                    tLink.linkTo = Number(words[1]);
+
+                                    if (nodeDir[tLink.linkFrom] && nodeDir[tLink.linkTo]) {
+                                        tLink.nodes.push({ coords: nodeDir[tLink.linkFrom].coords });
+                                        tLink.nodes.push({ coords: nodeDir[tLink.linkTo].coords });
+
+                                        if (specialCases.includes(tLink.linkName)) {
+                                            tLink.type = 'diversion';
+                                        } else if (nodeDir[tLink.linkTo].type === 'demand' || nodeDir[tLink.linkTo].type === 'agri') {
+                                            tLink.type = nodeDir[tLink.linkTo].type;
+                                        } else if (nodeDir[tLink.linkFrom].type === 'inflow') {
+                                            tLink.type = nodeDir[tLink.linkFrom].type;
                                         }
 
-                                        resetLink();
-                                        stateObj.changeState(states.INITIAL);
-
-                                        break;
+                                        schematicData.lines.push(Object.assign({}, tLink));
                                     }
-                            }
-                            break;
+
+                                    resetLink();
+                                    stateObj.changeState(states.INITIAL);
+
+                                    break;
+                                }
                         }
-                }
-                line = "";
+                        break;
+                    }
             }
+            line = "";
         }
+    }
 
-        dim.width = (dim.maxX - dim.minX) + (dim.margin.left + dim.margin.right);
-        dim.height = (dim.maxY - dim.minY) + (dim.margin.top + dim.margin.bottom);
+    dim.width = (dim.maxX - dim.minX) + (dim.margin.left + dim.margin.right);
+    dim.height = (dim.maxY - dim.minY) + (dim.margin.top + dim.margin.bottom);
 
-        Object.keys(nodeDir).forEach((key) => {
-            nodeDir[key].coords[0] = (((nodeDir[key].coords[0] - dim.minX) + dim.margin.left) / dim.width) * alpha;
-            nodeDir[key].coords[1] = (((nodeDir[key].coords[1] - dim.minY) + dim.margin.top) / dim.height) * (alpha / 2);
-        });
-
-        console.log(nodeDir);
-        console.log(schematicData);
+    Object.keys(nodeDir).forEach((key) => {
+        nodeDir[key].coords[0] = (((nodeDir[key].coords[0] - dim.minX) + dim.margin.left) / dim.width) * alpha;
+        nodeDir[key].coords[1] = (((nodeDir[key].coords[1] - dim.minY) + dim.margin.top) / dim.height) * (alpha / 2);
     });
+
+    return schematicData;
+
 }
