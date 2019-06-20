@@ -76,8 +76,8 @@ class NavBar extends Component {
                         </ul>
                         <ul className='nav navbar-nav'>
                             <li>
-                                <Link to={'/Tools'}>
-                                    <span className="icon icon-tools"></span> Tools
+                                <Link to={'/Parser'}>
+                                    <span className="icon icon-classic-computer"></span> MODSIM Parser
                                 </Link>
                             </li>
                         </ul>
