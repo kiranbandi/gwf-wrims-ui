@@ -43,13 +43,28 @@ class Container extends Component {
                 }
                 <footer className="footer w-full m-t hidden-xs">
                     <div className="container-fluid">
-                        <div className='w-md footer-inner'>
-                            <span className="left text-xs-left">
-                                <a className="footer-link" href="mailto:venkat.bandi@usask.ca?subject=GWF HCI&amp;body=Please%20Fill%20">Contact Us</a>
-                            </span>
+                        <div className='w-sm footer-inner bottom-left'>
+                            <div className="left text-xs-left">
+                                <a className="footer-link right" href="http://hci.usask.ca/"> <img src="assets/img/interaction_lab.gif" height="30" /></a>
+                            </div>
                         </div>
-                        <div className='w-md footer-inner text-xs-right'>
-                            <a className="footer-link right" href="http://hci.usask.ca/"> <img src="assets/img/interaction_lab.gif" height="30" /></a>
+                        <div className='w-md footer-inner bottom-center'>
+                            <div className="center text-xs-center">
+                                <a className="footer-link" href="mailto:venkat.bandi@usask.ca?subject=GWF HCI&amp;body=Please%20Fill%20">Contact Us</a>
+                            </div>
+                        </div>
+                        <div className='w-sm footer-inner text-xs-right bottom-right'>
+                            <div class="bottom-right-center">
+                                <a href="https://www.usask.ca/" class="uofs-footer-logo">
+                                    University of Saskatchewan
+                                </a>
+
+                                <p class="uofs-copyright">
+                                    <span class="copyright-text">© University of Saskatchewan</span>
+                                    <br />
+                                    <a href="https://www.usask.ca/disclaimer.php">Disclaimer</a> | <a href="https://www.usask.ca/privacy.php">Privacy</a>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </footer>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 //  Image url handling is convoluted in scss , much easier to set inline and get images from root
 let backgroundStyle = { backgroundImage: 'url(assets/img/gwf.jpg)' };
 import YouTube from 'react-youtube';
+import vtdata from '../utils/videoTilesData';
 
 class Home extends Component {
 
@@ -9,54 +10,62 @@ class Home extends Component {
 
     super(props);
     this.state = {
+      playerRef: undefined,
       isVidPlaying: false,
-      currentVidID: undefined
+      currentVidID: "xrpzzGsfy7o",
     };
     this._onReady = this._onReady.bind(this);
     this._onPlay = this._onPlay.bind(this);
     this._onEnd = this._onEnd.bind(this);
+    this._onEndM = this._onEndM.bind(this);
+
   }
 
   _onReady(event) {
-    event.target.playVideo();
-  }
-
-  _onPlay(event) {
 
     this.setState({
-      isVidPlaying: true,
-      currentVidID: event.target.getVideoData().video_id
+      playerRef: event
     });
+  }
+
+  _onPlay(id) {
+    this.setState({
+      isVidPlaying: true,
+      currentVidID: id
+    });
+
+    setTimeout(() => { this.state.playerRef.target.playVideo(); }, 10);
   }
 
   _onEnd(event) {
-    this.setState({
-      isVidPlaying: false,
-      currentVidID: undefined
-    });
+    this.setState({ isVidPlaying: false });
+    setTimeout(() => { this.state.playerRef.target.stopVideo(); }, 10);
+  }
+
+  _onEndM(event) {
+    setTimeout(() => { event.target.stopVideo(); }, 10);
   }
 
   render() {
 
-    let widthOfPage = document.body.getBoundingClientRect().width;
+    let widthOfPage = document.body.getBoundingClientRect().width,
+      onMobile = false;
 
     if (widthOfPage > 1170) {
       widthOfPage = 1000
     }
     else if (widthOfPage < 700) {
+      onMobile = true;
       widthOfPage = 0.90 * widthOfPage;
     }
     else {
+      onMobile = true;
       widthOfPage = 0.75 * widthOfPage;
     }
 
-    console.log(widthOfPage);
 
     return (
       <div>
-
-
-
         <div className="home-header" style={backgroundStyle}>
           <div className="container">
             <div className='col-lg-12 text-lg-left text-md-center text-sm-center text-xs-center'>
@@ -74,44 +83,55 @@ class Home extends Component {
             the strategic needs of the Canadian economy in adapting to change and managing risks of uncertain water futures
             extreme events. End-user needs will be our beacon and will drive strategy and shape our science. </p>
           <h1>Dashboard Demonstration</h1>
-          <div>
-            <div className="video-list" style={{height: ((widthOfPage/2)+"px")}}>
-              <YouTube
-                containerClassName='youtube-container'
-                videoId="xrpzzGsfy7o"
-                opts={{ width: widthOfPage / 4, height: widthOfPage / 8 }}
-                onPlay={this._onPlay} />
-              <YouTube
-                containerClassName='youtube-container'
-                videoId="kOvwu_0z2jM"
-                opts={{ width: widthOfPage / 4, height: widthOfPage / 8 }}
-                onPlay={this._onPlay} />
-              <YouTube
-                containerClassName='youtube-container'
-                videoId="QW206F8BTzE"
-                opts={{ width: widthOfPage / 4, height: widthOfPage / 8 }}
-                onPlay={this._onPlay} />
-              <YouTube
-                containerClassName='youtube-container'
-                videoId="NNAkYbNBeK0"
-                opts={{ width: widthOfPage / 4, height: widthOfPage / 8 }}
-                onPlay={this._onPlay} />
-              <YouTube
-                containerClassName='youtube-container'
-                videoId="Y74jb1V_DOg"
-                opts={{ width: widthOfPage / 4, height: widthOfPage / 8 }}
-                onPlay={this._onPlay} />
-            </div>
-            <YouTube
-              containerClassName='current-video'
-              videoId={this.state.currentVidID}
-              opts={{ width: widthOfPage, height: widthOfPage / 2 }}
-              onReady={this._onReady}
-              onEnd={this._onEnd} />
-          </div>
+          {
+            onMobile ?
+              <div className="mobile">
+                {
+                  vtdata.tileData.map((o, idx) => {
+                    return (
+                      <YouTube
+                        containerClassName='mobile-video-tile'
+                        key={o.id}
+                        videoId={o.id}
+                        opts={{ width: (widthOfPage), height: (widthOfPage / 2) }}
+                        onEnd={this._onEndM}
+                      />
+                    )
+                  })
+                }
+              </div>
+              :
+              <div className="pc">
+                <div className="video-list" style={{ height: ((widthOfPage / 2) + "px") }}>
+                  {
+                    vtdata.tileData.map((o, idx) => {
 
+                      let tileStyle = {
+                        background: `url(https://img.youtube.com/vi/${o.id}/${o.thumb}.jpg)`,
+                        width: ((widthOfPage / 4) + "px"),
+                        height: ((widthOfPage / 6.5) + "px"),
+                        backgroundSize: "100% 100%",
+                        backgroundRepeat: "no-repeat",
+                        lineHeight: ((widthOfPage / 6.5) + "px")
+                      };
+
+                      return (
+                        <div className="tile-container" style={tileStyle} key={o.id} onClick={() => { this._onPlay(o.id); }}>
+                          <div className="tile-text">{o.title}</div>
+                        </div>
+                      );
+                    })
+                  }
+                </div>
+                <YouTube
+                  containerClassName='current-video'
+                  videoId={this.state.currentVidID}
+                  opts={{ width: (widthOfPage * .85), height: (widthOfPage / 2) }}
+                  onReady={this._onReady}
+                  onEnd={this._onEnd} />
+              </div>
+          }
         </div>
-
       </div>
 
     )
