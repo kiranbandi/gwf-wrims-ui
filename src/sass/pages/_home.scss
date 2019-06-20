@@ -47,9 +47,14 @@
           &>ul {
               font-size: 1.25em;
           }
-          &>div {
+          .pc {
               display: inline-flex;
               width: max-content;
+              text-align: center;
+          }
+
+          .mobile {
+              text-align: center;
           }
       }
       
