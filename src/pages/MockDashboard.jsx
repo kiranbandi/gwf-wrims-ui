@@ -10,6 +10,7 @@ import processSchematic from '../utils/processSchematic';
 import { getFlowData } from '../utils/requestServer';
 import _ from 'lodash';
 import LegendPanel from '../components/MapLegend/LegendPanel';
+import YearRangeSlider from '../components/YearRangeSlider';
 
 
 class MockDashboardRoot extends Component {
@@ -106,13 +107,18 @@ class MockDashboardRoot extends Component {
                 {isSchematicLoading ?
                     <Loading className='loader' type='spin' height='100px' width='100px' color='#d6e5ff' delay={-1} /> :
                     <div className='dashboard-inner-root'>
-                        {SchematicData.lines.length > 0 && <div>
+                        {SchematicData.lines.length > 0 && <div style={{ 'display':'inline' }}>
                             <FilterPanel schematicData={SchematicData} />
-                            <RiverMap
-                                schematicData={SchematicData}
-                                width={mapWidth}
-                                height={mapWidth / 1.75}
-                                isMock={true} />
+                            <span>
+                                <YearRangeSlider width={mapWidth} height={mapWidth / 1.75 *0.15}/>
+                                <RiverMap
+                                    schematicData={SchematicData}
+                                    width={mapWidth}
+                                    height={mapWidth / 1.75}
+                                    isMock={true} />
+
+                            </span>
+              
                             <VerticalSlider
                                 width={widthOfSlider}
                                 height={mapWidth / 1.75} />

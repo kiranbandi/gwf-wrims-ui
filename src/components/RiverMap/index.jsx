@@ -13,8 +13,6 @@ import Artifacts from './Artifacts';
 import RiverLabels from './RiverLabels';
 import Markers from './Markers';
 
-var isMock;
-
 class RiverMap extends Component {
 
     constructor(props) {
@@ -27,8 +25,6 @@ class RiverMap extends Component {
         // magic numbers for our chart so it looks good
         const initialZoomScale = { x: width * 0.50, y: width * 0.30, scale: 1.10 };
         attachZoom('river-map', initialZoomScale);
-        isMock = this.props.isMock;
-
     }
 
     onItemClick(itemType, params) {
@@ -165,7 +161,7 @@ class RiverMap extends Component {
                             highlightName={name}
                             onItemClick={this.onItemClick}
                             markers={filteredData.markers}
-                            isMock={isMock} />
+                            isMock={this.props.isMock} />
 
                     </g>
                     {/* Display the title from the schema */}
