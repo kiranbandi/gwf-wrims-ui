@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 //  Image url handling is convoluted in scss , much easier to set inline and get images from root
 let backgroundStyle = { backgroundImage: 'url(assets/img/gwf.jpg)' };
 import YouTube from 'react-youtube';
+import vtdata from '../utils/videoTilesData';
 
 class Home extends Component {
 
@@ -41,6 +42,8 @@ class Home extends Component {
 
   render() {
 
+    console.log("lol")
+
     let widthOfPage = document.body.getBoundingClientRect().width;
 
     if (widthOfPage > 1170) {
@@ -76,23 +79,22 @@ class Home extends Component {
           <div>
             <div className="video-list" style={{ height: ((widthOfPage / 2) + "px") }}>
               {
-                ["xrpzzGsfy7o 0 Region-Selection", "kOvwu_0z2jM 0 Points-of-Interest", "QW206F8BTzE 0 Selection-Filter", "NNAkYbNBeK0 0 Decreasing-Supply", "Y74jb1V_DOg 0 Visualizing-Flow-Rates"].map((str, idx) => {
-                  let id = str.split(" ");
+                vtdata.tileData.map((o, idx) => {
 
                   let tileStyle = {
-                    background: `url(https://img.youtube.com/vi/${id[0]}/${id[1]}.jpg)`,
+                    background: `url(https://img.youtube.com/vi/${o.id}/${o.thumb}.jpg)`,
                     width: ((widthOfPage / 4) + "px"),
                     height: ((widthOfPage / 6.5) + "px"),
                     backgroundSize: "100% 100%",
                     backgroundRepeat: "no-repeat",
                     lineHeight: ((widthOfPage / 6.5) + "px")
-                  }
+                  };
 
                   return (
-                    <div className="tile-container" style={tileStyle} key={id[0]} onClick={() => { this._onPlay(id[0]); }}>
-                      <div className="tile-text">{id[2].split("-").join(" ")}</div>
+                    <div className="tile-container" style={tileStyle} key={o.id} onClick={() => { this._onPlay(o.id); }}>
+                      <div className="tile-text">{o.title}</div>
                     </div>
-                  )
+                  );
                 })
               }
             </div>
