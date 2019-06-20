@@ -1,4 +1,37 @@
 .statcard {
     display: inline-block;
     margin-right: 5px;
+    min-height: 80px;
+    vertical-align: top;
+    position: relative;
+    .statcard-major {
+        font-size: 16px;
+    }
+    .statcard-content {
+        margin-top: 12px;
+        margin-left: 30%;
+        svg {
+            display: inline-block;
+            position: absolute;
+            bottom: 3px;
+            left: 15%;
+        }
+    }
+    .card-icon {
+        margin-left: 1px;
+        padding-left: 1px;
+    }
+    .p-a {
+        padding: 5px;
+    }
+    path.card-icon {
+        fill: white;
+    }
+    .delta-indicator {
+        font-size: 10px;
+        font-weight: bold;
+    }
+    .statcard-desc {
+        font-size: 0.9em;
+    }
 }

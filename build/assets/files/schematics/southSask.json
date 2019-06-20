@@ -9,7 +9,8 @@
         { "name": "Diefenbaker Reservoir", "coords": [42, 101] }
     ],
 
-    "demands": [{
+    "demands": [
+        {
             "nodeNum": 11,
             "name": "I306_1",
             "color": "#cc00cc",
@@ -506,7 +507,8 @@
         }
     ],
 
-    "nonStorage": [{
+    "nonStorage": [
+        {
             "nodeNum": 56,
             "name": "In30_SSR",
             "color": "#3399ff",
@@ -991,7 +993,8 @@
             }]
         }
     ],
-    "sinks": [{
+    "sinks": [
+        {
             "nodeNum": 95,
             "name": "Sink_00",
             "color": "#00cc33",
@@ -1014,7 +1017,8 @@
             }]
         }
     ],
-    "reservoirs": [{
+    "reservoirs": [
+        {
             "nodeNum": 1,
             "name": "R1_LDief",
             "color": "#ff0000",

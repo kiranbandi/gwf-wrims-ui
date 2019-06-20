@@ -10,7 +10,11 @@
         margin-bottom: 10px;
     }
     .metrics-container {
-        margin-top: 25px;
+        margin-top: 10px;
+        .exclaimatory-text {
+            margin: 0px;
+            font-size: 0.75em;
+        }
     }
     .flow-inner-container {
         svg.flow-data-chart {

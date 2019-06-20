@@ -1,10 +1,10 @@
 /*global $*/
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { line, scaleLinear, timeParse } from 'd3';
 import Loading from 'react-loading';
 import * as d3 from 'd3';
 import StatCard from '../components/StatCard';
+import calculateMetrics from '../utils/calculateMetrics';
 
 class FlowPanel extends Component {
 
@@ -30,39 +30,48 @@ class FlowPanel extends Component {
     render() {
 
         const { flowData = {}, width, height } = this.props,
-            { dataList = [], name = '', isLoading = false } = flowData,
+            { dataList = [], name = '', isLoading = false, flowParams = { threshold: 'base' } } = flowData,
             innerWidth = width - 40,
-            innerHeight = height - (height / 2.75);
+            innerHeight = height - (175);
 
+        const { summerFlow = { major: '', minor: '' },
+            winterFlow = { major: '', minor: '' },
+            spawningRate = { major: '', minor: '' } } = calculateMetrics(dataList, name, flowParams.threshold);
 
         return (
             <div className='flow-panel-root-container' style={{ width, height }}>
-                <h4 className='title-bar text-center'>FLOW DATA {name ? " - " + name : ""}</h4>
+                <h4 className='title-bar text-center'>FLOW DATA
+                {name.length > 0 && <strong style={{ marginLeft: 10 }}>{name}</strong>}
+                </h4>
                 {isLoading ?
                     <Loading className='loader' type='spin' height='75px' width='75px' color='#d6e5ff' delay={-1} /> :
                     <div className='flow-inner-container'>
                         <div className='metrics-container'>
+                            <p className='exclaimatory-text'>* All values are in 1000m<sup>3</sup>/week</p>
                             <StatCard
                                 title={"Summer Flow"}
-                                major={90}
-                                minor={5}
+                                major={summerFlow.major || 'N/A'}
+                                minor={!!summerFlow.minor ? summerFlow.minor + '%' : ''}
                                 type={"success"}
-                                arrow={"positive"}
-                                width={innerWidth / 3.1} />
+                                arrow={!!summerFlow.minor ? summerFlow.minor > 0 ? 'positive' : 'negative' : ''}
+                                width={innerWidth / 3.1}
+                                icon="sun" />
                             <StatCard
                                 title={"Winter Flow"}
-                                major={90}
-                                minor={5}
-                                type={"info"}
-                                arrow={"positive"}
-                                width={innerWidth / 3.1} />
-                            <StatCard
-                                title={"Test data"}
-                                major={90}
-                                minor={5}
+                                major={winterFlow.major || 'N/A'}
+                                minor={!!winterFlow.minor ? winterFlow.minor + '%' : ''}
                                 type={"primary"}
-                                arrow={"negative"}
-                                width={innerWidth / 3.1} />
+                                arrow={!!winterFlow.minor > 0 ? winterFlow.minor > 0 ? 'positive' : 'negative' : ''}
+                                width={innerWidth / 3.1}
+                                icon="snow" />
+                            <StatCard
+                                title={"Spawning Rate"}
+                                major={!!spawningRate.major ? spawningRate.major + '%' : 'N/A'}
+                                minor={!!spawningRate.minor ? spawningRate.minor + '%' : ''}
+                                type={"info"}
+                                arrow={!!spawningRate.minor > 0 ? spawningRate.minor > 0 ? 'positive' : 'negative' : ''}
+                                width={innerWidth / 3.1}
+                                icon="fish" />
                         </div>
 
                         {dataList.length <= 0 ?
@@ -103,7 +112,7 @@ function makeTimeChart(dataList) {
             top: 20,
             right: 20,
             bottom: +svg.attr("height") * (0.30),
-            left: 40
+            left: 42
         },
         margin2 = {
             top: +svg.attr("height") * (0.775),

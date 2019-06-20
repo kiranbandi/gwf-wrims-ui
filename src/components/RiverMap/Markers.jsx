@@ -123,7 +123,7 @@ class Markers extends Component {
         const { flowData = {}, width, height } = this.props,
             { dataList = [], path = {}, isLoading = false } = flowData;
 
-        let { markers = [], xScale, yScale } = this.props,
+        let { markers = [], xScale, yScale, highlightName = '' } = this.props,
             markerSizeScale = (xScale(1) - xScale(0)) / 90;
 
         const markerList = _.map(markers, (marker, index) => {
@@ -141,7 +141,7 @@ class Markers extends Component {
 
             if ((!!coords && coords.length > 0)) {
                 return (
-                    <g key={'marker-' + index} className='river-marker'
+                    <g key={'marker-' + index} className={'river-marker' + ((highlightName == marker.name) ? ' highlight' : '')}
                         // probably the worst way to do this but im on a deadline so sue me !!
                         onDoubleClick={this.onMarkerClick.bind(this, marker)}
                         transform={"translate(" + (+xScale(coords[0]) - (tempOffset)) + "," + (+yScale(coords[1]) - (tempOffset)) + ") scale(" + (markerSizeScaleTemp) + ")"}>
@@ -180,75 +180,4 @@ class Markers extends Component {
 
         return (<g className='river-marker-container'>{markerList}</g>)
     }
-}
-
-
-function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators({ setFlowData }, dispatch)
-    };
-}
-
-function mapStateToProps(state) {
-    return {
-        flowData: state.delta.flowData
-    };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Markers);
-
-
-function makeTimeChart(data, path, index, threshold = 50) {
-    // set the dimensions and margins of the graph
-    var width = 500, height = 500, margin = 40;
-    // console.log("doughnut-chart" + index)
-    // The radius of the pieplot is half the width or half the height (smallest one). I substract a bit of margin.
-    var radius = Math.min(width, height) / 2 - margin
-
-    // append the svg object to the div called 'my_dataviz'
-    var svg = d3.select("g.doughnut-chart" + index)
-        .append("g")
-        .attr("width", width)
-        .attr("height", height)
-        .append("g");
-    // console.log("HERE")
-    // console.log(data)
-    // // .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
-
-    // // Create dummy data
-    // var data = {
-    //     1: 40, 2: 5, 3: 20, 4: 10
-    // }
-
-    var colorList = ["blue", "red"]
-    // console.log(dataList)
-
-
-
-    // set the color scale
-    var color = d3.scaleOrdinal()
-        .domain(data)
-        .range(colorList)
-
-    // Compute the position of each group on the pie:
-    var pie = d3.pie()
-        .sort(null) // Do not sort group by size
-        .value(function (d) { return d.value; })
-    var data_ready = pie(d3.entries(data))
-
-    // Build the pie chart: Basically, each part of the pie is a path that we build using the arc function.
-    svg
-        .selectAll('whatever')
-        .data(data_ready)
-        .enter()
-        .append('path')
-        .attr('d', d3.arc()
-            .innerRadius(radius + 50)         // This is the size of the donut hole
-            .outerRadius(radius + 100)
-        )
-        .attr('fill', function (d) { return (color(d.data.key)) })
-        .attr("stroke", "black")
-        .style("stroke-width", "2px")
-        .style("opacity", 0.7)
-
 }

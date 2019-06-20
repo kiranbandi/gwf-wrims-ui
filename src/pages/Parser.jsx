@@ -27,9 +27,6 @@ class Parser extends Component {
         xyParser("assets/files/xy/southSask.xy");
     }
 
-    
-
-
     render() {
         const { isSchematicLoading, SchematicData = { lines: [], artifacts: [], labels: [], markers: [] } } = this.state;
 

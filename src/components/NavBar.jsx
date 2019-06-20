@@ -84,7 +84,7 @@ class NavBar extends Component {
                         <ul className='nav navbar-nav'>
                             <li>
                                 <Link to={'/Parser'}>
-                                    <span className="icon"></span> parser
+                                    <span className="icon icon-tools"></span> parser
                                 </Link>
                             </li>
                         </ul>   

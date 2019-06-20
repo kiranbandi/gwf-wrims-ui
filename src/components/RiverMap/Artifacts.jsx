@@ -14,15 +14,15 @@ export default class Markers extends Component {
 
     render() {
 
-        let { artifacts = [], xScale, yScale } = this.props,
+        let { artifacts = [], xScale, yScale, highlightName = '' } = this.props,
             // scale relative to the size of the screen
             reservoirIconScale = (xScale(1) - xScale(0)) / 90;
-            let tempOffset = reservoirIconScale * 150;
+        let tempOffset = reservoirIconScale * 150;
 
         const reservoirList = _.map(_.filter(artifacts, (d) => d.type == 'reservoir'),
             (reservoir, index) => {
                 const { coords, size = 1 } = reservoir;
-                return <g key={'reservoir-' + index} className='reservoir'
+                return <g key={'reservoir-' + index} className={'reservoir' + ((highlightName == reservoir.name) ? ' highlight' : '')}
                     onDoubleClick={this.onArtifactClick.bind(this, reservoir)}
                     transform={"translate(" + (+xScale(coords[0]) - (tempOffset)) + "," + (+yScale(coords[1]) - (tempOffset)) + ") scale(" + (size * reservoirIconScale) + ")"}>
                     <circle cx='150' cy='150' r='200'></circle>
@@ -37,10 +37,10 @@ export default class Markers extends Component {
         const sinkList = _.map(_.filter(artifacts, (d) => d.type == 'sink'),
             (sink, index) => {
                 const { coords, size = 1 } = sink;
-                return <g key={'sink-' + index} className='sink'
+                return <g key={'sink-' + index} className={'sink' + ((highlightName == sink.name) ? ' highlight' : '')}
                     transform={"translate(" + (+xScale(coords[0]) - (tempOffset)) + "," + (+yScale(coords[1]) - (tempOffset)) + ") scale(" + (size * reservoirIconScale) + ")"}>
                     <circle cx='150' cy='150' r='200'></circle>
-                    <text x='75' y='225'>S</text>
+                    <text x='75' y='230'>S</text>
                     <title>{sink.name}</title>
                 </g>
             })

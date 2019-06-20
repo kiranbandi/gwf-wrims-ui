@@ -1,0 +1,25 @@
+.vertical-slider-container {
+    overflow: hidden;
+    display: inline-block;
+    background: #1b1f2a;
+    margin-top: 10px;
+    margin-left: 1%;
+    border-radius: 7px;
+    vertical-align: top;
+    .slider-title {
+        font-weight: bold;
+    }
+    .inner-slider {
+        float: left;
+        margin-top: 10px;
+        .rc-slider-vertical {
+            text-align: center;
+            display: inline-block;
+            margin-left: -40px;
+            margin-top: 10px;
+        }
+        strong {
+            font-size: 14px;
+        }
+    }
+}

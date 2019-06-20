@@ -47,4 +47,23 @@
           &>ul {
               font-size: 1.25em;
           }
+          &>div {
+              display: -webkit-box;
+          }
       }
+
+      .video-list {
+        height: max-content;  
+        padding: 0vw 1vw;
+        &>div {
+            padding: .5vw 0vw;
+        }
+        overflow-y: scroll;
+        
+      }
+
+      .current-video {
+        height: max-content;  
+      }
+
+      
