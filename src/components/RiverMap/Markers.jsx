@@ -13,6 +13,7 @@ export default class Markers extends Component {
     }
 
     render() {
+        console.log(this.props.isMock)
         const { flowData = {}, width, height } = this.props,
             { dataList = [], path = {}, isLoading = false } = flowData;
 
@@ -55,10 +56,7 @@ export default class Markers extends Component {
                         <title>
                             {name}
                         </title>
-
-                        <DoughnutChart
-                            index={index}
-                        />
+                        {this.props.isMock == true ? <DoughnutChart index={index} /> : <div />}
                     </g>
                 );
             }

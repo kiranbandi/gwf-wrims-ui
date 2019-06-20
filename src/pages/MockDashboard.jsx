@@ -12,7 +12,7 @@ import _ from 'lodash';
 import LegendPanel from '../components/MapLegend/LegendPanel';
 
 
-class DashboardRoot extends Component {
+class MockDashboardRoot extends Component {
 
     constructor(props) {
         super(props);
@@ -112,7 +112,7 @@ class DashboardRoot extends Component {
                                 schematicData={SchematicData}
                                 width={mapWidth}
                                 height={mapWidth / 1.75}
-                                isMock={false} />
+                                isMock={true} />
                             <VerticalSlider
                                 width={widthOfSlider}
                                 height={mapWidth / 1.75} />
@@ -140,4 +140,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DashboardRoot);
+export default connect(mapStateToProps, mapDispatchToProps)(MockDashboardRoot);
