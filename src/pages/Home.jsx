@@ -9,8 +9,9 @@ class Home extends Component {
 
     super(props);
     this.state = {
+      playerRef: undefined,
       isVidPlaying: false,
-      currentVidID: undefined
+      currentVidID: "xrpzzGsfy7o"
     };
     this._onReady = this._onReady.bind(this);
     this._onPlay = this._onPlay.bind(this);
@@ -18,22 +19,24 @@ class Home extends Component {
   }
 
   _onReady(event) {
-    event.target.playVideo();
-  }
-
-  _onPlay(event) {
 
     this.setState({
-      isVidPlaying: true,
-      currentVidID: event.target.getVideoData().video_id
+      playerRef: event
     });
+  }
+
+  _onPlay(id) {
+    this.setState({
+      isVidPlaying: true,
+      currentVidID: id
+    });
+
+    setTimeout(() => { this.state.playerRef.target.playVideo(); }, 10);
   }
 
   _onEnd(event) {
-    this.setState({
-      isVidPlaying: false,
-      currentVidID: undefined
-    });
+    this.setState({ isVidPlaying: false });
+    setTimeout(() => { this.state.playerRef.target.stopVideo(); }, 10);
   }
 
   render() {
@@ -50,13 +53,9 @@ class Home extends Component {
       widthOfPage = 0.75 * widthOfPage;
     }
 
-    console.log(widthOfPage);
 
     return (
       <div>
-
-
-
         <div className="home-header" style={backgroundStyle}>
           <div className="container">
             <div className='col-lg-12 text-lg-left text-md-center text-sm-center text-xs-center'>
@@ -75,37 +74,32 @@ class Home extends Component {
             extreme events. End-user needs will be our beacon and will drive strategy and shape our science. </p>
           <h1>Dashboard Demonstration</h1>
           <div>
-            <div className="video-list" style={{height: ((widthOfPage/2)+"px")}}>
-              <YouTube
-                containerClassName='youtube-container'
-                videoId="xrpzzGsfy7o"
-                opts={{ width: widthOfPage / 4, height: widthOfPage / 8 }}
-                onPlay={this._onPlay} />
-              <YouTube
-                containerClassName='youtube-container'
-                videoId="kOvwu_0z2jM"
-                opts={{ width: widthOfPage / 4, height: widthOfPage / 8 }}
-                onPlay={this._onPlay} />
-              <YouTube
-                containerClassName='youtube-container'
-                videoId="QW206F8BTzE"
-                opts={{ width: widthOfPage / 4, height: widthOfPage / 8 }}
-                onPlay={this._onPlay} />
-              <YouTube
-                containerClassName='youtube-container'
-                videoId="NNAkYbNBeK0"
-                opts={{ width: widthOfPage / 4, height: widthOfPage / 8 }}
-                onPlay={this._onPlay} />
-              <YouTube
-                containerClassName='youtube-container'
-                videoId="Y74jb1V_DOg"
-                opts={{ width: widthOfPage / 4, height: widthOfPage / 8 }}
-                onPlay={this._onPlay} />
+            <div className="video-list" style={{ height: ((widthOfPage / 2) + "px") }}>
+              {
+                ["xrpzzGsfy7o 0 Region-Selection", "kOvwu_0z2jM 0 Points-of-Interest", "QW206F8BTzE 0 Selection-Filter", "NNAkYbNBeK0 0 Decreasing-Supply", "Y74jb1V_DOg 0 Visualizing-Flow-Rates"].map((str, idx) => {
+                  let id = str.split(" ");
+
+                  let tileStyle = {
+                    background: `url(https://img.youtube.com/vi/${id[0]}/${id[1]}.jpg)`,
+                    width: ((widthOfPage / 4) + "px"),
+                    height: ((widthOfPage / 6.5) + "px"),
+                    backgroundSize: "100% 100%",
+                    backgroundRepeat: "no-repeat",
+                    lineHeight: ((widthOfPage / 6.5) + "px")
+                  }
+
+                  return (
+                    <div className="tile-container" style={tileStyle} key={id[0]} onClick={() => { this._onPlay(id[0]); }}>
+                      <div className="tile-text">{id[2].split("-").join(" ")}</div>
+                    </div>
+                  )
+                })
+              }
             </div>
             <YouTube
               containerClassName='current-video'
               videoId={this.state.currentVidID}
-              opts={{ width: widthOfPage, height: widthOfPage / 2 }}
+              opts={{ width: (widthOfPage * .85), height: (widthOfPage / 2) }}
               onReady={this._onReady}
               onEnd={this._onEnd} />
           </div>
