@@ -16,7 +16,7 @@ body {
             .footer {
                 position: absolute;
                 bottom: 0px;
-                height: 50px;
+                height: auto;
                 padding: 10px;
                 background: #1a1c22;
                 .footer-inner {
@@ -27,6 +27,16 @@ body {
                         color: #307691;
                     }
                 }
+            }
+            .bottom-right {
+                float: right;
+            }
+            .bottom-left {
+                float: left;
+            }
+            .bottom-center {}
+            .bottom-right-center {
+                text-align: center;
             }
         }
         .inlay-icon {

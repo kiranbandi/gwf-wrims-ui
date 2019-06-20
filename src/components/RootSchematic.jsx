@@ -94,7 +94,7 @@ export default class RootSchematic extends Component {
                     <div className='list-container'>
                         {/* bad idea to attach so many events , need to refactor and attach single event to parent */}
                         {/* id is model#type#name#number */}
-                        <p onClick={this.props.onPlaceSelect} id='southSask#link#J_2_J_32#6' className={selectedPlace == 'southSask#link#J_2_J_32#6' ? 'selected-button' : ''}>City of Saskatoon</p>
+                        <p onClick={this.props.onPlaceSelect} id='southSask#link#J_3_J1_RF#8' className={selectedPlace == 'southSask#link#J_3_J1_RF#8' ? 'selected-button' : ''}>City of Saskatoon</p>
                         <p onClick={this.props.onPlaceSelect} id='southSask#link#J2_RF_J_38#98' className={selectedPlace == 'southSask#link#J2_RF_J_38#98' ? 'selected-button' : ''}>Cumberland Delta</p>
                         <p onClick={this.props.onPlaceSelect} id='southSask#reservoir#R1_LDief#1' className={selectedPlace == 'southSask#reservoir#R1_LDief#1' ? 'selected-button' : ''}>Diefenbaker Lake</p>
                         <p onClick={this.props.onPlaceSelect} id='southSask#reservoir#R7_Tobin#3' className={selectedPlace == 'southSask#reservoir#R7_Tobin#3' ? 'selected-button' : ''}>Tobin Lake</p>
