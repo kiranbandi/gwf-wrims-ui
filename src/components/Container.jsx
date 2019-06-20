@@ -54,13 +54,13 @@ class Container extends Component {
                             </div>
                         </div>
                         <div className='w-sm footer-inner text-xs-right bottom-right'>
-                            <div class="bottom-right-center">
-                                <a href="https://www.usask.ca/" class="uofs-footer-logo">
+                            <div className="bottom-right-center">
+                                <a href="https://www.usask.ca/" className="uofs-footer-logo">
                                     University of Saskatchewan
                                 </a>
 
-                                <p class="uofs-copyright">
-                                    <span class="copyright-text">© University of Saskatchewan</span>
+                                <p className="uofs-copyright">
+                                    <span className="copyright-text">© University of Saskatchewan</span>
                                     <br />
                                     <a href="https://www.usask.ca/disclaimer.php">Disclaimer</a> | <a href="https://www.usask.ca/privacy.php">Privacy</a>
                                 </p>
