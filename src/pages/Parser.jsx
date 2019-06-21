@@ -24,6 +24,7 @@ class Parser extends Component {
             dataReady: false,
             visualize: false,
             jsonData: undefined,
+            schematicData: undefined,
             fileName: "",
         };
         this.processFile = this.processFile.bind(this);
@@ -33,13 +34,15 @@ class Parser extends Component {
 
     processFile() {
         // turn on file processing loader
-        this.setState({ processing: true, dataReady: false, visualize: false });
+        this.setState({ processing: true, dataReady: false, visualize: false, jsonData: undefined, schematicData: undefined });
         getFile('xy-file')
             .then((response) => { return xyParser(response); })
             .then((parsedData) => {
+                const clonedData = Object.assign({}, parsedData);
                 this.setState({
                     dataReady: true,
-                    jsonData: parsedData,
+                    schematicData: clonedData,
+                    jsonData:  parsedData,
                     fileName: document.getElementById("xy-file").files[0].name
                 });
             })
@@ -51,17 +54,14 @@ class Parser extends Component {
 
     downloadFile(event) {
         event.preventDefault();
-        downloadJSON(this.state.jsonData, this.state.fileName);
+        downloadJSON(this.state.schematicData, this.state.fileName);
     }
     visualizeRecords() {
         this.setState({ visualize: true });
     }
 
     render() {
-        const { isSchematicLoading, SchematicData = { lines: [], artifacts: [], labels: [], markers: [] } } = this.state;
-        const { processing, visualize, dataReady, jsonData } = this.state;
-        console.log(jsonData);
-
+        const { processing, visualize, dataReady } = this.state;
         //125px to offset the 30px margin on both sides and vertical scroll bar width
         //125px to offset the 30px margin on both sides and vertical scroll bar width
         let widthOfDashboard = document.body.getBoundingClientRect().width,
@@ -102,7 +102,7 @@ class Parser extends Component {
                         overflowY: "hidden",
                         textAlign: "center" }}>
                         <RiverMap
-                            schematicData={jsonData}
+                            schematicData={this.state.jsonData}
                             width={mapWidth}
                             height={mapWidth / 2}
                             fromDashboard={false}/>

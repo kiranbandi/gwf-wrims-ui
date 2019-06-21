@@ -22,15 +22,18 @@ class RiverMap extends Component {
 
     componentDidMount() {
         const { width, fromDashboard = true } = this.props;
+        
         // magic numbers for our chart so it looks good
-        const initialZoomScale = fromDashboard? { x: width * 0.50, y: width * 0.30, scale: 1.10 } : { x: width * 0.045, y: width * 0.053, scale: 1.10 };
+        const initialZoomScale = fromDashboard? { x: width * 0.50, y: width * 0.30, scale: 1.10 } : { x: width * 0.045, y: width * 0.055, scale: 1.10 };
 
         attachZoom('river-map', initialZoomScale);
     }
 
     onItemClick(itemType, params) {
-        let { schematicData, actions, flowData = {} } = this.props,
+        let { schematicData, actions, flowData = {}, fromDashboard = true } = this.props,
             { flowParams = { threshold: 'base' }, isLoading = false } = flowData;
+
+        if (!fromDashboard) { return; }
 
         // if there is a call in progress ignore the click
         if (!isLoading) {
@@ -92,6 +95,7 @@ class RiverMap extends Component {
         const { schematicData = { lines: [], artifacts: [], labels: [], markers: [], title: {} },
             width, height, filterMesh, flowData = {} } = this.props,
             { name = '' } = flowData;
+            
 
 
         // find the max and min from all the nodes within the lines

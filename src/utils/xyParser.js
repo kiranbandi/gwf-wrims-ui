@@ -148,7 +148,7 @@ export default function(xyFileData) {
                                                 if (tNode.name.toLowerCase().indexOf('artificial') >= 0) {
                                                     resetNode();
                                                     stateObj.changeState(states.INITIAL);
-                                                } else if (tNode.name[0] == 'i') {
+                                                } else if (tNode.name.toLowerCase()[0] == 'i') {
                                                     tNode.type = 'inflow'
                                                 } else {
                                                     tNode.type = 'junction'
@@ -161,7 +161,7 @@ export default function(xyFileData) {
                                                 if (tNode.name.toLowerCase().indexOf('ft_') >= 0) {
                                                     resetNode();
                                                     stateObj.changeState(states.INITIAL);
-                                                } else if (tNode.name[0] == 'i') {
+                                                } else if (tNode.name.toLowerCase()[0] == 'i') {
                                                     tNode.type = 'agri'
                                                 } else {
                                                     tNode.type = 'demand'
