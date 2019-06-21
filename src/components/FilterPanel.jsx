@@ -7,6 +7,7 @@ import InflowFilter from './FilterComponents/InflowFilter.jsx';
 import AmenitiesFilter from './FilterComponents/AmenitiesFilter.jsx';
 import IrrigationFilter from './FilterComponents/IrrigationFilter.jsx';
 import NonIrrigationFilter from './FilterComponents/NonIrrigationFilter.jsx';
+import YearRangeSlider from './YearRangeSlider';
 
 
 class FilterPanel extends Component {
@@ -20,21 +21,31 @@ class FilterPanel extends Component {
 
         return (
             <div className='filter-root-container '>
-                <div className='filter-div'>
-                    <IrrigationFilter schematicData={schematicData} />
+                <div>
+                    <div className='filter-div'>
+                        <IrrigationFilter schematicData={schematicData} />
+                    </div>
+                    <div className='filter-div'>
+                        <NonIrrigationFilter schematicData={schematicData} />
+                    </div>
+                    <div className='filter-div'>
+                        <InflowFilter schematicData={schematicData} />
+                    </div>
+                    <div className='filter-div'>
+                        <AmenitiesFilter schematicData={schematicData} />
+                    </div>
+                    <div className='filter-div filter-general'>
+                        <LabelFilter />
+                    </div>
                 </div>
-                <div className='filter-div'>
-                    <NonIrrigationFilter schematicData={schematicData} />
+                <div>
+                <YearRangeSlider width={this.props.width} height={this.props.height}/>
+                    
                 </div>
-                <div className='filter-div'>
-                    <InflowFilter schematicData={schematicData} />
-                </div>
-                <div className='filter-div'>
-                    <AmenitiesFilter schematicData={schematicData} />
-                </div>
-                <div className='filter-div filter-general'>
-                    <LabelFilter />
-                </div>
+
+
+
+
             </div>
         );
     }

@@ -62,17 +62,26 @@ class YearRangeSlider extends Component {
         let { width, height, flowData = {} } = this.props;
 
         return (
-            <div className='horizontal-slider-container' style={{ 'width': width, 'height': height }}>
-                <div className='inner-slider' style={{ 'width': width, 'height': height * 0.80, 'marginBottom': height * 0.1, 'padding': '0 5%' }} >
+            <div className='horizontal-slider-container'>
+                <div className='inner-slider' >
                     {/* <p className='slider-title'>Decrease Supply</p> */}
-                  
-                    <Range min={1920} max={2020} step={5} marks={markRange} allowCross={true} value={this.state.value} onChange={this.onSliderChange} />
-                    <br />
-                    <label>LowerBound: </label>&nbsp;
-                    <input type="number" style={{'color':'hsl(0,0%,50%)'}} value={this.state.lowerBound} onChange={this.onLowerBoundChange} />&nbsp;&nbsp;&nbsp;&nbsp;
-                    <label>UpperBound: </label>&nbsp;
-                    <input type="number" style={{'color':'hsl(0,0%,50%)'}} value={this.state.upperBound} onChange={this.onUpperBoundChange} />&nbsp;&nbsp;&nbsp;
-                    <button className="btn" style={{'color': 'white', 'backgroundColor': '#1ca8dd'}} onClick={this.handleApply}>Apply</button>
+                    <div className="yearRangeSlider">
+                        <Range min={1920} max={2020} step={5} marks={markRange} allowCross={true} 
+                        value={this.state.value} onChange={this.onSliderChange} />
+                    </div>
+                    <div className="yearRangeLabel">
+                        {/* <label>LowerBound: </label>&nbsp; */}
+                        <input className="inputBox" type="number" 
+                            value={this.state.lowerBound} onChange={this.onLowerBoundChange} />
+                            &nbsp;&nbsp;&nbsp;
+                        {/* <label>UpperBound: </label>&nbsp; */}
+                        <label> - </label>&nbsp;&nbsp;&nbsp;
+                        <input className="inputBox" type="number" 
+                            value={this.state.upperBound} onChange={this.onUpperBoundChange} />
+                            &nbsp;&nbsp;&nbsp;
+                        <button className="btn" onClick={this.handleApply}>Apply</button>
+                    </div>
+                   
                 </div>
             </div>
         );
