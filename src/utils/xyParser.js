@@ -70,7 +70,7 @@ export default function(xyFileData) {
         nodeDir = {},
 
         // object to store all the schematic data
-        schematicData = { lines: [], artifacts: [], labels: [], markers: [], title: {} },
+        schematicData = { lines: [], artifacts: [], markers: [] },
 
         // object to store the dimension info of the relative view 
         dim = {

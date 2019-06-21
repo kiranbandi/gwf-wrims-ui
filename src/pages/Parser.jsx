@@ -21,18 +21,19 @@ class Parser extends Component {
         super(props);
         this.state = {
             processing: false,
-            processingSample: false,
             dataReady: false,
+            visualize: false,
             jsonData: undefined,
-            fileName: ""
+            fileName: "",
         };
         this.processFile = this.processFile.bind(this);
         this.downloadFile = this.downloadFile.bind(this);
+        this.visualizeRecords = this.visualizeRecords.bind(this);
     }
 
     processFile() {
         // turn on file processing loader
-        this.setState({ processing: true, dataReady: false });
+        this.setState({ processing: true, dataReady: false, visualize: false });
         getFile('xy-file')
             .then((response) => { return xyParser(response); })
             .then((parsedData) => {
@@ -52,13 +53,23 @@ class Parser extends Component {
         event.preventDefault();
         downloadJSON(this.state.jsonData, this.state.fileName);
     }
+    visualizeRecords() {
+        this.setState({ visualize: true });
+    }
 
     render() {
         const { isSchematicLoading, SchematicData = { lines: [], artifacts: [], labels: [], markers: [] } } = this.state;
-        const { processing, processingSample, dataReady, showGraphPanel } = this.state;
+        const { processing, visualize, dataReady, jsonData } = this.state;
+        console.log(jsonData);
+
         //125px to offset the 30px margin on both sides and vertical scroll bar width
-        let widthOfDashboard = document.body.getBoundingClientRect().width - 100,
-            mapWidth = widthOfDashboard * 0.65;
+        //125px to offset the 30px margin on both sides and vertical scroll bar width
+        let widthOfDashboard = document.body.getBoundingClientRect().width,
+            mapWidth = widthOfDashboard * 0.60,
+            widthOfSlider = 100;
+
+        // reduce the width of the slider from the map
+        mapWidth = mapWidth - widthOfSlider;
 
         return (
             <div className='tools-root m-t text-xs-center text-sm-left'>
@@ -81,11 +92,26 @@ class Parser extends Component {
                                 You can use the buttons below to download your schematic's data as a JSON file or visualize the schematic for a quick overview.
                             </div>
                             <button className="btn btn-success-outline m-r" onClick={this.downloadFile}>Download</button>
+                            <button className="btn btn-success-outline " onClick={this.visualizeRecords}>Visualize Schematic</button>
                         </div>
                     </div>}
+                {
+                    visualize &&
+                    <div style={{ height: "max-content",
+                        overflow: "scroll",
+                        overflowY: "hidden",
+                        textAlign: "center" }}>
+                        <RiverMap
+                            schematicData={jsonData}
+                            width={mapWidth}
+                            height={mapWidth / 2}
+                            fromDashboard={false}/>
+                        <LegendPanel />
+                    </div>
+                }
             </div>
-
         );
+
     }
 }
 

@@ -21,9 +21,10 @@ class RiverMap extends Component {
     }
 
     componentDidMount() {
-        const { width } = this.props;
+        const { width, fromDashboard = true } = this.props;
         // magic numbers for our chart so it looks good
-        const initialZoomScale = { x: width * 0.50, y: width * 0.30, scale: 1.10 };
+        const initialZoomScale = fromDashboard? { x: width * 0.50, y: width * 0.30, scale: 1.10 } : { x: width * 0.045, y: width * 0.053, scale: 1.10 };
+
         attachZoom('river-map', initialZoomScale);
     }
 
