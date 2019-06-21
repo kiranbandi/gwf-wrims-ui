@@ -14,7 +14,6 @@ import RiverLabels from './RiverLabels';
 import Markers from './Markers';
 
 class RiverMap extends Component {
-
     constructor(props) {
         super(props);
         this.onItemClick = this.onItemClick.bind(this);

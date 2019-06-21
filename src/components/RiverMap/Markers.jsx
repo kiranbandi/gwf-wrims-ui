@@ -13,7 +13,7 @@ export default class Markers extends Component {
     }
 
     render() {
-        console.log(this.props.isMock)
+        // console.log(this.props.isMock)
         const { flowData = {}, width, height } = this.props,
             { dataList = [], path = {}, isLoading = false } = flowData;
 
