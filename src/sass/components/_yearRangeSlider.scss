@@ -1,33 +1,57 @@
-.inner-slider{
-    padding: 0 5%;
-}
-
-.btn{
-    color: white;
-    background-color: #1ca8dd;
-}
-
-.yearRangeSlider{
-    width: 70%;
-    float: left;
-    padding: 1em 0 2em 0;
-}
-
-.yearRangeLabel {
-    float: right;
-    width: 30%;
-    margin: 0;
-    padding: 1em 2em 0 0;
-}
-
-.inputBox{
-    color: hsl(0,0%,50%);
-    width : 4em;
-}
 .horizontal-slider-container{
     width: 100%;
+
+
+    .year-container{
+        display:inline-block;
+        min-width: 69px;
+    }
+    .inner-slider{
+        padding: 0 3%;
+    }
+    
+    .btn{
+        color: white;
+        background-color: #1ca8dd;
+        margin: 0 0.5em 0 1em;
+        width: 5emw;
+        height: 35px;
+    }
+    
+    .yearRangeSlider{
+        width: 60%;
+        float: left;
+        padding: 1em 0 2em 0;
+    }
+    
+    .yearRangeLabel {
+        float: right;
+        width: 37%;
+        margin: 0;
+        padding: 1em 0 0 0;
+    }
+    
+    .inputBox{
+        color: hsl(0,0%,50%);
+        width : 4em;
+    }
+    
+    .inputLowerBound{
+        margin-right:0.5em;
+    }
+
+    .inputUpperBound{
+        margin-left:0.5em;
+    }
+    
+    .inner-slider{
+        width: 100%;
+        height: 50px;
+    }
+    
+    .react-switch {
+        margin: 0 1em;
+        vertical-align: middle;
+    }
 }
-.inner-slider{
-    width: 100%;
-    height: 50px;
-}
+
