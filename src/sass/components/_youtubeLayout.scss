@@ -1,16 +1,16 @@
 .youtube-layout-pc {
     width: max-content;
     text-align: center;
+
     &>div {
         display: inline-block;
     }
     .video-list {
 
         .tile-container {
+            
             margin: .5vh 0.5vw;
-            text-align: center;
-            opacity: 1;
-        
+
             .tile-tint {
                 height: inherit;
                 width: inherit;
@@ -40,6 +40,7 @@
             }
         }
         overflow-y: scroll;
+
         &::-webkit-scrollbar {
             width: 12px;
         }

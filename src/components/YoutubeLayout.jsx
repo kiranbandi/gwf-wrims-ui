@@ -1,6 +1,32 @@
 import React, { Component } from 'react';
 import YouTube from 'react-youtube';
 
+/*
+ * This component takes in video data as a prop and renders a layout/container
+ * that displays the list of videos and current video.
+ * 
+ * required props: 
+ *      videoTileData: An array of objects where each object has properties:
+ *          "id": a string, the video id of the youtube video
+ *          "thumb": a string, the thumbnail no. (by default youtube generates 4 thumbnails indexed from 0 to 3)             
+ *          "title": a string, the title that will appear on the tile 
+ * 
+ * sample videoTileData: [
+        {
+            id: "xrpzzGsfy7o",
+            thumb: "0",
+            title: "Region Selection"
+        },
+
+        {
+            id: "kOvwu_0z2jM",
+            thumb: "3",
+            title: "Points of Interest"
+        } 
+   ]
+ *
+ **/ 
+
 class YoutubeLayout extends Component {
 
 
@@ -61,14 +87,14 @@ class YoutubeLayout extends Component {
             onMobile = true;
             widthOfPage = 0.75 * widthOfPage;
         }
-
-        const { currentVidID = this.props.videoTileData[0].id } = this.state;
+        const { videoTileData } = this.props;
+        const { currentVidID = videoTileData[0].id } = this.state;
 
         return (
             onMobile ?
                 <div className="youtube-layout-mobile">
                     {
-                        this.props.videoTileData.map((o, idx) => {
+                        videoTileData.map((o, idx) => {
                             return (
                                 <YouTube
                                     containerClassName='mobile-video-tile'
@@ -85,7 +111,7 @@ class YoutubeLayout extends Component {
                 <div className="youtube-layout-pc">
                     <div className="video-list" style={{ height: ((widthOfPage / 2) + "px") }}>
                         {
-                            this.props.videoTileData.map((o, idx) => {
+                            videoTileData.map((o, idx) => {
 
                                 let tileStyle = {
                                     background: `url(https://img.youtube.com/vi/${o.id}/${o.thumb}.jpg)`,
