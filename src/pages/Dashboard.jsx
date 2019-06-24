@@ -70,8 +70,6 @@ class DashboardRoot extends Component {
 
             })
             .catch(() => {
-                debugger;
-
                 toastr["error"]("Failed to load schematic", "ERROR")
             })
             // turn off file processing loader
