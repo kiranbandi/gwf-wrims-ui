@@ -7,7 +7,6 @@ import ReactMapGL from 'react-map-gl';
 
 //  Image url handling is convoluted in scss , much easier to set inline and get images from root
 let backgroundStyleSchematic = { background: 'url(assets/img/overall.png)', backgroundSize: '100%' };
-let backgroundStyleMap = { background: 'url(assets/img/saskbasin.png)', backgroundSize: '100%' };
 
 export default class RootSchematic extends Component {
 
@@ -19,9 +18,9 @@ export default class RootSchematic extends Component {
             viewport: {
                 width: 400,
                 height: 400,
-                latitude: 37.7577,
-                longitude: -122.4376,
-                zoom: 8
+                latitude: 51,
+                longitude: -110.75,
+                zoom: 5.5
             }
         };
 
@@ -54,11 +53,15 @@ export default class RootSchematic extends Component {
 
     render() {
 
-        let { width = 1000, selectedPlace } = this.props, { isMapShown,viewport } = this.state;
+        let { width = 1000, selectedPlace } = this.props, { isMapShown, viewport } = this.state;
         // downscale by 20%
         width = width * .75;
-        backgroundStyleMap = { ...backgroundStyleMap, width: width, height: width / 2.15 };
         backgroundStyleSchematic = { ...backgroundStyleSchematic, width: width, height: width / 2.15 };
+
+        // set the viewports for the map
+        viewport.width = width;
+        viewport.height = width / 2.5;
+
 
         return (
             <div className='root-schema-container'>
@@ -85,12 +88,8 @@ export default class RootSchematic extends Component {
                     </div>
                     <h2 className='text-primary'>Select a <b>Region</b> to Investigate or Pick a <b>Place</b></h2>
                     {isMapShown ?
-                        // <div id='root-schema' className='image-container' style={backgroundStyleMap}>
-                        //     <div className='selection-box' id='highwood' onClick={this.props.onRegionSelect} style={{ top: width * 0.275, left: 0.15 * width }}></div>
-                        //     <div className='selection-box' id='southSask' onClick={this.props.onRegionSelect} style={{ top: width * 0.32, left: 0.45 * width }}></div>
-                        // </div>
                         <ReactMapGL
-                        mapStyle={'mapbox://styles/ricardorheeder/cjx2a9u8b3bi41cqtk3n66h0i'}
+                            mapStyle={'mapbox://styles/ricardorheeder/cjx2a9u8b3bi41cqtk3n66h0i'}
                             mapboxApiAccessToken={'pk.eyJ1IjoicmljYXJkb3JoZWVkZXIiLCJhIjoiY2p4MGl5bWIyMDE1bDN5b2NneHh5djJ2biJ9.3ALfBtMIORYFNtXU9RUUnA'}
                             {...this.state.viewport}
                             onViewportChange={(viewport) => this.setState({ viewport })} />
