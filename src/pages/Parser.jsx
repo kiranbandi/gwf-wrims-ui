@@ -81,7 +81,7 @@ class Parser extends Component {
                 </div>
                 {dataReady &&
                     <div>
-                        <div className='container'>
+                        <div className='container m-b-md'>
                             <div className="alert alert-success m-t-md m-b">
                                 <strong>File processing complete.</strong>
                                 You can use the buttons below to download your schematic's data as a JSON file or visualize the schematic for a quick overview.
