@@ -74,14 +74,7 @@ class NavBar extends Component {
                                 </Link>
                             </li>
                             <li>
-                                <Link to={'/MockDashboard'}>
-                                    <span className="icon icon-line-graph"></span> Mock Dashboard
-                                </Link>
-                            </li>
-                        </ul>
-                        <ul className='nav navbar-nav'>
-                            <li>
-                                <Link to={'/Parser'}>
+                            <Link to={'/Parser'}>
                                     <span className="icon icon-classic-computer"></span> MODSIM Parser
                                 </Link>
                             </li>

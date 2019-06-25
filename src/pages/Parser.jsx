@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { RiverMap, FilterPanel, FlowPanel, RootSchematic } from '../components';
-import axios from 'axios';
+import { RiverMap, FileUpload, LegendPanel } from '../components';
 import toastr from '../utils/toastr';
 import { setFlowData } from '../redux/actions/actions';
 import Loading from 'react-loading';
 import xyParser from '../utils/xyParser';
 import downloadJSON from '../utils/downloadJSON';
 import _ from 'lodash';
-import LegendPanel from '../components/MapLegend/LegendPanel';
-import FileUpload from '../components/FileUpload';
 import getFile from '../utils/getFile';
-import { parse } from 'querystring';
 
 
 class Parser extends Component {
@@ -42,7 +38,7 @@ class Parser extends Component {
                 this.setState({
                     dataReady: true,
                     schematicData: clonedData,
-                    jsonData:  parsedData,
+                    jsonData: parsedData,
                     fileName: document.getElementById("xy-file").files[0].name
                 });
             })
@@ -62,7 +58,6 @@ class Parser extends Component {
 
     render() {
         const { processing, visualize, dataReady } = this.state;
-        //125px to offset the 30px margin on both sides and vertical scroll bar width
         //125px to offset the 30px margin on both sides and vertical scroll bar width
         let widthOfDashboard = document.body.getBoundingClientRect().width,
             mapWidth = widthOfDashboard * 0.60,
@@ -95,17 +90,13 @@ class Parser extends Component {
                             <button className="btn btn-success-outline " onClick={this.visualizeRecords}>Visualize Schematic</button>
                         </div>
                     </div>}
-                {
-                    visualize &&
-                    <div style={{ height: "max-content",
-                        overflow: "scroll",
-                        overflowY: "hidden",
-                        textAlign: "center" }}>
+                {visualize &&
+                    <div className='text-center'>
                         <RiverMap
                             schematicData={this.state.jsonData}
                             width={mapWidth}
                             height={mapWidth / 2}
-                            fromDashboard={false}/>
+                            fromDashboard={false} />
                         <LegendPanel />
                     </div>
                 }

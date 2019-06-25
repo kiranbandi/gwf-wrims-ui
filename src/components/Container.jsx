@@ -43,31 +43,22 @@ class Container extends Component {
                 }
                 <footer className="footer w-full m-t hidden-xs">
                     <div className="container-fluid">
-                        <div className='w-sm footer-inner bottom-left'>
+                        <div className='footer-inner bottom-left'>
                             <div className="left text-xs-left">
-                                <a className="footer-link right" href="http://hci.usask.ca/" > <img src="assets/img/interaction_lab.gif" height="30"  style={{'margin':'5px 0px'}}/></a>
-                                <br/>
-                                <a className="footer-link right" href="https://gwf.usask.ca/"> <img src="assets/img/gwf_title.PNG" height="30"  style={{'margin':'5px 0px'}}/></a>
+                                <a className="footer-link right" href="http://hci.usask.ca/" > <img src="assets/img/interaction_lab.gif" height="32" style={{ 'margin': '5px 0px' }} /></a>
+                                <a className="footer-link right" href="https://gwf.usask.ca/"> <img src="assets/img/gwf_title.PNG" height="30" style={{ 'margin': '5px 0px' }} /></a>
                             </div>
                         </div>
-                        <div className='w-md footer-inner bottom-center'>
-                            <div className="center text-xs-center">
-                                <br/>
-                                <a className="footer-link" href="mailto:venkat.bandi@usask.ca?subject=GWF HCI&amp;body=Please%20Fill%20">Contact Us</a>
-                            </div>
-                        </div>
-                        <div className='w-sm footer-inner text-xs-right bottom-right'>
-                            <div className="bottom-right-center">
-                                <a href="https://www.usask.ca/" className="uofs-footer-logo">
-                                    University of Saskatchewan
-                                </a>
-
-                                <p className="uofs-copyright">
-                                    <span className="copyright-text">© University of Saskatchewan</span>
-                                    <br />
-                                    <a href="https://www.usask.ca/disclaimer.php">Disclaimer</a> | <a href="https://www.usask.ca/privacy.php">Privacy</a>
-                                </p>
-                            </div>
+                        <div className='footer-inner text-right bottom-right'>
+                            <a className="footer-link"
+                                href="mailto:venkat.bandi@usask.ca?subject=GWF HCI&amp;body=Please%20Fill%20">
+                                Contact Us </a>
+                            <span className='pole-holder'>|</span>
+                            <a href="https://www.usask.ca/">University of Saskatchewan</a>
+                            <span className='pole-holder'>|</span>
+                            <a href="https://www.usask.ca/disclaimer.php">Disclaimer</a>
+                            <span className='pole-holder'>|</span>
+                            <a href="https://www.usask.ca/privacy.php">Privacy</a>
                         </div>
                     </div>
                 </footer>
