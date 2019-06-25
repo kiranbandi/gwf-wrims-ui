@@ -45,7 +45,7 @@ class Container extends Component {
                     <div className="container-fluid">
                         <div className='footer-inner bottom-left'>
                             <div className="left text-xs-left">
-                                <a className="footer-link right" href="http://hci.usask.ca/" > <img src="assets/img/interaction_lab.gif" height="32" style={{ 'margin': '5px 0px' }} /></a>
+                                <a className="footer-link right" href="http://hci.usask.ca/" > <img src="assets/img/interaction_lab.gif" height="30" style={{ 'margin': '5px 0px' }} /></a>
                                 <a className="footer-link right" href="https://gwf.usask.ca/"> <img src="assets/img/gwf_title.PNG" height="30" style={{ 'margin': '5px 0px' }} /></a>
                             </div>
                         </div>

@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import MapGL, { Marker, Popup } from 'react-map-gl';
-
 import PlaceInfo from './PlaceInfo';
 import PlaceMarker from './PlaceMarker';
 import PLACES from '../../utils/mapPlaces';
-
 
 const TOKEN = 'pk.eyJ1IjoicmljYXJkb3JoZWVkZXIiLCJhIjoiY2p4MGl5bWIyMDE1bDN5b2NneHh5djJ2biJ9.3ALfBtMIORYFNtXU9RUUnA';
 
@@ -30,7 +28,11 @@ export default class BasinMap extends Component {
     renderPlaceMarker(place, index) {
         return (
             <Marker key={`marker-${index}`} longitude={place.longitude} latitude={place.latitude}>
-                <PlaceMarker size={20} onClick={() => this.setState({ popupInfo: place })} />
+                <PlaceMarker size={20} onClick={() => {
+                    this.props.onRegionSelect({ 'target': place })
+                    // set the popup info for the current place marker
+                    this.setState({ popupInfo: place })
+                }} />
             </Marker>
         );
     };
@@ -45,8 +47,7 @@ export default class BasinMap extends Component {
                     longitude={popupInfo.longitude}
                     latitude={popupInfo.latitude}
                     closeOnClick={false}
-                    onClose={() => this.setState({ popupInfo: null })}
-                >
+                    onClose={() => this.setState({ popupInfo: null })}>
                     <PlaceInfo info={popupInfo} />
                 </Popup>
             )

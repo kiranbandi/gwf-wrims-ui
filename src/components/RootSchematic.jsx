@@ -78,7 +78,7 @@ export default class RootSchematic extends Component {
                     </div>
                     <h2 className='text-primary'>Select a <b>Region</b> to Investigate or Pick a <b>Place</b></h2>
                     {isMapShown ?
-                        <BasinMap width={width} /> :
+                        <BasinMap width={width} onRegionSelect={this.props.onRegionSelect} /> :
                         <div id='root-schema' className='image-container' style={backgroundStyleSchematic}>
                             <svg className='tile-container' width={width} height={width / 2.15}>
                                 {this.getTiles(width, width / 2.15)}
