@@ -14,7 +14,6 @@ import RiverLabels from './RiverLabels';
 import Markers from './Markers';
 
 class RiverMap extends Component {
-
     constructor(props) {
         super(props);
         this.onItemClick = this.onItemClick.bind(this);
@@ -165,7 +164,8 @@ class RiverMap extends Component {
                             yScale={yScale}
                             highlightName={name}
                             onItemClick={this.onItemClick}
-                            markers={filteredData.markers} />
+                            markers={filteredData.markers}
+                            isMock={this.props.isMock} />
 
                     </g>
                     {/* Display the title from the schema */}

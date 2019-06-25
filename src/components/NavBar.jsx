@@ -73,6 +73,11 @@ class NavBar extends Component {
                                     <span className="icon icon-line-graph"></span> Dashboard
                                 </Link>
                             </li>
+                            <li>
+                                <Link to={'/MockDashboard'}>
+                                    <span className="icon icon-line-graph"></span> Mock Dashboard
+                                </Link>
+                            </li>
                         </ul>
                         <ul className='nav navbar-nav'>
                             <li>

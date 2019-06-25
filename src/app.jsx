@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
-import { NotFound, Home, Dashboard, Parser } from './pages';
+import { NotFound, Home, Dashboard, MockDashboard,Parser } from './pages';
 import { Container } from './components';
 import configureStore from './redux/store/configureStore';
 import { Provider } from 'react-redux';
@@ -26,9 +26,10 @@ class App extends Component {
       <Provider store={store}>
         <Router history={hashHistory}>
           <Route path='/' component={Container} pawsTicket={pawsTicket}>
-            <IndexRoute component={Home}/>
-            <Route path='Dashboard' component={Dashboard} onEnter={checkloginStatus}/>
+            <IndexRoute component={Home} />
+            <Route path='Dashboard' component={Dashboard} onEnter={checkloginStatus} />
             <Route path='Parser' component={Parser} onEnter={checkloginStatus}/>
+            <Route path='MockDashboard' component={MockDashboard} onEnter={checkloginStatus} />
             <Route path='*' component={NotFound} />
           </Route>
         </Router>

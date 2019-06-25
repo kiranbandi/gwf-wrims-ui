@@ -1,5 +1,4 @@
-export default [
-    {
+export default [{
         id: "xrpzzGsfy7o",
         thumb: "0",
         title: "Region Selection"

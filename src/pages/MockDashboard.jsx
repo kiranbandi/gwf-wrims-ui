@@ -12,7 +12,7 @@ import _ from 'lodash';
 import LegendPanel from '../components/MapLegend/LegendPanel';
 
 
-class DashboardRoot extends Component {
+class MockDashboardRoot extends Component {
 
     constructor(props) {
         super(props);
@@ -70,6 +70,8 @@ class DashboardRoot extends Component {
 
             })
             .catch(() => {
+                debugger;
+
                 toastr["error"]("Failed to load schematic", "ERROR")
             })
             // turn off file processing loader
@@ -104,13 +106,15 @@ class DashboardRoot extends Component {
                 {isSchematicLoading ?
                     <Loading className='loader' type='spin' height='100px' width='100px' color='#d6e5ff' delay={-1} /> :
                     <div className='dashboard-inner-root'>
-                        {SchematicData.lines.length > 0 && <div>
-                            <FilterPanel schematicData={SchematicData} />
-                            <RiverMap
-                                schematicData={SchematicData}
-                                width={mapWidth}
-                                height={mapWidth / 1.75}
-                                isMock={false} />
+                        {SchematicData.lines.length > 0 && <div style={{ 'display':'inline' }}>
+                            <FilterPanel schematicData={SchematicData}  width={mapWidth} height={mapWidth / 1.75 *0.15}/>
+                                <RiverMap
+                                    schematicData={SchematicData}
+                                    width={mapWidth}
+                                    height={mapWidth / 1.75}
+                                    isMock={true} />
+
+              
                             <VerticalSlider
                                 width={widthOfSlider}
                                 height={mapWidth / 1.75} />
@@ -138,4 +142,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DashboardRoot);
+export default connect(mapStateToProps, mapDispatchToProps)(MockDashboardRoot);
