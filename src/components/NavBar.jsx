@@ -74,6 +74,13 @@ class NavBar extends Component {
                                 </Link>
                             </li>
                         </ul>
+                        <ul className='nav navbar-nav'>
+                            <li>
+                                <Link to={'/Parser'}>
+                                    <span className="icon icon-classic-computer"></span> MODSIM Parser
+                                </Link>
+                            </li>
+                        </ul>
                         <ul className='nav navbar-nav navbar-right'>
                             <li> {this.props.logged_in ?
                                 <Link to='/Logout' onClick={this.logOut}>

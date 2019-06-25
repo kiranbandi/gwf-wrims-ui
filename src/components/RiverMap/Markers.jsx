@@ -62,8 +62,6 @@ export default class Markers extends Component {
             }
         });
 
-
-
         return (<g className='river-marker-container'>{markerList}</g>)
     }
 }
