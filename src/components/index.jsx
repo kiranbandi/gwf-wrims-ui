@@ -5,3 +5,6 @@ export { default as FilterPanel } from './FilterPanel';
 export { default as FlowPanel } from './FlowPanel';
 export { default as RootSchematic } from './RootSchematic';
 export { default as VerticalSlider } from './VerticalSlider';
+export { default as YoutubeLayout } from './YoutubeLayout';
+export { default as LegendPanel } from './MapLegend/LegendPanel';
+export { default as FileUpload } from './FileUpload';

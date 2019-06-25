@@ -22,7 +22,8 @@ export default function(data) {
             "nodeNum": node.nodeNum,
             "size": 1
         };
-    })
+    });
+    
     let sinks = _.map(inputData.sinks, (node) => {
         return {
             "type": "sink",
@@ -138,7 +139,6 @@ export default function(data) {
             schematicData.lines.push(tempStore);
         }
     })
-
     return schematicData;
 }
 

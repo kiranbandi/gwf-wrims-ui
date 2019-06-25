@@ -6,7 +6,7 @@ body {
     #root {
         width: 100%;
         min-height: 100%;
-        padding-bottom: 60px;
+        padding-bottom: 75px;
         position: relative;
         #app-container {
             min-height: 100%;
@@ -17,7 +17,7 @@ body {
                 position: absolute;
                 bottom: 0px;
                 height: auto;
-                padding: 10px;
+                padding: 5px 0px;
                 background: #1a1c22;
                 .footer-inner {
                     display: inline-block;
@@ -30,13 +30,14 @@ body {
             }
             .bottom-right {
                 float: right;
+                margin-top: 6px;
             }
             .bottom-left {
                 float: left;
             }
-            .bottom-center {}
-            .bottom-right-center {
-                text-align: center;
+            span.pole-holder {
+                margin-left: 10px;
+                margin-right: 10px;
             }
         }
         .inlay-icon {
