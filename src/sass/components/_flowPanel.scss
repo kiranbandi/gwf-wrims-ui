@@ -5,6 +5,7 @@
     border-radius: 7px;
     margin-left: 20px;
     vertical-align: top;
+    position: relative;
     .title-bar {
         margin-top: 30px;
         margin-bottom: 10px;
@@ -18,9 +19,10 @@
     }
     .statcard-button-group {
         display: block;
-        width: 40px;
+        width: 80%;
         float: right;
-        margin: 10px 8px 0px 2px;
+        margin: 10px 8px 0px 18%;
+        position: absolute;
     }
     .statcard-button {
         margin: 2px 0px 2px 0px;
@@ -29,6 +31,14 @@
     }
     .statcard-button:hover {
         background-color: #4CAF50;
+    }
+    #TestSelect {
+        float: left;
+        width: 310px;
+    }
+    .two-button-group {
+        width: 40px;
+        float: right;
     }
     .metrics-container {
         margin-top: 10px;
