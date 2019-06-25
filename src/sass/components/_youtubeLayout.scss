@@ -1,20 +1,29 @@
 .youtube-layout-pc {
     width: max-content;
     text-align: center;
-
     &>div {
         display: inline-block;
     }
     .video-list {
-
         .tile-container {
-            
             margin: .5vh 0.5vw;
-
             .tile-tint {
                 height: inherit;
                 width: inherit;
                 opacity: 0;
+                .tile-text {
+                    height: max-content;
+                    width: max-content;
+                    position: relative;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    color: white;
+                    font-size: 20px;
+                    font-weight: bold;
+                    opacity: 1;
+                    background: transparent;
+                }
                 &:hover {
                     transition: .5s ease;
                     opacity: 1;
@@ -23,24 +32,9 @@
                     cursor: pointer;
                 }
             }
-        
-            .tile-text {
-                height: max-content;
-                width: max-content;
-                position: relative;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                color: white;
-                font-size: 20px;
-                font-weight: bold;
-                &:hover {
-                    transition: .5s ease;
-                }
-            }
         }
         overflow-y: scroll;
-
+        overflow-x: hidden;
         &::-webkit-scrollbar {
             width: 12px;
         }
