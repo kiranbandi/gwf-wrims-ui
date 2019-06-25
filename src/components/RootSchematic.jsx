@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import * as d3 from 'd3';
 import tileMap from '../utils/tileMap';
 import Switch from "react-switch";
-import ReactMapGL from 'react-map-gl';
+import { BasinMap } from '../components';
 
 //  Image url handling is convoluted in scss , much easier to set inline and get images from root
 let backgroundStyleSchematic = { background: 'url(assets/img/overall.png)', backgroundSize: '100%' };
@@ -15,13 +15,7 @@ export default class RootSchematic extends Component {
 
         this.state = {
             isMapShown: true,
-            viewport: {
-                width: 400,
-                height: 400,
-                latitude: 51,
-                longitude: -110.75,
-                zoom: 5.5
-            }
+
         };
 
         this.getTiles = this.getTiles.bind(this);
@@ -53,14 +47,10 @@ export default class RootSchematic extends Component {
 
     render() {
 
-        let { width = 1000, selectedPlace } = this.props, { isMapShown, viewport } = this.state;
+        let { width = 1000, selectedPlace } = this.props, { isMapShown } = this.state;
         // downscale by 20%
         width = width * .75;
         backgroundStyleSchematic = { ...backgroundStyleSchematic, width: width, height: width / 2.15 };
-
-        // set the viewports for the map
-        viewport.width = width;
-        viewport.height = width / 2.5;
 
 
         return (
@@ -88,12 +78,7 @@ export default class RootSchematic extends Component {
                     </div>
                     <h2 className='text-primary'>Select a <b>Region</b> to Investigate or Pick a <b>Place</b></h2>
                     {isMapShown ?
-                        <ReactMapGL
-                            mapStyle={'mapbox://styles/ricardorheeder/cjx2a9u8b3bi41cqtk3n66h0i'}
-                            mapboxApiAccessToken={'pk.eyJ1IjoicmljYXJkb3JoZWVkZXIiLCJhIjoiY2p4MGl5bWIyMDE1bDN5b2NneHh5djJ2biJ9.3ALfBtMIORYFNtXU9RUUnA'}
-                            {...this.state.viewport}
-                            onViewportChange={(viewport) => this.setState({ viewport })} />
-                        :
+                        <BasinMap width={width} /> :
                         <div id='root-schema' className='image-container' style={backgroundStyleSchematic}>
                             <svg className='tile-container' width={width} height={width / 2.15}>
                                 {this.getTiles(width, width / 2.15)}
@@ -123,6 +108,3 @@ export default class RootSchematic extends Component {
         );
     }
 }
-
-
-// image courtesy of South East Alberta Watershed Alliance
