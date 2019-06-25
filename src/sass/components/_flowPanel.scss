@@ -16,12 +16,10 @@
     .metrics-container {
         margin-top: 10px;
         display: inline-flex;
-        overflow: scroll;
-        // width: 400px;
+        overflow: hidden;
         margin: 0 10px 0 10px;
         overflow-y: hidden;
         padding-bottom: 5px;
-        /* width */
     }
     .metrics-container::-webkit-scrollbar {
         height: 0.7em;

@@ -73,35 +73,7 @@ class FlowPanel extends Component {
                                 arrow={!!spawningRate.minor > 0 ? spawningRate.minor > 0 ? 'positive' : 'negative' : ''}
                                 width={innerWidth / 3.1}
                                 icon="fish" />
-
-
-
-                            <StatCard
-                                title={"Summer Flow"}
-                                major={summerFlow.major || 'N/A'}
-                                minor={!!summerFlow.minor ? summerFlow.minor + '%' : ''}
-                                type={"success"}
-                                arrow={!!summerFlow.minor ? summerFlow.minor > 0 ? 'positive' : 'negative' : ''}
-                                width={innerWidth / 3.1}
-                                icon="sun" />
-                            <StatCard
-                                title={"Winter Flow"}
-                                major={winterFlow.major || 'N/A'}
-                                minor={!!winterFlow.minor ? winterFlow.minor + '%' : ''}
-                                type={"primary"}
-                                arrow={!!winterFlow.minor > 0 ? winterFlow.minor > 0 ? 'positive' : 'negative' : ''}
-                                width={innerWidth / 3.1}
-                                icon="snow" />
-                            <StatCard
-                                title={"Spawning Rate"}
-                                major={!!spawningRate.major ? spawningRate.major + '%' : 'N/A'}
-                                minor={!!spawningRate.minor ? spawningRate.minor + '%' : ''}
-                                type={"info"}
-                                arrow={!!spawningRate.minor > 0 ? spawningRate.minor > 0 ? 'positive' : 'negative' : ''}
-                                width={innerWidth / 3.1}
-                                icon="fish" />
                         </div>
-
                         {dataList.length <= 0 ?
                             <h4 className='title-bar text-center m-a-lg'>No Data Available</h4> :
                             <svg height={innerHeight} width={innerWidth} className='flow-data-chart metric-chart'>
