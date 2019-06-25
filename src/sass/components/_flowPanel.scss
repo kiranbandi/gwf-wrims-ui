@@ -13,6 +13,23 @@
         margin: 0px;
         font-size: 0.75em;
     }
+    .entire-panel {
+        display: inline;
+    }
+    .statcard-button-group {
+        display: block;
+        width: 40px;
+        float: right;
+        margin: 10px 8px 0px 2px;
+    }
+    .statcard-button {
+        margin: 2px 0px 2px 0px;
+        background: #1a1c22;
+        color: white;
+    }
+    .statcard-button:hover {
+        background-color: #4CAF50;
+    }
     .metrics-container {
         margin-top: 10px;
         display: inline-flex;
@@ -21,6 +38,7 @@
         margin: 0 10px 0 10px;
         overflow-y: hidden;
         padding-bottom: 5px;
+        float: left;
         /* width */
     }
     .metrics-container::-webkit-scrollbar {

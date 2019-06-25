@@ -5,6 +5,11 @@ import Loading from 'react-loading';
 import * as d3 from 'd3';
 import StatCard from '../components/StatCard';
 import calculateMetrics from '../utils/calculateMetrics';
+import Select from 'react-select';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+
+// React.Bootstrap = require('react-bootstrap');
+// React.Bootstrap.Select = require('react-bootstrap-select');
 
 class FlowPanel extends Component {
 
@@ -43,64 +48,84 @@ class FlowPanel extends Component {
                 <h4 className='title-bar text-center'>FLOW DATA
                 {name.length > 0 && <strong style={{ marginLeft: 10 }}>{name}</strong>}
                 </h4>
+
+                {/* <Select id="TestSelect" name="TestSelect" class="selectpicker" multiple data-width="100%" title="##valorSelect##">
+                    <option data-tokens="No?" value="0">No?</option>
+                    <optgroup label="TestGroup">
+                        <option data-tokens="test1" value="1">test1.</option>
+                        <option data-tokens="test2" value="2">test2</option>
+                        <option data-tokens="test3" value="3">test3</option>
+                        <option data-tokens="test4" value="4">test4</option>
+                    </optgroup>
+                </Select> */}
+
+
+
                 {isLoading ?
                     <Loading className='loader' type='spin' height='75px' width='75px' color='#d6e5ff' delay={-1} /> :
                     <div className='flow-inner-container'>
                         <p className='exclaimatory-text'>* All values are in 1000m<sup>3</sup>/week</p>
+                        <div className='entire-panel'>
+                            <div className='metrics-container' style={{ 'width': width - 70 }}>
+                                <StatCard
+                                    title={"Summer Flow"}
+                                    major={summerFlow.major || 'N/A'}
+                                    minor={!!summerFlow.minor ? summerFlow.minor + '%' : ''}
+                                    type={"success"}
+                                    arrow={!!summerFlow.minor ? summerFlow.minor > 0 ? 'positive' : 'negative' : ''}
+                                    width={innerWidth / 3.1}
+                                    icon="sun" />
+                                <StatCard
+                                    title={"Winter Flow"}
+                                    major={winterFlow.major || 'N/A'}
+                                    minor={!!winterFlow.minor ? winterFlow.minor + '%' : ''}
+                                    type={"primary"}
+                                    arrow={!!winterFlow.minor > 0 ? winterFlow.minor > 0 ? 'positive' : 'negative' : ''}
+                                    width={innerWidth / 3.1}
+                                    icon="snow" />
+                                <StatCard
+                                    title={"Spawning Rate"}
+                                    major={!!spawningRate.major ? spawningRate.major + '%' : 'N/A'}
+                                    minor={!!spawningRate.minor ? spawningRate.minor + '%' : ''}
+                                    type={"info"}
+                                    arrow={!!spawningRate.minor > 0 ? spawningRate.minor > 0 ? 'positive' : 'negative' : ''}
+                                    width={innerWidth / 3.1}
+                                    icon="fish" />
 
-                        <div className='metrics-container' style={{ 'width': width - 20 }}>
-                            <StatCard
-                                title={"Summer Flow"}
-                                major={summerFlow.major || 'N/A'}
-                                minor={!!summerFlow.minor ? summerFlow.minor + '%' : ''}
-                                type={"success"}
-                                arrow={!!summerFlow.minor ? summerFlow.minor > 0 ? 'positive' : 'negative' : ''}
-                                width={innerWidth / 3.1}
-                                icon="sun" />
-                            <StatCard
-                                title={"Winter Flow"}
-                                major={winterFlow.major || 'N/A'}
-                                minor={!!winterFlow.minor ? winterFlow.minor + '%' : ''}
-                                type={"primary"}
-                                arrow={!!winterFlow.minor > 0 ? winterFlow.minor > 0 ? 'positive' : 'negative' : ''}
-                                width={innerWidth / 3.1}
-                                icon="snow" />
-                            <StatCard
-                                title={"Spawning Rate"}
-                                major={!!spawningRate.major ? spawningRate.major + '%' : 'N/A'}
-                                minor={!!spawningRate.minor ? spawningRate.minor + '%' : ''}
-                                type={"info"}
-                                arrow={!!spawningRate.minor > 0 ? spawningRate.minor > 0 ? 'positive' : 'negative' : ''}
-                                width={innerWidth / 3.1}
-                                icon="fish" />
 
 
+                                <StatCard
+                                    title={"Summer Flow"}
+                                    major={summerFlow.major || 'N/A'}
+                                    minor={!!summerFlow.minor ? summerFlow.minor + '%' : ''}
+                                    type={"success"}
+                                    arrow={!!summerFlow.minor ? summerFlow.minor > 0 ? 'positive' : 'negative' : ''}
+                                    width={innerWidth / 3.1}
+                                    icon="sun" />
+                                <StatCard
+                                    title={"Winter Flow"}
+                                    major={winterFlow.major || 'N/A'}
+                                    minor={!!winterFlow.minor ? winterFlow.minor + '%' : ''}
+                                    type={"primary"}
+                                    arrow={!!winterFlow.minor > 0 ? winterFlow.minor > 0 ? 'positive' : 'negative' : ''}
+                                    width={innerWidth / 3.1}
+                                    icon="snow" />
+                                <StatCard
+                                    title={"Spawning Rate"}
+                                    major={!!spawningRate.major ? spawningRate.major + '%' : 'N/A'}
+                                    minor={!!spawningRate.minor ? spawningRate.minor + '%' : ''}
+                                    type={"info"}
+                                    arrow={!!spawningRate.minor > 0 ? spawningRate.minor > 0 ? 'positive' : 'negative' : ''}
+                                    width={innerWidth / 3.1}
+                                    icon="fish" />
+                            </div>
 
-                            <StatCard
-                                title={"Summer Flow"}
-                                major={summerFlow.major || 'N/A'}
-                                minor={!!summerFlow.minor ? summerFlow.minor + '%' : ''}
-                                type={"success"}
-                                arrow={!!summerFlow.minor ? summerFlow.minor > 0 ? 'positive' : 'negative' : ''}
-                                width={innerWidth / 3.1}
-                                icon="sun" />
-                            <StatCard
-                                title={"Winter Flow"}
-                                major={winterFlow.major || 'N/A'}
-                                minor={!!winterFlow.minor ? winterFlow.minor + '%' : ''}
-                                type={"primary"}
-                                arrow={!!winterFlow.minor > 0 ? winterFlow.minor > 0 ? 'positive' : 'negative' : ''}
-                                width={innerWidth / 3.1}
-                                icon="snow" />
-                            <StatCard
-                                title={"Spawning Rate"}
-                                major={!!spawningRate.major ? spawningRate.major + '%' : 'N/A'}
-                                minor={!!spawningRate.minor ? spawningRate.minor + '%' : ''}
-                                type={"info"}
-                                arrow={!!spawningRate.minor > 0 ? spawningRate.minor > 0 ? 'positive' : 'negative' : ''}
-                                width={innerWidth / 3.1}
-                                icon="fish" />
+                            <div className="statcard-button-group">
+                                <button class="btn statcard-button"><i class="icon icon-chevron-down"></i></button>
+                                <button class="btn statcard-button"><i class="icon icon-check"></i></button>
+                            </div>
                         </div>
+
 
                         {dataList.length <= 0 ?
                             <h4 className='title-bar text-center m-a-lg'>No Data Available</h4> :
