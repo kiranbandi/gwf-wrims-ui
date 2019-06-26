@@ -10,6 +10,11 @@ class FlowPanel extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            showPowerData: false
+        }
+        this.waterFlowToggle = this.waterFlowToggle.bind(this);
+        this.powerFigureToggle = this.powerFigureToggle.bind(this);
     }
 
     componentDidMount() {
@@ -22,13 +27,33 @@ class FlowPanel extends Component {
 
     componentDidUpdate() {
         const { flowData = {} } = this.props, { dataList = [] } = flowData;
-        const timePeriodList = _.map(dataList, (d) => d.flow);
+
+        // in the true block in this ternary operator declaration, replace the existing code with 
+        // the array for the power rates and then this comp. should work as required.
+        // added this to test and demonstrate functioanlity
+        const timePeriodList = this.state.showPowerData? (_.map(dataList, (d) => d.flow)).slice(0, 450) : _.map(dataList, (d) => d.flow);
+        
         if (dataList.length > 0) {
-            makeTimeChart(timePeriodList);
+                makeTimeChart(timePeriodList);
         }
     }
-    render() {
+    waterFlowToggle() {
+        
+        if (this.state.showPowerData) {
+            this.setState({showPowerData: false});
+        }
 
+    }
+
+    powerFigureToggle() {
+        
+        if (!this.state.showPowerData) {
+            this.setState({showPowerData: true});
+        }
+    }
+
+    render() {
+        console.log("IWASCALLED");
         const { flowData = {}, width, height } = this.props,
             { dataList = [], name = '', isLoading = false, flowParams = { threshold: 'base' } } = flowData,
             innerWidth = width - 40,
@@ -37,9 +62,10 @@ class FlowPanel extends Component {
         const { summerFlow = { major: '', minor: '' },
             winterFlow = { major: '', minor: '' },
             spawningRate = { major: '', minor: '' } } = calculateMetrics(dataList, name, flowParams.threshold);
+        let isPowerReservoir = ["R1_LDief", "R6_Cod", "R7_Tobin"].includes(name);
 
         return (
-            <div className='flow-panel-root-container' style={{ width, height: (height + (height * .10)) + "px" }}>
+            <div className='flow-panel-root-container' style={{ width, height: (isPowerReservoir? (height + (height * .10)) + "px" : height) }}>
                 <h4 className='title-bar text-center'>FLOW DATA
                 {name.length > 0 && <strong style={{ marginLeft: 10 }}>{name}</strong>}
                 </h4>
@@ -77,38 +103,57 @@ class FlowPanel extends Component {
                         {dataList.length <= 0 ?
                             <h4 className='title-bar text-center m-a-lg'>No Data Available</h4> :
                             <svg height={innerHeight} width={innerWidth} className='flow-data-chart metric-chart'>
-                            </svg>}
-                        <div className="toggle-btn-container" style={{height: (height * .10) + "px" }}>
-                            <div class="btx" style={{ height: (height * .085) + "px"}}>
-                <div class="btx-icon" style={{height: (height * .07) + "px", width: (height * .07) + "px"}}>
-                    <svg>
-                            <g class="water-drop" style={{transform: "translateX(-.5px) " + "scale("+((height * .07)*0.0019)+")"}}>
-                                <path d="M270.265,149.448c-36.107-47.124-70.38-78.948-73.439-141.372c0-1.836-0.612-3.06-1.836-4.284
-                                        c-0.612-3.06-3.672-4.896-6.732-3.06c-3.672,0-6.731,2.448-6.731,6.732c-77.112,83.232-207.468,294.372-43.452,354.959
-                                        c74.052,27.541,157.896-9.791,172.584-90.576C318.614,228.396,295.969,182.497,270.265,149.448z M138.686,323.256
-                                        c-17.748-10.404-28.764-31.211-34.272-49.572c-2.448-9.18-3.672-18.359-3.06-27.539c3.672-15.912,8.568-31.213,14.076-46.512
-                                        c3.06,13.463,9.18,26.928,17.748,36.719c19.584,21.422,59.364,34.273,70.38,61.201c6.732,16.523-19.584,30.6-30.6,34.271
-                                        C161.33,335.496,148.477,329.377,138.686,323.256z"/>
-                            </g>
-                        </svg>
-                </div>
-                <span class="btx-text">&nbsp;FLOW RATES&nbsp;</span>
-
-            </div>
-                            <div class="btx" style={{ height: (height * .085) + "px"}}>
-                <div class="btx-icon" style={{height: (height * .07) + "px", width: (height * .07) + "px"}}>
-                    <svg>
-                                <g class="bolt" style={{transform:"translateX(-2px) " + "scale("+((height * .07)*0.0015)+")"}}>
-                                        <path d="M207.523,560.316c0,0,194.42-421.925,194.444-421.986l10.79-23.997c-41.824,12.02-135.271,34.902-135.57,35.833
-                        C286.96,122.816,329.017,0,330.829,0c-39.976,0-79.952,0-119.927,0l-12.167,57.938l-51.176,209.995l135.191-36.806
-                        L207.523,560.316z"/>
+                                <defs>
+                                    <clipPath id="clip">
+                                        <rect>
+                                        </rect>
+                                    </clipPath>
+                                </defs>
+                                <g className="focus">
+                                    <g className="axis axis--y"></g>
+                                    <path className="area"></path>
+                                    <g className="axis axis--x"></g>
+                                    <path className="line"></path>
                                 </g>
-                            </svg>
-                </div>
-                <span class="btx-text">&nbsp;POWER FIGURES&nbsp;</span>
-            </div>
-                        </div>    
-                    </div>
+                                <g className="context">
+                                    <path className="area"></path>
+                                    <path className="line"></path>
+                                    <g className="axis axis--x"></g>
+                                    <g className="brush"></g>
+                                </g>
+                                <rect className="zoom">
+                                </rect>
+                            </svg>}
+                        {isPowerReservoir && <div className="toggle-btn-container" style={{height: (height * .10) + "px" }}>
+                            <div className="btx" style={{ height: (height * .085) + "px"}} onClick={this.waterFlowToggle} >
+                                <div className="btx-icon" style={{height: (height * .07) + "px", width: (height * .07) + "px" }}>
+                                    <svg>
+                                        <g className="water-drop" style={{transform:"scale("+((height * .07)*0.0019)+")"}}>
+                                            <path d="M270.265,149.448c-36.107-47.124-70.38-78.948-73.439-141.372c0-1.836-0.612-3.06-1.836-4.284
+                                            c-0.612-3.06-3.672-4.896-6.732-3.06c-3.672,0-6.731,2.448-6.731,6.732c-77.112,83.232-207.468,294.372-43.452,354.959
+                                            c74.052,27.541,157.896-9.791,172.584-90.576C318.614,228.396,295.969,182.497,270.265,149.448z M138.686,323.256
+                                            c-17.748-10.404-28.764-31.211-34.272-49.572c-2.448-9.18-3.672-18.359-3.06-27.539c3.672-15.912,8.568-31.213,14.076-46.512
+                                            c3.06,13.463,9.18,26.928,17.748,36.719c19.584,21.422,59.364,34.273,70.38,61.201c6.732,16.523-19.584,30.6-30.6,34.271
+                                            C161.33,335.496,148.477,329.377,138.686,323.256z"/>
+                                        </g>
+                                    </svg>
+                                </div>
+                                <span className="btx-text">&nbsp;FLOW RATES&nbsp;</span>
+                            </div>
+                            <div className="btx" style={{ height: (height * .085) + "px"}} onClick={this.powerFigureToggle}>
+                                <div className="btx-icon" style={{height: (height * .07) + "px", width: (height * .07) + "px" }}>
+                                    <svg>
+                                        <g className="bolt" style={{transform:"scale("+((height * .07)*0.0015)+")"}}>
+                                            <path d="M207.523,560.316c0,0,194.42-421.925,194.444-421.986l10.79-23.997c-41.824,12.02-135.271,34.902-135.57,35.833
+                                            C286.96,122.816,329.017,0,330.829,0c-39.976,0-79.952,0-119.927,0l-12.167,57.938l-51.176,209.995l135.191-36.806
+                                            L207.523,560.316z"/>
+                                        </g>
+                                    </svg>  
+                                </div>
+                                <span className="btx-text">&nbsp;POWER FIGURES&nbsp;</span>
+                            </div>
+                        </div>}    
+                    </div> 
                 }
             </div>);
     }
@@ -222,18 +267,15 @@ function makeTimeChart(dataList) {
         });
 
 
-    svg.append("defs").append("clipPath")
-        .attr("id", "clip")
-        .append("rect")
+    svg.select("defs").select("clipPath#clip")
+        .select("rect")
         .attr("width", width)
         .attr("height", height);
 
-    var focus = svg.append("g")
-        .attr("class", "focus")
+    var focus = svg.select("g.focus")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    var context = svg.append("g")
-        .attr("class", "context")
+    var context = svg.select("g.context")
         .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
 
 
@@ -258,50 +300,41 @@ function makeTimeChart(dataList) {
     x2.domain(x.domain());
     y2.domain(y.domain());
 
-    focus.append("g")
-        .attr("class", "axis axis--y")
+    focus.select("g.axis.axis--y")
         .call(yAxis)
         .attr("transform", "translate(" + width + ", 0)");
 
-    focus.append("path")
+    focus.select("path.area")
         .datum(data)
-        .attr("class", "area")
         .attr("d", area);
 
-    focus.append("g")
-        .attr("class", "axis axis--x")
+    focus.select("g.axis.axis--x")
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis);
-    focus.append("path")
+    focus.select("path.line")
         .datum(data)
-        .attr("class", "line")
         .attr("d", line);
 
-    context.append("path")
+    context.select("path.area")
         .datum(data)
-        .attr("class", "area")
         .attr("d", area2);
-    context.append("path")
+    context.select("path.line")
         .datum(data)
-        .attr("class", "line")
         .attr("d", line2);
 
-    context.append("g")
-        .attr("class", "axis axis--x")
+    context.select("g.axis.axis--x")
         .attr("transform", "translate(0," + height2 + ")")
         .call(xAxis2);
 
-    var contextBrush = context.append("g")
-        .attr("class", "brush")
-        .call(brush)
-        .call(brush.move, x.range());
+    var contextBrush = context.select("g.brush");
+
+    contextBrush.call(brush).call(brush.move, x.range());
 
     contextBrush.selectAll(".handle")
         .attr('rx', 3)
         .attr('ry', 3);
 
-    svg.append("rect")
-        .attr("class", "zoom")
+    svg.select("rect.zoom")
         .attr("width", width)
         .attr("height", height)
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
@@ -327,8 +360,8 @@ function makeTimeChart(dataList) {
         focus.select(".area").attr("d", area);
         focus.select(".line").attr("d", line);
         focus.select(".axis--x").call(xAxis);
-
         contextBrush.call(brush.move, x.range().map(t.invertX, t));
+        // contextBrush
     }
 
 
