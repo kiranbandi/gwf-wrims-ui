@@ -39,7 +39,7 @@ class FilterPanel extends Component {
                     </div>
                 </div>
                 <div>
-                <YearRangeSlider width={this.props.width} height={this.props.height}/>
+                {/* <YearRangeSlider width={this.props.width} height={this.props.height}/> */}
                     
                 </div>
 
