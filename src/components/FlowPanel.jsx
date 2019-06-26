@@ -39,7 +39,7 @@ class FlowPanel extends Component {
     }
 
     render() {
-        const options = [];
+        const options = ['test1', 'test2'];
         const { flowData = {}, width, height } = this.props,
             { dataList = [], name = '', isLoading = false, flowParams = { threshold: 'base' } } = flowData,
             innerWidth = width - 40,
@@ -85,15 +85,17 @@ class FlowPanel extends Component {
                                     arrow={!!spawningRate.minor > 0 ? spawningRate.minor > 0 ? 'positive' : 'negative' : ''}
                                     width={innerWidth / 3.1}
                                     icon="fish" />
-
                             </div>
 
                             <div className="statcard-button-group">
                                 {this.state.dropDownVisible
                                     ? <div id="TestSelect">
                                         <label htmlFor="sourceChromosomes">Stat Cards:</label>
-                                        <select className="selectpicker" multiple title="Select options..." open>
-                                            {options}
+                                        <select className="" multiple title="Select options..." open>
+                                            <option key='1' value='one'>One</option>
+                                            <option key='2' value='two'>Two</option>
+                                            <option key='3' value='three'>Three</option>
+
                                         </select>
                                     </div>
                                     : <div />
