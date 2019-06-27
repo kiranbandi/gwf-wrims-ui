@@ -262,8 +262,9 @@ function makeTimeChart(dataList) {
         .call(xAxis2);
 
     var contextBrush = context.append("g")
-        .attr("class", "brush")
-        .call(brush)
+        .attr("class", "brush");
+
+    contextBrush.call(brush)
         .call(brush.move, x.range());
 
     contextBrush.selectAll(".handle")
