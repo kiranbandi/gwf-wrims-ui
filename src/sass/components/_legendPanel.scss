@@ -27,8 +27,16 @@
         margin: 15px;
         svg {
             display: inline-block;
-            margin: 0px auto;
+            // margin: 0px auto;
         }
+    }
+    .icon-div {
+        // width: 50%;
+        float: left;
+    }
+    .path-div {
+        // width: 45%;
+        float: right;
     }
     .filter-general {
         width: auto;
@@ -123,6 +131,11 @@
         text {
             fill: white;
         }
+        &.highlight {
+            circle {
+                fill: red !important;
+            }
+        }
         .sink-text {
             fill: black !important;
             font-weight: bold;
@@ -133,7 +146,7 @@
         font-weight: bold;
     }
     svg.flow-data-chart {
-        margin: 0px auto;
+        // margin: 0px auto;
         display: block;
         .flow-spark-line {
             fill: none;

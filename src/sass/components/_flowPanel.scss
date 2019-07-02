@@ -5,6 +5,7 @@
     border-radius: 7px;
     margin-left: 20px;
     vertical-align: top;
+    position: relative;
     .title-bar {
         margin-top: 30px;
         margin-bottom: 10px;
@@ -13,13 +14,42 @@
         margin: 0px;
         font-size: 0.75em;
     }
+    .entire-panel {
+        display: inline-flex;
+        position: relative;
+    }
+    .statcard-button-group {
+        display: block;
+        width: 80%;
+        float: right;
+        margin: 10px 8px 0px 18%;
+        position: absolute;
+    }
+    .statcard-button {
+        margin: 2px 0px 2px 0px;
+        background: #1a1c22;
+        color: white;
+    }
+    .statcard-button:hover {
+        background-color: #4CAF50;
+    }
+    #TestSelect {
+        float: left;
+        width: 310px;
+    }
+    .two-button-group {
+        width: 40px;
+    }
     .metrics-container {
         margin-top: 10px;
         display: inline-flex;
-        overflow: hidden;
         margin: 0 10px 0 10px;
+        overflow-x: scroll;
         overflow-y: hidden;
         padding-bottom: 5px;
+        z-index: 1;
+        position: absolute;
+        /* width */
     }
     .metrics-container::-webkit-scrollbar {
         height: 0.7em;
@@ -53,6 +83,60 @@
                 fill: white;
                 font-weight: bold;
                 font-size: 17px;
+            }
+        }
+        .toggle-btn-container {
+            width: max-content;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            .btx {
+                margin-right: 5px;
+                display: inline-block;
+                background: rgb(40, 73, 222);
+                border: 2px solid transparent;
+                border-radius: 50px;
+                width: max-content;
+                position: relative;
+                top: 50%;
+                transform: translateY(-50%);
+                cursor: pointer;
+                .btx-icon {
+                    display: inline-block;
+                    vertical-align: middle;
+                    background: rgb(72, 136, 255);
+                    border-radius: 50px;
+                    padding: 5px;
+                    margin: 2px;
+                    position: relative;
+                    top: 50%;
+                    transform: translateY(-52%);
+                    svg {
+                        position: relative;
+                        transform: translate(-1%, -1%); 
+                        width: inherit;
+                        height: inherit;
+                        .water-drop {
+                            position: relative;
+                        }
+                        .bolt {
+                            position: relative;
+                        }
+                    }
+                }
+                .btx-text {
+                    max-width: 0;
+                    -webkit-transition: max-width 1.8s;
+                    transition: max-width 1.5s;
+                    display: inline-block;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    color: white;
+                }
+                &:hover .btx-text {
+                    max-width: 12rem;
+                }
             }
         }
     }
@@ -122,5 +206,104 @@
         cursor: move;
         fill: none;
         pointer-events: all;
+    }
+}
+
+.sm-root {
+    position: absolute;
+    height: 254px;
+    &>div {
+        display: inline-block;
+        vertical-align: top;
+    }
+    &.sm-hidden {
+        z-index: 0;
+    }
+    &.sm-visible {
+        z-index: 2;
+    }
+    .sm-options-container {
+
+        &::-webkit-scrollbar {
+            height: 0.7em;
+            width: 6px;
+            margin-top: 2px;
+        }
+
+        &::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 5px grey;
+            border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: darkgrey;
+            border-radius: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb:hover {
+            background: rgb(94, 94, 94);
+        }
+
+        border: 1px solid #2b3241;
+        height: 250px;
+        transform: translateY(5px);
+        overflow-x: hidden;
+        overflow-y: scroll;
+
+        &.sm-visible {
+            visibility: visible;
+            opacity: 1;
+            transition: width 2s linear, visibility 0s linear 0s, opacity 300ms;
+        }
+        &.sm-hidden {
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s linear 100ms, opacity 100ms;
+        }
+        .sm-option {
+            background: #1b1f2ad9;
+            border: 1px solid #2b3241;
+            cursor: pointer;
+            &:hover {
+                border: 1px solid #54585f;
+            }
+            &>div {
+                display: inline-block;
+                padding: 3px;
+            }
+            .sm-option-icon {
+                position: relative;
+                width: 20%;
+                &>div {
+                    background: #1bc98e;
+                    width: 100%;
+                    border: .5px solid white;
+                }
+            }
+            .sm-option-text {
+                position: relative;
+                width: 60%;
+                text-align: left;
+                font-size: 0.9em;
+                font-weight: normal;
+                color: rgba(255, 255, 255, 0.65);
+                letter-spacing: .15em;
+                text-transform: uppercase;
+            }
+            .sm-option-check {
+                position: relative;
+                width: 20%;
+                &.sm-hidden i {
+                    visibility: hidden;
+                    opacity: 0;
+                    transition: visibility 0s linear 50ms, opacity 50ms;
+                }
+                &.sm-visible i {
+                    visibility: visible;
+                    opacity: 1;
+                    transition: visibility 0s linear 0s, opacity 50ms;
+                }
+            }
+        }
     }
 }
