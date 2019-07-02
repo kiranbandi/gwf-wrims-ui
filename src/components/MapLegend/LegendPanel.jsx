@@ -14,7 +14,7 @@ export default class LegendPanel extends Component {
         let svgWidth = 600, // Change this if svg width is changed
 
             // ICON VARIABLES
-            numberOfIcons = 5, // When adding a new icon, increment numberOfIcons and make sure the increments_Icons is multiplied by the array index
+            numberOfIcons = 7, // When adding a new icon, increment numberOfIcons and make sure the increments_Icons is multiplied by the array index
             increments_Icons = svgWidth / numberOfIcons, startingPoint_Icons = increments_Icons / 2,
 
             // PATH VARIABLES
@@ -27,7 +27,7 @@ export default class LegendPanel extends Component {
             <div id='map-legend' className='legend-root-container '>
 
                 <div>
-                    <div className='filter-div'>
+                    <div className='filter-div icon-div'>
                         <svg width={svgWidth} height="60">
                             <LegendIcon
                                 title={"IRRIGATION"}
@@ -62,16 +62,33 @@ export default class LegendPanel extends Component {
                             />
 
                             <LegendIcon
-                                title={"SINK"}
-                                textX={(startingPoint_Icons + (increments_Icons * 4) - 4)}
+                                title={"POWER RESERVOIR"}
+                                textX={(startingPoint_Icons + (increments_Icons * 4) - 40)}
                                 circleTransform={"translate(" + (startingPoint_Icons + (increments_Icons * 4)) + ", 5) scale(0.08)"}
+                                imageTransform={"translate(" + (startingPoint_Icons + (increments_Icons * 4) + 4) + ", 5) scale(0.05)"}
+                                type={"reservoir"}
+                            />
+
+                            <LegendIcon
+                                title={"SINK"}
+                                textX={(startingPoint_Icons + (increments_Icons * 5) - 3)}
+                                circleTransform={"translate(" + (startingPoint_Icons + (increments_Icons * 5)) + ", 5) scale(0.08)"}
                                 type={"sink"}
+                            />
+
+                            <LegendIcon
+                                title={"SELECTED"}
+                                textX={(startingPoint_Icons + (increments_Icons * 6) - 18)}
+                                circleTransform={"translate(" + (startingPoint_Icons + (increments_Icons * 6)) + ", 5) scale(0.08)"}
+                                imageTransform={"translate(" + (startingPoint_Icons + (increments_Icons * 6)) + ", 5) scale(0.08)"}
+                                type={"inflow"}
+                                selected={true}
                             />
 
                         </svg>
                     </div>
 
-                    <div className='filter-div'>
+                    <div className='filter-div path-div'>
                         <svg className='flow-data-chart' width={svgWidth} height="60">
                             <g className='lines-container'>
                                 <path className='flow-spark-line'

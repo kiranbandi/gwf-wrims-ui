@@ -6,7 +6,7 @@ export default function(containerID, initialZoomScale = { x: 0, y: 0, scale: 1 }
 
     var zoom = d3
         .zoom()
-        .scaleExtent([0.05, 6])
+        .scaleExtent([1, 4])
         // we will use the double clicks for marker selections
         //  this way there is no ambiguity with click events on the same dom node
         .filter(() => !(d3.event.type == 'dblclick'))
