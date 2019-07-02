@@ -12,7 +12,69 @@ class FlowPanel extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            dropDownVisible: false
+            dropDownVisible: false,
+            statcards: [
+                {
+                    name: "Summer Flow",
+                    color: "#1bc98e",
+                    visible: false
+                },
+                {
+                    name: "Winter Flow",
+                    color: "#1ca8dd",
+                    visible: false
+                },
+                {
+                    name: "Spawning Rate",
+                    color: "#9f86ff",
+                    visible: false
+                },
+                {
+                    name: "Summer Flow",
+                    color: "#1bc98e",
+                    visible: false
+                },
+                {
+                    name: "Winter Flow",
+                    color: "#1ca8dd",
+                    visible: false
+                },
+                {
+                    name: "Spawning Rate",
+                    color: "#9f86ff",
+                    visible: false
+                },
+                {
+                    name: "Summer Flow",
+                    color: "#1bc98e",
+                    visible: false
+                },
+                {
+                    name: "Winter Flow",
+                    color: "#1ca8dd",
+                    visible: false
+                },
+                {
+                    name: "Spawning Rate",
+                    color: "#9f86ff",
+                    visible: false
+                },
+                {
+                    name: "Summer Flow",
+                    color: "#1bc98e",
+                    visible: false
+                },
+                {
+                    name: "Winter Flow",
+                    color: "#1ca8dd",
+                    visible: false
+                },
+                {
+                    name: "Spawning Rate",
+                    color: "#9f86ff",
+                    visible: false
+                },
+            ]
         }
     }
 
@@ -34,12 +96,24 @@ class FlowPanel extends Component {
 
     fakeDropDownClick = () => {
 
-        console.log("click")
         this.setState({ dropDownVisible: !this.state.dropDownVisible })
     }
 
+    setVisible = (statCardID) => {
+
+        // temp implementation to test out the menu
+        var updatedStatcards = this.state.statcards.map((statcard, idx) => {
+            if (idx === statCardID) {
+                statcard.visible = !statcard.visible;
+            }
+            
+            return statcard;
+        });
+
+        this.setState({statcards: updatedStatcards});
+    }
+
     render() {
-        const options = ['test1', 'test2'];
         const { flowData = {}, width, height } = this.props,
             { dataList = [], name = '', isLoading = false, flowParams = { threshold: 'base' } } = flowData,
             innerWidth = width - 40,
@@ -59,7 +133,7 @@ class FlowPanel extends Component {
                     <Loading className='loader' type='spin' height='75px' width='75px' color='#d6e5ff' delay={-1} /> :
                     <div className='flow-inner-container'>
                         <p className='exclaimatory-text'>* All values are in 1000m<sup>3</sup>/week</p>
-                        <div className='entire-panel'>
+                        <div className='entire-panel' style={{width, height: '108px'}}>
                             <div className='metrics-container' style={{ 'width': width - 70 }}>
                                 <StatCard
                                     title={"Summer Flow"}
@@ -87,20 +161,18 @@ class FlowPanel extends Component {
                                     icon="fish" />
                             </div>
 
-                            <div className="statcard-button-group">
-                                {this.state.dropDownVisible
-                                    ? <div id="TestSelect">
-                                        <label htmlFor="sourceChromosomes">Stat Cards:</label>
-                                        <select className="" multiple title="Select options..." open>
-                                            <option key='1' value='one'>One</option>
-                                            <option key='2' value='two'>Two</option>
-                                            <option key='3' value='three'>Three</option>
-
-                                        </select>
-                                    </div>
-                                    : <div />
-                                }
-
+                            <div className={"sm-root" + (this.state.dropDownVisible? " sm-visible" : " sm-hidden")} style={{ 'width': ((.65)*width) + "px", transform: `translateX(${((.35)*width) + 4}px)` }}>
+                                <div className={"sm-options-container" + (this.state.dropDownVisible? " sm-visible" : " sm-hidden")} style={{ width: (((.65)*width) - 70) + "px" }}>
+                                    {this.state.statcards.map((statcard, idx) => {
+                                        return (
+                                            <div className="sm-option" key={idx} onClick={() => this.setVisible(idx)}>
+                                                <div className="sm-option-icon"><div style={{background: statcard.color}}>&zwnj;</div></div>
+                                                <div className="sm-option-text">{statcard.name}</div>
+                                                <div className={"sm-option-check" + (statcard.visible? " sm-visble" : " sm-hidden")}><i className="icon icon-check"></i></div>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
 
                                 <div className='two-button-group'>
                                     <button id="dropdown-icon" onClick={this.fakeDropDownClick} className="btn statcard-button"><i className="icon icon-chevron-down"></i></button>
@@ -113,7 +185,27 @@ class FlowPanel extends Component {
                         {dataList.length <= 0 ?
                             <h4 className='title-bar text-center m-a-lg'>No Data Available</h4> :
                             <svg height={innerHeight} width={innerWidth} className='flow-data-chart metric-chart'>
-                            </svg>}
+                                <defs>
+                                    <clipPath id="clip">
+                                        <rect>
+                                        </rect>
+                                    </clipPath>
+                                </defs>
+                                <g className="focus">
+                                    <g className="axis axis--y"></g>
+                                    <path className="area"></path>
+                                    <g className="axis axis--x"></g>
+                                    <path className="line"></path>
+                                </g>
+                                <g className="context">
+                                    <path className="area"></path>
+                                    <path className="line"></path>
+                                    <g className="axis axis--x"></g>
+                                    <g className="brush"></g>
+                                </g>
+                                <rect className="zoom">
+                                </rect>
+                            </svg>}}
                     </div>
                 }
             </div>);
@@ -228,18 +320,15 @@ function makeTimeChart(dataList) {
         });
 
 
-    svg.append("defs").append("clipPath")
-        .attr("id", "clip")
-        .append("rect")
+    svg.select("defs").select("clipPath#clip")
+        .select("rect")
         .attr("width", width)
         .attr("height", height);
 
-    var focus = svg.append("g")
-        .attr("class", "focus")
+    var focus = svg.select("g.focus")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    var context = svg.append("g")
-        .attr("class", "context")
+    var context = svg.select("g.context")
         .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
 
 
@@ -264,50 +353,41 @@ function makeTimeChart(dataList) {
     x2.domain(x.domain());
     y2.domain(y.domain());
 
-    focus.append("g")
-        .attr("class", "axis axis--y")
+    focus.select("g.axis.axis--y")
         .call(yAxis)
         .attr("transform", "translate(" + width + ", 0)");
 
-    focus.append("path")
+    focus.select("path.area")
         .datum(data)
-        .attr("class", "area")
         .attr("d", area);
 
-    focus.append("g")
-        .attr("class", "axis axis--x")
+    focus.select("g.axis.axis--x")
         .attr("transform", "translate(0," + height + ")")
         .call(xAxis);
-    focus.append("path")
+    focus.select("path.line")
         .datum(data)
-        .attr("class", "line")
         .attr("d", line);
 
-    context.append("path")
+    context.select("path.area")
         .datum(data)
-        .attr("class", "area")
         .attr("d", area2);
-    context.append("path")
+    context.select("path.line")
         .datum(data)
-        .attr("class", "line")
         .attr("d", line2);
 
-    context.append("g")
-        .attr("class", "axis axis--x")
+    context.select("g.axis.axis--x")
         .attr("transform", "translate(0," + height2 + ")")
         .call(xAxis2);
 
-    var contextBrush = context.append("g")
-        .attr("class", "brush")
-        .call(brush)
-        .call(brush.move, x.range());
+    var contextBrush = context.select("g.brush");
+
+    contextBrush.call(brush).call(brush.move, x.range());
 
     contextBrush.selectAll(".handle")
         .attr('rx', 3)
         .attr('ry', 3);
 
-    svg.append("rect")
-        .attr("class", "zoom")
+    svg.select("rect.zoom")
         .attr("width", width)
         .attr("height", height)
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
@@ -333,8 +413,8 @@ function makeTimeChart(dataList) {
         focus.select(".area").attr("d", area);
         focus.select(".line").attr("d", line);
         focus.select(".axis--x").call(xAxis);
-
         contextBrush.call(brush.move, x.range().map(t.invertX, t));
+        // contextBrush
     }
 
 
