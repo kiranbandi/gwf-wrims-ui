@@ -106,7 +106,7 @@ class FlowPanel extends Component {
         let isPowerReservoir = ["R1_LDief", "R6_Cod", "R7_Tobin"].includes(name);
 
         return (
-            <div className='flow-panel-root-container' style={{ width, height: (isPowerReservoir? (height + (height * .10)) + "px" : height) }}>
+            <div className='flow-panel-root-container' style={{ width, height: (isPowerReservoir? (height + (height * .150)) + "px" : ((height + 11.5)+'px')) }}>
                 <h4 className='title-bar text-center'>FLOW DATA
                 {name.length > 0 && <strong style={{ marginLeft: 10 }}>{name}</strong>}
                 </h4>
