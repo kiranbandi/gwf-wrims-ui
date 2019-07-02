@@ -85,6 +85,60 @@
                 font-size: 17px;
             }
         }
+        .toggle-btn-container {
+            width: max-content;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            .btx {
+                margin-right: 5px;
+                display: inline-block;
+                background: rgb(40, 73, 222);
+                border: 2px solid transparent;
+                border-radius: 50px;
+                width: max-content;
+                position: relative;
+                top: 50%;
+                transform: translateY(-50%);
+                cursor: pointer;
+                .btx-icon {
+                    display: inline-block;
+                    vertical-align: middle;
+                    background: rgb(72, 136, 255);
+                    border-radius: 50px;
+                    padding: 5px;
+                    margin: 2px;
+                    position: relative;
+                    top: 50%;
+                    transform: translateY(-52%);
+                    svg {
+                        position: relative;
+                        transform: translate(-1%, -1%); 
+                        width: inherit;
+                        height: inherit;
+                        .water-drop {
+                            position: relative;
+                        }
+                        .bolt {
+                            position: relative;
+                        }
+                    }
+                }
+                .btx-text {
+                    max-width: 0;
+                    -webkit-transition: max-width 1.8s;
+                    transition: max-width 1.5s;
+                    display: inline-block;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    color: white;
+                }
+                &:hover .btx-text {
+                    max-width: 12rem;
+                }
+            }
+        }
     }
     //  temp serve code style
     .metric-chart .tick>line {

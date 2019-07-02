@@ -29,9 +29,15 @@ class FlowPanel extends Component {
                     color: "#9f86ff",
                     visible: false
                 }
-            ]
+            ]  ,
+            showPowerData: false
         }
+        
+        this.waterFlowToggle = this.waterFlowToggle.bind(this);
+        this.powerFigureToggle = this.powerFigureToggle.bind(this);
     }
+          
+    
 
     componentDidMount() {
         const { flowData = {} } = this.props, { dataList = [] } = flowData;
@@ -43,9 +49,28 @@ class FlowPanel extends Component {
 
     componentDidUpdate() {
         const { flowData = {} } = this.props, { dataList = [] } = flowData;
-        const timePeriodList = _.map(dataList, (d) => d.flow);
+
+        // in the true block in this ternary operator declaration, replace the existing code with 
+        // the array for the power rates and then this comp. should work as required.
+        // added this to test and demonstrate functioanlity
+        const timePeriodList = this.state.showPowerData? (_.map(dataList, (d) => d.flow)).slice(0, 450) : _.map(dataList, (d) => d.flow);
+        
         if (dataList.length > 0) {
-            makeTimeChart(timePeriodList);
+                makeTimeChart(timePeriodList);
+        }
+    }
+    waterFlowToggle() {
+        
+        if (this.state.showPowerData) {
+            this.setState({showPowerData: false});
+        }
+
+    }
+
+    powerFigureToggle() {
+        
+        if (!this.state.showPowerData) {
+            this.setState({showPowerData: true});
         }
     }
 
@@ -69,6 +94,7 @@ class FlowPanel extends Component {
     }
 
     render() {
+        // console.log("IWASCALLED");
         const { flowData = {}, width, height } = this.props,
             { dataList = [], name = '', isLoading = false, flowParams = { threshold: 'base' } } = flowData,
             innerWidth = width - 40,
@@ -77,9 +103,10 @@ class FlowPanel extends Component {
         const { summerFlow = { major: '', minor: '' },
             winterFlow = { major: '', minor: '' },
             spawningRate = { major: '', minor: '' } } = calculateMetrics(dataList, name, flowParams.threshold);
+        let isPowerReservoir = ["R1_LDief", "R6_Cod", "R7_Tobin"].includes(name);
 
         return (
-            <div className='flow-panel-root-container' style={{ width, height }}>
+            <div className='flow-panel-root-container' style={{ width, height: (isPowerReservoir? (height + (height * .10)) + "px" : height) }}>
                 <h4 className='title-bar text-center'>FLOW DATA
                 {name.length > 0 && <strong style={{ marginLeft: 10 }}>{name}</strong>}
                 </h4>
@@ -161,7 +188,36 @@ class FlowPanel extends Component {
                                 <rect className="zoom">
                                 </rect>
                             </svg>}
-                    </div>
+                        {isPowerReservoir && <div className="toggle-btn-container" style={{height: (height * .10) + "px" }}>
+                            <div className="btx" style={{ height: (height * .085) + "px"}} onClick={this.waterFlowToggle} >
+                                <div className="btx-icon" style={{height: (height * .07) + "px", width: (height * .07) + "px" }}>
+                                    <svg>
+                                        <g className="water-drop" style={{transform:"scale("+((height * .07)*0.0019)+")"}}>
+                                            <path d="M270.265,149.448c-36.107-47.124-70.38-78.948-73.439-141.372c0-1.836-0.612-3.06-1.836-4.284
+                                            c-0.612-3.06-3.672-4.896-6.732-3.06c-3.672,0-6.731,2.448-6.731,6.732c-77.112,83.232-207.468,294.372-43.452,354.959
+                                            c74.052,27.541,157.896-9.791,172.584-90.576C318.614,228.396,295.969,182.497,270.265,149.448z M138.686,323.256
+                                            c-17.748-10.404-28.764-31.211-34.272-49.572c-2.448-9.18-3.672-18.359-3.06-27.539c3.672-15.912,8.568-31.213,14.076-46.512
+                                            c3.06,13.463,9.18,26.928,17.748,36.719c19.584,21.422,59.364,34.273,70.38,61.201c6.732,16.523-19.584,30.6-30.6,34.271
+                                            C161.33,335.496,148.477,329.377,138.686,323.256z"/>
+                                        </g>
+                                    </svg>
+                                </div>
+                                <span className="btx-text">&nbsp;FLOW RATES&nbsp;</span>
+                            </div>
+                            <div className="btx" style={{ height: (height * .085) + "px"}} onClick={this.powerFigureToggle}>
+                                <div className="btx-icon" style={{height: (height * .07) + "px", width: (height * .07) + "px" }}>
+                                    <svg>
+                                        <g className="bolt" style={{transform:"scale("+((height * .07)*0.0015)+")"}}>
+                                            <path d="M207.523,560.316c0,0,194.42-421.925,194.444-421.986l10.79-23.997c-41.824,12.02-135.271,34.902-135.57,35.833
+                                            C286.96,122.816,329.017,0,330.829,0c-39.976,0-79.952,0-119.927,0l-12.167,57.938l-51.176,209.995l135.191-36.806
+                                            L207.523,560.316z"/>
+                                        </g>
+                                    </svg>  
+                                </div>
+                                <span className="btx-text">&nbsp;POWER FIGURES&nbsp;</span>
+                            </div>
+                        </div>}    
+                    </div> 
                 }
             </div>);
     }
