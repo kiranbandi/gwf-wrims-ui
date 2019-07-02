@@ -1,24 +1,10 @@
 import React, { Component } from 'react'
-import { totalmem } from 'os';
 
 export default class LegendIcon extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            isSelected: true,
-            selected: this.props.selected
-        }
     }
 
-    componentDidMount(){
-        if(this.state.selected==true){
-            
-            setInterval(()=>{
-                this.setState({isSelected: !this.state.isSelected});
-            }, 2000);
-        }
-    }
 
     render() {
         
@@ -27,7 +13,7 @@ export default class LegendIcon extends Component {
         return (
             <g>
                 <g key={'marker-' + type} id={title} className={!selected ? "river-marker" 
-                    : this.state.isSelected ? "river-marker highlight" :"river-marker"}
+                    : "river-marker highlight"}
                     transform={circleTransform}>
                     <circle
                         cx='150' cy='150' r='200'
@@ -77,12 +63,12 @@ export default class LegendIcon extends Component {
                     
                 </g>
                 <text 
-                x={!selected ? textX : this.state.isSelected ? textX : textX-6} 
-                
-                y={textY} id={title + "-title"} 
-                
-                className="legend-label">
-                {!selected ? title : this.state.isSelected ? title : "UNSELECTED"}
+                    x={textX} 
+                    
+                    y={textY} id={title + "-title"} 
+                    
+                    className="legend-label">
+                    {title}
                 </text>
             </g>
         )

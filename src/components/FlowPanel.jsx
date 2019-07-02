@@ -106,11 +106,11 @@ class FlowPanel extends Component {
             if (idx === statCardID) {
                 statcard.visible = !statcard.visible;
             }
-            
+
             return statcard;
         });
 
-        this.setState({statcards: updatedStatcards});
+        this.setState({ statcards: updatedStatcards });
     }
 
     render() {
@@ -133,7 +133,7 @@ class FlowPanel extends Component {
                     <Loading className='loader' type='spin' height='75px' width='75px' color='#d6e5ff' delay={-1} /> :
                     <div className='flow-inner-container'>
                         <p className='exclaimatory-text'>* All values are in 1000m<sup>3</sup>/week</p>
-                        <div className='entire-panel' style={{width, height: '108px'}}>
+                        <div className='entire-panel' style={{ width, height: '108px' }}>
                             <div className='metrics-container' style={{ 'width': width - 70 }}>
                                 <StatCard
                                     title={"Summer Flow"}
@@ -161,14 +161,14 @@ class FlowPanel extends Component {
                                     icon="fish" />
                             </div>
 
-                            <div className={"sm-root" + (this.state.dropDownVisible? " sm-visible" : " sm-hidden")} style={{ 'width': ((.65)*width) + "px", transform: `translateX(${((.35)*width) + 4}px)` }}>
-                                <div className={"sm-options-container" + (this.state.dropDownVisible? " sm-visible" : " sm-hidden")} style={{ width: (((.65)*width) - 70) + "px" }}>
+                            <div className={"sm-root" + (this.state.dropDownVisible ? " sm-visible" : " sm-hidden")} style={{ 'width': ((.65) * width) + "px", transform: `translateX(${((.35) * width) + 4}px)` }}>
+                                <div className={"sm-options-container" + (this.state.dropDownVisible ? " sm-visible" : " sm-hidden")} style={{ width: (((.65) * width) - 70) + "px" }}>
                                     {this.state.statcards.map((statcard, idx) => {
                                         return (
                                             <div className="sm-option" key={idx} onClick={() => this.setVisible(idx)}>
-                                                <div className="sm-option-icon"><div style={{background: statcard.color}}>&zwnj;</div></div>
+                                                <div className="sm-option-icon"><div style={{ background: statcard.color }}>&zwnj;</div></div>
                                                 <div className="sm-option-text">{statcard.name}</div>
-                                                <div className={"sm-option-check" + (statcard.visible? " sm-visble" : " sm-hidden")}><i className="icon icon-check"></i></div>
+                                                <div className={"sm-option-check" + (statcard.visible ? " sm-visble" : " sm-hidden")}><i className="icon icon-check"></i></div>
                                             </div>
                                         )
                                     })}
@@ -205,7 +205,7 @@ class FlowPanel extends Component {
                                 </g>
                                 <rect className="zoom">
                                 </rect>
-                            </svg>}}
+                            </svg>}
                     </div>
                 }
             </div>);

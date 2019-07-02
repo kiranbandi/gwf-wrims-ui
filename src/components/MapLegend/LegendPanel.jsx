@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import * as d3 from 'd3';
 import _ from 'lodash';
-import { line, scaleLinear } from 'd3';
 import LegendIcon from './LegendIcon'
 
 export default class LegendPanel extends Component {
@@ -11,15 +9,16 @@ export default class LegendPanel extends Component {
 
 
     render() {
-        let svgWidth = 600, // Change this if svg width is changed
-
+        const { width } = this.props;
+        let svgIconWidth = width * 0.6, // Width is around 60%
             // ICON VARIABLES
             numberOfIcons = 7, // When adding a new icon, increment numberOfIcons and make sure the increments_Icons is multiplied by the array index
-            increments_Icons = svgWidth / numberOfIcons, startingPoint_Icons = increments_Icons / 2,
+            increments_Icons = svgIconWidth / numberOfIcons, startingPoint_Icons = increments_Icons / 2,
 
+            svgPathWidth = width * 0.385, // Width is around 40%
             // PATH VARIABLES
             numberOfPaths = 4, // When adding a new path, increment numberOfPaths and make sure the increments_Paths is multiplied by the array index
-            increments_Paths = svgWidth / numberOfPaths, startingPoint_Paths = (increments_Paths / 2) - 30
+            increments_Paths = svgPathWidth / numberOfPaths, startingPoint_Paths = (increments_Paths / 2) - 30
             ;
 
         return (
@@ -28,7 +27,7 @@ export default class LegendPanel extends Component {
 
                 <div>
                     <div className='filter-div icon-div'>
-                        <svg width={svgWidth} height="60">
+                        <svg width={svgIconWidth} height="60">
                             <LegendIcon
                                 title={"IRRIGATION"}
                                 textX={(startingPoint_Icons + (increments_Icons * 0) - 20)}
@@ -89,7 +88,7 @@ export default class LegendPanel extends Component {
                     </div>
 
                     <div className='filter-div path-div'>
-                        <svg className='flow-data-chart' width={svgWidth} height="60">
+                        <svg className='flow-data-chart' width={svgPathWidth} height="60">
                             <g className='lines-container'>
                                 <path className='flow-spark-line'
                                     transform={"translate(" + (startingPoint_Paths + (increments_Paths * 0)) + ", 5)"}
