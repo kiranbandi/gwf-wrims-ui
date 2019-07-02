@@ -15,7 +15,7 @@ export default class LegendPanel extends Component {
             numberOfIcons = 7, // When adding a new icon, increment numberOfIcons and make sure the increments_Icons is multiplied by the array index
             increments_Icons = svgIconWidth / numberOfIcons, startingPoint_Icons = increments_Icons / 2,
 
-            svgPathWidth = width * 0.385, // Width is around 40%
+            svgPathWidth = width * 0.38, // Width is around 40%
             // PATH VARIABLES
             numberOfPaths = 4, // When adding a new path, increment numberOfPaths and make sure the increments_Paths is multiplied by the array index
             increments_Paths = svgPathWidth / numberOfPaths, startingPoint_Paths = (increments_Paths / 2) - 30

@@ -28,52 +28,7 @@ class FlowPanel extends Component {
                     name: "Spawning Rate",
                     color: "#9f86ff",
                     visible: false
-                },
-                {
-                    name: "Summer Flow",
-                    color: "#1bc98e",
-                    visible: false
-                },
-                {
-                    name: "Winter Flow",
-                    color: "#1ca8dd",
-                    visible: false
-                },
-                {
-                    name: "Spawning Rate",
-                    color: "#9f86ff",
-                    visible: false
-                },
-                {
-                    name: "Summer Flow",
-                    color: "#1bc98e",
-                    visible: false
-                },
-                {
-                    name: "Winter Flow",
-                    color: "#1ca8dd",
-                    visible: false
-                },
-                {
-                    name: "Spawning Rate",
-                    color: "#9f86ff",
-                    visible: false
-                },
-                {
-                    name: "Summer Flow",
-                    color: "#1bc98e",
-                    visible: false
-                },
-                {
-                    name: "Winter Flow",
-                    color: "#1ca8dd",
-                    visible: false
-                },
-                {
-                    name: "Spawning Rate",
-                    color: "#9f86ff",
-                    visible: false
-                },
+                }
             ]
         }
     }
