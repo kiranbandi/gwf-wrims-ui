@@ -106,7 +106,7 @@ class FlowPanel extends Component {
         let isPowerReservoir = ["R1_LDief", "R6_Cod", "R7_Tobin"].includes(name);
 
         return (
-            <div className='flow-panel-root-container' style={{ width, height: (isPowerReservoir? (height + (height * .150)) + "px" : ((height + 11.5)+'px')) }}>
+            <div className='flow-panel-root-container' style={{ width, height: (isPowerReservoir? (height + (height * .10) + 15) + "px" : ((height + 15)+'px')) }}>
                 <h4 className='title-bar text-center'>FLOW DATA
                 {name.length > 0 && <strong style={{ marginLeft: 10 }}>{name}</strong>}
                 </h4>
@@ -390,8 +390,7 @@ function makeTimeChart(dataList) {
         .attr("transform", "translate(0," + height2 + ")")
         .call(xAxis2);
 
-    var contextBrush = context.append("g")
-        .attr("class", "brush");
+    var contextBrush = context.select("g.brush");
 
     contextBrush.call(brush)
         .call(brush.move, x.range());
