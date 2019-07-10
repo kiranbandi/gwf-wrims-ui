@@ -49,11 +49,9 @@ class FlowPanel extends Component {
 
     componentDidUpdate() {
         const { flowData = {} } = this.props, { dataList = [] } = flowData;
-
-        // in the true block in this ternary operator declaration, replace the existing code with 
-        // the array for the power rates and then this comp. should work as required.
-        // added this to test and demonstrate functioanlity
-        const timePeriodList = this.state.showPowerData? (_.map(dataList, (d) => d.flow)).slice(0, 450) : _.map(dataList, (d) => d.flow);
+        console.log("FlowPanel: " + flowData)
+        // Added functionality in index.jsx: actions.setFlowData to add values for power
+        const timePeriodList = this.state.showPowerData? (_.map(dataList, (d) => d.power)) : _.map(dataList, (d) => d.flow);
         
         if (dataList.length > 0) {
                 makeTimeChart(timePeriodList);
@@ -80,7 +78,6 @@ class FlowPanel extends Component {
     }
 
     setVisible = (statCardID) => {
-
         // temp implementation to test out the menu
         var updatedStatcards = this.state.statcards.map((statcard, idx) => {
             if (idx === statCardID) {

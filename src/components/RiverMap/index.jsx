@@ -21,9 +21,9 @@ class RiverMap extends Component {
 
     componentDidMount() {
         const { width, fromDashboard = true } = this.props;
-        
+
         // magic numbers for our chart so it looks good
-        const initialZoomScale = fromDashboard? { x: width * 0.50, y: width * 0.30, scale: 1.10 } : { x: width * 0.045, y: width * 0.055, scale: 1.10 };
+        const initialZoomScale = fromDashboard ? { x: width * 0.50, y: width * 0.30, scale: 1.10 } : { x: width * 0.045, y: width * 0.055, scale: 1.10 };
 
         attachZoom('river-map', initialZoomScale);
     }
@@ -66,12 +66,22 @@ class RiverMap extends Component {
             actions.setFlowData({ dataList: [], name, flowParams, isLoading: true });
             getFlowData(flowParams)
                 .then((records) => {
+                    console.log(records);
+                    // if (records[0])
 
                     let dataList = _.map(records, (d) => (
-                        {
-                            'flow': (Math.round(Number(d.flow) * 1000) / 1000),
-                            'timestamp': d.timestamp
-                        }));
+                        d.power == null ?
+                            {
+                                'flow': d.flow,
+                                'timestamp': d.timestamp
+                            }
+                            :
+                            {
+                                'flow': d.flow,
+                                'timestamp': d.timestamp,
+                                'power': d.power
+                            }
+                    ));
 
                     actions.setFlowData({ dataList, name, flowParams, isLoading: false });
                 })
@@ -94,7 +104,7 @@ class RiverMap extends Component {
         const { schematicData = { lines: [], artifacts: [], labels: [], markers: [], title: {} },
             width, height, filterMesh, flowData = {} } = this.props,
             { name = '' } = flowData;
-            
+
 
 
         // find the max and min from all the nodes within the lines
@@ -131,7 +141,6 @@ class RiverMap extends Component {
         let filteredData = applyFilterMesh(filterMesh, schematicData);
 
         const { title = { coords: [], label: '' } } = schematicData;
-
 
         return (
             <div id='river-map' style={{ 'width': width, 'height': height }}>
