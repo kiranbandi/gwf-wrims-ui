@@ -63,10 +63,13 @@ export default class BasinMap extends Component {
         viewport.width = width;
         viewport.height = width / 2.5;
 
+        //Darktheme:  mapStyle={'mapbox://styles/ricardorheeder/cjx2a9u8b3bi41cqtk3n66h0i'}
+        //Lighttheme:  mapStyle={'mapbox://styles/ricardorheeder/cjx0jhl3106nf1cpefuocmvf1'}
+
         return (
             <div>
                 <MapGL
-                    mapStyle={'mapbox://styles/ricardorheeder/cjx2a9u8b3bi41cqtk3n66h0i'}
+                    mapStyle={'mapbox://styles/ricardorheeder/cjx0jhl3106nf1cpefuocmvf1'}
                     mapboxApiAccessToken={TOKEN}
                     {...viewport}
                     onViewportChange={(viewport) => this.setState({ viewport })} >
