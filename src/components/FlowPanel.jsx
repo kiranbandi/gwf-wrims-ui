@@ -62,7 +62,6 @@ class FlowPanel extends Component {
         if (this.state.showPowerData) {
             this.setState({showPowerData: false});
         }
-
     }
 
     powerFigureToggle() {
@@ -95,7 +94,7 @@ class FlowPanel extends Component {
         const { flowData = {}, width, height } = this.props,
             { dataList = [], name = '', isLoading = false, flowParams = { threshold: 'base' } } = flowData,
             innerWidth = width - 40,
-            innerHeight = height - (175);
+            innerHeight = height - (155);
 
         const { summerFlow = { major: '', minor: '' },
             winterFlow = { major: '', minor: '' },
@@ -103,7 +102,7 @@ class FlowPanel extends Component {
         let isPowerReservoir = ["R1_LDief", "R6_Cod", "R7_Tobin"].includes(name);
 
         return (
-            <div className='flow-panel-root-container' style={{ width, height: (isPowerReservoir? (height + (height * .10) + 15) + "px" : ((height + 15)+'px')) }}>
+            <div className='flow-panel-root-container' style={{ width, height:  (height+'px') }}>
                 <h4 className='title-bar text-center'>FLOW DATA
                 {name.length > 0 && <strong style={{ marginLeft: 10 }}>{name}</strong>}
                 </h4>
@@ -112,7 +111,7 @@ class FlowPanel extends Component {
                     <Loading className='loader' type='spin' height='75px' width='75px' color='#d6e5ff' delay={-1} /> :
                     <div className='flow-inner-container'>
                         <p className='exclaimatory-text'>* All values are in 1000m<sup>3</sup>/week</p>
-                        <div className='entire-panel' style={{ width, height: '108px' }}>
+                        <div className='entire-panel' style={{ width, height: '90px' }}>
                             <div className='metrics-container' style={{ 'width': width - 70 }}>
                                 <StatCard
                                     title={"Summer Flow"}
@@ -160,10 +159,9 @@ class FlowPanel extends Component {
                             </div>
                         </div>
 
-
                         {dataList.length <= 0 ?
                             <h4 className='title-bar text-center m-a-lg'>No Data Available</h4> :
-                            <svg height={innerHeight} width={innerWidth} className='flow-data-chart metric-chart'>
+                            <svg height={(isPowerReservoir? (innerHeight - (innerHeight * .1) )  : innerHeight)} width={innerWidth + (innerWidth * 0.1)} className='flow-data-chart metric-chart'>
                                 <defs>
                                     <clipPath id="clip">
                                         <rect>
@@ -186,10 +184,11 @@ class FlowPanel extends Component {
                                 </rect>
                             </svg>}
                         {isPowerReservoir && <div className="toggle-btn-container" style={{height: (height * .10) + "px" }}>
-                            <div className="btx" style={{ height: (height * .085) + "px"}} onClick={this.waterFlowToggle} >
-                                <div className="btx-icon" style={{height: (height * .07) + "px", width: (height * .07) + "px" }}>
+                            
+                            <div className={"btx " + (this.state.showPowerData ? "" : "toggle-selected") } style={{ height: (height * .035) + "px"}} onClick={this.waterFlowToggle} >
+                                <div className="btx-icon" style={{height: (height * .03) + "px", width: (height * .03) + "px" }}>
                                     <svg>
-                                        <g className="water-drop" style={{transform:"scale("+((height * .07)*0.0019)+")"}}>
+                                        <g className="water-drop" style={{transform:"scale("+((height * .03)*0.0019)+")"}}>
                                             <path d="M270.265,149.448c-36.107-47.124-70.38-78.948-73.439-141.372c0-1.836-0.612-3.06-1.836-4.284
                                             c-0.612-3.06-3.672-4.896-6.732-3.06c-3.672,0-6.731,2.448-6.731,6.732c-77.112,83.232-207.468,294.372-43.452,354.959
                                             c74.052,27.541,157.896-9.791,172.584-90.576C318.614,228.396,295.969,182.497,270.265,149.448z M138.686,323.256
@@ -201,10 +200,11 @@ class FlowPanel extends Component {
                                 </div>
                                 <span className="btx-text">&nbsp;FLOW RATES&nbsp;</span>
                             </div>
-                            <div className="btx" style={{ height: (height * .085) + "px"}} onClick={this.powerFigureToggle}>
-                                <div className="btx-icon" style={{height: (height * .07) + "px", width: (height * .07) + "px" }}>
+
+                            <div className={"btx " + (this.state.showPowerData ? "toggle-selected" : "") } style={{ height: (height * .035) + "px"}} onClick={this.powerFigureToggle}>
+                                <div className="btx-icon" style={{height: (height * .03) + "px", width: (height * .03) + "px" }}>
                                     <svg>
-                                        <g className="bolt" style={{transform:"scale("+((height * .07)*0.0015)+")"}}>
+                                        <g className="bolt" style={{transform:"scale("+((height * .03)*0.0015)+")"}}>
                                             <path d="M207.523,560.316c0,0,194.42-421.925,194.444-421.986l10.79-23.997c-41.824,12.02-135.271,34.902-135.57,35.833
                                             C286.96,122.816,329.017,0,330.829,0c-39.976,0-79.952,0-119.927,0l-12.167,57.938l-51.176,209.995l135.191-36.806
                                             L207.523,560.316z"/>

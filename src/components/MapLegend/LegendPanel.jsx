@@ -7,7 +7,6 @@ export default class LegendPanel extends Component {
         super(props);
     }
 
-
     render() {
         const { width } = this.props;
         let svgIconWidth = width * 0.6, // Width is around 60%

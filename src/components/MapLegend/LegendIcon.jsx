@@ -8,12 +8,11 @@ export default class LegendIcon extends Component {
 
     render() {
         
-        const { title, textX, textY="52.5", type, circleTransform, imageTransform, selected=false } = this.props;
+        const { title, textX, textY="52.5", type, circleTransform, imageTransform, selected=false, hasText = true } = this.props;
 
         return (
             <g>
-                <g key={'marker-' + type} id={title} className={!selected ? "river-marker" 
-                    : "river-marker highlight"}
+                <g key={'marker-' + type} id={title} className={!selected ? "river-marker" : "river-marker highlight"}
                     transform={circleTransform}>
                     <circle
                         cx='150' cy='150' r='200'
@@ -62,7 +61,8 @@ export default class LegendIcon extends Component {
                     }
                     
                 </g>
-                <text 
+                {hasText 
+                ? <text 
                     x={textX} 
                     
                     y={textY} id={title + "-title"} 
@@ -70,6 +70,10 @@ export default class LegendIcon extends Component {
                     className="legend-label">
                     {title}
                 </text>
+                :
+                <text/>
+                }
+                
             </g>
         )
     }
