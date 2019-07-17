@@ -9,7 +9,7 @@ export default class LegendPanel extends Component {
 
     render() {
         const { width } = this.props;
-        let svgIconWidth = width * 0.6, // Width is around 60%
+        let svgIconWidth = width * 0.58, // Width is around 60%
             // ICON VARIABLES
             numberOfIcons = 7, // When adding a new icon, increment numberOfIcons and make sure the increments_Icons is multiplied by the array index
             increments_Icons = svgIconWidth / numberOfIcons, startingPoint_Icons = increments_Icons / 2,

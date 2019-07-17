@@ -5,7 +5,6 @@ import Loading from 'react-loading';
 import * as d3 from 'd3';
 import StatCard from '../components/StatCard';
 import calculateMetrics from '../utils/calculateMetrics';
-import Select from 'react-select';
 
 class FlowPanel extends Component {
 
@@ -17,17 +16,20 @@ class FlowPanel extends Component {
                 {
                     name: "Summer Flow",
                     color: "#1bc98e",
-                    visible: false
+                    visible: true,
+                    id: 0
                 },
                 {
                     name: "Winter Flow",
                     color: "#1ca8dd",
-                    visible: false
+                    visible: true,
+                    id: 1
                 },
                 {
                     name: "Spawning Rate",
                     color: "#9f86ff",
-                    visible: false
+                    visible: true,
+                    id: 2
                 }
             ]  ,
             showPowerData: false
@@ -49,7 +51,7 @@ class FlowPanel extends Component {
 
     componentDidUpdate() {
         const { flowData = {} } = this.props, { dataList = [] } = flowData;
-        console.log("FlowPanel: " + flowData)
+        // console.log("FlowPanel: " + flowData)
         // Added functionality in index.jsx: actions.setFlowData to add values for power
         const timePeriodList = this.state.showPowerData? (_.map(dataList, (d) => d.power)) : _.map(dataList, (d) => d.flow);
         
@@ -82,15 +84,18 @@ class FlowPanel extends Component {
             if (idx === statCardID) {
                 statcard.visible = !statcard.visible;
             }
-
+            
             return statcard;
         });
 
-        this.setState({ statcards: updatedStatcards });
+        this.setState({ statcards: updatedStatcards});
     }
 
-    render() {
-        // console.log("IWASCALLED");
+    addStatCards = () => {
+        let divStatCards = []
+        // console.log("HERE: " + innerWidth + summerFlow)
+        // console.log(summerFlow)
+
         const { flowData = {}, width, height } = this.props,
             { dataList = [], name = '', isLoading = false, flowParams = { threshold: 'base' } } = flowData,
             innerWidth = width - 40,
@@ -99,6 +104,69 @@ class FlowPanel extends Component {
         const { summerFlow = { major: '', minor: '' },
             winterFlow = { major: '', minor: '' },
             spawningRate = { major: '', minor: '' } } = calculateMetrics(dataList, name, flowParams.threshold);
+
+         // Outer loop to create parent
+        for (let i = 0; i < 3; i++) {
+            if (this.state.statcards[i].id == 0 && this.state.statcards[i].visible){
+                divStatCards.push(
+                    <StatCard
+                        key={i}
+                        title={"Summer Flow"}
+                        major={summerFlow.major || 'N/A'}
+                        minor={!!summerFlow.minor ? summerFlow.minor + '%' : ''}
+                        type={"success"}
+                        arrow={!!summerFlow.minor ? summerFlow.minor > 0 ? 'positive' : 'negative' : ''}
+                        width={innerWidth / 3.1}
+                        icon="sun" 
+                    />
+                )
+            }
+
+            if (this.state.statcards[i].id == 1 && this.state.statcards[i].visible){
+                divStatCards.push(
+                    <StatCard
+                        key={i}
+                        title={"Winter Flow"}
+                        major={winterFlow.major || 'N/A'}
+                        minor={!!winterFlow.minor ? winterFlow.minor + '%' : ''}
+                        type={"primary"}
+                        arrow={!!winterFlow.minor > 0 ? winterFlow.minor > 0 ? 'positive' : 'negative' : ''}
+                        width={innerWidth / 3.1}
+                        icon="snow" 
+                    />
+                )
+            }
+
+            if (this.state.statcards[i].id == 2 && this.state.statcards[i].visible){
+                divStatCards.push(
+                    <StatCard
+                        key={i}
+                        title={"Spawning Rate"}
+                        major={!!spawningRate.major ? spawningRate.major + '%' : 'N/A'}
+                        minor={!!spawningRate.minor ? spawningRate.minor + '%' : ''}
+                        type={"info"}
+                        arrow={!!spawningRate.minor > 0 ? spawningRate.minor > 0 ? 'positive' : 'negative' : ''}
+                        width={innerWidth / 3.1}
+                        icon="fish" 
+                    />
+                )
+            }
+
+
+        }
+
+        return divStatCards
+    }
+
+    render() {
+        const { flowData = {}, width, height } = this.props,
+            { dataList = [], name = '', isLoading = false, flowParams = { threshold: 'base' } } = flowData,
+            innerWidth = width - 40,
+            innerHeight = height - (155);
+
+        // const { summerFlow = { major: '', minor: '' },
+        //     winterFlow = { major: '', minor: '' },
+        //     spawningRate = { major: '', minor: '' } } = calculateMetrics(dataList, name, flowParams.threshold);
         let isPowerReservoir = ["R1_LDief", "R6_Cod", "R7_Tobin"].includes(name);
 
         return (
@@ -113,30 +181,7 @@ class FlowPanel extends Component {
                         <p className='exclaimatory-text'>* All values are in 1000m<sup>3</sup>/week</p>
                         <div className='entire-panel' style={{ width, height: '90px' }}>
                             <div className='metrics-container' style={{ 'width': width - 70 }}>
-                                <StatCard
-                                    title={"Summer Flow"}
-                                    major={summerFlow.major || 'N/A'}
-                                    minor={!!summerFlow.minor ? summerFlow.minor + '%' : ''}
-                                    type={"success"}
-                                    arrow={!!summerFlow.minor ? summerFlow.minor > 0 ? 'positive' : 'negative' : ''}
-                                    width={innerWidth / 3.1}
-                                    icon="sun" />
-                                <StatCard
-                                    title={"Winter Flow"}
-                                    major={winterFlow.major || 'N/A'}
-                                    minor={!!winterFlow.minor ? winterFlow.minor + '%' : ''}
-                                    type={"primary"}
-                                    arrow={!!winterFlow.minor > 0 ? winterFlow.minor > 0 ? 'positive' : 'negative' : ''}
-                                    width={innerWidth / 3.1}
-                                    icon="snow" />
-                                <StatCard
-                                    title={"Spawning Rate"}
-                                    major={!!spawningRate.major ? spawningRate.major + '%' : 'N/A'}
-                                    minor={!!spawningRate.minor ? spawningRate.minor + '%' : ''}
-                                    type={"info"}
-                                    arrow={!!spawningRate.minor > 0 ? spawningRate.minor > 0 ? 'positive' : 'negative' : ''}
-                                    width={innerWidth / 3.1}
-                                    icon="fish" />
+                                {this.addStatCards()}
                             </div>
 
                             <div className={"sm-root" + (this.state.dropDownVisible ? " sm-visible" : " sm-hidden")} style={{ 'width': ((.65) * width) + "px", transform: `translateX(${((.35) * width) + 4}px)` }}>
@@ -185,10 +230,10 @@ class FlowPanel extends Component {
                             </svg>}
                         {isPowerReservoir && <div className="toggle-btn-container" style={{height: (height * .10) + "px" }}>
                             
-                            <div className={"btx " + (this.state.showPowerData ? "" : "toggle-selected") } style={{ height: (height * .035) + "px"}} onClick={this.waterFlowToggle} >
-                                <div className="btx-icon" style={{height: (height * .03) + "px", width: (height * .03) + "px" }}>
-                                    <svg>
-                                        <g className="water-drop" style={{transform:"scale("+((height * .03)*0.0019)+")"}}>
+                            <div className={"btx " + (this.state.showPowerData ? "" : "toggle-selected") } style={{ height: "25px"}} onClick={this.waterFlowToggle} >
+                                <div className="btx-icon" style={{height: "20px", width: "20px", transform: "translate(0px,-12px)" }}>
+                                    <svg style={{transform: "translate(-2px, -1px)"}}>
+                                        <g className="water-drop" style={{transform:"scale(0.038)"}}>
                                             <path d="M270.265,149.448c-36.107-47.124-70.38-78.948-73.439-141.372c0-1.836-0.612-3.06-1.836-4.284
                                             c-0.612-3.06-3.672-4.896-6.732-3.06c-3.672,0-6.731,2.448-6.731,6.732c-77.112,83.232-207.468,294.372-43.452,354.959
                                             c74.052,27.541,157.896-9.791,172.584-90.576C318.614,228.396,295.969,182.497,270.265,149.448z M138.686,323.256
@@ -198,20 +243,20 @@ class FlowPanel extends Component {
                                         </g>
                                     </svg>
                                 </div>
-                                <span className="btx-text">&nbsp;FLOW RATES&nbsp;</span>
+                                <span className="btx-text" style={{transform: "translate(0px,-2px)" }}>&nbsp;FLOW RATES&nbsp;</span>
                             </div>
 
-                            <div className={"btx " + (this.state.showPowerData ? "toggle-selected" : "") } style={{ height: (height * .035) + "px"}} onClick={this.powerFigureToggle}>
-                                <div className="btx-icon" style={{height: (height * .03) + "px", width: (height * .03) + "px" }}>
-                                    <svg>
-                                        <g className="bolt" style={{transform:"scale("+((height * .03)*0.0015)+")"}}>
+                            <div className={"btx " + (this.state.showPowerData ? "toggle-selected" : "") } style={{ height: "25px"}} onClick={this.powerFigureToggle}>
+                                <div className="btx-icon" style={{height: "20px", width: "20px", transform: "translate(0px,-12px)" }}>
+                                    <svg style={{transform: "translate(-2px, -1px)"}}>
+                                        <g className="bolt" style={{transform:"scale(0.03)"}}>
                                             <path d="M207.523,560.316c0,0,194.42-421.925,194.444-421.986l10.79-23.997c-41.824,12.02-135.271,34.902-135.57,35.833
                                             C286.96,122.816,329.017,0,330.829,0c-39.976,0-79.952,0-119.927,0l-12.167,57.938l-51.176,209.995l135.191-36.806
                                             L207.523,560.316z"/>
                                         </g>
                                     </svg>  
                                 </div>
-                                <span className="btx-text">&nbsp;POWER FIGURES&nbsp;</span>
+                                <span className="btx-text" style={{transform: "translate(0px,-2px)" }}> &nbsp;POWER FIGURES&nbsp;</span>
                             </div>
                         </div>}    
                     </div> 
