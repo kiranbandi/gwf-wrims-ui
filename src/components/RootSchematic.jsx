@@ -4,11 +4,12 @@ import * as d3 from 'd3';
 import tileMap from '../utils/tileMap';
 import Switch from "react-switch";
 import { BasinMap } from '../components';
+import { connect } from 'react-redux';
 
 //  Image url handling is convoluted in scss , much easier to set inline and get images from root
 let backgroundStyleSchematic = { background: 'url(assets/img/overall.png)', backgroundSize: '100%' };
 
-export default class RootSchematic extends Component {
+class RootSchematic extends Component {
 
     constructor(props) {
         super(props);
@@ -24,7 +25,7 @@ export default class RootSchematic extends Component {
 
 
     handleChange(isMapShown) {
-        this.setState({ isMapShown });
+        this.setState({ isMapShown: !this.state.isMapShown });
     }
 
     getTiles(width, height) {
@@ -44,10 +45,18 @@ export default class RootSchematic extends Component {
         })
     }
 
-
     render() {
 
-        let { width = 1000, selectedPlace } = this.props, { isMapShown } = this.state;
+        let { width = 1000, selectedPlace, userState } = this.props, { isMapShown } = this.state;
+
+        let isStakeHolder = userState === "STAKEHOLDER";
+
+        if (userState !== "WATER_SCIENTIST") {
+
+            isMapShown = false;
+        }
+
+        
         // downscale by 20%
         width = width * .75;
         backgroundStyleSchematic = { ...backgroundStyleSchematic, width: width, height: width / 2.15 };
@@ -57,26 +66,27 @@ export default class RootSchematic extends Component {
             <div className='root-schema-container'>
                 <div className='schema-selection-container' style={{ width: width }}>
                     <h2 className='text-primary switch-custom-label'>Basin Map</h2>
-                    <div className='switch-container'>
-                        <label htmlFor="material-switch">
-                            <Switch
-                                checked={isMapShown}
-                                onChange={this.handleChange}
-                                onColor="#86d3ff"
-                                onHandleColor="#2693e6"
-                                handleDiameter={30}
-                                uncheckedIcon={false}
-                                checkedIcon={false}
-                                boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
-                                activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
-                                height={20}
-                                width={48}
-                                className="react-switch"
-                                id="material-switch"
-                            />
-                        </label>
-                    </div>
-                    <h2 className='text-primary'>Select a <b>Region</b> to Investigate or Pick a <b>Place</b></h2>
+                    {!isStakeHolder && 
+                        <div className='switch-container'>
+                            <label htmlFor="material-switch">
+                                <Switch
+                                    checked={isMapShown}
+                                    onChange={this.handleChange}
+                                    onColor="#86d3ff"
+                                    onHandleColor="#2693e6"
+                                    handleDiameter={30}
+                                    uncheckedIcon={false}
+                                    checkedIcon={false}
+                                    boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
+                                    activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
+                                    height={20}
+                                    width={48}
+                                    className="react-switch"
+                                    id="material-switch"
+                                />
+                            </label>
+                        </div>}
+                    {!isStakeHolder && <h2 className='text-primary'>Select a <b>Region</b> to Investigate or Pick a <b>Place</b></h2> }
                     {isMapShown ?
                         <BasinMap width={width} onRegionSelect={this.props.onRegionSelect} /> :
                         <div id='root-schema' className='image-container' style={backgroundStyleSchematic}>
@@ -108,3 +118,11 @@ export default class RootSchematic extends Component {
         );
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        userState: state.delta.userState
+    };
+}
+
+export default connect(mapStateToProps, null)(RootSchematic);

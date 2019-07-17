@@ -99,3 +99,7 @@ export function setFilterNonIrrigation(visibleNonIrrigations) {
 export function toggleNonIrrigationVisibility() {
     return { type: types.SET_NONIRRIGATION_VISIBILITY };
 }
+
+export function setUserState(userState) {
+    return { type: types.SET_USER_STATE, userState }
+}

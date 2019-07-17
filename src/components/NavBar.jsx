@@ -6,6 +6,8 @@ import { bindActionCreators } from 'redux';
 import { setLogoutData, setLoginData } from '../redux/actions/actions';
 import { GoogleLogin } from 'react-google-login';
 import { requestLogin } from '../utils/requestServer';
+import { setUserState } from '../redux/actions/actions';
+
 
 // Google client ID for the GWF project 
 const GOOGLE_ID = '35101241949-nlhoc8npcecg7il8589aq194cc5cboab.apps.googleusercontent.com';
@@ -19,6 +21,7 @@ class NavBar extends Component {
         super(props);
         this.logOut = this.logOut.bind(this);
         this.googleResponse = this.googleResponse.bind(this);
+        this.onSelectUserType = this.onSelectUserType.bind(this);
     }
 
     componentDidMount() {
@@ -29,6 +32,11 @@ class NavBar extends Component {
                 $(this).collapse('hide');
             }
         });
+    }
+
+    onSelectUserType() {
+        const userType = event.target.value;
+        this.props.actions.setUserState(userType);
     }
 
     logOut(event) {
@@ -50,7 +58,8 @@ class NavBar extends Component {
 
     render() {
         const loginRedirectURL = 'https://cas.usask.ca/cas/login?service=' + encodeURIComponent((process.env.NODE_ENV == 'development') ? 'https://localhost:8888/' : 'https://gwf-hci.usask.ca/');
-
+        const { userState, logged_in } = this.props;
+        const nullUserState = (userState === "EMPTY_STATE")
         return (
             <nav className="navbar navbar-inverse navbar-fixed-top">
                 <div className="container-fluid">
@@ -80,7 +89,19 @@ class NavBar extends Component {
                             </li>
                         </ul>
                         <ul className='nav navbar-nav navbar-right'>
+                            { !nullUserState && logged_in &&
+                                <li>
+                                    <div className="input-group">
+                                        <span className='inner-span'>Current User</span>
+                                        <select name="program" className='custom-select' value={userState} onChange={this.onSelectUserType}>
+                                            <option key={'pg-1'} value={'STAKEHOLDER'} >{'Stakeholder'}</option>
+                                            <option key={'pg-2'} value={'WATER_SCIENTIST'} >{'Water Scientist'}</option>
+                                        </select>
+                                    </div>
+                                </li>
+                            }
                             <li> {this.props.logged_in ?
+                                
                                 <Link to='/Logout' onClick={this.logOut}>
                                     <span className="icon icon-log-out"></span> Logout
                                         </Link>
@@ -118,13 +139,14 @@ class NavBar extends Component {
 function mapStateToProps(state) {
     return {
         logged_in: state.delta.sessionStatus,
-        username: state.delta.username
+        username: state.delta.username,
+        userState: state.delta.userState
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({ setLogoutData, setLoginData }, dispatch)
+        actions: bindActionCreators({ setLogoutData, setLoginData, setUserState }, dispatch)
     };
 }
 
