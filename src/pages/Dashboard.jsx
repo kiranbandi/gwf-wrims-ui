@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { RiverMap, FilterPanel, FlowPanel, RootSchematic, VerticalSlider } from '../components';
+import { RiverMap, FilterPanel, FlowPanel, RootSchematic, VerticalSlider, Modal } from '../components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { setFlowData } from '../redux/actions/actions';
+import { setFlowData, setUserState } from '../redux/actions/actions';
 import axios from 'axios';
 import toastr from '../utils/toastr';
 import Loading from 'react-loading';
@@ -90,10 +90,12 @@ class DashboardRoot extends Component {
 
         // reduce the width of the slider from the map
         mapWidth = mapWidth - widthOfSlider;
-
+         
+        const { userState } = this.props;
 
         return (
             <div className='dashboard-page-root' >
+            <Modal show={userState === "EMPTY_STATE"} componentID={"userSelection"}/>    
 
                 <RootSchematic
                     width={widthOfDashboard}
@@ -128,7 +130,8 @@ class DashboardRoot extends Component {
 
 function mapStateToProps(state) {
     return {
-        flowData: state.delta.flowData
+        flowData: state.delta.flowData,
+        userState: state.delta.userState
     };
 }
 

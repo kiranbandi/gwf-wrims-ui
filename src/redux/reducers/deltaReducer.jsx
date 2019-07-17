@@ -46,7 +46,9 @@ export default function deltaReducer(state = initialState.delta, action) {
       return Object.assign({}, state, { filterMesh: { ...state.filterMesh, areNonIrrigationsVisible: !state.filterMesh.areNonIrrigationsVisible } })
     case types.SET_FILTER_NONIRRIGATION:
       return Object.assign({}, state, { filterMesh: { ...state.filterMesh, visibleNonIrrigations: action.visibleNonIrrigations } })
-
+    
+    case types.SET_USER_STATE: 
+      return Object.assign({}, state, { userState: action.userState } )
 
     default:
       return state;

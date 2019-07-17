@@ -11,3 +11,4 @@ export { default as FileUpload } from './FileUpload';
 export { default as PlaceInfo } from './MapComponents/PlaceInfo';
 export { default as PlaceMarker } from './MapComponents/PlaceMarker';
 export { default as BasinMap } from './MapComponents/BasinMap';
+export { default as Modal } from './Modal/';
