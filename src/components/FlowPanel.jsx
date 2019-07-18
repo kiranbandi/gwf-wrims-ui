@@ -31,7 +31,7 @@ class FlowPanel extends Component {
                     visible: true,
                     id: 2
                 }
-            ]  ,
+            ],
             showPowerData: false
         }
         
@@ -91,22 +91,22 @@ class FlowPanel extends Component {
         this.setState({ statcards: updatedStatcards});
     }
 
-    addStatCards = () => {
+    addStatCards = (numStatcards) => {
         let divStatCards = []
-        // console.log("HERE: " + innerWidth + summerFlow)
-        // console.log(summerFlow)
 
-        const { flowData = {}, width, height } = this.props,
-            { dataList = [], name = '', isLoading = false, flowParams = { threshold: 'base' } } = flowData,
-            innerWidth = width - 40,
-            innerHeight = height - (155);
+        const { flowData = {}, width, height } = this.props;
+        
+        const { dataList = [], name = '', isLoading = false, flowParams = { threshold: 'base' } } = flowData;
 
-        const { summerFlow = { major: '', minor: '' },
-            winterFlow = { major: '', minor: '' },
-            spawningRate = { major: '', minor: '' } } = calculateMetrics(dataList, name, flowParams.threshold);
+    //    console.log("HERE:")
+        // console.log(flowData);
+
+       const { summerFlow = { major: '', minor: '' },
+           winterFlow = { major: '', minor: '' },
+           spawningRate = { major: '', minor: '' } } = calculateMetrics(dataList, name, flowParams.threshold);
 
          // Outer loop to create parent
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < numStatcards; i++) {
             if (this.state.statcards[i].id == 0 && this.state.statcards[i].visible){
                 divStatCards.push(
                     <StatCard
@@ -151,8 +151,6 @@ class FlowPanel extends Component {
                     />
                 )
             }
-
-
         }
 
         return divStatCards
@@ -167,6 +165,7 @@ class FlowPanel extends Component {
         // const { summerFlow = { major: '', minor: '' },
         //     winterFlow = { major: '', minor: '' },
         //     spawningRate = { major: '', minor: '' } } = calculateMetrics(dataList, name, flowParams.threshold);
+
         let isPowerReservoir = ["R1_LDief", "R6_Cod", "R7_Tobin"].includes(name);
 
         return (
@@ -181,7 +180,7 @@ class FlowPanel extends Component {
                         <p className='exclaimatory-text'>* All values are in 1000m<sup>3</sup>/week</p>
                         <div className='entire-panel' style={{ width, height: '90px' }}>
                             <div className='metrics-container' style={{ 'width': width - 70 }}>
-                                {this.addStatCards()}
+                                {this.addStatCards(Object.keys(this.state.statcards).length)}
                             </div>
 
                             <div className={"sm-root" + (this.state.dropDownVisible ? " sm-visible" : " sm-hidden")} style={{ 'width': ((.65) * width) + "px", transform: `translateX(${((.35) * width) + 4}px)` }}>
