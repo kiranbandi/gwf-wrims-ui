@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { RiverMap, FilterPanel, FlowPanel, RootSchematic, VerticalSlider, Modal } from '../components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { setFlowData, setUserState } from '../redux/actions/actions';
+import { setFlowData } from '../redux/actions/actions';
 import axios from 'axios';
 import toastr from '../utils/toastr';
 import Loading from 'react-loading';
@@ -24,6 +24,8 @@ class DashboardRoot extends Component {
         this.onRegionSelect = this.onRegionSelect.bind(this);
         this.onPlaceSelect = this.onPlaceSelect.bind(this);
     }
+
+
 
     onRegionSelect(event) {
         const selectedRegion = event.target.id || 'highwood';
@@ -90,12 +92,12 @@ class DashboardRoot extends Component {
 
         // reduce the width of the slider from the map
         mapWidth = mapWidth - widthOfSlider;
-         
+
         const { userState } = this.props;
 
         return (
             <div className='dashboard-page-root' >
-            <Modal show={userState === "EMPTY_STATE"} componentID={"userSelection"}/>    
+                <Modal show={userState === "EMPTY_STATE"} componentID={"userSelection"} />
 
                 <RootSchematic
                     width={widthOfDashboard}
@@ -107,15 +109,17 @@ class DashboardRoot extends Component {
                     <Loading className='loader' type='spin' height='100px' width='100px' color='#d6e5ff' delay={-1} /> :
                     <div className='dashboard-inner-root'>
                         {SchematicData.lines.length > 0 && <div>
-                            <FilterPanel schematicData={SchematicData} />
+                            {(userState == "WATER_SCIENTIST") && < FilterPanel schematicData={SchematicData} />}
                             <RiverMap
                                 schematicData={SchematicData}
                                 width={mapWidth}
                                 height={mapWidth / 1.75}
                                 isMock={false} />
-                            <VerticalSlider
+
+                            {(userState == "WATER_SCIENTIST") && <VerticalSlider
                                 width={widthOfSlider}
-                                height={mapWidth / 1.75} />
+                                height={mapWidth / 1.75} />}
+
                             <FlowPanel
                                 width={widthOfDashboard * 0.35}
                                 height={mapWidth / 1.75} />

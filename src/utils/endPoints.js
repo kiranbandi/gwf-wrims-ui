@@ -12,6 +12,7 @@ var endPoints = {
     getCatalog: endPointRoot + "/dss/get-catalog",
     getPathData: endPointRoot + "/dss/get-pathdata",
     getFlowData: endPointRoot + "/records/flow-data",
+    getYearlyData: endPointRoot + "/records/yearly-flow-data",
 }
 
 module.exports = endPoints;

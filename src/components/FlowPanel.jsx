@@ -198,7 +198,6 @@ class FlowPanel extends Component {
 
                                 <div className='two-button-group'>
                                     <button id="dropdown-icon" onClick={this.fakeDropDownClick} className="btn statcard-button"><i className="icon icon-chevron-down"></i></button>
-                                    <button id="submit-icon" className="btn statcard-button"><i className="icon icon-check"></i></button>
                                 </div>
                             </div>
                         </div>

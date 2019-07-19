@@ -15,10 +15,9 @@ class RootSchematic extends Component {
         super(props);
 
         this.state = {
-            isMapShown: true,
+            isMapShown: false,
 
         };
-
         this.getTiles = this.getTiles.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
@@ -52,21 +51,18 @@ class RootSchematic extends Component {
         let isStakeHolder = userState === "STAKEHOLDER";
 
         if (userState !== "WATER_SCIENTIST") {
-
-            isMapShown = false;
+            isMapShown = true;
         }
 
-        
         // downscale by 20%
         width = width * .75;
         backgroundStyleSchematic = { ...backgroundStyleSchematic, width: width, height: width / 2.15 };
-
 
         return (
             <div className='root-schema-container'>
                 <div className='schema-selection-container' style={{ width: width }}>
                     <h2 className='text-primary switch-custom-label'>Basin Map</h2>
-                    {!isStakeHolder && 
+                    {!isStakeHolder &&
                         <div className='switch-container'>
                             <label htmlFor="material-switch">
                                 <Switch
@@ -86,7 +82,7 @@ class RootSchematic extends Component {
                                 />
                             </label>
                         </div>}
-                    {!isStakeHolder && <h2 className='text-primary'>Select a <b>Region</b> to Investigate or Pick a <b>Place</b></h2> }
+                    {!isStakeHolder && <h2 className='text-primary'>Select a <b>Region</b> to Investigate or Pick a <b>Place</b></h2>}
                     {isMapShown ?
                         <BasinMap width={width} onRegionSelect={this.props.onRegionSelect} /> :
                         <div id='root-schema' className='image-container' style={backgroundStyleSchematic}>
