@@ -20,11 +20,13 @@ class RiverMap extends Component {
     }
 
     componentDidMount() {
-        const { width, fromDashboard = true } = this.props;
+        const { width, fromDashboard = true, scaleFix } = this.props;
 
         // magic numbers for our chart so it looks good
-        const initialZoomScale = fromDashboard ? { x: width * 0.50, y: width * 0.30, scale: 1.10 } : { x: width * 0.045, y: width * 0.055, scale: 1.10 };
-
+        let initialZoomScale = (fromDashboard) ? { x: width * 0.50, y: width * 0.25, scale: 1.10 } : { x: width * 0.045, y: width * 0.055, scale: 1.10 };
+        
+        // for when the user is in stakeholder mode
+        initialZoomScale = (scaleFix) ? { x: width * 0.045, y: width * 0.015, scale: 1.10 } : initialZoomScale;
         attachZoom('river-map', initialZoomScale);
     }
 
@@ -66,20 +68,18 @@ class RiverMap extends Component {
             actions.setFlowData({ dataList: [], name, flowParams, isLoading: true });
             getFlowData(flowParams)
                 .then((records) => {
-                    console.log(records);
-                    // if (records[0])
-
                     let dataList = _.map(records, (d) => (
-                        d.power == null ?
+                            d.power?
                             {
-                                'flow': d.flow,
-                                'timestamp': d.timestamp
+                                'flow': (Math.round(Number(d.flow) * 1000) / 1000),
+                                'timestamp': d.timestamp,
+                                'power': d.power
+
                             }
                             :
                             {
-                                'flow': d.flow,
-                                'timestamp': d.timestamp,
-                                'power': d.power
+                                'flow': (Math.round(Number(d.flow) * 1000) / 1000),
+                                'timestamp': d.timestamp
                             }
                     ));
 

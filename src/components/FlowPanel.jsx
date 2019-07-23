@@ -17,19 +17,16 @@ class FlowPanel extends Component {
                     name: "Summer Flow",
                     color: "#1bc98e",
                     visible: true,
-                    id: 0
                 },
                 {
                     name: "Winter Flow",
                     color: "#1ca8dd",
                     visible: true,
-                    id: 1
                 },
                 {
                     name: "Spawning Rate",
                     color: "#9f86ff",
                     visible: true,
-                    id: 2
                 }
             ],
             showPowerData: false
@@ -73,42 +70,32 @@ class FlowPanel extends Component {
         }
     }
 
-    fakeDropDownClick = () => {
+    onDropdownButtonClick = () => {
 
         this.setState({ dropDownVisible: !this.state.dropDownVisible })
     }
 
-    setVisible = (statCardID) => {
-        // temp implementation to test out the menu
-        var updatedStatcards = this.state.statcards.map((statcard, idx) => {
-            if (idx === statCardID) {
-                statcard.visible = !statcard.visible;
-            }
-            
-            return statcard;
-        });
+    toggleVisibility = (statcardID) => {
 
-        this.setState({ statcards: updatedStatcards});
+        let { statcards } = this.state;
+
+        statcards[statcardID].visible = !statcards[statcardID].visible;  
+
+        this.setState({ statcards: statcards});
     }
 
-    addStatCards = (numStatcards) => {
-        let divStatCards = []
-
-        const { flowData = {}, width, height } = this.props;
+    addStatCards = (metrics, innerWidth) => {
         
-        const { dataList = [], name = '', isLoading = false, flowParams = { threshold: 'base' } } = flowData;
+        const { statcards } = this.state;
 
-    //    console.log("HERE:")
-        // console.log(flowData);
+        let visibleStatCards = []
 
-       const { summerFlow = { major: '', minor: '' },
-           winterFlow = { major: '', minor: '' },
-           spawningRate = { major: '', minor: '' } } = calculateMetrics(dataList, name, flowParams.threshold);
+        for (let i = 0; i < statcards.length; i++) {
 
-         // Outer loop to create parent
-        for (let i = 0; i < numStatcards; i++) {
-            if (this.state.statcards[i].id == 0 && this.state.statcards[i].visible){
-                divStatCards.push(
+            if ((i === 0) && statcards[i].visible) {
+                let summerFlow = metrics[0];
+
+                visibleStatCards.push(
                     <StatCard
                         key={i}
                         title={"Summer Flow"}
@@ -119,11 +106,13 @@ class FlowPanel extends Component {
                         width={innerWidth / 3.1}
                         icon="sun" 
                     />
-                )
+                );
             }
 
-            if (this.state.statcards[i].id == 1 && this.state.statcards[i].visible){
-                divStatCards.push(
+            if ((i === 1) && statcards[i].visible) {
+                let winterFlow = metrics[1];
+
+                visibleStatCards.push(
                     <StatCard
                         key={i}
                         title={"Winter Flow"}
@@ -134,11 +123,13 @@ class FlowPanel extends Component {
                         width={innerWidth / 3.1}
                         icon="snow" 
                     />
-                )
+                );
             }
 
-            if (this.state.statcards[i].id == 2 && this.state.statcards[i].visible){
-                divStatCards.push(
+            if ((i === 2) && statcards[i].visible) {
+                let spawningRate = metrics[2];
+                
+                visibleStatCards.push(
                     <StatCard
                         key={i}
                         title={"Spawning Rate"}
@@ -149,25 +140,30 @@ class FlowPanel extends Component {
                         width={innerWidth / 3.1}
                         icon="fish" 
                     />
-                )
+                );
             }
         }
 
-        return divStatCards
+        return visibleStatCards;
     }
 
     render() {
+        // console.log("IWASCALLED");
         const { flowData = {}, width, height } = this.props,
             { dataList = [], name = '', isLoading = false, flowParams = { threshold: 'base' } } = flowData,
-            innerWidth = width - 40,
-            innerHeight = height - (155);
+            innerWidth = width - 60,
+            innerHeight = height - (175);
 
-        // const { summerFlow = { major: '', minor: '' },
-        //     winterFlow = { major: '', minor: '' },
-        //     spawningRate = { major: '', minor: '' } } = calculateMetrics(dataList, name, flowParams.threshold);
-
+        const { summerFlow = { major: '', minor: '' },
+            winterFlow = { major: '', minor: '' },
+            spawningRate = { major: '', minor: '' } } = calculateMetrics(dataList, name, flowParams.threshold);
         let isPowerReservoir = ["R1_LDief", "R6_Cod", "R7_Tobin"].includes(name);
 
+        // if a node has no power associated with it, show water data by default
+        if (!isPowerReservoir && this.state.showPowerData) { this.waterFlowToggle(); }
+
+        let metrics = [summerFlow, winterFlow, spawningRate]
+        
         return (
             <div className='flow-panel-root-container' style={{ width, height:  (height+'px') }}>
                 <h4 className='title-bar text-center'>FLOW DATA
@@ -180,14 +176,14 @@ class FlowPanel extends Component {
                         <p className='exclaimatory-text'>* All values are in 1000m<sup>3</sup>/week</p>
                         <div className='entire-panel' style={{ width, height: '90px' }}>
                             <div className='metrics-container' style={{ 'width': width - 70 }}>
-                                {this.addStatCards(Object.keys(this.state.statcards).length)}
+                                {this.addStatCards(metrics, innerWidth)}
                             </div>
 
                             <div className={"sm-root" + (this.state.dropDownVisible ? " sm-visible" : " sm-hidden")} style={{ 'width': ((.65) * width) + "px", transform: `translateX(${((.35) * width) + 4}px)` }}>
                                 <div className={"sm-options-container" + (this.state.dropDownVisible ? " sm-visible" : " sm-hidden")} style={{ width: (((.65) * width) - 70) + "px" }}>
                                     {this.state.statcards.map((statcard, idx) => {
                                         return (
-                                            <div className="sm-option" key={idx} onClick={() => this.setVisible(idx)}>
+                                            <div className="sm-option" key={idx} onClick={() => this.toggleVisibility(idx)}>
                                                 <div className="sm-option-icon"><div style={{ background: statcard.color }}>&zwnj;</div></div>
                                                 <div className="sm-option-text">{statcard.name}</div>
                                                 <div className={"sm-option-check" + (statcard.visible ? " sm-visble" : " sm-hidden")}><i className="icon icon-check"></i></div>
@@ -197,7 +193,7 @@ class FlowPanel extends Component {
                                 </div>
 
                                 <div className='two-button-group'>
-                                    <button id="dropdown-icon" onClick={this.fakeDropDownClick} className="btn statcard-button"><i className="icon icon-chevron-down"></i></button>
+                                    <button id="dropdown-icon" onClick={this.onDropdownButtonClick} className="btn statcard-button"><i className="icon icon-chevron-down"></i></button>
                                 </div>
                             </div>
                         </div>
