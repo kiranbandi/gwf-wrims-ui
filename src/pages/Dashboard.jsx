@@ -93,11 +93,11 @@ class DashboardRoot extends Component {
         // reduce the width of the slider from the map
         mapWidth = mapWidth - widthOfSlider;
 
-        const { userState } = this.props;
+        const { mode } = this.props;
 
         return (
             <div className='dashboard-page-root' >
-                <Modal show={userState === "EMPTY_STATE"} componentID={"userSelection"} />
+                <Modal show={mode === -1} componentID={"userSelection"} />
 
                 <RootSchematic
                     width={widthOfDashboard}
@@ -109,16 +109,16 @@ class DashboardRoot extends Component {
                     <Loading className='loader' type='spin' height='100px' width='100px' color='#d6e5ff' delay={-1} /> :
                     <div className='dashboard-inner-root'>
                         {SchematicData.lines.length > 0 && <div>
-                            {(userState == "WATER_SCIENTIST") && < FilterPanel schematicData={SchematicData} />}
+                            {(mode === 1) && < FilterPanel schematicData={SchematicData} />}
 
                             <RiverMap
                                 schematicData={SchematicData}
                                 width={mapWidth}
                                 height={mapWidth / 1.75}
                                 isMock={false}
-                                scaleFix={!(userState == "WATER_SCIENTIST")} />
+                                scaleFix={!(mode === 1)} />
 
-                            {(userState == "WATER_SCIENTIST") && <VerticalSlider
+                            {(mode === 1) && <VerticalSlider
                                 width={widthOfSlider}
                                 height={mapWidth / 1.75} />}
 
@@ -138,7 +138,7 @@ class DashboardRoot extends Component {
 function mapStateToProps(state) {
     return {
         flowData: state.delta.flowData,
-        userState: state.delta.userState
+        mode: state.delta.mode
     };
 }
 

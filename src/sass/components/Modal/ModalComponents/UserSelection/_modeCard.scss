@@ -1,0 +1,47 @@
+.mode-card-root {
+    display: inline-block;
+    height: 97%;
+    width: 28%;
+    background: #212131;
+    margin: 0 20px;
+    border-radius: 15px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    vertical-align: top;
+
+    .mode-card-content {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+
+        .mode-card-title {
+            font-size: 1.4em;
+            padding: 6px;
+            white-space: pre-line;
+        }
+        .mode-card-text {
+            padding: 15px;
+        }
+    
+        .one-examples-title {
+            text-align: left;
+            padding: 15px;
+            font-weight: bold;
+        }
+    
+        .one-examples-content {
+            margin: -8px 0px 0px -5px;
+            
+            li{
+                text-align: left;
+            }
+        }
+    }
+
+    &:hover {
+        border: 2px solid #7676af;
+        
+    }
+    
+
+}

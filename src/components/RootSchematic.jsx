@@ -46,11 +46,11 @@ class RootSchematic extends Component {
 
     render() {
 
-        let { width = 1000, selectedPlace, userState } = this.props, { isMapShown } = this.state;
+        let { width = 1000, selectedPlace, mode } = this.props, { isMapShown } = this.state;
 
-        let isStakeHolder = userState === "STAKEHOLDER";
+        let isModeZero = (mode === 0);
 
-        if (userState !== "WATER_SCIENTIST") {
+        if (mode !== 1) {
             isMapShown = true;
         }
 
@@ -62,7 +62,7 @@ class RootSchematic extends Component {
             <div className='root-schema-container'>
                 <div className='schema-selection-container' style={{ width: width }}>
                     <h2 className='text-primary switch-custom-label'>Basin Map</h2>
-                    {!isStakeHolder &&
+                    {!isModeZero &&
                         <div className='switch-container'>
                             <label htmlFor="material-switch">
                                 <Switch
@@ -82,7 +82,7 @@ class RootSchematic extends Component {
                                 />
                             </label>
                         </div>}
-                    {!isStakeHolder && <h2 className='text-primary'>Select a <b>Region</b> to Investigate or Pick a <b>Place</b></h2>}
+                    {!isModeZero && <h2 className='text-primary'>Select a <b>Region</b> to Investigate or Pick a <b>Place</b></h2>}
                     {isMapShown ?
                         <BasinMap width={width} onRegionSelect={this.props.onRegionSelect} /> :
                         <div id='root-schema' className='image-container' style={backgroundStyleSchematic}>
@@ -117,7 +117,7 @@ class RootSchematic extends Component {
 
 function mapStateToProps(state) {
     return {
-        userState: state.delta.userState
+        mode: state.delta.mode
     };
 }
 

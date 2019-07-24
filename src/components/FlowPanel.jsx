@@ -48,8 +48,7 @@ class FlowPanel extends Component {
 
     componentDidUpdate() {
         const { flowData = {} } = this.props, { dataList = [] } = flowData;
-        // console.log("FlowPanel: " + flowData)
-        // Added functionality in index.jsx: actions.setFlowData to add values for power
+        
         const timePeriodList = this.state.showPowerData? (_.map(dataList, (d) => d.power)) : _.map(dataList, (d) => d.flow);
         
         if (dataList.length > 0) {
@@ -148,7 +147,6 @@ class FlowPanel extends Component {
     }
 
     render() {
-        // console.log("IWASCALLED");
         const { flowData = {}, width, height } = this.props,
             { dataList = [], name = '', isLoading = false, flowParams = { threshold: 'base' } } = flowData,
             innerWidth = width - 60,
