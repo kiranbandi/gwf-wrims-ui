@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { toggleAmenityVisibility, setFilterAmenity } from '../../redux/actions/actions';
+import { toggleAmenityVisibility, setFilterAmenity } from '../../../../redux/actions/actions';
 import Select from 'react-select';
-import sortAlphaNum from '../../utils/sortAlphaNum';
+import sortAlphaNum from '../../../../utils/sortAlphaNum';
 
 class AmenitiesFilter extends Component {
     constructor(props) {

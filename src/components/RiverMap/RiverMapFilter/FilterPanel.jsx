@@ -2,12 +2,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import LabelFilter from './FilterComponents/LabelFilter.jsx'
-import InflowFilter from './FilterComponents/InflowFilter.jsx';
-import AmenitiesFilter from './FilterComponents/AmenitiesFilter.jsx';
-import IrrigationFilter from './FilterComponents/IrrigationFilter.jsx';
-import NonIrrigationFilter from './FilterComponents/NonIrrigationFilter.jsx';
-import YearRangeSlider from './YearRangeSlider';
+import LabelFilter from './FilterPanelComponents/LabelFilter.jsx'
+import InflowFilter from './FilterPanelComponents/InflowFilter.jsx';
+import AmenitiesFilter from './FilterPanelComponents/AmenitiesFilter.jsx';
+import IrrigationFilter from './FilterPanelComponents/IrrigationFilter.jsx';
+import NonIrrigationFilter from './FilterPanelComponents/NonIrrigationFilter.jsx';
+import YearRangeSlider from '../../SingleFilterComponents/YearRangeSlider';
 
 
 class FilterPanel extends Component {

@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Loading from 'react-loading';
 import * as d3 from 'd3';
-import StatCard from '../components/StatCard';
-import calculateMetrics from '../utils/calculateMetrics';
+import StatCard from './StatCard';
+import calculateMetrics from '../../utils/calculateMetrics';
 
 class FlowPanel extends Component {
 
