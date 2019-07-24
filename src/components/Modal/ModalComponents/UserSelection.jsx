@@ -20,7 +20,7 @@ class UserSelection extends Component {
         }
 
         return (
-            <div className="us-root" style={{width: widthOfPage, height: .40 * widthOfPage}}>
+            <div className="us-root" style={{ width: widthOfPage, height: .40 * widthOfPage }}>
                 <div className="us-text">
                     {"Who's using this tool today?"}
                 </div>
