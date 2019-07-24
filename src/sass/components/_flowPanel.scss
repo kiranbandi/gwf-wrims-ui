@@ -34,10 +34,7 @@
     .statcard-button:hover {
         background-color: #4CAF50;
     }
-    #TestSelect {
-        float: left;
-        width: 310px;
-    }
+
     .two-button-group {
         width: 40px;
     }
@@ -49,6 +46,7 @@
         z-index: 1;
         position: absolute;
         text-align: center;
+        white-space: nowrap;
     }
     .metrics-container::-webkit-scrollbar {
         height: 0.7em;

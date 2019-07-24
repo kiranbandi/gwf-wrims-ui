@@ -110,16 +110,19 @@ class DashboardRoot extends Component {
                     <div className='dashboard-inner-root'>
                         {SchematicData.lines.length > 0 && <div>
                             {(userState == "WATER_SCIENTIST") && < FilterPanel schematicData={SchematicData} />}
+
                             <RiverMap
                                 schematicData={SchematicData}
                                 width={mapWidth}
                                 height={mapWidth / 1.75}
-                                isMock={false} />
+                                isMock={false}
+                                scaleFix={!(userState == "WATER_SCIENTIST")} />
 
                             {(userState == "WATER_SCIENTIST") && <VerticalSlider
                                 width={widthOfSlider}
                                 height={mapWidth / 1.75} />}
 
+        
                             <FlowPanel
                                 width={widthOfDashboard * 0.35}
                                 height={mapWidth / 1.75} />
