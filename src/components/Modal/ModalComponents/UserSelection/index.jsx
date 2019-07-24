@@ -34,8 +34,8 @@ class UserSelection extends Component {
                         title={`Explore water management scenarios for the basin`}
                         text={`In this mode, users will be able to access models built to explore user questions for particular locations or policy issues.`}
                         innerElements={[
-                            <div className="one-examples-title">{`Some Examples: `}</div>,
-                            <ul className="one-examples-content">
+                            <div className="one-examples-title" key={'card-1-examples'}>{`Some Examples: `}</div>,
+                            <ul className="one-examples-content" key={'card-1-example-descriptions'}>
                                 <li>{`Water management futures for the Saskatchewan River Basin`}</li>
                                 <li>{`Reservoir management scenarios for hydro-power generation in the Upper Nelson basin`}</li>
                                 <li>{`Farmers and water use behavior in the Bow River Basin`}</li>

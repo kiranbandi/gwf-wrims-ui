@@ -10,9 +10,7 @@
     vertical-align: top;
 
     .mode-card-content {
-        position: relative;
-        top: 50%;
-        transform: translateY(-50%);
+        padding-top: 15px;
 
         .mode-card-title {
             font-size: 1.4em;

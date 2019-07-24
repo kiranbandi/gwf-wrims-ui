@@ -16,17 +16,17 @@ class FlowPanel extends Component {
                 {
                     name: "Summer Flow",
                     color: "#1bc98e",
-                    visible: true,
+                    visible: true
                 },
                 {
                     name: "Winter Flow",
                     color: "#1ca8dd",
-                    visible: true,
+                    visible: true
                 },
                 {
                     name: "Spawning Rate",
                     color: "#9f86ff",
-                    visible: true,
+                    visible: true
                 }
             ],
             showPowerData: false

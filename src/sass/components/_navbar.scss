@@ -64,10 +64,13 @@
         font-weight: bold;
         padding: 6px;
         margin: 8px 0;
-        background: transparent;
+        background: #2f2f2f;
+        border: 2px solid transparent;
         cursor: pointer;
+        color: #c7c7c7;
+
         &:hover {
-            background: #383838
+            border: 2px solid #8c8c8c;
         }
     }
 }
