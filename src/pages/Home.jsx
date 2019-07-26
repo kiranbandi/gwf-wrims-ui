@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 //  Image url handling is convoluted in scss , much easier to set inline and get images from root
 let backgroundStyle = { backgroundImage: 'url(assets/img/gwf.jpg)' };
-import videoTileData from '../utils/videoTilesData';
+import videoTileData from '../utils/static-reference/videoTilesData';
 import { YoutubeLayout } from '../components'
 
 class Home extends Component {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 import { getPathData } from '../../utils/requestServer';
-import processFlowData from '../../utils/processFlowData';
+import processFlowData from '../../utils/processors/processFlowData';
 import * as d3 from 'd3';
 
 class DoughnutChart extends Component {

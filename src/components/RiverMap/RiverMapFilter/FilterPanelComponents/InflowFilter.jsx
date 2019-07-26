@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { toggleInflowVisibility, setFilterInflow } from '../../../../redux/actions/actions';
 import Select from 'react-select';
-import sortAlphaNum from '../../../../utils/sortAlphaNum';
+import sortAlphaNum from '../../../../utils/processors/sortAlphaNum';
 
 class InflowFilter extends Component {
     constructor(props) {
