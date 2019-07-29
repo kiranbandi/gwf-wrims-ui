@@ -6,11 +6,15 @@ import PLACES from '../../utils/static-reference/mapPlaces';
 
 const TOKEN = 'pk.eyJ1IjoicmljYXJkb3JoZWVkZXIiLCJhIjoiY2p4MGl5bWIyMDE1bDN5b2NneHh5djJ2biJ9.3ALfBtMIORYFNtXU9RUUnA';
 
+import {defaultMapStyle, highlightLayerIndex} from './map-style.jsx';
+
+
 export default class BasinMap extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            mapStyle: defaultMapStyle,
             viewport: {
                 width: 400,
                 height: 400,
@@ -18,12 +22,34 @@ export default class BasinMap extends Component {
                 longitude: -110.75,
                 zoom: 5.5
             },
-            popupInfo: null
+            popupInfo: null,
+            hoverInfo: null
 
         };
         this.renderPlaceMarker = this.renderPlaceMarker.bind(this);
         this.renderPopup = this.renderPopup.bind(this);
     }
+
+    _onHover = event => {
+        let basinName = '';
+        let hoverInfo = null;
+
+        const basin = event.features && event.features.find(f => f.layer.id === 'basins'); //ab-bow-9oizy4
+        console.log(event)
+        if (basin){
+            hoverInfo = {
+                lngLat: event.lngLat,
+                basin: basin.properties
+            };
+            // console.log(basin.properties)
+            basinName = basin.properties.BASIN;
+            console.log(basinName)
+        }
+        this.setState({
+            mapStyle: defaultMapStyle.setIn(['layers', highlightLayerIndex, 'filter', 2], basinName),
+            hoverInfo
+        });
+    };
 
     renderPlaceMarker(place, index) {
         return (
@@ -38,26 +64,36 @@ export default class BasinMap extends Component {
     };
 
     renderPopup() {
-        const { popupInfo } = this.state;
-        return (
-            popupInfo && (
-                <Popup
-                    tipSize={5}
-                    anchor="left"
-                    longitude={popupInfo.longitude}
-                    latitude={popupInfo.latitude}
-                    closeOnClick={false}
-                    onClose={() => this.setState({ popupInfo: null })}>
-                    <PlaceInfo info={popupInfo} />
-                </Popup>
-            )
-        );
+        const { popupInfo, hoverInfo } = this.state;
+        if (hoverInfo) {
+            return (
+              <Popup longitude={hoverInfo.lngLat[0]} latitude={hoverInfo.lngLat[1]} closeButton={false}>
+                <div className="basin-info">{hoverInfo.basin.BASIN}</div>
+              </Popup>
+            );
+          }
+        if (popupInfo){
+            return (
+                popupInfo && (
+                    <Popup
+                        tipSize={5}
+                        anchor="left"
+                        longitude={popupInfo.longitude}
+                        latitude={popupInfo.latitude}
+                        closeOnClick={false}
+                        onClose={() => this.setState({ popupInfo: null })}>
+                        <PlaceInfo info={popupInfo} />
+                    </Popup>
+                )
+            );
+        }
+        return null;
     }
 
 
     render() {
 
-        let { viewport } = this.state, { width } = this.props;
+        let { viewport, mapStyle } = this.state, { width } = this.props;
 
         // set the viewports for the map
         viewport.width = width;
@@ -69,12 +105,15 @@ export default class BasinMap extends Component {
         return (
             <div>
                 <MapGL
-                    mapStyle={'mapbox://styles/ricardorheeder/cjy67he431dft1cmldbiuecro'}
+                    mapStyle={mapStyle}
                     mapboxApiAccessToken={TOKEN}
                     {...viewport}
-                    onViewportChange={(viewport) => this.setState({ viewport })} >
+                    onViewportChange={(viewport) => this.setState({ viewport })} 
+                    onHover={this._onHover}
+                    >
                     {PLACES.map(this.renderPlaceMarker)}
                     {this.renderPopup()}
+
                 </MapGL>
             </div>
         );
