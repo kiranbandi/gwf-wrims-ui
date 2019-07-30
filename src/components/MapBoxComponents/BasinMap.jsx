@@ -4,16 +4,25 @@ import PlaceInfo from './PlaceInfo';
 import PlaceMarker from './PlaceMarker';
 import PLACES from '../../utils/static-reference/mapPlaces';
 
+import { fromJS } from 'immutable';
+
 const TOKEN = 'pk.eyJ1IjoicmljYXJkb3JoZWVkZXIiLCJhIjoiY2p4MGl5bWIyMDE1bDN5b2NneHh5djJ2biJ9.3ALfBtMIORYFNtXU9RUUnA';
 
-import { defaultMapStyle, highlightLayerIndex } from './map-style.jsx';
+// import { defaultMapStyle, highlightLayerIndex } from './map-style.jsx';
+
+import defaultMapStyle from './map-style.jsx';
+
+
+let basinArray = ['bow-river', 'noth-saskatchewan-river'];
+
+
 
 export default class BasinMap extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            mapStyle: defaultMapStyle,
+            mapStyle: _.cloneDeep(defaultMapStyle),
             viewport: {
                 width: 400,
                 height: 400,
@@ -27,29 +36,64 @@ export default class BasinMap extends Component {
         };
         this.renderPlaceMarker = this.renderPlaceMarker.bind(this);
         this.renderPopup = this.renderPopup.bind(this);
+        this._onHover = this._onHover.bind(this);
     }
 
     _onHover = event => {
-        let countyName = '';
+
+
+        // debugger;        console.log(defaultMapStyle);
+
+        // let countyName = '';
         let hoverInfo = null;
 
-        const county = event.features && event.features.find(f => f.layer.id === 'counties'); //ab-bow-9oizy4    ab-reddeer-4bfoeo
-        // console.log(event)
-        if (county) {
+        const basin = event.features && event.features.find(f => basinArray.indexOf(f.layer.id) > -1);
+
+        let { mapStyle } = this.state;
+
+        let oldValue = mapStyle.layers[40].paint['fill-color'];
+
+        console.log(fromJS);
+        //  immutable code sequence
+        //  if a is the object  
+        //  layers = mapStyle.get('layers')
+        //  basinNameId = basin.layer.id;
+
+        //  basinLayerIndex =layers.findIndex((l)=>{
+        //     return l.toObject().id == basinNameId
+        //     })
+
+
+
+        if (basin) {
+            // curBasinState = true
+            // prevBasinState = false
+
+
+
             hoverInfo = {
                 lngLat: event.lngLat,
-                county: county.properties
+                basinName: basin.layer.id.split("-").join(" ")
             };
-            // console.log(basin.properties)
-            countyName = county.properties.COUNTY;
-            // countyName = county.properties.WSCSDA
-            console.log("County:")
-            console.log(county)
+
+            mapStyle.layers[40].paint['fill-color'] = 'red';
+
         }
-        this.setState({
-            mapStyle: defaultMapStyle.setIn(['layers', highlightLayerIndex, 'filter', 2], countyName),
-            hoverInfo
-        });
+
+        else {
+
+            mapStyle.layers[40].paint['fill-color'] = defaultMapStyle.layers[40].paint['fill-color'];
+
+        }
+
+        if (oldValue != mapStyle.layers[40].paint['fill-color']) {
+            this.setState({
+                // mapStyle: defaultMapStyle.setIn(['layers', highlightLayerIndex, 'filter', 2], countyName),
+                mapStyle
+                // hoverInfo
+            });
+        }
+
     };
 
     renderPlaceMarker(place, index) {
@@ -71,7 +115,7 @@ export default class BasinMap extends Component {
             console.log(hoverInfo)
             return (
                 <Popup longitude={hoverInfo.lngLat[0]} latitude={hoverInfo.lngLat[1]} closeButton={false}>
-                    <div className="county-info">{hoverInfo.county.WSCSDA}</div>
+                    <div className="county-info">{hoverInfo.basinName}</div>
                 </Popup>
             );
         }
@@ -102,20 +146,24 @@ export default class BasinMap extends Component {
         viewport.width = width;
         viewport.height = width / 2.5;
 
+        console.log('render');
+
+        // debugger;
+
         //Darktheme:  mapStyle={'mapbox://styles/ricardorheeder/cjx2a9u8b3bi41cqtk3n66h0i'}
         //Lighttheme: mapbox://styles/ricardorheeder/cjy67he431dft1cmldbiuecro
 
         return (
             <div>
                 <MapGL
-                    mapStyle={mapStyle}
+                    mapStyle={fromJS(mapStyle)}
                     mapboxApiAccessToken={TOKEN}
                     {...viewport}
                     onViewportChange={(viewport) => this.setState({ viewport })}
                     onHover={this._onHover}
                 >
-                    {PLACES.map(this.renderPlaceMarker)}
-                    {this.renderPopup()}
+                    {/* {PLACES.map(this.renderPlaceMarker)} */}
+                    {/* {this.renderPopup()} */}
 
                 </MapGL>
             </div>
