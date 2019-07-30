@@ -15,7 +15,7 @@ mapStyle.sources.counties = {
   // type: 'vector',
   // url: 'mapbox://mapbox.82pkq93d'
   type: 'geojson',
-  data: '../../../build/assets/files/HighwoodESPG4269.geojson'
+  data: '../../../build/assets/files/AB_Bow.geojson'
 };
 
 // console.log(mapStyle.sources)
@@ -50,7 +50,10 @@ mapStyle.layers.splice(
     filter: ['in', 'COUNTY', '']
   }
 );
-//   console.log(mapStyle)
+console.log("Mapstyle:")
+console.log(mapStyle)
+console.log("Sources:")
+console.log(mapStyle.sources.counties.data)
 
 export const highlightLayerIndex = mapStyle.layers.findIndex(
   layer => layer.id === 'counties-highlighted'

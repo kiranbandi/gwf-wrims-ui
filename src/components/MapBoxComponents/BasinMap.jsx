@@ -33,7 +33,7 @@ export default class BasinMap extends Component {
         let countyName = '';
         let hoverInfo = null;
 
-        const county = event.features && event.features.find(f => f.layer.id === 'ab-bow-9oizy4'); //ab-bow-9oizy4
+        const county = event.features && event.features.find(f => f.layer.id === 'counties'); //ab-bow-9oizy4    ab-reddeer-4bfoeo
         // console.log(event)
         if (county) {
             hoverInfo = {
@@ -42,6 +42,8 @@ export default class BasinMap extends Component {
             };
             // console.log(basin.properties)
             countyName = county.properties.COUNTY;
+            // countyName = county.properties.WSCSDA
+            console.log("County:")
             console.log(county)
         }
         this.setState({
@@ -65,9 +67,11 @@ export default class BasinMap extends Component {
     renderPopup() {
         const { popupInfo, hoverInfo } = this.state;
         if (hoverInfo) {
+            console.log("Hover Info:")
+            console.log(hoverInfo)
             return (
                 <Popup longitude={hoverInfo.lngLat[0]} latitude={hoverInfo.lngLat[1]} closeButton={false}>
-                    <div className="county-info">{hoverInfo.county.COUNTY}</div>
+                    <div className="county-info">{hoverInfo.county.WSCSDA}</div>
                 </Popup>
             );
         }
