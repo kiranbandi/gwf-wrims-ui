@@ -6,8 +6,7 @@ import PLACES from '../../utils/static-reference/mapPlaces';
 
 const TOKEN = 'pk.eyJ1IjoicmljYXJkb3JoZWVkZXIiLCJhIjoiY2p4MGl5bWIyMDE1bDN5b2NneHh5djJ2biJ9.3ALfBtMIORYFNtXU9RUUnA';
 
-import {defaultMapStyle, highlightLayerIndex} from './map-style.jsx';
-
+import { defaultMapStyle, highlightLayerIndex } from './map-style.jsx';
 
 export default class BasinMap extends Component {
 
@@ -31,22 +30,22 @@ export default class BasinMap extends Component {
     }
 
     _onHover = event => {
-        let basinName = '';
+        let countyName = '';
         let hoverInfo = null;
 
-        const basin = event.features && event.features.find(f => f.layer.id === 'basins'); //ab-bow-9oizy4
-        console.log(event)
-        if (basin){
+        const county = event.features && event.features.find(f => f.layer.id === 'ab-bow-9oizy4'); //ab-bow-9oizy4
+        // console.log(event)
+        if (county) {
             hoverInfo = {
                 lngLat: event.lngLat,
-                basin: basin.properties
+                county: county.properties
             };
             // console.log(basin.properties)
-            basinName = basin.properties.BASIN;
-            console.log(basinName)
+            countyName = county.properties.COUNTY;
+            console.log(county)
         }
         this.setState({
-            mapStyle: defaultMapStyle.setIn(['layers', highlightLayerIndex, 'filter', 2], basinName),
+            mapStyle: defaultMapStyle.setIn(['layers', highlightLayerIndex, 'filter', 2], countyName),
             hoverInfo
         });
     };
@@ -67,12 +66,12 @@ export default class BasinMap extends Component {
         const { popupInfo, hoverInfo } = this.state;
         if (hoverInfo) {
             return (
-              <Popup longitude={hoverInfo.lngLat[0]} latitude={hoverInfo.lngLat[1]} closeButton={false}>
-                <div className="basin-info">{hoverInfo.basin.BASIN}</div>
-              </Popup>
+                <Popup longitude={hoverInfo.lngLat[0]} latitude={hoverInfo.lngLat[1]} closeButton={false}>
+                    <div className="county-info">{hoverInfo.county.COUNTY}</div>
+                </Popup>
             );
-          }
-        if (popupInfo){
+        }
+        if (popupInfo) {
             return (
                 popupInfo && (
                     <Popup
@@ -108,9 +107,9 @@ export default class BasinMap extends Component {
                     mapStyle={mapStyle}
                     mapboxApiAccessToken={TOKEN}
                     {...viewport}
-                    onViewportChange={(viewport) => this.setState({ viewport })} 
+                    onViewportChange={(viewport) => this.setState({ viewport })}
                     onHover={this._onHover}
-                    >
+                >
                     {PLACES.map(this.renderPlaceMarker)}
                     {this.renderPopup()}
 
