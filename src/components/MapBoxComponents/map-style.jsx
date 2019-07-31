@@ -66,5 +66,4 @@ export default defaultMapStyle;
 // // debugger;
 // export default mapStyle;
 
-
 // export const defaultMapStyle = fromJS(mapStyle);

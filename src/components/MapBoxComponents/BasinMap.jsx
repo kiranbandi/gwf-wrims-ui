@@ -15,7 +15,8 @@ import defaultMapStyle from './map-style.jsx';
 
 let basinArray = ['bow-river', 'noth-saskatchewan-river'];
 
-
+let curHover = ''
+let prevHover = ''
 
 export default class BasinMap extends Component {
 
@@ -41,19 +42,6 @@ export default class BasinMap extends Component {
 
     _onHover = event => {
 
-
-        // debugger;        console.log(defaultMapStyle);
-
-        // let countyName = '';
-        let hoverInfo = null;
-
-        const basin = event.features && event.features.find(f => basinArray.indexOf(f.layer.id) > -1);
-
-        let { mapStyle } = this.state;
-
-        let oldValue = mapStyle.layers[40].paint['fill-color'];
-
-        console.log(fromJS);
         //  immutable code sequence
         //  if a is the object  
         //  layers = mapStyle.get('layers')
@@ -62,31 +50,45 @@ export default class BasinMap extends Component {
         //  basinLayerIndex =layers.findIndex((l)=>{
         //     return l.toObject().id == basinNameId
         //     })
+        let { mapStyle } = this.state;
 
+    
+        // let countyName = '';
+        let hoverInfo = null;
+        const basin = event.features && event.features.find(f => basinArray.indexOf(f.layer.id) > -1);
 
-
+        // If hovering over a basin
         if (basin) {
-            // curBasinState = true
-            // prevBasinState = false
+            let basinNameId = basin.layer.id;   // Store basin name as ID
 
+            curHover = basinNameId  // store basin ID as current hover
 
+            // Check that we are not still hovering over same basin ()
+            if (prevHover != curHover){
+                // console.log("test")
+                hoverInfo = {
+                    lngLat: event.lngLat,
+                    basinName: basin.layer.id.split("-").join(" ")
+                };
+    
+                mapStyle.layers[40].paint['fill-color'] = 'red';
+            }
 
-            hoverInfo = {
-                lngLat: event.lngLat,
-                basinName: basin.layer.id.split("-").join(" ")
-            };
-
-            mapStyle.layers[40].paint['fill-color'] = 'red';
+            // let a = fromJS(mapStyle)
+            // let layers = a.get('layers')
 
         }
 
         else {
-
-            mapStyle.layers[40].paint['fill-color'] = defaultMapStyle.layers[40].paint['fill-color'];
-
+            curHover = ''   // Currently hovering nothing
+            mapStyle.layers[40].paint['fill-color'] = defaultMapStyle.layers[40].paint['fill-color'];   // Set paint back to normal
         }
 
-        if (oldValue != mapStyle.layers[40].paint['fill-color']) {
+        // If the current hover has changed 
+        // OR
+        // We have hovered off of a basin
+        if ((curHover != prevHover) || (curHover == '' && basinArray.indexOf(prevHover) > -1)){
+            prevHover = curHover    // Set previous hover to what was previously hovered
             this.setState({
                 // mapStyle: defaultMapStyle.setIn(['layers', highlightLayerIndex, 'filter', 2], countyName),
                 mapStyle
