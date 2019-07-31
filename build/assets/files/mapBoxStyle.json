@@ -1306,7 +1306,7 @@
             }
         },
         {
-            "id": "ab-southsask-3a48lg",
+            "id": "ab-southsask",
             "type": "fill",
             "metadata": { "mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e" },
             "source": "composite",
@@ -1315,7 +1315,7 @@
             "paint": { "fill-color": "hsl(115, 47%, 67%)" }
         },
         {
-            "id": "sk-sssubrb-baxwft",
+            "id": "sk-sssubrb",
             "type": "fill",
             "metadata": { "mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e" },
             "source": "composite",
@@ -1324,7 +1324,7 @@
             "paint": { "fill-color": "hsl(115, 47%, 67%)" }
         },
         {
-            "id": "sk-sasksubrb-aj6mog",
+            "id": "sk-sasksubrb",
             "type": "fill",
             "metadata": { "mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e" },
             "source": "composite",
@@ -1333,7 +1333,7 @@
             "paint": { "fill-color": "#8ad283" }
         },
         {
-            "id": "ab-reddeer-4bfoeo",
+            "id": "ab-reddeer",
             "type": "fill",
             "metadata": { "mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e" },
             "source": "composite",
@@ -1342,7 +1342,7 @@
             "paint": { "fill-color": "hsl(308, 14%, 69%)" }
         },
         {
-            "id": "ab-oldman-2mzcdi",
+            "id": "ab-oldman",
             "type": "fill",
             "metadata": { "mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e" },
             "source": "composite",
@@ -1351,7 +1351,7 @@
             "paint": { "fill-color": "hsl(196, 58%, 77%)" }
         },
         {
-            "id": "sk-nssubrb-8pynwc",
+            "id": "sk-nssubrb",
             "type": "fill",
             "metadata": { "mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e" },
             "source": "composite",
@@ -1360,7 +1360,7 @@
             "paint": { "fill-color": "hsl(72, 46%, 64%)" }
         },
         {
-            "id": "ab-nsrb-702x6o",
+            "id": "ab-nsrb",
             "type": "fill",
             "metadata": { "mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e" },
             "source": "composite",
@@ -1369,7 +1369,7 @@
             "paint": { "fill-color": "hsl(72, 46%, 64%)" }
         },
         {
-            "id": "bow-river",
+            "id": "ab-bow",
             "type": "fill",
             "metadata": { "mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e" },
             "source": "composite",
@@ -1403,15 +1403,6 @@
             "source-layer": "SouthSaskR-avcidb",
             "layout": { "visibility": "none" },
             "paint": { "fill-color": "hsla(108, 85%, 18%, 0.75)" }
-        },
-        {
-            "id": "SouthSaskRiver_Shapefile copy",
-            "type": "line",
-            "metadata": { "mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e" },
-            "source": "composite",
-            "source-layer": "SouthSaskR-avcidb",
-            "layout": {},
-            "paint": {}
         },
         {
             "id": "national-park",

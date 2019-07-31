@@ -13,13 +13,13 @@ const TOKEN = 'pk.eyJ1IjoicmljYXJkb3JoZWVkZXIiLCJhIjoiY2p4MGl5bWIyMDE1bDN5b2NneH
 import defaultMapStyle from './map-style.jsx';
 
 
-let basinArray = ['bow-river', 'noth-saskatchewan-river'];
+let basinArray = ['ab-bow', 'ab-nsrb', 'sk-nssubrb', 'ab-oldman', 'ab-reddeer', 'sk-sasksubrb', 'sk-sssubrb', 'ab-southsask'];
 
 let curHover = ''
 let prevHover = ''
 let basinLayerIndex = null
 
-let defaultMap = fromJS(defaultMapStyle)
+// let defaultMap = fromJS(defaultMapStyle)
 
 export default class BasinMap extends Component {
 
@@ -27,7 +27,7 @@ export default class BasinMap extends Component {
         super(props);
         this.state = {
             // mapStyle: _.cloneDeep(defaultMapStyle),
-            mapStyle: defaultMap,
+            mapStyle: fromJS(defaultMapStyle),
             viewport: {
                 width: 400,
                 height: 400,
@@ -47,37 +47,36 @@ export default class BasinMap extends Component {
 
     componentDidMount(){
           this.setState({
-                mapObjectFromImmutable: defaultMap,
+                mapObjectFromImmutable: this.state.mapStyle,
             })
     }
 
     _onHover = event => {
-
-        //  immutable code sequence
-        //  if a is the object  
-        //  layers = mapStyle.get('layers')
-        //  basinNameId = basin.layer.id;
-        //  basinLayerIndex =layers.findIndex((l)=>{
-        //     return l.toObject().id == basinNameId
-        //     })
-        let { mapStyle } = this.state;
-
-        let basinColor = ""
-    
         // let countyName = '';
         let hoverInfo = null;
         const basin = event.features && event.features.find(f => basinArray.indexOf(f.layer.id) > -1);
 
         // If hovering over a basin
         if (basin) {
+
+            // reset hoverInfo so that it re-renders to mouse cursor
+            hoverInfo = {
+                lngLat: event.lngLat,
+                basinName: basin.layer.id.split("-").join(" ") 
+            };
+            this.setState({hoverInfo})
+
             let basinNameId = basin.layer.id;   // Store basin name as ID
 
             curHover = basinNameId  // store basin ID as current hover
 
             // Check that we are not still hovering over same basin ()
             if (prevHover != curHover){
-
                 // Hovering over new basin - make changes
+
+                // console.log(defaultMapStyle)
+                // debugger
+                // console.log("test")
 
                 // let mapObjectFromImmutable = fromJS(mapStyle)
                 let layers = this.state.mapObjectFromImmutable.get('layers')
@@ -86,34 +85,13 @@ export default class BasinMap extends Component {
                     return l.toObject().id == basinNameId
                 })
 
-
-                console.log(defaultMapStyle)
-                // debugger
-
-
-                // console.log("test")
-                hoverInfo = {
-                    lngLat: event.lngLat,
-                    basinName: basin.layer.id.split("-").join(" ")
-                };
-
-
-                // this.setState({
-                //     mapStyle: mapObjectFromImmutable.setIn(['layers', basinLayerIndex, 'fill-color'], 'red'),
-                // })
-                basinColor = "red"
-                // defaultMapStyle.setIn(['layers', highlightLayerIndex, 'filter', 2], countyName)
-                // mapStyle.layers[basinLayerIndex].paint['fill-color'] = 'red';
             }
-
-
-
+             // Setting the hover info to the name of the basin
         }
 
         else {
             curHover = ''   // Currently hovering nothing
             if (basinLayerIndex != null){
-                basinColor = "hsl(46, 78%, 76%)" // Set paint back to normal
                 // mapStyle.layers[basinLayerIndex].paint['fill-color'] = defaultMapStyle.layers[basinLayerIndex].paint['fill-color'];  
 
             }
@@ -125,11 +103,16 @@ export default class BasinMap extends Component {
         if ((curHover != prevHover) || (curHover == '' && basinArray.indexOf(prevHover) > -1)){
             prevHover = curHover    // Set previous hover to what was previously hovered
 
-            this.setState({
-                mapStyle: defaultMap.setIn(['layers', basinLayerIndex, 'paint', 'fill-color'], basinColor),
-                // mapStyle
-                // hoverInfo
-            });
+            if (curHover == ''){
+                this.setState({
+                    mapStyle: this.state.mapObjectFromImmutable
+                })
+            }else{
+                this.setState({
+                    mapStyle: this.state.mapObjectFromImmutable.setIn(['layers', basinLayerIndex, 'paint', 'fill-color'], 'red'),
+                    hoverInfo
+                });
+            }
         }
 
     };
@@ -200,8 +183,8 @@ export default class BasinMap extends Component {
                     onViewportChange={(viewport) => this.setState({ viewport })}
                     onHover={this._onHover}
                 >
-                    {/* {PLACES.map(this.renderPlaceMarker)} */}
-                    {/* {this.renderPopup()} */}
+                    {PLACES.map(this.renderPlaceMarker)}
+                    {this.renderPopup()}
 
                 </MapGL>
             </div>
