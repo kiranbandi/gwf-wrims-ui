@@ -4428,13 +4428,6 @@
             }
         },
         {
-            "id": "MountainDetail",
-            "type": "hillshade",
-            "source": "mapbox://mapbox.terrain-rgb",
-            "layout": {},
-            "paint": { "hillshade-shadow-color": "hsla(0, 0%, 0%, 0.07)" }
-        },
-        {
             "id": "LakesRiversLine",
             "type": "line",
             "metadata": { "mapbox:group": "ebd86dd659473a9e4a63a033d53ce964" },
