@@ -8,8 +8,6 @@ import { fromJS } from 'immutable';
 
 const TOKEN = 'pk.eyJ1IjoicmljYXJkb3JoZWVkZXIiLCJhIjoiY2p4MGl5bWIyMDE1bDN5b2NneHh5djJ2biJ9.3ALfBtMIORYFNtXU9RUUnA';
 
-// import { defaultMapStyle, highlightLayerIndex } from './map-style.jsx';
-
 import defaultMapStyle from './map-style.jsx';
 
 
@@ -18,8 +16,6 @@ let basinArray = ['ab-bow', 'ab-nsrb', 'sk-nssubrb', 'ab-oldman', 'ab-reddeer', 
 let curHover = ''
 let prevHover = ''
 let basinLayerIndex = null
-
-// let defaultMap = fromJS(defaultMapStyle)
 
 export default class BasinMap extends Component {
 
@@ -52,7 +48,6 @@ export default class BasinMap extends Component {
     }
 
     _onHover = event => {
-        // let countyName = '';
         let hoverInfo = null;
         const basin = event.features && event.features.find(f => basinArray.indexOf(f.layer.id) > -1);
 
@@ -86,7 +81,6 @@ export default class BasinMap extends Component {
                 })
 
             }
-             // Setting the hover info to the name of the basin
         }
 
         else {
@@ -136,7 +130,7 @@ export default class BasinMap extends Component {
             console.log(hoverInfo)
             return (
                 <Popup longitude={hoverInfo.lngLat[0]} latitude={hoverInfo.lngLat[1]} closeButton={false}>
-                    <div className="county-info">{hoverInfo.basinName}</div>
+                    <div className="basin-info">{hoverInfo.basinName}</div>
                 </Popup>
             );
         }
@@ -167,9 +161,7 @@ export default class BasinMap extends Component {
         viewport.width = width;
         viewport.height = width / 2.5;
 
-        console.log('render');
-
-        // debugger;
+        // console.log('render');
 
         //Darktheme:  mapStyle={'mapbox://styles/ricardorheeder/cjx2a9u8b3bi41cqtk3n66h0i'}
         //Lighttheme: mapbox://styles/ricardorheeder/cjy67he431dft1cmldbiuecro
