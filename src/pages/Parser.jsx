@@ -5,7 +5,7 @@ import { RiverMap, FileUpload, LegendPanel } from '../components';
 import toastr from '../utils/toastr';
 import { setFlowData } from '../redux/actions/actions';
 import Loading from 'react-loading';
-import xyParser from '../utils/xyParser';
+import xyParser from '../utils/processors/xyParser';
 import downloadJSON from '../utils/downloadJSON';
 import _ from 'lodash';
 import getFile from '../utils/getFile';

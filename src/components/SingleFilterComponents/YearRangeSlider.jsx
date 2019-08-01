@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import 'rc-slider/assets/index.css';
 import Slider from 'rc-slider';
-import { getFlowData } from '../utils/requestServer';
-import { setFlowData } from '../redux/actions/actions';
-import toastr from '../utils/toastr';
+import { getFlowData } from '../../utils/requestServer';
+import { setFlowData } from '../../redux/actions/actions';
+import toastr from '../../utils/toastr';
 import Switch from "react-switch";
 
 
 const UPPERBOUND = 1990, LOWERBOUND = 2015;
-var markRange={};
+var markRange = {};
 
 const Range = Slider.Range;
 
@@ -23,8 +23,8 @@ class YearRangeSlider extends Component {
         this.onSliderChangeSingle = this.onSliderChangeSingle.bind(this);
         this.handleChange = this.handleChange.bind(this);
 
-        for(var i = 1920; i <= 2020; i= i+10){
-            markRange[i]=i;
+        for (var i = 1920; i <= 2020; i = i + 10) {
+            markRange[i] = i;
         }
 
         this.state = {
@@ -34,20 +34,20 @@ class YearRangeSlider extends Component {
             checked: true
         };
     }
-    
+
     handleChange(checked) {
         this.setState({ checked, upperBound: this.state.lowerBound });
     }
 
     onLowerBoundChange = (e) => {
-        if (!(e.target.value > markRange[ 2020 ]) && !(e.target.value < markRange[ 1920 ]) && (e.target.value < this.state.upperBound)){
-            this.setState({ lowerBound: e.target.value>this.state.lowerBound ? +e.target.value+4 : +e.target.value-4  });
+        if (!(e.target.value > markRange[2020]) && !(e.target.value < markRange[1920]) && (e.target.value < this.state.upperBound)) {
+            this.setState({ lowerBound: e.target.value > this.state.lowerBound ? +e.target.value + 4 : +e.target.value - 4 });
         }
     }
 
     onUpperBoundChange = (e) => {
-        if (!(e.target.value > markRange[ 2020 ]) && !(e.target.value < markRange[ 1920 ]) && (e.target.value > this.state.lowerBound)){
-        this.setState({ upperBound: e.target.value>this.state.upperBound ? +e.target.value+4 : +e.target.value-4  });
+        if (!(e.target.value > markRange[2020]) && !(e.target.value < markRange[1920]) && (e.target.value > this.state.lowerBound)) {
+            this.setState({ upperBound: e.target.value > this.state.upperBound ? +e.target.value + 4 : +e.target.value - 4 });
         }
     }
 
@@ -62,7 +62,7 @@ class YearRangeSlider extends Component {
     onSliderChangeSingle = (value) => {
         this.setState({
             lowerBound: value,
-            value : [this.state.lowerBound, this.state.lowerBound],
+            value: [this.state.lowerBound, this.state.lowerBound],
         })
     }
 
@@ -83,13 +83,13 @@ class YearRangeSlider extends Component {
                 <div className='inner-slider' >
 
                     <div className="yearRangeSlider">
-                       {this.state.checked 
-                       ? <Slider min={1920} max={2020} step={5} marks={markRange}
-                        included={false} value={this.state.value[0]} onChange={this.onSliderChangeSingle} />
-                        : <Range min={1920} max={2020} step={5} marks={markRange} allowCross={true} 
-                        value={this.state.value} onChange={this.onSliderChangeMulti} />
-                    } 
-                        
+                        {this.state.checked
+                            ? <Slider min={1920} max={2020} step={5} marks={markRange}
+                                included={false} value={this.state.value[0]} onChange={this.onSliderChangeSingle} />
+                            : <Range min={1920} max={2020} step={5} marks={markRange} allowCross={true}
+                                value={this.state.value} onChange={this.onSliderChangeMulti} />
+                        }
+
                     </div>
 
                     <div className="yearRangeLabel">
@@ -99,38 +99,38 @@ class YearRangeSlider extends Component {
                             checked={this.state.checked}
                             className="react-switch"
                             onColor="#86d3ff"
-                                onHandleColor="#2693e6"
-                                handleDiameter={30}
-                                uncheckedIcon={false}
-                                checkedIcon={false}
-                                boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
-                                activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
-                                height={20}
-                                width={48}
-                                className="react-switch"
-                                id="material-switch"
+                            onHandleColor="#2693e6"
+                            handleDiameter={30}
+                            uncheckedIcon={false}
+                            checkedIcon={false}
+                            boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
+                            activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
+                            height={20}
+                            width={48}
+                            className="react-switch"
+                            id="material-switch"
                         />
 
                         {/* <label>LowerBound: </label>&nbsp; */}
-                        <input className="inputBox inputLowerBound" type="number" 
+                        <input className="inputBox inputLowerBound" type="number"
                             value={this.state.lowerBound} onChange={this.onLowerBoundChange} />
                         {/* <label>UpperBound: </label>&nbsp; */}
 
                         <div className='year-container'>
-                        {this.state.checked 
-                            ? <span/>
-                            : <span>
-                                <label> - </label>
-                                <input className="inputBox inputUpperBound" type="number" 
-                                    value={this.state.upperBound} onChange={this.onUpperBoundChange} />
-                            </span>
-                        }
+                            {this.state.checked
+                                ? <span />
+                                : <span>
+                                    <label> - </label>
+                                    <input className="inputBox inputUpperBound" type="number"
+                                        value={this.state.upperBound} onChange={this.onUpperBoundChange} />
+                                </span>
+                            }
                         </div>
-                        
+
                         <button className="btn" onClick={this.handleApply}>APPLY</button>
                         <button className="btn" onClick={this.handleClear}>CLEAR</button>
                     </div>
-                   
+
                 </div>
             </div>
         );

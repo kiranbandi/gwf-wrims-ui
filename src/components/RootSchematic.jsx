@@ -1,7 +1,7 @@
 /*global $*/
 import React, { Component } from 'react';
 import * as d3 from 'd3';
-import tileMap from '../utils/tileMap';
+import tileMap from '../utils/static-reference/tileMap';
 import Switch from "react-switch";
 import { BasinMap } from '../components';
 import { connect } from 'react-redux';

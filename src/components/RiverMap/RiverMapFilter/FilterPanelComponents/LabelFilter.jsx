@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { toggleLabelVisibility } from '../../redux/actions/actions';
-import Select from 'react-select';
-import sortAlphaNum from '../../utils/sortAlphaNum';
+import { toggleLabelVisibility } from '../../../../redux/actions/actions';
 
 class LabelFilter extends Component {
     constructor(props) {

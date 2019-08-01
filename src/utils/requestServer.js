@@ -1,6 +1,6 @@
 import toastr from './toastr';
 import axios from 'axios';
-import endPoints from './endPoints';
+import endPoints from './static-reference/endPoints';
 import _ from 'lodash';
 
 var requestServer = {};

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { toggleNonIrrigationVisibility, setFilterNonIrrigation } from '../../redux/actions/actions';
+import { toggleNonIrrigationVisibility, setFilterNonIrrigation } from '../../../../redux/actions/actions';
 import Select from 'react-select';
-import sortAlphaNum from '../../utils/sortAlphaNum';
+import sortAlphaNum from '../../../../utils/processors/sortAlphaNum';
 
 class NonIrrigationFilter extends Component {
     constructor(props) {

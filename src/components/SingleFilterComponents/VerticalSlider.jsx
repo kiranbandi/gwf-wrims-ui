@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import 'rc-slider/assets/index.css';
 import Slider from 'rc-slider';
-import { getFlowData } from '../utils/requestServer';
-import { setFlowData } from '../redux/actions/actions';
-import toastr from '../utils/toastr';
+import { getFlowData } from '../../utils/requestServer';
+import { setFlowData } from '../../redux/actions/actions';
+import toastr from '../../utils/toastr';
 
 const marks = {
     0: <strong>Base</strong>,

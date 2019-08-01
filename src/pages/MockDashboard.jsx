@@ -6,7 +6,7 @@ import { setFlowData } from '../redux/actions/actions';
 import axios from 'axios';
 import toastr from '../utils/toastr';
 import Loading from 'react-loading';
-import processSchematic from '../utils/processSchematic';
+import processSchematic from '../utils/processors/processSchematic';
 import { getFlowData } from '../utils/requestServer';
 import _ from 'lodash';
 import LegendPanel from '../components/MapLegend/LegendPanel';
@@ -106,15 +106,15 @@ class MockDashboardRoot extends Component {
                 {isSchematicLoading ?
                     <Loading className='loader' type='spin' height='100px' width='100px' color='#d6e5ff' delay={-1} /> :
                     <div className='dashboard-inner-root'>
-                        {SchematicData.lines.length > 0 && <div style={{ 'display':'inline' }}>
-                            <FilterPanel schematicData={SchematicData}  width={mapWidth} height={mapWidth / 1.75 *0.15}/>
-                                <RiverMap
-                                    schematicData={SchematicData}
-                                    width={mapWidth}
-                                    height={mapWidth / 1.75}
-                                    isMock={true} />
+                        {SchematicData.lines.length > 0 && <div style={{ 'display': 'inline' }}>
+                            <FilterPanel schematicData={SchematicData} width={mapWidth} height={mapWidth / 1.75 * 0.15} />
+                            <RiverMap
+                                schematicData={SchematicData}
+                                width={mapWidth}
+                                height={mapWidth / 1.75}
+                                isMock={true} />
 
-              
+
                             <VerticalSlider
                                 width={widthOfSlider}
                                 height={mapWidth / 1.75} />

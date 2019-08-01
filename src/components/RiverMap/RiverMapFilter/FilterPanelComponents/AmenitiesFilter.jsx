@@ -1,37 +1,37 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { toggleInflowVisibility, setFilterInflow } from '../../redux/actions/actions';
+import { toggleAmenityVisibility, setFilterAmenity } from '../../../../redux/actions/actions';
 import Select from 'react-select';
-import sortAlphaNum from '../../utils/sortAlphaNum';
+import sortAlphaNum from '../../../../utils/processors/sortAlphaNum';
 
-class InflowFilter extends Component {
+class AmenitiesFilter extends Component {
     constructor(props) {
         super(props);
-        this.onInflowClick = this.onInflowClick.bind(this);
+        this.onAmenityClick = this.onAmenityClick.bind(this);
         this.onSelectChange = this.onSelectChange.bind(this);
     }
 
-    onInflowClick() {
-        this.props.actions.toggleInflowVisibility();
+    onAmenityClick() {
+        this.props.actions.toggleAmenityVisibility();
     }
 
     onSelectChange(selectedValueList) {
-        this.props.actions.setFilterInflow(_.map(selectedValueList, (d) => d.label));
+        this.props.actions.setFilterAmenity(_.map(selectedValueList, (d) => d.label));
     }
 
     render() {
         const { filterMesh, schematicData = { lines: [], artifacts: [], labels: [], markers: [] } } = this.props,
-            { areInflowsVisible = false, visibleInflows = [] } = filterMesh;
+            { areAmenitiesVisible = false, visibleAmenities = [] } = filterMesh;
 
         // filter out all demands , then get the name of the demand and finally sort 
-        const inflowsList = _.map(_.filter(schematicData.markers,
-            (d) => { return (d.type == 'inflow' || d.type == 'inflow') }),
+        const amenitiesList = _.map(_.filter(schematicData.lines,
+            (d) => { return (d.type == 'diversion' || d.type == 'diversion') }),
             (d) => d.name)
             .sort(sortAlphaNum);
 
         // Merge the option Array text with the count of records present in each type
-        const modifiedOptionArray = _.map(inflowsList, (option) => ({ label: option, value: option }));
+        const modifiedOptionArray = _.map(amenitiesList, (option) => ({ label: option, value: option }));
 
 
         return (
@@ -41,25 +41,26 @@ class InflowFilter extends Component {
                     <div className='select-container-filter'>
                         <Select
                             isClearable={true}
-                            name={'inflow-select'}
-                            placeholder='Select Inflows...'
+                            name={'amenity-select'}
+                            placeholder='Select Amenities...'
                             // defaultValue={'asdf'}
                             isMulti
-                            isDisabled={!areInflowsVisible}
+                            isDisabled={!areAmenitiesVisible}
                             // react select needs a value and so we need to set it in a complicated way with a function
                             //  need to find a more elegant solution in future
-                            value={_.map(visibleInflows, (name) => ({ label: name, value: name }))}
+                            value={_.map(visibleAmenities, (name) => ({ label: name, value: name }))}
                             options={modifiedOptionArray}
                             styles={{ option: (styles) => ({ ...styles, color: 'black', textAlign: 'left' }) }}
                             onChange={this.onSelectChange} />
                     </div>
                     {/* Adding a button to toggle all demands */}
                     <button
-                        className={"eye custom-icon-button inflow " + ('icon btn ') + (areInflowsVisible ? '' : 'outline') +
-                            (areInflowsVisible ? ' icon-eye' : ' icon-eye-with-line')}
-                        onClick={this.onInflowClick}>
+                        className={"eye custom-icon-button diversion " + ('icon btn ') + (areAmenitiesVisible ? '' : 'outline') +
+                            (areAmenitiesVisible ? ' icon-eye' : ' icon-eye-with-line')}
+                        onClick={this.onAmenityClick}>
                     </button>
                 </div>
+
             </div>
         )
     }
@@ -73,8 +74,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({ toggleInflowVisibility, setFilterInflow }, dispatch) // *ADDED
+        actions: bindActionCreators({ toggleAmenityVisibility, setFilterAmenity }, dispatch) // *ADDED
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(InflowFilter);
+export default connect(mapStateToProps, mapDispatchToProps)(AmenitiesFilter);

@@ -6,7 +6,7 @@ import { setFlowData } from '../redux/actions/actions';
 import axios from 'axios';
 import toastr from '../utils/toastr';
 import Loading from 'react-loading';
-import processSchematic from '../utils/processSchematic';
+import processSchematic from '../utils/processors/processSchematic';
 import { getFlowData } from '../utils/requestServer';
 import _ from 'lodash';
 import LegendPanel from '../components/MapLegend/LegendPanel';
@@ -122,7 +122,7 @@ class DashboardRoot extends Component {
                                 width={widthOfSlider}
                                 height={mapWidth / 1.75} />}
 
-        
+
                             <FlowPanel
                                 width={widthOfDashboard * 0.35}
                                 height={mapWidth / 1.75} />

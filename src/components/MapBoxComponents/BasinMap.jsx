@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MapGL, { Marker, Popup } from 'react-map-gl';
 import PlaceInfo from './PlaceInfo';
 import PlaceMarker from './PlaceMarker';
-import PLACES from '../../utils/mapPlaces';
+import PLACES from '../../utils/static-reference/mapPlaces';
 
 const TOKEN = 'pk.eyJ1IjoicmljYXJkb3JoZWVkZXIiLCJhIjoiY2p4MGl5bWIyMDE1bDN5b2NneHh5djJ2biJ9.3ALfBtMIORYFNtXU9RUUnA';
 

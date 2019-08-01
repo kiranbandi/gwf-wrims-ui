@@ -2,13 +2,13 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
-import { NotFound, Home, Dashboard, MockDashboard,Parser } from './pages';
+import { NotFound, Home, Dashboard, MockDashboard, Parser } from './pages';
 import { Modal } from './components/Modal'
 import { Container } from './components';
 import configureStore from './redux/store/configureStore';
 import { Provider } from 'react-redux';
 import { checkloginStatus } from './utils/authorization';
-import processQueryParams from './utils/processQueryParams';
+import processQueryParams from './utils/processors/processQueryParams';
 
 //Root sass file for webpack to compile
 import './sass/main.scss';
@@ -29,7 +29,7 @@ class App extends Component {
           <Route path='/' component={Container} pawsTicket={pawsTicket}>
             <IndexRoute component={Home} />
             <Route path='Dashboard' component={Dashboard} onEnter={checkloginStatus} />
-            <Route path='Parser' component={Parser} onEnter={checkloginStatus}/>
+            <Route path='Parser' component={Parser} onEnter={checkloginStatus} />
             <Route path='MockDashboard' component={MockDashboard} onEnter={checkloginStatus} />
             <Route path='*' component={NotFound} />
           </Route>
