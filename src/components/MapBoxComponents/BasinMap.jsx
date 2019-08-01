@@ -33,18 +33,14 @@ export default class BasinMap extends Component {
             },
             popupInfo: null,
             hoverInfo: null,
-            mapObjectFromImmutable: null
+            mapObjectFromImmutable: fromJS(defaultMapStyle)
 
         };
         this.renderPlaceMarker = this.renderPlaceMarker.bind(this);
         this.renderPopup = this.renderPopup.bind(this);
+        this.renderHoverPopup = this.renderHoverPopup.bind(this);
         this._onHover = this._onHover.bind(this);
-    }
-
-    componentDidMount(){
-          this.setState({
-                mapObjectFromImmutable: this.state.mapStyle,
-            })
+        this._onClick = this._onClick.bind(this);
     }
 
     _onHover = event => {
@@ -57,26 +53,22 @@ export default class BasinMap extends Component {
             // reset hoverInfo so that it re-renders to mouse cursor
             hoverInfo = {
                 lngLat: event.lngLat,
-                basinName: basin.layer.id.split("-").join(" ") 
+                basinName: basin.layer.id.split("-").join(" ")
             };
-            this.setState({hoverInfo})
+            this.setState({ hoverInfo })
 
             let basinNameId = basin.layer.id;   // Store basin name as ID
 
             curHover = basinNameId  // store basin ID as current hover
 
             // Check that we are not still hovering over same basin ()
-            if (prevHover != curHover){
+            if (prevHover != curHover) {
                 // Hovering over new basin - make changes
-
-                // console.log(defaultMapStyle)
-                // debugger
-                // console.log("test")
 
                 // let mapObjectFromImmutable = fromJS(mapStyle)
                 let layers = this.state.mapObjectFromImmutable.get('layers')
                 let basinNameId = basin.layer.id;
-                basinLayerIndex = layers.findIndex((l)=> {
+                basinLayerIndex = layers.findIndex((l) => {
                     return l.toObject().id == basinNameId
                 })
 
@@ -85,28 +77,61 @@ export default class BasinMap extends Component {
 
         else {
             curHover = ''   // Currently hovering nothing
-            if (basinLayerIndex != null){
+            if (basinLayerIndex != null) {
                 // mapStyle.layers[basinLayerIndex].paint['fill-color'] = defaultMapStyle.layers[basinLayerIndex].paint['fill-color'];  
 
             }
         }
 
+        // console.log('Current Hover: ' + curHover)
+        // console.log('Previous Hover: ' + prevHover)
+
         // If the current hover has changed 
         // OR
         // We have hovered off of a basin
-        if ((curHover != prevHover) || (curHover == '' && basinArray.indexOf(prevHover) > -1)){
+        if ((curHover != prevHover) || (curHover == '' && basinArray.indexOf(prevHover) > -1)) {
             prevHover = curHover    // Set previous hover to what was previously hovered
 
-            if (curHover == ''){
+            if (curHover == '') {
+                hoverInfo = ''
                 this.setState({
-                    mapStyle: this.state.mapObjectFromImmutable
+                    mapStyle: this.state.mapObjectFromImmutable,
+                    hoverInfo
                 })
-            }else{
+            } else {
                 this.setState({
-                    mapStyle: this.state.mapObjectFromImmutable.setIn(['layers', basinLayerIndex, 'paint', 'fill-color'], 'red'),
+                    mapStyle: this.state.mapObjectFromImmutable.setIn(['layers', basinLayerIndex, 'paint', 'fill-color'], "hsl(0, 36%, 71%)"),
                     hoverInfo
                 });
             }
+        }
+
+    };
+
+    // Handling clicks on the map and where to redirect users
+    _onClick = event => {
+
+        let { viewport } = this.state
+        // viewport.zoom = 10
+
+
+
+        let place = null;
+        // console.log(curHover)
+        if (curHover == '') { return }
+        if (curHover == 'sk-sssubrb' || curHover == 'ab-southsask' || curHover == 'sk-sasksubrb') {
+            place = PLACES[0]
+            this.props.onRegionSelect({ 'target': place })
+        }
+        else if (curHover == 'ab-bow') {
+            place = PLACES[1]
+            this.props.onRegionSelect({ 'target': place })
+        }
+
+
+        if (place != null) {
+            // set the popup info for the current place marker
+            this.setState({ popupInfo: place, viewport })
         }
 
     };
@@ -115,6 +140,7 @@ export default class BasinMap extends Component {
         return (
             <Marker key={`marker-${index}`} longitude={place.longitude} latitude={place.latitude}>
                 <PlaceMarker size={20} onClick={() => {
+                    // console.log(place)
                     this.props.onRegionSelect({ 'target': place })
                     // set the popup info for the current place marker
                     this.setState({ popupInfo: place })
@@ -124,16 +150,8 @@ export default class BasinMap extends Component {
     };
 
     renderPopup() {
-        const { popupInfo, hoverInfo } = this.state;
-        if (hoverInfo) {
-            console.log("Hover Info:")
-            console.log(hoverInfo)
-            return (
-                <Popup longitude={hoverInfo.lngLat[0]} latitude={hoverInfo.lngLat[1]} closeButton={false}>
-                    <div className="basin-info">{hoverInfo.basinName}</div>
-                </Popup>
-            );
-        }
+        const { popupInfo } = this.state;
+
         if (popupInfo) {
             return (
                 popupInfo && (
@@ -152,6 +170,20 @@ export default class BasinMap extends Component {
         return null;
     }
 
+    renderHoverPopup() {
+        const { hoverInfo } = this.state;
+        if (hoverInfo) {
+            // console.log("Hover Info:")
+            // console.log(hoverInfo)
+            return (
+                <Popup longitude={hoverInfo.lngLat[0]} latitude={hoverInfo.lngLat[1]} closeButton={false}>
+                    <div className="basin-info">{hoverInfo.basinName}</div>
+                </Popup>
+            );
+        }
+        return null;
+    }
+
 
     render() {
 
@@ -163,9 +195,6 @@ export default class BasinMap extends Component {
 
         // console.log('render');
 
-        //Darktheme:  mapStyle={'mapbox://styles/ricardorheeder/cjx2a9u8b3bi41cqtk3n66h0i'}
-        //Lighttheme: mapbox://styles/ricardorheeder/cjy67he431dft1cmldbiuecro
-
         return (
             <div>
                 <MapGL
@@ -174,9 +203,11 @@ export default class BasinMap extends Component {
                     {...viewport}
                     onViewportChange={(viewport) => this.setState({ viewport })}
                     onHover={this._onHover}
+                    onClick={this._onClick}
                 >
-                    {PLACES.map(this.renderPlaceMarker)}
+                    {/* {PLACES.map(this.renderPlaceMarker)} */}
                     {this.renderPopup()}
+                    {this.renderHoverPopup()}
 
                 </MapGL>
             </div>

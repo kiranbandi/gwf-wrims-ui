@@ -1378,15 +1378,6 @@
             "paint": { "fill-color": "hsl(46, 78%, 76%)" }
         },
         {
-            "id": "Highwood_Shapefile",
-            "type": "fill",
-            "metadata": { "mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e" },
-            "source": "composite",
-            "source-layer": "HighwoodESPG4269-81jsxn",
-            "layout": { "visibility": "none" },
-            "paint": { "fill-color": "hsla(115, 13%, 55%, 0.75)" }
-        },
-        {
             "id": "Highwood_Shapefile copy",
             "type": "line",
             "metadata": { "mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e" },
