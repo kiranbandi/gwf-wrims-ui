@@ -1306,7 +1306,7 @@
             }
         },
         {
-            "id": "ab-southsask",
+            "id": "AB-South-Saskatchewan-River",
             "type": "fill",
             "metadata": { "mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e" },
             "source": "composite",
@@ -1315,7 +1315,7 @@
             "paint": { "fill-color": "hsl(115, 47%, 67%)" }
         },
         {
-            "id": "sk-sssubrb",
+            "id": "SK-South-Saskatchewan-River-Upstream",
             "type": "fill",
             "metadata": { "mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e" },
             "source": "composite",
@@ -1324,7 +1324,7 @@
             "paint": { "fill-color": "hsl(115, 47%, 67%)" }
         },
         {
-            "id": "sk-sasksubrb",
+            "id": "SK-South-Saskatchewan-River-Downstream",
             "type": "fill",
             "metadata": { "mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e" },
             "source": "composite",
@@ -1333,7 +1333,7 @@
             "paint": { "fill-color": "#8ad283" }
         },
         {
-            "id": "ab-reddeer",
+            "id": "Reddeer-River",
             "type": "fill",
             "metadata": { "mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e" },
             "source": "composite",
@@ -1342,7 +1342,7 @@
             "paint": { "fill-color": "hsl(308, 14%, 69%)" }
         },
         {
-            "id": "ab-oldman",
+            "id": "Oldman-River",
             "type": "fill",
             "metadata": { "mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e" },
             "source": "composite",
@@ -1351,7 +1351,7 @@
             "paint": { "fill-color": "hsl(196, 58%, 77%)" }
         },
         {
-            "id": "sk-nssubrb",
+            "id": "SK-North-Saskatchewan-River",
             "type": "fill",
             "metadata": { "mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e" },
             "source": "composite",
@@ -1360,7 +1360,7 @@
             "paint": { "fill-color": "hsl(72, 46%, 64%)" }
         },
         {
-            "id": "ab-nsrb",
+            "id": "AB-North-Saskatchewan-River",
             "type": "fill",
             "metadata": { "mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e" },
             "source": "composite",
@@ -1369,7 +1369,7 @@
             "paint": { "fill-color": "hsl(72, 46%, 64%)" }
         },
         {
-            "id": "ab-bow",
+            "id": "Bow-River",
             "type": "fill",
             "metadata": { "mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e" },
             "source": "composite",
@@ -1378,22 +1378,22 @@
             "paint": { "fill-color": "hsl(46, 78%, 76%)" }
         },
         {
-            "id": "Highwood_Shapefile copy",
+            "id": "Highwood-Border",
             "type": "line",
             "metadata": { "mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e" },
             "source": "composite",
             "source-layer": "HighwoodESPG4269-81jsxn",
             "layout": {},
-            "paint": {}
+            "paint": { "line-color": "hsla(0, 0%, 0%, 0.45)" }
         },
         {
-            "id": "SouthSaskRiver_Shapefile",
+            "id": "Highwood",
             "type": "fill",
             "metadata": { "mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e" },
             "source": "composite",
-            "source-layer": "SouthSaskR-avcidb",
-            "layout": { "visibility": "none" },
-            "paint": { "fill-color": "hsla(108, 85%, 18%, 0.75)" }
+            "source-layer": "HighwoodESPG4269-81jsxn",
+            "layout": {},
+            "paint": { "fill-color": "hsla(46, 79%, 76%, 0)" }
         },
         {
             "id": "national-park",

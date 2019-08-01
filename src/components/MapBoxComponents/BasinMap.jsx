@@ -11,7 +11,17 @@ const TOKEN = 'pk.eyJ1IjoicmljYXJkb3JoZWVkZXIiLCJhIjoiY2p4MGl5bWIyMDE1bDN5b2NneH
 import defaultMapStyle from './map-style.jsx';
 
 
-let basinArray = ['ab-bow', 'ab-nsrb', 'sk-nssubrb', 'ab-oldman', 'ab-reddeer', 'sk-sasksubrb', 'sk-sssubrb', 'ab-southsask'];
+let basinArray = [
+    'AB-South-Saskatchewan-River',
+    'SK-South-Saskatchewan-River-Upstream',
+    'SK-South-Saskatchewan-River-Downstream',
+    'Reddeer-River',
+    'Oldman-River',
+    'SK-North-Saskatchewan-River',
+    'AB-North-Saskatchewan-River',
+    'Bow-River',
+    'Highwood'
+];
 
 let curHover = ''
 let prevHover = ''
@@ -23,7 +33,7 @@ export default class BasinMap extends Component {
         super(props);
         this.state = {
             // mapStyle: _.cloneDeep(defaultMapStyle),
-            mapStyle: fromJS(defaultMapStyle),
+            mapStyle: defaultMapStyle,
             viewport: {
                 width: 400,
                 height: 400,
@@ -33,7 +43,7 @@ export default class BasinMap extends Component {
             },
             popupInfo: null,
             hoverInfo: null,
-            mapObjectFromImmutable: fromJS(defaultMapStyle)
+            mapObjectFromImmutable: defaultMapStyle
 
         };
         this.renderPlaceMarker = this.renderPlaceMarker.bind(this);
@@ -66,7 +76,7 @@ export default class BasinMap extends Component {
                 // Hovering over new basin - make changes
 
                 // let mapObjectFromImmutable = fromJS(mapStyle)
-                let layers = this.state.mapObjectFromImmutable.get('layers')
+                let layers = defaultMapStyle.get('layers')
                 let basinNameId = basin.layer.id;
                 basinLayerIndex = layers.findIndex((l) => {
                     return l.toObject().id == basinNameId
@@ -95,12 +105,31 @@ export default class BasinMap extends Component {
             if (curHover == '') {
                 hoverInfo = ''
                 this.setState({
-                    mapStyle: this.state.mapObjectFromImmutable,
+                    mapStyle: defaultMapStyle,
                     hoverInfo
                 })
             } else {
+                let defaultMapStyleCopy = defaultMapStyle
+
+                if (curHover == 'SK-South-Saskatchewan-River-Upstream' || curHover == 'SK-South-Saskatchewan-River-Downstream') {
+                    if (curHover == 'SK-South-Saskatchewan-River-Upstream') {
+                        defaultMapStyleCopy = defaultMapStyle.setIn(['layers', basinLayerIndex + 1, 'paint', 'fill-color'], "hsl(0, 36%, 71%)")
+                    }
+                    else if (curHover == 'SK-South-Saskatchewan-River-Downstream') {
+                        defaultMapStyleCopy = defaultMapStyle.setIn(['layers', basinLayerIndex - 1, 'paint', 'fill-color'], "hsl(0, 36%, 71%)")
+                    }
+                }
+                else if (curHover == 'SK-North-Saskatchewan-River' || curHover == 'AB-North-Saskatchewan-River') {
+                    if (curHover == 'SK-North-Saskatchewan-River') {
+                        defaultMapStyleCopy = defaultMapStyle.setIn(['layers', basinLayerIndex + 1, 'paint', 'fill-color'], "hsl(0, 36%, 71%)")
+                    }
+                    else if (curHover == 'AB-North-Saskatchewan-River') {
+                        defaultMapStyleCopy = defaultMapStyle.setIn(['layers', basinLayerIndex - 1, 'paint', 'fill-color'], "hsl(0, 36%, 71%)")
+                    }
+                }
+
                 this.setState({
-                    mapStyle: this.state.mapObjectFromImmutable.setIn(['layers', basinLayerIndex, 'paint', 'fill-color'], "hsl(0, 36%, 71%)"),
+                    mapStyle: defaultMapStyleCopy.setIn(['layers', basinLayerIndex, 'paint', 'fill-color'], "hsl(0, 36%, 71%)"),
                     hoverInfo
                 });
             }
@@ -111,19 +140,20 @@ export default class BasinMap extends Component {
     // Handling clicks on the map and where to redirect users
     _onClick = event => {
 
-        let { viewport } = this.state
-        // viewport.zoom = 10
+        // EXAMPLE OF HOW TO CHANGE VIEWPORT IN 'onClick'
+        // let { viewport } = this.state
+        // viewport.zoom = 10  
 
 
 
         let place = null;
         // console.log(curHover)
         if (curHover == '') { return }
-        if (curHover == 'sk-sssubrb' || curHover == 'ab-southsask' || curHover == 'sk-sasksubrb') {
+        if (curHover == 'SK-South-Saskatchewan-River-Upstream' || curHover == 'SK-South-Saskatchewan-River-Downstream') {
             place = PLACES[0]
             this.props.onRegionSelect({ 'target': place })
         }
-        else if (curHover == 'ab-bow') {
+        else if (curHover == 'Highwood') {
             place = PLACES[1]
             this.props.onRegionSelect({ 'target': place })
         }
@@ -131,7 +161,7 @@ export default class BasinMap extends Component {
 
         if (place != null) {
             // set the popup info for the current place marker
-            this.setState({ popupInfo: place, viewport })
+            this.setState({ popupInfo: place }) // viewport
         }
 
     };

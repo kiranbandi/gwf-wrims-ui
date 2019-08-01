@@ -11,7 +11,7 @@ const defaultMapStyle = {
   layers: MAP_STYLE.layers.slice()
 };
 
-export default defaultMapStyle;
+export default fromJS(defaultMapStyle);
 
 // // Add the geojson files for basins
 // mapStyle.sources.counties = {
