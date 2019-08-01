@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { setLogoutData, setLoginData } from '../redux/actions/actions';
 import { GoogleLogin } from 'react-google-login';
 import { requestLogin } from '../utils/requestServer';
-import { setUserState } from '../redux/actions/actions';
+import { setMode } from '../redux/actions/actions';
 
 
 // Google client ID for the GWF project 
@@ -36,7 +36,7 @@ class NavBar extends Component {
 
     onSelectUserType() {
         const userType = event.target.value;
-        this.props.actions.setUserState(userType);
+        ;
     }
 
     logOut(event) {
@@ -58,8 +58,8 @@ class NavBar extends Component {
 
     render() {
         const loginRedirectURL = 'https://cas.usask.ca/cas/login?service=' + encodeURIComponent((process.env.NODE_ENV == 'development') ? 'https://localhost:8888/' : 'https://gwf-hci.usask.ca/');
-        const { userState, logged_in } = this.props;
-        const nullUserState = (userState === "EMPTY_STATE")
+        const { mode, logged_in } = this.props;
+        const nullUserState = (mode === -1)
         return (
             <nav className="navbar navbar-inverse navbar-fixed-top">
                 <div className="container-fluid">
@@ -91,12 +91,20 @@ class NavBar extends Component {
                         <ul className='nav navbar-nav navbar-right'>
                             { !nullUserState && logged_in &&
                                 <li>
-                                    <div className="input-group">
+                                    {/* <div className="input-group">
                                         <span className='inner-span'>Current User</span>
                                         <select name="program" className='custom-select' value={userState} onChange={this.onSelectUserType}>
                                             <option key={'pg-1'} value={'STAKEHOLDER'} >{'Stakeholder'}</option>
                                             <option key={'pg-2'} value={'WATER_SCIENTIST'} >{'Water Scientist'}</option>
                                         </select>
+                                    </div> */}
+                                    <div className="mode-switch-button" onClick={() => this.props.actions.setMode(-1)} >
+                                        {"Switch Mode"}
+                                        {/* <span className='inner-span'>Current User</span>
+                                        <select name="program" className='custom-select' value={userState} onChange={this.onSelectUserType}>
+                                            <option key={'pg-1'} value={'STAKEHOLDER'} >{'Stakeholder'}</option>
+                                            <option key={'pg-2'} value={'WATER_SCIENTIST'} >{'Water Scientist'}</option>
+                                        </select> */}
                                     </div>
                                 </li>
                             }
@@ -140,13 +148,13 @@ function mapStateToProps(state) {
     return {
         logged_in: state.delta.sessionStatus,
         username: state.delta.username,
-        userState: state.delta.userState
+        mode: state.delta.mode
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({ setLogoutData, setLoginData, setUserState }, dispatch)
+        actions: bindActionCreators({ setLogoutData, setLoginData, setMode }, dispatch)
     };
 }
 

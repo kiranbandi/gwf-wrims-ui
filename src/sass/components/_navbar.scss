@@ -57,10 +57,20 @@
         }
     }
 
-    .input-group {
-        margin-top: 8px;
-        .inner-span {
-            margin-right: 10px;
+    .mode-switch-button {
+
+        border-radius: 4px;
+        font-size: 1.16em;
+        font-weight: bold;
+        padding: 6px;
+        margin: 8px 0;
+        background: #2f2f2f;
+        border: 2px solid transparent;
+        cursor: pointer;
+        color: #c7c7c7;
+
+        &:hover {
+            border: 2px solid #8c8c8c;
         }
     }
 }

@@ -17,17 +17,17 @@ class FlowPanel extends Component {
                 {
                     name: "Summer Flow",
                     color: "#1bc98e",
-                    visible: true,
+                    visible: true
                 },
                 {
                     name: "Winter Flow",
                     color: "#1ca8dd",
-                    visible: true,
+                    visible: true
                 },
                 {
                     name: "Spawning Rate",
                     color: "#9f86ff",
-                    visible: true,
+                    visible: true
                 }
             ],
             showPowerData: false
@@ -47,8 +47,7 @@ class FlowPanel extends Component {
 
     componentDidUpdate() {
         const { flowData = {} } = this.props, { dataList = [] } = flowData;
-        // console.log("FlowPanel: " + flowData)
-        // Added functionality in index.jsx: actions.setFlowData to add values for power
+        
         const timePeriodList = this.state.showPowerData? (_.map(dataList, (d) => d.power)) : _.map(dataList, (d) => d.flow);
         
         if (dataList.length > 0) {
@@ -143,7 +142,6 @@ class FlowPanel extends Component {
     }
 
     render() {
-        // console.log("IWASCALLED");
         const { flowData = {}, width, height } = this.props,
             { dataList = [], name = '', isLoading = false, flowParams = { threshold: 'base' } } = flowData,
             innerWidth = width - 60,

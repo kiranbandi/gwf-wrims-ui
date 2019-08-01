@@ -100,6 +100,6 @@ export function toggleNonIrrigationVisibility() {
     return { type: types.SET_NONIRRIGATION_VISIBILITY };
 }
 
-export function setUserState(userState) {
-    return { type: types.SET_USER_STATE, userState }
+export function setMode(mode) {
+    return { type: types.SET_MODE, mode }
 }

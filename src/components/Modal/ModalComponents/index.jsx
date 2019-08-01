@@ -1,1 +1,1 @@
-export {default as UserSelection} from './UserSelection';
+export { default as UserSelection } from './UserSelection/';

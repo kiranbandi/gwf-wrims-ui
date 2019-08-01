@@ -26,6 +26,6 @@ export default {
       areNonIrrigationsVisible: true,
       visibleNonIrrigations: [],
     },
-    userState: "EMPTY_STATE"
+    mode: -1
   }
 };
