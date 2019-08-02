@@ -23,9 +23,19 @@ let basinArray = [
     'Highwood'
 ];
 
+const highlightColor = "hsl(0, 36%, 71%)"
+const borderColor = "rgba(192, 12, 12, 65)"
 let curHover = ''
 let prevHover = ''
 let basinLayerIndex = null
+var currentlyEditedMapHighlight = defaultMapStyle
+var currentlyEditedMapBorder = defaultMapStyle
+
+
+let basinBorderLayerIndex = ''
+let basinPrevBorderLayerIndex = ''
+let editedMapStyle = null;
+let currentBorderName = ''
 
 export default class BasinMap extends Component {
 
@@ -43,9 +53,9 @@ export default class BasinMap extends Component {
             },
             popupInfo: null,
             hoverInfo: null,
-            mapObjectFromImmutable: defaultMapStyle
-
+            mapSelectedBorder: defaultMapStyle
         };
+
         this.renderPlaceMarker = this.renderPlaceMarker.bind(this);
         this.renderPopup = this.renderPopup.bind(this);
         this.renderHoverPopup = this.renderHoverPopup.bind(this);
@@ -70,7 +80,6 @@ export default class BasinMap extends Component {
             let basinNameId = basin.layer.id;   // Store basin name as ID
 
             curHover = basinNameId  // store basin ID as current hover
-
             // Check that we are not still hovering over same basin ()
             if (prevHover != curHover) {
                 // Hovering over new basin - make changes
@@ -93,9 +102,6 @@ export default class BasinMap extends Component {
             }
         }
 
-        // console.log('Current Hover: ' + curHover)
-        // console.log('Previous Hover: ' + prevHover)
-
         // If the current hover has changed 
         // OR
         // We have hovered off of a basin
@@ -104,38 +110,40 @@ export default class BasinMap extends Component {
 
             if (curHover == '') {
                 hoverInfo = ''
+
+                editedMapStyle = defaultMapStyle
+
+                // Border companion basin
+                if (basinBorderLayerIndex != ''){
+                    editedMapStyle = this.borderBasin(editedMapStyle, basinBorderLayerIndex, currentBorderName)
+                }
+
                 this.setState({
-                    mapStyle: defaultMapStyle,
+                    mapStyle: editedMapStyle,
                     hoverInfo
                 })
             } else {
-                let defaultMapStyleCopy = defaultMapStyle
+                editedMapStyle = defaultMapStyle   // reset the map edits
 
-                if (curHover == 'SK-South-Saskatchewan-River-Upstream' || curHover == 'SK-South-Saskatchewan-River-Downstream') {
-                    if (curHover == 'SK-South-Saskatchewan-River-Upstream') {
-                        defaultMapStyleCopy = defaultMapStyle.setIn(['layers', basinLayerIndex + 1, 'paint', 'fill-color'], "hsl(0, 36%, 71%)")
-                    }
-                    else if (curHover == 'SK-South-Saskatchewan-River-Downstream') {
-                        defaultMapStyleCopy = defaultMapStyle.setIn(['layers', basinLayerIndex - 1, 'paint', 'fill-color'], "hsl(0, 36%, 71%)")
-                    }
+                // Highlight current basin(s)
+                editedMapStyle = this.highlightBasin(editedMapStyle, basinLayerIndex, curHover)
+
+                // Border the current basin(s)
+                if (basinBorderLayerIndex != ''){
+                    editedMapStyle = this.borderBasin(editedMapStyle, basinBorderLayerIndex, currentBorderName)
                 }
-                else if (curHover == 'SK-North-Saskatchewan-River' || curHover == 'AB-North-Saskatchewan-River') {
-                    if (curHover == 'SK-North-Saskatchewan-River') {
-                        defaultMapStyleCopy = defaultMapStyle.setIn(['layers', basinLayerIndex + 1, 'paint', 'fill-color'], "hsl(0, 36%, 71%)")
-                    }
-                    else if (curHover == 'AB-North-Saskatchewan-River') {
-                        defaultMapStyleCopy = defaultMapStyle.setIn(['layers', basinLayerIndex - 1, 'paint', 'fill-color'], "hsl(0, 36%, 71%)")
-                    }
-                }
+
 
                 this.setState({
-                    mapStyle: defaultMapStyleCopy.setIn(['layers', basinLayerIndex, 'paint', 'fill-color'], "hsl(0, 36%, 71%)"),
+                    mapStyle: editedMapStyle,
                     hoverInfo
                 });
             }
         }
 
     };
+
+
 
     // Handling clicks on the map and where to redirect users
     _onClick = event => {
@@ -144,11 +152,31 @@ export default class BasinMap extends Component {
         // let { viewport } = this.state
         // viewport.zoom = 10  
 
-
-
         let place = null;
-        // console.log(curHover)
-        if (curHover == '') { return }
+        if (curHover == '') { return }  // If not hovering over anything, don't do anything
+
+        // Get index of the current basin's border
+        let layers = defaultMapStyle.get('layers')
+        basinBorderLayerIndex = layers.findIndex((l) => {
+            return l.toObject().id == (curHover + '-Border')
+        })
+
+        if (basinPrevBorderLayerIndex != ''){
+            editedMapStyle = this.unborderBasin(editedMapStyle, basinPrevBorderLayerIndex, currentBorderName)
+        }
+
+        basinPrevBorderLayerIndex = basinBorderLayerIndex   // Store the previous border index
+        currentBorderName = curHover    // Store current basin-border's name
+
+        // Apply border, repaint current basin
+        editedMapStyle = this.borderBasin(editedMapStyle, basinBorderLayerIndex, currentBorderName)
+        editedMapStyle = editedMapStyle.setIn(['layers', basinLayerIndex, 'paint', 'fill-color'], highlightColor)
+
+        this.setState({
+            mapStyle: editedMapStyle
+        });
+
+        // Get information for the Info-Card pop-up
         if (curHover == 'SK-South-Saskatchewan-River-Upstream' || curHover == 'SK-South-Saskatchewan-River-Downstream') {
             place = PLACES[0]
             this.props.onRegionSelect({ 'target': place })
@@ -157,14 +185,85 @@ export default class BasinMap extends Component {
             place = PLACES[1]
             this.props.onRegionSelect({ 'target': place })
         }
-
-
+        
         if (place != null) {
             // set the popup info for the current place marker
             this.setState({ popupInfo: place }) // viewport
         }
-
     };
+
+    highlightBasin(mapToEdit, basinHighlightIndex, basinHighlightName){
+
+        if (basinHighlightName == 'SK-South-Saskatchewan-River-Upstream' || basinHighlightName == 'SK-South-Saskatchewan-River-Downstream') {
+            if (basinHighlightName == 'SK-South-Saskatchewan-River-Upstream') {
+                mapToEdit = mapToEdit.setIn(['layers', basinHighlightIndex + 1, 'paint', 'fill-color'], highlightColor)
+            }
+            else if (basinHighlightName == 'SK-South-Saskatchewan-River-Downstream') {
+                mapToEdit = mapToEdit.setIn(['layers', basinHighlightIndex - 1, 'paint', 'fill-color'], highlightColor)
+            }
+        }
+
+        else if (basinHighlightName == 'SK-North-Saskatchewan-River' || basinHighlightName == 'AB-North-Saskatchewan-River') {
+            if (basinHighlightName == 'SK-North-Saskatchewan-River') {
+                mapToEdit = mapToEdit.setIn(['layers', basinHighlightIndex + 1, 'paint', 'fill-color'], highlightColor)
+            }
+            else if (basinHighlightName == 'AB-North-Saskatchewan-River') {
+                mapToEdit = mapToEdit.setIn(['layers', basinHighlightIndex - 1, 'paint', 'fill-color'], highlightColor)
+            }
+        }
+
+        mapToEdit = mapToEdit.setIn(['layers', basinLayerIndex, 'paint', 'fill-color'], highlightColor)
+
+        return mapToEdit
+    }
+
+    borderBasin(mapToEdit, basinBorderIndex, basinBorderName){
+
+        if (basinBorderName == 'SK-South-Saskatchewan-River-Upstream' || basinBorderName == 'SK-South-Saskatchewan-River-Downstream') {
+            if (basinBorderName == 'SK-South-Saskatchewan-River-Upstream') {
+                mapToEdit = mapToEdit.setIn(['layers', basinBorderIndex + 1, 'layout', 'visibility'], "visible")
+            }
+            else if (basinBorderName == 'SK-South-Saskatchewan-River-Downstream') {
+                mapToEdit = mapToEdit.setIn(['layers', basinBorderIndex - 1, 'layout', 'visibility'], "visible")
+            }
+        }
+        
+        else if (basinBorderName == 'SK-North-Saskatchewan-River' || basinBorderName == 'AB-North-Saskatchewan-River') {
+            if (basinBorderName == 'SK-North-Saskatchewan-River') {
+                mapToEdit = mapToEdit.setIn(['layers', basinBorderIndex + 1, 'layout', 'visibility'], "visible")
+            }
+            else if (basinBorderName == 'AB-North-Saskatchewan-River') {
+                mapToEdit = mapToEdit.setIn(['layers', basinBorderIndex - 1, 'layout', 'visibility'], "visible")
+            }
+        }
+        mapToEdit = mapToEdit.setIn(['layers', basinBorderIndex, 'layout', 'visibility'], "visible")
+
+        return mapToEdit
+    }
+
+    unborderBasin(mapToEdit, basinBorderIndex, basinBorderName){
+
+        if (basinBorderName == 'SK-South-Saskatchewan-River-Upstream' || basinBorderName == 'SK-South-Saskatchewan-River-Downstream') {
+            if (basinBorderName == 'SK-South-Saskatchewan-River-Upstream') {
+                mapToEdit = mapToEdit.setIn(['layers', basinBorderIndex + 1, 'layout', 'visibility'], "none")
+            }
+            else if (basinBorderName == 'SK-South-Saskatchewan-River-Downstream') {
+                mapToEdit = mapToEdit.setIn(['layers', basinBorderIndex - 1, 'layout', 'visibility'], "none")
+            }
+        }
+        
+        else if (basinBorderName == 'SK-North-Saskatchewan-River' || basinBorderName == 'AB-North-Saskatchewan-River') {
+            if (basinBorderName == 'SK-North-Saskatchewan-River') {
+                mapToEdit = mapToEdit.setIn(['layers', basinBorderIndex + 1, 'layout', 'visibility'], "none")
+            }
+            else if (basinBorderName == 'AB-North-Saskatchewan-River') {
+                mapToEdit = mapToEdit.setIn(['layers', basinBorderIndex - 1, 'layout', 'visibility'], "none")
+            }
+        }
+        mapToEdit = mapToEdit.setIn(['layers', basinBorderIndex, 'layout', 'visibility'], "none")
+
+        return mapToEdit
+    }
 
     renderPlaceMarker(place, index) {
         return (
@@ -213,7 +312,6 @@ export default class BasinMap extends Component {
         }
         return null;
     }
-
 
     render() {
 
