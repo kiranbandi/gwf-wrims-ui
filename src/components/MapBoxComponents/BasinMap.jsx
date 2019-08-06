@@ -43,9 +43,9 @@ export default class BasinMap extends Component {
             viewport: {
                 width: 400,
                 height: 400,
-                latitude: 51.40,
+                latitude: 52.25,
                 longitude: -110.75,
-                zoom: 5.5
+                zoom: 5.1
             },
             popupInfo: null,
             hoverInfo: null,
@@ -148,8 +148,6 @@ export default class BasinMap extends Component {
         }
 
     };
-
-
 
     // Handling clicks on the map and where to redirect users
     _onClick = event => {
