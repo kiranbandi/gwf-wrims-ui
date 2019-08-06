@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MapGL, { Marker, Popup } from 'react-map-gl';
+import MapGL, { Marker, Popup, FlyToInterpolator } from 'react-map-gl';
 import PlaceInfo from './PlaceInfo';
 import PlaceMarker from './PlaceMarker';
 import PLACES from '../../utils/static-reference/mapPlaces';
@@ -24,13 +24,9 @@ let basinArray = [
 ];
 
 const highlightColor = "hsl(0, 36%, 71%)"
-const borderColor = "rgba(192, 12, 12, 65)"
 let curHover = ''
 let prevHover = ''
 let basinLayerIndex = null
-var currentlyEditedMapHighlight = defaultMapStyle
-var currentlyEditedMapBorder = defaultMapStyle
-
 
 let basinBorderLayerIndex = ''
 let basinPrevBorderLayerIndex = ''
@@ -67,15 +63,25 @@ export default class BasinMap extends Component {
         let hoverInfo = null;
         const basin = event.features && event.features.find(f => basinArray.indexOf(f.layer.id) > -1);
 
+        // console.log(event.lngLat)
+
         // If hovering over a basin
         if (basin) {
 
-            // reset hoverInfo so that it re-renders to mouse cursor
-            hoverInfo = {
-                lngLat: event.lngLat,
-                basinName: basin.layer.id.split("-").join(" ")
-            };
-            this.setState({ hoverInfo })
+            if (currentBorderName != curHover ){
+                // reset hoverInfo so that it re-renders to mouse cursor
+                hoverInfo = {
+                    lngLat: event.lngLat,
+                    basinName: basin.layer.id.split("-").join(" ")
+                };
+                this.setState({ hoverInfo })
+            }
+            if (currentBorderName == curHover){
+                hoverInfo = null;
+                this.setState({ hoverInfo })
+
+            }
+
 
             let basinNameId = basin.layer.id;   // Store basin name as ID
 
@@ -151,6 +157,8 @@ export default class BasinMap extends Component {
         // EXAMPLE OF HOW TO CHANGE VIEWPORT IN 'onClick'
         // let { viewport } = this.state
         // viewport.zoom = 10  
+        let hoverInfo = null;
+        this.setState({ hoverInfo })
 
         let place = null;
         if (curHover == '') { return }  // If not hovering over anything, don't do anything
@@ -179,11 +187,38 @@ export default class BasinMap extends Component {
         // Get information for the Info-Card pop-up
         if (curHover == 'SK-South-Saskatchewan-River-Upstream' || curHover == 'SK-South-Saskatchewan-River-Downstream') {
             place = PLACES[0]
+            this._goToViewport(place)
             this.props.onRegionSelect({ 'target': place })
         }
         else if (curHover == 'Highwood') {
             place = PLACES[1]
+            this._goToViewport(place)
             this.props.onRegionSelect({ 'target': place })
+        }
+        else if (curHover == 'Reddeer-River') {
+            place = PLACES[2]
+            this._goToViewport(place)
+            // this.props.onRegionSelect({ 'target': place })
+        }
+        else if (curHover == 'SK-North-Saskatchewan-River' || curHover == 'AB-North-Saskatchewan-River') {
+            place = PLACES[3]
+            this._goToViewport(place)
+            // this.props.onRegionSelect({ 'target': place })
+        }
+        else if (curHover == 'Bow-River') {
+            place = PLACES[4]
+            this._goToViewport(place)
+            // this.props.onRegionSelect({ 'target': place })
+        }
+        else if (curHover == 'Oldman-River') {
+            place = PLACES[5]
+            this._goToViewport(place)
+            // this.props.onRegionSelect({ 'target': place })
+        }
+        else if (curHover == 'AB-South-Saskatchewan-River') {
+            place = PLACES[6]
+            this._goToViewport(place)
+            // this.props.onRegionSelect({ 'target': place })
         }
         
         if (place != null) {
@@ -313,6 +348,21 @@ export default class BasinMap extends Component {
         return null;
     }
 
+    _onViewportChange = viewport =>
+    this.setState({
+      viewport: {...this.state.viewport, ...viewport}
+    });
+
+    _goToViewport = ({longitude, latitude, zoom}) => {
+        this._onViewportChange({
+          longitude,
+          latitude,
+          zoom,
+          transitionInterpolator: new FlyToInterpolator(),
+          transitionDuration: 1500
+        });
+      };
+
     render() {
 
         let { viewport, mapStyle } = this.state, { width } = this.props;
@@ -329,7 +379,10 @@ export default class BasinMap extends Component {
                     mapStyle={fromJS(mapStyle)}
                     mapboxApiAccessToken={TOKEN}
                     {...viewport}
-                    onViewportChange={(viewport) => this.setState({ viewport })}
+
+                    onViewportChange={this._onViewportChange}
+
+                    // onViewportChange={(viewport) => this.setState({ viewport })}
                     onHover={this._onHover}
                     onClick={this._onClick}
                 >
