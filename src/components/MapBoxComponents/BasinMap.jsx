@@ -49,7 +49,8 @@ export default class BasinMap extends Component {
             },
             popupInfo: null,
             hoverInfo: null,
-            mapSelectedBorder: defaultMapStyle
+            mapSelectedBorder: defaultMapStyle,
+            place: null
         };
 
         this.renderPlaceMarker = this.renderPlaceMarker.bind(this);
@@ -158,7 +159,6 @@ export default class BasinMap extends Component {
         let hoverInfo = null;
         this.setState({ hoverInfo })
 
-        let place = null;
         if (curHover == '') { return }  // If not hovering over anything, don't do anything
 
         // Get index of the current basin's border
@@ -184,44 +184,44 @@ export default class BasinMap extends Component {
 
         // Get information for the Info-Card pop-up
         if (curHover == 'SK-South-Saskatchewan-River-Upstream' || curHover == 'SK-South-Saskatchewan-River-Downstream') {
-            place = PLACES[0]
-            this._goToViewport(place)
-            this.props.onRegionSelect({ 'target': place })
+            this.setState({
+                place: PLACES[0]
+            });
         }
         else if (curHover == 'Highwood') {
-            place = PLACES[1]
-            this._goToViewport(place)
-            this.props.onRegionSelect({ 'target': place })
+            this.setState({
+                place: PLACES[1]
+            });
         }
         else if (curHover == 'Reddeer-River') {
-            place = PLACES[2]
-            this._goToViewport(place)
-            // this.props.onRegionSelect({ 'target': place })
+            this.setState({
+                place: PLACES[2]
+            });
         }
         else if (curHover == 'SK-North-Saskatchewan-River' || curHover == 'AB-North-Saskatchewan-River') {
-            place = PLACES[3]
-            this._goToViewport(place)
-            // this.props.onRegionSelect({ 'target': place })
+            this.setState({
+                place: PLACES[3]
+            });
         }
         else if (curHover == 'Bow-River') {
-            place = PLACES[4]
-            this._goToViewport(place)
-            // this.props.onRegionSelect({ 'target': place })
+            this.setState({
+                place: PLACES[4]
+            });
         }
         else if (curHover == 'Oldman-River') {
-            place = PLACES[5]
-            this._goToViewport(place)
-            // this.props.onRegionSelect({ 'target': place })
+            this.setState({
+                place: PLACES[5]
+            });
         }
         else if (curHover == 'AB-South-Saskatchewan-River') {
-            place = PLACES[6]
-            this._goToViewport(place)
-            // this.props.onRegionSelect({ 'target': place })
+            this.setState({
+                place: PLACES[6]
+            });
         }
         
-        if (place != null) {
+        if (this.state.place != null) {
             // set the popup info for the current place marker
-            this.setState({ popupInfo: place }) // viewport
+            this.setState({ popupInfo: this.state.place }) // viewport
         }
     };
 
@@ -311,6 +311,11 @@ export default class BasinMap extends Component {
         );
     };
 
+    iconButtonClick = () => { 
+        this._goToViewport(this.state.place)
+        this.props.onRegionSelect({ 'target': this.state.place })
+    }
+
     renderPopup() {
         const { popupInfo } = this.state;
 
@@ -324,7 +329,7 @@ export default class BasinMap extends Component {
                         latitude={popupInfo.latitude}
                         closeOnClick={false}
                         onClose={() => this.setState({ popupInfo: null })}>
-                        <PlaceInfo info={popupInfo} />
+                        <PlaceInfo info={popupInfo} iconButton={this.iconButtonClick}/>
                     </Popup>
                 )
             );
