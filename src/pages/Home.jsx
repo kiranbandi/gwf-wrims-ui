@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 //  Image url handling is convoluted in scss , much easier to set inline and get images from root
 let backgroundStyle = { backgroundImage: 'url(assets/img/gwf.jpg)' };
 import videoTileData from '../utils/static-reference/videoTilesData';
 import { YoutubeLayout } from '../components'
 
 class Home extends Component {
+
+  componentDidMount() {
+    const { mode = 1 } = this.props;
+    if (mode == 2) {
+      window.scrollTo(0, document.getElementById('demo-tile').offsetTop - 25);
+    }
+  }
+
 
   render() {
 
@@ -36,7 +45,7 @@ class Home extends Component {
             the platform, login and select from one of the many options below.
           </p>
 
-          <h1>Dashboard Demonstration</h1>
+          <h1 id='demo-tile'>Dashboard Demonstration</h1>
           <YoutubeLayout videoTileData={videoTileData} />
           <h1>Learn more</h1>
           <p>The project is aimed at building decision support tools for all parties involved in the Global Water Futures
@@ -52,6 +61,10 @@ class Home extends Component {
   }
 };
 
-export default Home;
+function mapStateToProps(state) {
+  return {
+    mode: state.delta.mode
+  };
+}
 
-
+export default connect(mapStateToProps, null)(Home);

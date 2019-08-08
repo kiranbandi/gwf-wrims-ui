@@ -101,5 +101,11 @@ export function toggleNonIrrigationVisibility() {
 }
 
 export function setMode(mode) {
+
+    // if mode is 2 then redirect user to dashboard     
+    if (mode == 2) {
+        hashHistory.push('/');
+    }
+
     return { type: types.SET_MODE, mode }
 }
