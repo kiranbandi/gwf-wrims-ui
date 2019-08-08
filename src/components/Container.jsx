@@ -46,9 +46,10 @@ class Container extends Component {
                     <div className="container-fluid">
                         <div className='footer-inner bottom-left'>
                             <div className="left text-xs-left">
-                                <a className="footer-link right" href="https://water.usask.ca/"> <img src="assets/img/usask_GIWS_Logo-Standard.png" height="50" width="80" style={{ 'margin': '5px 0px' }} /></a>
-                                <a className="footer-link right" href="https://gwf.usask.ca/"> <img src="assets/img/IMPC_Horizontal_FC.png" height="40" width="135" style={{ 'margin': '5px 0px' }} /></a>
-                                <a className="footer-link right" href="http://hci.usask.ca/" > <img src="assets/img/interaction_lab.gif" height="40" width="150" style={{ 'margin': '5px 0px' }} /></a>
+                                <a className="footer-link right" href="https://gwf.usask.ca/"> <img src="assets/img/gwf_title.png" height="35" width="140" style={{ 'margin': '5px 2px' }} /></a>
+                                <a className="footer-link right" href="https://gwf.usask.ca/impc/"> <img src="assets/img/IMPC_Horizontal_FC.png" height="35" width="100" style={{ 'margin': '5px 2px' }} /></a>
+                                <a className="footer-link right" href="https://water.usask.ca/"> <img src="assets/img/gwf_logo.png" height="35" width="120" style={{ 'margin': '5px 2px' }} /></a>
+                                <a className="footer-link right" href="http://hci.usask.ca/" > <img src="assets/img/interaction_lab.gif" height="35" width="150" style={{ 'margin': '5px 2px' }} /></a>
                             </div>
                         </div>
                         <div className='footer-inner text-right bottom-right'>

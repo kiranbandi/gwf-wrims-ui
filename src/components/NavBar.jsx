@@ -90,21 +90,9 @@ class NavBar extends Component {
                         </ul>
                         <ul className='nav navbar-nav navbar-right'>
                             { !nullUserState && logged_in &&
-                                <li>
-                                    {/* <div className="input-group">
-                                        <span className='inner-span'>Current User</span>
-                                        <select name="program" className='custom-select' value={userState} onChange={this.onSelectUserType}>
-                                            <option key={'pg-1'} value={'STAKEHOLDER'} >{'Stakeholder'}</option>
-                                            <option key={'pg-2'} value={'WATER_SCIENTIST'} >{'Water Scientist'}</option>
-                                        </select>
-                                    </div> */}
+                                <li>                              
                                     <div className="mode-switch-button" onClick={() => this.props.actions.setMode(-1)} >
                                         {"Switch Mode"}
-                                        {/* <span className='inner-span'>Current User</span>
-                                        <select name="program" className='custom-select' value={userState} onChange={this.onSelectUserType}>
-                                            <option key={'pg-1'} value={'STAKEHOLDER'} >{'Stakeholder'}</option>
-                                            <option key={'pg-2'} value={'WATER_SCIENTIST'} >{'Water Scientist'}</option>
-                                        </select> */}
                                     </div>
                                 </li>
                             }
