@@ -32,7 +32,13 @@ class DashboardRoot extends Component {
         this.setState({ 'isSchematicLoading': true });
         axios.get("/assets/files/schematics/" + selectedRegion + ".json")
             .then((response) => {
-                let processedData = processSchematic(response.data);
+                let processedData;
+                if (['alberta', 'northSask', 'northSaskSask', 'stribs', 'tau'].indexOf(selectedRegion) == -1) {
+                 processedData = processSchematic(response.data);
+                }
+                else {
+                    processedData = _.clone(response.data)
+                }
                 this.setState({ 'SchematicData': { ...processedData, selectedRegion, selectedPlace: '' } });
             })
             .catch(() => { toastr["error"]("Failed to load schematic", "ERROR") })
@@ -108,26 +114,25 @@ class DashboardRoot extends Component {
                 {isSchematicLoading ?
                     <Loading className='loader' type='spin' height='100px' width='100px' color='#d6e5ff' delay={-1} /> :
                     <div className='dashboard-inner-root'>
-                        {SchematicData.lines.length > 0 && <div>
-                            {(mode === 1) && < FilterPanel schematicData={SchematicData} />}
+                        {SchematicData.lines.length > 0 &&
+                            <div>
+                                {(mode === 1) && < FilterPanel schematicData={SchematicData} />}
+                                <RiverMap
+                                    schematicData={SchematicData}
+                                    width={mapWidth}
+                                    height={mapWidth / 1.75}
+                                    isMock={false}
+                                    scaleFix={!(mode === 1)} />
 
-                            <RiverMap
-                                schematicData={SchematicData}
-                                width={mapWidth}
-                                height={mapWidth / 1.75}
-                                isMock={false}
-                                scaleFix={!(mode === 1)} />
+                                {(mode === 1) && <VerticalSlider
+                                    width={widthOfSlider}
+                                    height={mapWidth / 1.75} />}
 
-                            {(mode === 1) && <VerticalSlider
-                                width={widthOfSlider}
-                                height={mapWidth / 1.75} />}
-
-
-                            <FlowPanel
-                                width={widthOfDashboard * 0.35}
-                                height={mapWidth / 1.75} />
-                            <LegendPanel width={widthOfDashboard} />
-                        </div>}
+                                <FlowPanel
+                                    width={widthOfDashboard * 0.35}
+                                    height={mapWidth / 1.75} />
+                                <LegendPanel width={widthOfDashboard} />
+                            </div>}
                     </div>
                 }
             </div>
