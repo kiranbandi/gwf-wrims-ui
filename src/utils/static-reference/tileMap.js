@@ -69,7 +69,7 @@ const tileMap = [{
 
     {
         tileID: "stribs",
-        tileName: "STRIBS Model",
+        tileName: "Southern Tributaries  Model",
         color: "#f5e2b800",
         hoverColor: "#ffd2508f",
         boundingPath: [

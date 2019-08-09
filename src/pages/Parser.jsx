@@ -97,7 +97,7 @@ class Parser extends Component {
                             width={mapWidth}
                             height={mapWidth / 2}
                             fromDashboard={false} />
-                        <LegendPanel />
+                        <LegendPanel width={widthOfDashboard} />
                     </div>
                 }
             </div>
