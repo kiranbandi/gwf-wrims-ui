@@ -1129,7 +1129,8 @@
             }]
         }
     ],
-    "links": [{
+    "links": [
+        {
             "linkName": "In30_SSR_AB_BRDR_J30",
             "linkNumber": 1,
             "linkTo": 56,
