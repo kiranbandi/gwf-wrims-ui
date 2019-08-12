@@ -61,6 +61,7 @@ export default class BasinMap extends Component {
                 yPos: 0,
                 mouseOver: false
             },
+            displayImage : false,
 
             basinStruct : {
                 southSask: {
@@ -226,11 +227,13 @@ export default class BasinMap extends Component {
 
         this.setPlace(curHover);
         
-        // if (this.state.place != null) {
-        //     // set the popup info for the current place marker
-        //     this.setState({ popupInfo: this.state.place }) // viewport
-        // }
+        // Update popupInfo state to new place selected
+        if (this.state.place != null) {
+            // set the popup info for the current place marker
+            this.setState({ popupInfo: this.state.place }) // viewport
+        }
 
+        // If a basin is selected, place the marking menu down, else, remove the marking menu
         if (curHover != ''){
             if ( !this.state.markingMenu.mouseOver && !wasDragging) {
                 this.setState({
@@ -242,11 +245,12 @@ export default class BasinMap extends Component {
                 markingMenu: {...this.state.markingMenu, curClick: false}
             });
         }
+
         // If mouse button up, impossible to be hovering
         wasDragging = false
     }
 
-    
+
     mouseOut() {
         // Indicates that we finished hovering over a button
         this.setState({
@@ -448,17 +452,22 @@ export default class BasinMap extends Component {
         });
       };
 
-    viewImage(){
+    viewImage(popupInfo){
+        // <img width={240} src={info.image} />
         console.log("image clicked")
     }
-    viewWiki(){
-        console.log("wiki clicked")
-    }
+
     viewSchematic(){
+        this.iconButtonClick()
+        this.setState({
+            markingMenu: {...this.state.markingMenu, curClick: false, mouseOver: false}
+        });
         console.log("schematic clicked")
     }
 
     addMarkingMenu(){
+        const { popupInfo } = this.state;
+
         if (this.state.markingMenu.curClick){
             return ( 
                 <MarkingMenu
@@ -471,13 +480,24 @@ export default class BasinMap extends Component {
                         <button className="icon icon-location-pin" />
                     </div>
                     <div className="button marking-menu-button"  onMouseOut={() => this.mouseOut()} onMouseOver={() => this.mouseOver()}>
-                        <button className="icon icon-image" onClick={() => this.viewImage()}/>
+                        <button className="icon icon-image" onClick={() => this.setState({displayImage: !this.state.displayImage})}/>
+                        <div className="basin-image-div" >
+                            {this.state.displayImage 
+                            ? <div className="polaroid">
+                                <img className="basin-image" width={240} src={popupInfo.image} />
+                                <div className="text-container">
+                                    <p className="text-styling">{popupInfo.name}</p>
+                                </div> 
+                            </div>
+                            : <img/>
+                            }
+                        </div>
                     </div>
                     <div className="button marking-menu-button"  onMouseOut={() => this.mouseOut()} onMouseOver={() => this.mouseOver()}>
                         <button className="icon icon-air" onClick={() => this.viewSchematic()}/>
                     </div>
                     <div className="button marking-menu-button"  onMouseOut={() => this.mouseOut()} onMouseOver={() => this.mouseOver()}>
-                        <button className="icon icon-info-with-circle" onClick={() => this.viewWiki()}/>
+                        <a className="icon icon-info-with-circle"  target="_new" href={`http://en.wikipedia.org/w/index.php?title=Special:Search&search=${`${popupInfo.name}`}`} />
                     </div>
                 </MarkingMenu>
             )
@@ -495,13 +515,10 @@ export default class BasinMap extends Component {
         viewport.width = width;
         viewport.height = width / 2.5;
 
-        // console.log('render');
-
         return (
             <div className="mapboxDiv">
 
                 <MapGL
-
                     mapStyle={fromJS(mapStyle)}
                     mapboxApiAccessToken={TOKEN}
                     {...viewport}
@@ -515,14 +532,13 @@ export default class BasinMap extends Component {
                     getCursor={this._getCursor}  // Can see when we are dragging map
                 >
                     {/* {PLACES.map(this.renderPlaceMarker)} */}
-                    {this.renderPopup()}
+                    {/* {this.renderPopup()} */}
                     {this.renderHoverPopup()}
 
                     <div className="markingMenuDiv">
                         {this.addMarkingMenu()}                
                     </div>
                 </MapGL>
-
 
             </div>
         );
