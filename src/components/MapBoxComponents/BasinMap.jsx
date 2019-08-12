@@ -132,7 +132,6 @@ export default class BasinMap extends Component {
             if (prevHover != curHover) {
                 // Hovering over new basin - make changes
 
-                // let mapObjectFromImmutable = fromJS(mapStyle)
                 let layers = defaultMapStyle.get('layers')
                 let basinNameId = basin.layer.id;
                 basinLayerIndex = layers.findIndex((l) => {
@@ -143,7 +142,8 @@ export default class BasinMap extends Component {
 
         else {
             curHover = ''   // Currently hovering nothing
-            if (basinLayerIndex != null) {
+
+            if (basinLayerIndex != null) { // CONSIDER REMOVING
                 // mapStyle.layers[basinLayerIndex].paint['fill-color'] = defaultMapStyle.layers[basinLayerIndex].paint['fill-color'];  
             }
         }
@@ -179,28 +179,29 @@ export default class BasinMap extends Component {
                     editedMapStyle = this.borderBasin(editedMapStyle, basinBorderLayerIndex, currentBorderName)
                 }
 
-
                 this.setState({
                     mapStyle: editedMapStyle,
                     hoverInfo
                 });
             }
         }
-
     };
 
-    // Handling clicks on the map and where to redirect users
     _onMouseDown = event => {
-        let hoverInfo = null;
-        this.setState({ hoverInfo })
-
+        // If not hovering over a marking menu button AND if mouse down THEN remove the marking menu
         if ( this.state.markingMenu.mouseOver == false){
             this.setState({
                 markingMenu: {...this.state.markingMenu, curClick: false}
             });
         }
+    };
 
-        if (curHover == '' || this.wasDragging || this.state.markingMenu.mouseOver) { return }  // If not hovering over anything, don't do anything
+    // Handling clicks on the map and where to redirect users
+    _onMouseUp = event => {
+        let hoverInfo = null;
+        this.setState({ hoverInfo })
+
+        if (curHover == '' || wasDragging || this.state.markingMenu.mouseOver) { return }  // If not hovering over anything, don't do anything
 
         // Get index of the current basin's border
         let layers = defaultMapStyle.get('layers')
@@ -223,53 +224,15 @@ export default class BasinMap extends Component {
             mapStyle: editedMapStyle
         });
 
-        // Get information for the Info-Card pop-up
-        if (curHover == 'SK-South-Saskatchewan-River-Upstream' || curHover == 'SK-South-Saskatchewan-River-Downstream') {
-            this.setState({
-                place: PLACES[0]
-            });
-        }
-        else if (curHover == 'Highwood') {
-            this.setState({
-                place: PLACES[1]
-            });
-        }
-        else if (curHover == 'Reddeer-River') {
-            this.setState({
-                place: PLACES[2]
-            });
-        }
-        else if (curHover == 'SK-North-Saskatchewan-River' || curHover == 'AB-North-Saskatchewan-River') {
-            this.setState({
-                place: PLACES[3]
-            });
-        }
-        else if (curHover == 'Bow-River') {
-            this.setState({
-                place: PLACES[4]
-            });
-        }
-        else if (curHover == 'Oldman-River') {
-            this.setState({
-                place: PLACES[5]
-            });
-        }
-        else if (curHover == 'AB-South-Saskatchewan-River') {
-            this.setState({
-                place: PLACES[6]
-            });
-        }
+        this.setPlace(curHover);
         
         // if (this.state.place != null) {
         //     // set the popup info for the current place marker
         //     this.setState({ popupInfo: this.state.place }) // viewport
         // }
-    };
 
-    // Mouse up deals with placing the Marking Menu
-    _onMouseUp = event => {
         if (curHover != ''){
-            if ( !this.state.markingMenu.mouseOver && !this.wasDragging) {
+            if ( !this.state.markingMenu.mouseOver && !wasDragging) {
                 this.setState({
                     markingMenu: {...this.state.markingMenu, curClick: true, xPos: event.point[0] - 12.5, yPos: event.point[1] - 12.5},
                 });
@@ -280,9 +243,10 @@ export default class BasinMap extends Component {
             });
         }
         // If mouse button up, impossible to be hovering
-        this.wasDragging = false
+        wasDragging = false
     }
 
+    
     mouseOut() {
         // Indicates that we finished hovering over a button
         this.setState({
@@ -300,7 +264,7 @@ export default class BasinMap extends Component {
     }
 
     _getCursor = event => {
-        this.wasDragging= event.isDragging
+        wasDragging= event.isDragging
     }
 
     highlightBasin(mapToEdit, basinHighlightIndex, basinHighlightName){
@@ -374,6 +338,45 @@ export default class BasinMap extends Component {
         mapToEdit = mapToEdit.setIn(['layers', basinBorderIndex, 'layout', 'visibility'], "none")
 
         return mapToEdit
+    }
+
+    setPlace(curHover){ 
+        // Get information for the Info-Card pop-up
+        if (curHover == 'SK-South-Saskatchewan-River-Upstream' || curHover == 'SK-South-Saskatchewan-River-Downstream') {
+            this.setState({
+                place: PLACES[0]
+            });
+        }
+        else if (curHover == 'Highwood') {
+            this.setState({
+                place: PLACES[1]
+            });
+        }
+        else if (curHover == 'Reddeer-River') {
+            this.setState({
+                place: PLACES[2]
+            });
+        }
+        else if (curHover == 'SK-North-Saskatchewan-River' || curHover == 'AB-North-Saskatchewan-River') {
+            this.setState({
+                place: PLACES[3]
+            });
+        }
+        else if (curHover == 'Bow-River') {
+            this.setState({
+                place: PLACES[4]
+            });
+        }
+        else if (curHover == 'Oldman-River') {
+            this.setState({
+                place: PLACES[5]
+            });
+        }
+        else if (curHover == 'AB-South-Saskatchewan-River') {
+            this.setState({
+                place: PLACES[6]
+            });
+        }
     }
 
     renderPlaceMarker(place, index) {
