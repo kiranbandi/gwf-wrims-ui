@@ -11,7 +11,6 @@ const TOKEN = 'pk.eyJ1IjoicmljYXJkb3JoZWVkZXIiLCJhIjoiY2p4MGl5bWIyMDE1bDN5b2NneH
 
 import defaultMapStyle from './map-style.jsx';
 
-
 let basinArray = [
     'AB-South-Saskatchewan-River',
     'SK-South-Saskatchewan-River-Upstream',
@@ -53,6 +52,14 @@ export default class BasinMap extends Component {
             hoverInfo: null,
             mapSelectedBorder: defaultMapStyle,
             place: null,
+            motionMenu: {
+                curClick: false,
+                prevClick: false,
+                xPos: 0,
+                yPos: 0,
+                mouseOver: false
+            },
+ 
 
             basinStruct : {
                 southSask: {
@@ -87,19 +94,20 @@ export default class BasinMap extends Component {
         this.renderPopup = this.renderPopup.bind(this);
         this.renderHoverPopup = this.renderHoverPopup.bind(this);
         this._onHover = this._onHover.bind(this);
-        this._onClick = this._onClick.bind(this);
+        this._onMouseDown = this._onMouseDown.bind(this);
+        this._onMouseUp = this._onMouseUp.bind(this);
+
+        this._getCursor = this._getCursor.bind(this);
+
         this.test = this.test.bind(this);
-
-
-
+        this.addMotionMenu = this.addMotionMenu.bind(this);
     }
 
     _onHover = event => {
         let hoverInfo = null;
         const basin = event.features && event.features.find(f => basinArray.indexOf(f.layer.id) > -1);
 
-        // console.log(event.lngLat)
-
+        if (this.state.motionMenu.mouseOver) { return } 
         // If hovering over a basin
         if (basin) {
 
@@ -114,9 +122,7 @@ export default class BasinMap extends Component {
             if (currentBorderName == curHover){
                 hoverInfo = null;
                 this.setState({ hoverInfo })
-
             }
-
 
             let basinNameId = basin.layer.id;   // Store basin name as ID
 
@@ -185,15 +191,17 @@ export default class BasinMap extends Component {
     };
 
     // Handling clicks on the map and where to redirect users
-    _onClick = event => {
-
-        // EXAMPLE OF HOW TO CHANGE VIEWPORT IN 'onClick'
-        // let { viewport } = this.state
-        // viewport.zoom = 10  
+    _onMouseDown = event => {
         let hoverInfo = null;
         this.setState({ hoverInfo })
 
-        if (curHover == '') { return }  // If not hovering over anything, don't do anything
+        if ( this.state.motionMenu.mouseOver == false){
+            this.setState({
+                motionMenu: {...this.state.motionMenu, curClick: false}
+            });
+        }
+
+        if (curHover == '' || this.state.motionMenu.mouseOver) { return }  // If not hovering over anything, don't do anything
 
         // Get index of the current basin's border
         let layers = defaultMapStyle.get('layers')
@@ -212,6 +220,7 @@ export default class BasinMap extends Component {
         editedMapStyle = this.borderBasin(editedMapStyle, basinBorderLayerIndex, currentBorderName)
         editedMapStyle = editedMapStyle.setIn(['layers', basinLayerIndex, 'paint', 'fill-color'], highlightColor)
 
+        console.log(event)
         this.setState({
             mapStyle: editedMapStyle
         });
@@ -258,6 +267,43 @@ export default class BasinMap extends Component {
             this.setState({ popupInfo: this.state.place }) // viewport
         }
     };
+
+    _onMouseUp = event => {
+        if (curHover != ''){
+            if ( this.state.motionMenu.mouseOver == false){
+                this.setState({
+                    motionMenu: {...this.state.motionMenu, curClick: true, xPos: event.point[0] - 12.5, yPos: event.point[1] - 12.5}
+                });
+            }
+
+           
+        }else{
+            this.setState({
+                motionMenu: {...this.state.motionMenu, curClick: false}
+            });
+        }
+
+    }
+
+    mouseOut() {
+        this.setState({
+            motionMenu: {...this.state.motionMenu, mouseOver: false}
+        });
+        // mouseOver = false 
+        console.log("Mouse out!!! " + this.state.motionMenu.curClick);
+    }
+      
+    mouseOver() {
+    this.setState({
+        motionMenu: {...this.state.motionMenu, mouseOver: true}
+    });
+    // mouseOver = true
+    console.log("Mouse over!!!" + this.state.motionMenu.curClick);
+    }
+
+    _getCursor = event => {
+        console.log(event)
+    }
 
     highlightBasin(mapToEdit, basinHighlightIndex, basinHighlightName){
 
@@ -385,10 +431,11 @@ export default class BasinMap extends Component {
         return null;
     }
 
-    _onViewportChange = viewport =>
-    this.setState({
-      viewport: {...this.state.viewport, ...viewport}
-    });
+    _onViewportChange = viewport =>{
+        this.setState({
+        viewport: {...this.state.viewport, ...viewport}
+        });
+    }
 
     _goToViewport = ({longitude, latitude, zoom}) => {
         this._onViewportChange({
@@ -404,6 +451,35 @@ export default class BasinMap extends Component {
         console.log("clicked")
     }
 
+    addMotionMenu(){
+        if (this.state.motionMenu.curClick){
+            return ( 
+                <MotionMenu
+                    x={this.state.motionMenu.xPos}
+                    y={this.state.motionMenu.yPos}
+                    type="circle"
+                    margin={30}
+                >
+                    <div className="button marking-menu-button" onMouseOut={() => this.mouseOut()} onMouseOver={() => this.mouseOver()} >
+                        <button className="icon icon-location" />
+                    </div>
+                    <div className="button marking-menu-button">
+                        <button className="icon icon-location" onClick={this.test}  onMouseOut={() => this.mouseOut()} onMouseOver={() => this.mouseOver()}/>
+                    </div>
+                    <div className="button marking-menu-button">
+                        <button className="icon icon-location" onClick={this.test}  onMouseOut={() => this.mouseOut()} onMouseOver={() => this.mouseOver()}/>
+                    </div>
+                    <div className="button marking-menu-button">
+                        <button className="icon icon-location" onClick={this.test}  onMouseOut={() => this.mouseOut()} onMouseOver={() => this.mouseOver()}/>
+                    </div>
+                </MotionMenu>
+            )
+        }
+        else{
+            return('')
+        }
+    }
+
     render() {
 
         let { viewport, mapStyle } = this.state, { width } = this.props;
@@ -415,8 +491,10 @@ export default class BasinMap extends Component {
         // console.log('render');
 
         return (
-            <div>
+            <div className="mapboxDiv">
+
                 <MapGL
+
                     mapStyle={fromJS(mapStyle)}
                     mapboxApiAccessToken={TOKEN}
                     {...viewport}
@@ -425,32 +503,19 @@ export default class BasinMap extends Component {
 
                     // onViewportChange={(viewport) => this.setState({ viewport })}
                     onHover={this._onHover}
-                    onClick={this._onClick}
+                    onMouseDown={this._onMouseDown}
+                    onMouseUp={this._onMouseUp}
+                    // getCursor={this._getCursor}  // Can see when we are dragging map
                 >
                     {/* {PLACES.map(this.renderPlaceMarker)} */}
                     {this.renderPopup()}
                     {this.renderHoverPopup()}
-                    <MotionMenu
-                    x={250}
-                    y={250}
-                    type="circle"
-                    margin={50}
-                >
-                    <div className="button">
-                    <i className="icon icon-location" />
-                    </div>
 
-                    <div className="button">
-                    <button className="icon icon-location" onClick={this.test}/>
+                    <div className="markingMenuDiv">
+                        {this.addMotionMenu()}                
                     </div>
-                    <div className="button">
-                    <button className="icon icon-location" onClick={this.test}/>
-                    </div>
-                    <div className="button">
-                    <button className="icon icon-location" onClick={this.test}/>
-                    </div>
-                </MotionMenu>
                 </MapGL>
+
 
             </div>
         );
