@@ -3,6 +3,7 @@ import MapGL, { Marker, Popup, FlyToInterpolator } from 'react-map-gl';
 import PlaceInfo from './PlaceInfo';
 import PlaceMarker from './PlaceMarker';
 import PLACES from '../../utils/static-reference/mapPlaces';
+import MotionMenu from './MarkingMenu'
 
 import { fromJS } from 'immutable';
 
@@ -22,6 +23,7 @@ let basinArray = [
     'Bow-River',
     'Highwood'
 ];
+
 
 const highlightColor = "hsl(0, 36%, 71%)"
 let curHover = ''
@@ -50,7 +52,35 @@ export default class BasinMap extends Component {
             popupInfo: null,
             hoverInfo: null,
             mapSelectedBorder: defaultMapStyle,
-            place: null
+            place: null,
+
+            basinStruct : {
+                southSask: {
+                    displayName : "South-Saskatchewan-River",
+                    highlightColor: "hsl(115, 67%, 47%)"
+                },
+                northSaskSask: {
+                    displayName : "SK-North-Saskatchewan-River",
+                    highlightColor: "hsl(72, 66%, 44%)"
+                },
+                northSask: {
+                    displayName : "AB-North-Saskatchewan-River",
+                    highlightColor: "hsl(72, 66%, 44%)"
+                },
+
+                stribs: {
+                    displayName : "SK-North-Saskatchewan-River",
+                    highlightColor: "hsl(115, 67%, 87%)"
+                },
+                highwood: {
+                    displayName : "Highwood-River",
+                    highlightColor: "hsla(46, 99%, 56%, 0)"
+                },
+                // alberta: {
+                //     displayName : "SK-North-Saskatchewan-River",
+                //     highlightColor: "hsl(115, 67%, 87%)"
+                // }
+            }
         };
 
         this.renderPlaceMarker = this.renderPlaceMarker.bind(this);
@@ -58,6 +88,10 @@ export default class BasinMap extends Component {
         this.renderHoverPopup = this.renderHoverPopup.bind(this);
         this._onHover = this._onHover.bind(this);
         this._onClick = this._onClick.bind(this);
+        this.test = this.test.bind(this);
+
+
+
     }
 
     _onHover = event => {
@@ -366,6 +400,10 @@ export default class BasinMap extends Component {
         });
       };
 
+    test(){
+        console.log("clicked")
+    }
+
     render() {
 
         let { viewport, mapStyle } = this.state, { width } = this.props;
@@ -392,8 +430,28 @@ export default class BasinMap extends Component {
                     {/* {PLACES.map(this.renderPlaceMarker)} */}
                     {this.renderPopup()}
                     {this.renderHoverPopup()}
+                    <MotionMenu
+                    x={250}
+                    y={250}
+                    type="circle"
+                    margin={50}
+                >
+                    <div className="button">
+                    <i className="icon icon-location" />
+                    </div>
 
+                    <div className="button">
+                    <button className="icon icon-location" onClick={this.test}/>
+                    </div>
+                    <div className="button">
+                    <button className="icon icon-location" onClick={this.test}/>
+                    </div>
+                    <div className="button">
+                    <button className="icon icon-location" onClick={this.test}/>
+                    </div>
+                </MotionMenu>
                 </MapGL>
+
             </div>
         );
     }

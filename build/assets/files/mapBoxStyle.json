@@ -1330,7 +1330,7 @@
             "source": "composite",
             "source-layer": "SK_SaskSubRB-aj6mog",
             "layout": {},
-            "paint": { "fill-color": "#8ad283" }
+            "paint": { "fill-color": "hsl(115, 47%, 67%)" }
         },
         {
             "id": "Reddeer-River",
