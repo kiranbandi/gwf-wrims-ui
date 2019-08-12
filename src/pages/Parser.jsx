@@ -34,7 +34,7 @@ class Parser extends Component {
         getFile('xy-file')
             .then((response) => { return xyParser(response); })
             .then((parsedData) => {
-                const clonedData = Object.assign({}, parsedData);
+                const clonedData = _.cloneDeep(parsedData);
                 this.setState({
                     dataReady: true,
                     schematicData: clonedData,
@@ -97,7 +97,7 @@ class Parser extends Component {
                             width={mapWidth}
                             height={mapWidth / 2}
                             fromDashboard={false} />
-                        <LegendPanel width={widthOfDashboard} />
+                        <LegendPanel width={widthOfDashboard - 100} />
                     </div>
                 }
             </div>
