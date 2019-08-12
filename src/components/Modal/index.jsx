@@ -15,7 +15,6 @@ class Modal extends Component {
         }
         
     }
-
     
     render() {
         
