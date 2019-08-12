@@ -3,7 +3,7 @@ import MapGL, { Marker, Popup, FlyToInterpolator } from 'react-map-gl';
 import PlaceInfo from './PlaceInfo';
 import PlaceMarker from './PlaceMarker';
 import PLACES from '../../utils/static-reference/mapPlaces';
-import MotionMenu from './MarkingMenu'
+import MarkingMenu from './MarkingMenu'
 
 import { fromJS } from 'immutable';
 
@@ -34,6 +34,8 @@ let basinPrevBorderLayerIndex = ''
 let editedMapStyle = null;
 let currentBorderName = ''
 
+let wasDragging = false;
+
 export default class BasinMap extends Component {
 
     constructor(props) {
@@ -52,14 +54,13 @@ export default class BasinMap extends Component {
             hoverInfo: null,
             mapSelectedBorder: defaultMapStyle,
             place: null,
-            motionMenu: {
+            markingMenu: {
                 curClick: false,
                 prevClick: false,
                 xPos: 0,
                 yPos: 0,
                 mouseOver: false
             },
- 
 
             basinStruct : {
                 southSask: {
@@ -99,15 +100,15 @@ export default class BasinMap extends Component {
 
         this._getCursor = this._getCursor.bind(this);
 
-        this.test = this.test.bind(this);
-        this.addMotionMenu = this.addMotionMenu.bind(this);
+        this.addMarkingMenu = this.addMarkingMenu.bind(this);
     }
+
 
     _onHover = event => {
         let hoverInfo = null;
         const basin = event.features && event.features.find(f => basinArray.indexOf(f.layer.id) > -1);
 
-        if (this.state.motionMenu.mouseOver) { return } 
+        if (this.state.markingMenu.mouseOver) { return } 
         // If hovering over a basin
         if (basin) {
 
@@ -137,7 +138,6 @@ export default class BasinMap extends Component {
                 basinLayerIndex = layers.findIndex((l) => {
                     return l.toObject().id == basinNameId
                 })
-
             }
         }
 
@@ -145,7 +145,6 @@ export default class BasinMap extends Component {
             curHover = ''   // Currently hovering nothing
             if (basinLayerIndex != null) {
                 // mapStyle.layers[basinLayerIndex].paint['fill-color'] = defaultMapStyle.layers[basinLayerIndex].paint['fill-color'];  
-
             }
         }
 
@@ -195,13 +194,13 @@ export default class BasinMap extends Component {
         let hoverInfo = null;
         this.setState({ hoverInfo })
 
-        if ( this.state.motionMenu.mouseOver == false){
+        if ( this.state.markingMenu.mouseOver == false){
             this.setState({
-                motionMenu: {...this.state.motionMenu, curClick: false}
+                markingMenu: {...this.state.markingMenu, curClick: false}
             });
         }
 
-        if (curHover == '' || this.state.motionMenu.mouseOver) { return }  // If not hovering over anything, don't do anything
+        if (curHover == '' || this.wasDragging || this.state.markingMenu.mouseOver) { return }  // If not hovering over anything, don't do anything
 
         // Get index of the current basin's border
         let layers = defaultMapStyle.get('layers')
@@ -220,7 +219,6 @@ export default class BasinMap extends Component {
         editedMapStyle = this.borderBasin(editedMapStyle, basinBorderLayerIndex, currentBorderName)
         editedMapStyle = editedMapStyle.setIn(['layers', basinLayerIndex, 'paint', 'fill-color'], highlightColor)
 
-        console.log(event)
         this.setState({
             mapStyle: editedMapStyle
         });
@@ -262,47 +260,47 @@ export default class BasinMap extends Component {
             });
         }
         
-        if (this.state.place != null) {
-            // set the popup info for the current place marker
-            this.setState({ popupInfo: this.state.place }) // viewport
-        }
+        // if (this.state.place != null) {
+        //     // set the popup info for the current place marker
+        //     this.setState({ popupInfo: this.state.place }) // viewport
+        // }
     };
 
+    // Mouse up deals with placing the Marking Menu
     _onMouseUp = event => {
         if (curHover != ''){
-            if ( this.state.motionMenu.mouseOver == false){
+            if ( !this.state.markingMenu.mouseOver && !this.wasDragging) {
                 this.setState({
-                    motionMenu: {...this.state.motionMenu, curClick: true, xPos: event.point[0] - 12.5, yPos: event.point[1] - 12.5}
+                    markingMenu: {...this.state.markingMenu, curClick: true, xPos: event.point[0] - 12.5, yPos: event.point[1] - 12.5},
                 });
             }
-
-           
         }else{
             this.setState({
-                motionMenu: {...this.state.motionMenu, curClick: false}
+                markingMenu: {...this.state.markingMenu, curClick: false}
             });
         }
-
+        // If mouse button up, impossible to be hovering
+        this.wasDragging = false
     }
 
     mouseOut() {
+        // Indicates that we finished hovering over a button
         this.setState({
-            motionMenu: {...this.state.motionMenu, mouseOver: false}
+            markingMenu: {...this.state.markingMenu, mouseOver: false}
         });
-        // mouseOver = false 
-        console.log("Mouse out!!! " + this.state.motionMenu.curClick);
     }
-      
+    
     mouseOver() {
-    this.setState({
-        motionMenu: {...this.state.motionMenu, mouseOver: true}
-    });
-    // mouseOver = true
-    console.log("Mouse over!!!" + this.state.motionMenu.curClick);
+        // Clears hover info, so that it dissapears while hovering over a button
+        // Indicates that we are hovering over a button
+        this.setState({
+            markingMenu: {...this.state.markingMenu, mouseOver: true},
+            hoverInfo: null
+        });
     }
 
     _getCursor = event => {
-        console.log(event)
+        this.wasDragging= event.isDragging
     }
 
     highlightBasin(mapToEdit, basinHighlightIndex, basinHighlightName){
@@ -447,32 +445,38 @@ export default class BasinMap extends Component {
         });
       };
 
-    test(){
-        console.log("clicked")
+    viewImage(){
+        console.log("image clicked")
+    }
+    viewWiki(){
+        console.log("wiki clicked")
+    }
+    viewSchematic(){
+        console.log("schematic clicked")
     }
 
-    addMotionMenu(){
-        if (this.state.motionMenu.curClick){
+    addMarkingMenu(){
+        if (this.state.markingMenu.curClick){
             return ( 
-                <MotionMenu
-                    x={this.state.motionMenu.xPos}
-                    y={this.state.motionMenu.yPos}
+                <MarkingMenu
+                    x={this.state.markingMenu.xPos}
+                    y={this.state.markingMenu.yPos}
                     type="circle"
-                    margin={30}
+                    margin={45}
                 >
                     <div className="button marking-menu-button" onMouseOut={() => this.mouseOut()} onMouseOver={() => this.mouseOver()} >
-                        <button className="icon icon-location" />
+                        <button className="icon icon-location-pin" />
                     </div>
-                    <div className="button marking-menu-button">
-                        <button className="icon icon-location" onClick={this.test}  onMouseOut={() => this.mouseOut()} onMouseOver={() => this.mouseOver()}/>
+                    <div className="button marking-menu-button"  onMouseOut={() => this.mouseOut()} onMouseOver={() => this.mouseOver()}>
+                        <button className="icon icon-image" onClick={() => this.viewImage()}/>
                     </div>
-                    <div className="button marking-menu-button">
-                        <button className="icon icon-location" onClick={this.test}  onMouseOut={() => this.mouseOut()} onMouseOver={() => this.mouseOver()}/>
+                    <div className="button marking-menu-button"  onMouseOut={() => this.mouseOut()} onMouseOver={() => this.mouseOver()}>
+                        <button className="icon icon-air" onClick={() => this.viewSchematic()}/>
                     </div>
-                    <div className="button marking-menu-button">
-                        <button className="icon icon-location" onClick={this.test}  onMouseOut={() => this.mouseOut()} onMouseOver={() => this.mouseOver()}/>
+                    <div className="button marking-menu-button"  onMouseOut={() => this.mouseOut()} onMouseOver={() => this.mouseOver()}>
+                        <button className="icon icon-info-with-circle" onClick={() => this.viewWiki()}/>
                     </div>
-                </MotionMenu>
+                </MarkingMenu>
             )
         }
         else{
@@ -505,14 +509,14 @@ export default class BasinMap extends Component {
                     onHover={this._onHover}
                     onMouseDown={this._onMouseDown}
                     onMouseUp={this._onMouseUp}
-                    // getCursor={this._getCursor}  // Can see when we are dragging map
+                    getCursor={this._getCursor}  // Can see when we are dragging map
                 >
                     {/* {PLACES.map(this.renderPlaceMarker)} */}
                     {this.renderPopup()}
                     {this.renderHoverPopup()}
 
                     <div className="markingMenuDiv">
-                        {this.addMotionMenu()}                
+                        {this.addMarkingMenu()}                
                     </div>
                 </MapGL>
 

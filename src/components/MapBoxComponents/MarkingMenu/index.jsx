@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import MenuItem from './item';
 import MenuButton from './button';
 
-export default class MotionMenu extends Component {
+export default class MarkingMenu extends Component {
 
   static propTypes = {
     margin: PropTypes.number.isRequired,
