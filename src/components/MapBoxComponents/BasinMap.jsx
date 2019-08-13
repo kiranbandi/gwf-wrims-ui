@@ -34,8 +34,6 @@ let basinPrevBorderLayerIndex = ''
 let editedMapStyle = null;
 let currentBorderName = ''
 
-let wasDragging = false;
-
 export default class BasinMap extends Component {
 
     constructor(props) {
@@ -62,6 +60,8 @@ export default class BasinMap extends Component {
                 mouseOver: false
             },
             displayImage : false,
+            canDrag: true,
+            canScroll: true,
 
             basinStruct : {
                 southSask: {
@@ -99,7 +99,7 @@ export default class BasinMap extends Component {
         this._onMouseDown = this._onMouseDown.bind(this);
         this._onMouseUp = this._onMouseUp.bind(this);
 
-        this._getCursor = this._getCursor.bind(this);
+        // this._getCursor = this._getCursor.bind(this);
 
         this.addMarkingMenu = this.addMarkingMenu.bind(this);
     }
@@ -190,10 +190,13 @@ export default class BasinMap extends Component {
 
     _onMouseDown = event => {
         // If not hovering over a marking menu button AND if mouse down THEN remove the marking menu
-        if ( this.state.markingMenu.mouseOver == false){
+        if ( this.state.markingMenu.mouseOver == false ){
             this.setState({
                 markingMenu: {...this.state.markingMenu, curClick: false}
             });
+        }
+        if (this.state.markingMenu.mouseOver){
+            this.setState({canDrag: false, canScroll: false})
         }
     };
 
@@ -202,7 +205,7 @@ export default class BasinMap extends Component {
         let hoverInfo = null;
         this.setState({ hoverInfo })
 
-        if (curHover == '' || wasDragging || this.state.markingMenu.mouseOver) { return }  // If not hovering over anything, don't do anything
+        if (curHover == '' || this.state.markingMenu.mouseOver) { return }  // If not hovering over anything, don't do anything 
 
         // Get index of the current basin's border
         let layers = defaultMapStyle.get('layers')
@@ -235,21 +238,27 @@ export default class BasinMap extends Component {
 
         // If a basin is selected, place the marking menu down, else, remove the marking menu
         if (curHover != ''){
-            if ( !this.state.markingMenu.mouseOver && !wasDragging) {
+            if ( !this.state.markingMenu.mouseOver ) {
                 this.setState({
                     markingMenu: {...this.state.markingMenu, curClick: true, xPos: event.point[0] - 12.5, yPos: event.point[1] - 12.5},
                 });
             }
         }else{
-            this.setState({
-                markingMenu: {...this.state.markingMenu, curClick: false}
-            });
+            this.closeMarkingMenu();
         }
 
         // If mouse button up, impossible to be hovering
-        wasDragging = false
+        this.setState({canDrag: true, canScroll: true})
     }
 
+    closeMarkingMenu(){
+        if (this.state.markingMenu.curClick == true){
+            console.log("close marking menu")
+            this.setState({
+                markingMenu: {...this.state.markingMenu, curClick: false, mouseOver: false}
+            });
+        }
+    }
 
     mouseOut() {
         // Indicates that we finished hovering over a button
@@ -265,10 +274,6 @@ export default class BasinMap extends Component {
             markingMenu: {...this.state.markingMenu, mouseOver: true},
             hoverInfo: null
         });
-    }
-
-    _getCursor = event => {
-        wasDragging= event.isDragging
     }
 
     highlightBasin(mapToEdit, basinHighlightIndex, basinHighlightName){
@@ -345,6 +350,7 @@ export default class BasinMap extends Component {
     }
 
     setPlace(curHover){ 
+        console.log("set place")
         // Get information for the Info-Card pop-up
         if (curHover == 'SK-South-Saskatchewan-River-Upstream' || curHover == 'SK-South-Saskatchewan-River-Downstream') {
             this.setState({
@@ -383,6 +389,7 @@ export default class BasinMap extends Component {
         }
     }
 
+    // Can delete
     renderPlaceMarker(place, index) {
         return (
             <Marker key={`marker-${index}`} longitude={place.longitude} latitude={place.latitude}>
@@ -401,6 +408,7 @@ export default class BasinMap extends Component {
         this.props.onRegionSelect({ 'target': this.state.place })
     }
 
+    // Can delete
     renderPopup() {
         const { popupInfo } = this.state;
 
@@ -437,6 +445,8 @@ export default class BasinMap extends Component {
     }
 
     _onViewportChange = viewport =>{
+        console.log("on viewport change")
+
         this.setState({
         viewport: {...this.state.viewport, ...viewport}
         });
@@ -452,11 +462,6 @@ export default class BasinMap extends Component {
         });
       };
 
-    viewImage(popupInfo){
-        // <img width={240} src={info.image} />
-        console.log("image clicked")
-    }
-
     viewSchematic(){
         this.iconButtonClick()
         this.setState({
@@ -469,6 +474,8 @@ export default class BasinMap extends Component {
         const { popupInfo } = this.state;
 
         if (this.state.markingMenu.curClick){
+            console.log("add marking menu")
+
             return ( 
                 <MarkingMenu
                     x={this.state.markingMenu.xPos}
@@ -508,7 +515,6 @@ export default class BasinMap extends Component {
     }
 
     render() {
-
         let { viewport, mapStyle } = this.state, { width } = this.props;
 
         // set the viewports for the map
@@ -524,15 +530,17 @@ export default class BasinMap extends Component {
                     {...viewport}
 
                     onViewportChange={this._onViewportChange}
-
-                    // onViewportChange={(viewport) => this.setState({ viewport })}
+                    doubleClickZoom={false}
+                    dragRotate={false}
+                    minZoom={2}
+                    
                     onHover={this._onHover}
                     onMouseDown={this._onMouseDown}
                     onMouseUp={this._onMouseUp}
-                    getCursor={this._getCursor}  // Can see when we are dragging map
+
+                    // if transition, dragging, panning, potating, or zooming, close menu
+                    onInteractionStateChange={() => this.closeMarkingMenu()}
                 >
-                    {/* {PLACES.map(this.renderPlaceMarker)} */}
-                    {/* {this.renderPopup()} */}
                     {this.renderHoverPopup()}
 
                     <div className="markingMenuDiv">
