@@ -1,1008 +1,1471 @@
 {
     "title": {
         "label": "North Saskatchewan (SK)",
-        "coords": [0, 0]
+        "coords": [
+            0,
+            0
+        ]
     },
-
-    "lines": [{
-            "name": "In_NSR_ABtoSK_05EF001_J_AB_SK_Border",
-            "linkNum": 1,
-            "linkFrom": 1,
-            "linkTo": 2,
-            "type": "inflow",
-            "nodes": [{
-                    "coords": [
-                        7.674597083653108,
-                        51.025056947608206
-                    ]
-                },
-                {
-                    "coords": [
-                        30.007674597083657,
-                        51.13895216400911
-                    ]
-                }
-            ],
-            "reverse": false
-        },
+    "labels": [
         {
-            "name": "J_AB_SK_Border_J_North_Battleford",
-            "linkNum": 2,
-            "linkFrom": 2,
-            "linkTo": 4,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        30.007674597083657,
-                        51.13895216400911
-                    ]
-                },
-                {
-                    "coords": [
-                        76.2854950115119,
-                        50.79726651480638
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_North_Battleford_J_EagleCr",
-            "linkNum": 3,
-            "linkFrom": 4,
-            "linkTo": 34,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        76.2854950115119,
-                        50.79726651480638
-                    ]
-                },
-                {
-                    "coords": [
-                        113.43054489639295,
-                        51.025056947608206
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_EagleCr_J_PA",
-            "linkNum": 4,
-            "linkFrom": 34,
-            "linkTo": 35,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        113.43054489639295,
-                        51.025056947608206
-                    ]
-                },
-                {
-                    "coords": [
-                        150.4221028396009,
-                        50.79726651480638
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_PA_J_NSR_PA",
-            "linkNum": 5,
-            "linkFrom": 35,
-            "linkTo": 9,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        150.4221028396009,
-                        50.79726651480638
-                    ]
-                },
-                {
-                    "coords": [
-                        171.52724481964697,
-                        50
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_NSR_PA_In39_NSR",
-            "linkNum": 6,
-            "linkFrom": 9,
-            "linkTo": 10,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        171.52724481964697,
-                        50
-                    ]
-                },
-                {
-                    "coords": [
-                        192.3254029163469,
-                        50.34168564920274
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_North_Battleford_J_Cochin",
-            "linkNum": 7,
-            "linkFrom": 4,
-            "linkTo": 5,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        76.2854950115119,
-                        50.79726651480638
-                    ]
-                },
-                {
-                    "coords": [
-                        76.13200306983885,
-                        30.979498861047837
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "In_BattleMouth_05FF001_J_North_Battleford",
-            "linkNum": 8,
-            "linkFrom": 6,
-            "linkTo": 4,
-            "type": "inflow",
-            "nodes": [{
-                    "coords": [
-                        75.97851112816578,
-                        78.81548974943053
-                    ]
-                },
-                {
-                    "coords": [
-                        76.2854950115119,
-                        50.79726651480638
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "In_EagleCr_05GC006_J_EagleCr",
-            "linkNum": 9,
-            "linkFrom": 7,
-            "linkTo": 34,
-            "type": "inflow",
-            "nodes": [{
-                    "coords": [
-                        113.27705295471988,
-                        78.81548974943053
-                    ]
-                },
-                {
-                    "coords": [
-                        113.43054489639295,
-                        51.025056947608206
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "In_Sturgeon_05GF002_J_PA",
-            "linkNum": 10,
-            "linkFrom": 8,
-            "linkTo": 35,
-            "type": "inflow",
-            "nodes": [{
-                    "coords": [
-                        150.80583269378357,
-                        26.537585421412302
-                    ]
-                },
-                {
-                    "coords": [
-                        150.4221028396009,
-                        50.79726651480638
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_AB_SK_Border_J_Lloydminster",
-            "linkNum": 11,
-            "linkFrom": 2,
-            "linkTo": 3,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        30.007674597083657,
-                        51.13895216400911
-                    ]
-                },
-                {
-                    "coords": [
-                        29.930928626247123,
-                        70.15945330296127
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_Lloydminster_Irr_1",
-            "linkNum": 12,
-            "linkFrom": 3,
-            "linkTo": 11,
-            "type": "agri",
-            "nodes": [{
-                    "coords": [
-                        29.930928626247123,
-                        70.15945330296127
-                    ]
-                },
-                {
-                    "coords": [
-                        42.97774366845741,
-                        84.96583143507974
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_North_Battleford_Irr_2",
-            "linkNum": 13,
-            "linkFrom": 4,
-            "linkTo": 12,
-            "type": "agri",
-            "nodes": [{
-                    "coords": [
-                        76.2854950115119,
-                        50.79726651480638
-                    ]
-                },
-                {
-                    "coords": [
-                        91.86492709132771,
-                        66.17312072892938
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_EagleCr_Irr_3",
-            "linkNum": 14,
-            "linkFrom": 34,
-            "linkTo": 13,
-            "type": "agri",
-            "nodes": [{
-                    "coords": [
-                        113.43054489639295,
-                        51.025056947608206
-                    ]
-                },
-                {
-                    "coords": [
-                        113.66078280890252,
-                        29.271070615034166
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_Lloydminster_MW_1",
-            "linkNum": 15,
-            "linkFrom": 3,
-            "linkTo": 14,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        29.930928626247123,
-                        70.15945330296127
-                    ]
-                },
-                {
-                    "coords": [
-                        30.237912509593244,
-                        90.8883826879271
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_North_Battleford_MW_2",
-            "linkNum": 16,
-            "linkFrom": 4,
-            "linkTo": 19,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        76.2854950115119,
-                        50.79726651480638
-                    ]
-                },
-                {
-                    "coords": [
-                        67.92018419033002,
-                        73.4624145785877
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_EagleCr_MW_3",
-            "linkNum": 17,
-            "linkFrom": 34,
-            "linkTo": 25,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        113.43054489639295,
-                        51.025056947608206
-                    ]
-                },
-                {
-                    "coords": [
-                        124.55871066768995,
-                        32.23234624145786
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_Cochin_MW_19",
-            "linkNum": 18,
-            "linkFrom": 5,
-            "linkTo": 31,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        76.13200306983885,
-                        30.979498861047837
-                    ]
-                },
-                {
-                    "coords": [
-                        76.13200306983885,
-                        9.111617312072893
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_Lloydminster_MW_12",
-            "linkNum": 19,
-            "linkFrom": 3,
-            "linkTo": 21,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        29.930928626247123,
-                        70.15945330296127
-                    ]
-                },
-                {
-                    "coords": [
-                        21.105141980046046,
-                        84.16856492027335
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_AB_SK_Border_MW_13",
-            "linkNum": 20,
-            "linkFrom": 2,
-            "linkTo": 29,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        30.007674597083657,
-                        51.13895216400911
-                    ]
-                },
-                {
-                    "coords": [
-                        22.333077513430545,
-                        29.954441913439634
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_AB_SK_Border_MW_4",
-            "linkNum": 21,
-            "linkFrom": 2,
-            "linkTo": 28,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        30.007674597083657,
-                        51.13895216400911
-                    ]
-                },
-                {
-                    "coords": [
-                        29.547198772064466,
-                        26.765375854214124
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_AB_SK_Border_MW_7",
-            "linkNum": 22,
-            "linkFrom": 2,
-            "linkTo": 24,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        30.007674597083657,
-                        51.13895216400911
-                    ]
-                },
-                {
-                    "coords": [
-                        45.970836531082114,
-                        33.59908883826879
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_AB_SK_Border_MW_16",
-            "linkNum": 23,
-            "linkFrom": 2,
-            "linkTo": 18,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        30.007674597083657,
-                        51.13895216400911
-                    ]
-                },
-                {
-                    "coords": [
-                        38.60322333077513,
-                        27.44874715261959
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_North_Battleford_MW_14",
-            "linkNum": 24,
-            "linkFrom": 4,
-            "linkTo": 27,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        76.2854950115119,
-                        50.79726651480638
-                    ]
-                },
-                {
-                    "coords": [
-                        55.02686108979279,
-                        44.30523917995444
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_North_Battleford_MW_10",
-            "linkNum": 25,
-            "linkFrom": 4,
-            "linkTo": 26,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        76.2854950115119,
-                        50.79726651480638
-                    ]
-                },
-                {
-                    "coords": [
-                        96.46968534151958,
-                        56.83371298405467
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_North_Battleford_MW_5",
-            "linkNum": 26,
-            "linkFrom": 4,
-            "linkTo": 16,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        76.2854950115119,
-                        50.79726651480638
-                    ]
-                },
-                {
-                    "coords": [
-                        59.70836531082118,
-                        66.97038724373576
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_North_Battleford_MW_17",
-            "linkNum": 27,
-            "linkFrom": 4,
-            "linkTo": 23,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        76.2854950115119,
-                        50.79726651480638
-                    ]
-                },
-                {
-                    "coords": [
-                        53.72217958557176,
-                        58.54214123006833
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_North_Battleford_MW_8",
-            "linkNum": 28,
-            "linkFrom": 4,
-            "linkTo": 20,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        76.2854950115119,
-                        50.79726651480638
-                    ]
-                },
-                {
-                    "coords": [
-                        84.49731389102072,
-                        72.77904328018224
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_EagleCr_MW_15",
-            "linkNum": 29,
-            "linkFrom": 34,
-            "linkTo": 15,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        113.43054489639295,
-                        51.025056947608206
-                    ]
-                },
-                {
-                    "coords": [
-                        103.37682271680737,
-                        32.23234624145786
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_PA_MW_11",
-            "linkNum": 30,
-            "linkFrom": 35,
-            "linkTo": 30,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        150.4221028396009,
-                        50.79726651480638
-                    ]
-                },
-                {
-                    "coords": [
-                        138.06600153491942,
-                        37.47152619589977
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_PA_MW_6",
-            "linkNum": 31,
-            "linkFrom": 35,
-            "linkTo": 22,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        150.4221028396009,
-                        50.79726651480638
-                    ]
-                },
-                {
-                    "coords": [
-                        167.07597851112817,
-                        69.58997722095673
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_PA_MW_9",
-            "linkNum": 32,
-            "linkFrom": 35,
-            "linkTo": 17,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        150.4221028396009,
-                        50.79726651480638
-                    ]
-                },
-                {
-                    "coords": [
-                        151.327705295472,
-                        73.91799544419135
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_PA_MW_18",
-            "linkNum": 33,
-            "linkFrom": 35,
-            "linkTo": 32,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        150.4221028396009,
-                        50.79726651480638
-                    ]
-                },
-                {
-                    "coords": [
-                        159.40138142747506,
-                        73.00683371298405
-                    ]
-                }
-            ],
-            "reverse": false
+            "name": "",
+            "coords": [
+                0,
+                0
+            ]
         }
     ],
-    "artifacts": [{
-        "name": "In39_NSR",
-        "nodeNum": 10,
-        "type": "sink",
-        "coords": [
-            192.3254029163469,
-            50.34168564920274
-        ],
-        "size": 1
-    }],
-    "markers": [{
-            "name": "In_NSR_ABtoSK_05EF001",
-            "nodeNum": 1,
-            "type": "inflow",
-            "coords": [
-                7.674597083653108,
-                51.025056947608206
-            ]
-        },
+    "demands": [
         {
-            "name": "J_AB_SK_Border",
-            "nodeNum": 2,
-            "type": "junction",
-            "coords": [
-                30.007674597083657,
-                51.13895216400911
-            ]
-        },
-        {
-            "name": "J_Lloydminster",
-            "nodeNum": 3,
-            "type": "junction",
-            "coords": [
-                29.930928626247123,
-                70.15945330296127
-            ]
-        },
-        {
-            "name": "J_North_Battleford",
-            "nodeNum": 4,
-            "type": "junction",
-            "coords": [
-                76.2854950115119,
-                50.79726651480638
-            ]
-        },
-        {
-            "name": "J_Cochin",
-            "nodeNum": 5,
-            "type": "junction",
-            "coords": [
-                76.13200306983885,
-                30.979498861047837
-            ]
-        },
-        {
-            "name": "In_BattleMouth_05FF001",
-            "nodeNum": 6,
-            "type": "inflow",
-            "coords": [
-                75.97851112816578,
-                78.81548974943053
-            ]
-        },
-        {
-            "name": "In_EagleCr_05GC006",
-            "nodeNum": 7,
-            "type": "inflow",
-            "coords": [
-                113.27705295471988,
-                78.81548974943053
-            ]
-        },
-        {
-            "name": "In_Sturgeon_05GF002",
-            "nodeNum": 8,
-            "type": "inflow",
-            "coords": [
-                150.80583269378357,
-                26.537585421412302
-            ]
-        },
-        {
-            "name": "J_NSR_PA",
-            "nodeNum": 9,
-            "type": "junction",
-            "coords": [
-                171.52724481964697,
-                50
-            ]
-        },
-        {
-            "name": "Irr_1",
             "nodeNum": 11,
-            "type": "agri",
-            "coords": [
-                42.97774366845741,
-                84.96583143507974
+            "name": "Irr_1",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.21488871834228704,
+                        0.8496583143507973
+                    ]
+                }
             ]
         },
         {
-            "name": "Irr_2",
             "nodeNum": 12,
-            "type": "agri",
-            "coords": [
-                91.86492709132771,
-                66.17312072892938
+            "name": "Irr_2",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.45932463545663854,
+                        0.6617312072892938
+                    ]
+                }
             ]
         },
         {
-            "name": "Irr_3",
             "nodeNum": 13,
-            "type": "agri",
-            "coords": [
-                113.66078280890252,
-                29.271070615034166
+            "name": "Irr_3",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.5683039140445126,
+                        0.29271070615034167
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_1",
             "nodeNum": 14,
-            "type": "demand",
-            "coords": [
-                30.237912509593244,
-                90.8883826879271
+            "name": "MW_1",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.15118956254796623,
+                        0.908883826879271
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_15",
             "nodeNum": 15,
-            "type": "demand",
-            "coords": [
-                103.37682271680737,
-                32.23234624145786
+            "name": "MW_15",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.5168841135840369,
+                        0.3223234624145786
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_5",
             "nodeNum": 16,
-            "type": "demand",
-            "coords": [
-                59.70836531082118,
-                66.97038724373576
+            "name": "MW_5",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.2985418265541059,
+                        0.6697038724373576
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_9",
             "nodeNum": 17,
-            "type": "demand",
-            "coords": [
-                151.327705295472,
-                73.91799544419135
+            "name": "MW_9",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.75663852647736,
+                        0.7391799544419134
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_16",
             "nodeNum": 18,
-            "type": "demand",
-            "coords": [
-                38.60322333077513,
-                27.44874715261959
+            "name": "MW_16",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.19301611665387566,
+                        0.2744874715261959
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_2",
             "nodeNum": 19,
-            "type": "demand",
-            "coords": [
-                67.92018419033002,
-                73.4624145785877
+            "name": "MW_2",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.33960092095165006,
+                        0.734624145785877
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_8",
             "nodeNum": 20,
-            "type": "demand",
-            "coords": [
-                84.49731389102072,
-                72.77904328018224
+            "name": "MW_8",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.4224865694551036,
+                        0.7277904328018223
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_12",
             "nodeNum": 21,
-            "type": "demand",
-            "coords": [
-                21.105141980046046,
-                84.16856492027335
+            "name": "MW_12",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.10552570990023023,
+                        0.8416856492027335
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_6",
             "nodeNum": 22,
-            "type": "demand",
-            "coords": [
-                167.07597851112817,
-                69.58997722095673
+            "name": "MW_6",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.8353798925556408,
+                        0.6958997722095672
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_17",
             "nodeNum": 23,
-            "type": "demand",
-            "coords": [
-                53.72217958557176,
-                58.54214123006833
+            "name": "MW_17",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.2686108979278588,
+                        0.5854214123006833
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_7",
             "nodeNum": 24,
-            "type": "demand",
-            "coords": [
-                45.970836531082114,
-                33.59908883826879
+            "name": "MW_7",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.22985418265541058,
+                        0.3359908883826879
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_3",
             "nodeNum": 25,
-            "type": "demand",
-            "coords": [
-                124.55871066768995,
-                32.23234624145786
+            "name": "MW_3",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.6227935533384498,
+                        0.3223234624145786
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_10",
             "nodeNum": 26,
-            "type": "demand",
-            "coords": [
-                96.46968534151958,
-                56.83371298405467
+            "name": "MW_10",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.48234842670759787,
+                        0.5683371298405467
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_14",
             "nodeNum": 27,
-            "type": "demand",
-            "coords": [
-                55.02686108979279,
-                44.30523917995444
+            "name": "MW_14",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.27513430544896395,
+                        0.4430523917995444
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_4",
             "nodeNum": 28,
-            "type": "demand",
-            "coords": [
-                29.547198772064466,
-                26.765375854214124
+            "name": "MW_4",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.14773599386032232,
+                        0.26765375854214124
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_13",
             "nodeNum": 29,
-            "type": "demand",
-            "coords": [
-                22.333077513430545,
-                29.954441913439634
+            "name": "MW_13",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.11166538756715272,
+                        0.29954441913439633
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_11",
             "nodeNum": 30,
-            "type": "demand",
-            "coords": [
-                138.06600153491942,
-                37.47152619589977
+            "name": "MW_11",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.6903300076745971,
+                        0.37471526195899774
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_19",
             "nodeNum": 31,
-            "type": "demand",
-            "coords": [
-                76.13200306983885,
-                9.111617312072893
+            "name": "MW_19",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.3806600153491942,
+                        0.09111617312072894
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_18",
             "nodeNum": 32,
-            "type": "demand",
-            "coords": [
-                159.40138142747506,
-                73.00683371298405
+            "name": "MW_18",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.7970069071373753,
+                        0.7300683371298405
+                    ]
+                }
             ]
         },
         {
-            "name": "J_EagleCr",
+            "nodeNum": 33,
+            "name": "FT_NSR_MinFlow",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.8204911742133537,
+                        0.3895216400911162
+                    ]
+                }
+            ]
+        }
+    ],
+    "nonStorage": [
+        {
+            "nodeNum": 1,
+            "name": "In_NSR_ABtoSK_05EF001",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.03837298541826554,
+                        0.510250569476082
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 2,
+            "name": "J_AB_SK_Border",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.15003837298541828,
+                        0.5113895216400911
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 3,
+            "name": "J_Lloydminster",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.1496546431312356,
+                        0.7015945330296127
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 4,
+            "name": "J_North_Battleford",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.3814274750575595,
+                        0.5079726651480638
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 5,
+            "name": "J_Cochin",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.3806600153491942,
+                        0.3097949886104784
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 6,
+            "name": "In_BattleMouth_05FF001",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.37989255564082886,
+                        0.7881548974943052
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 7,
+            "name": "In_EagleCr_05GC006",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.5663852647735994,
+                        0.7881548974943052
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 8,
+            "name": "In_Sturgeon_05GF002",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.7540291634689179,
+                        0.265375854214123
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 9,
+            "name": "J_NSR_PA",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.8576362240982348,
+                        0.5
+                    ]
+                }
+            ]
+        },
+        {
             "nodeNum": 34,
-            "type": "junction",
-            "coords": [
-                113.43054489639295,
-                51.025056947608206
+            "name": "J_EagleCr",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.5671527244819647,
+                        0.510250569476082
+                    ]
+                }
             ]
         },
         {
-            "name": "J_PA",
             "nodeNum": 35,
-            "type": "junction",
-            "coords": [
-                150.4221028396009,
-                50.79726651480638
+            "name": "J_PA",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.7521105141980046,
+                        0.5079726651480638
+                    ]
+                }
+            ]
+        }
+    ],
+    "sinks": [
+        {
+            "nodeNum": 10,
+            "name": "In39_NSR",
+            "type": "Sink",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.9616270145817345,
+                        0.5034168564920274
+                    ]
+                }
+            ]
+        }
+    ],
+    "reservoirs": [],
+    "links": [
+        {
+            "linkName": "In_NSR_ABtoSK_05EF001_J_AB_SK_Border",
+            "linkNumber": 1,
+            "linkTo": 2,
+            "linkFrom": 1,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.03837298541826554,
+                        0.510250569476082
+                    ]
+                },
+                {
+                    "coords": [
+                        0.15003837298541828,
+                        0.5113895216400911
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_AB_SK_Border_J_North_Battleford",
+            "linkNumber": 2,
+            "linkTo": 4,
+            "linkFrom": 2,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.15003837298541828,
+                        0.5113895216400911
+                    ]
+                },
+                {
+                    "coords": [
+                        0.3814274750575595,
+                        0.5079726651480638
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_North_Battleford_J_EagleCr",
+            "linkNumber": 3,
+            "linkTo": 34,
+            "linkFrom": 4,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.3814274750575595,
+                        0.5079726651480638
+                    ]
+                },
+                {
+                    "coords": [
+                        0.5671527244819647,
+                        0.510250569476082
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_EagleCr_J_PA",
+            "linkNumber": 4,
+            "linkTo": 35,
+            "linkFrom": 34,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.5671527244819647,
+                        0.510250569476082
+                    ]
+                },
+                {
+                    "coords": [
+                        0.7521105141980046,
+                        0.5079726651480638
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_PA_J_NSR_PA",
+            "linkNumber": 5,
+            "linkTo": 9,
+            "linkFrom": 35,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.7521105141980046,
+                        0.5079726651480638
+                    ]
+                },
+                {
+                    "coords": [
+                        0.8576362240982348,
+                        0.5
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_NSR_PA_In39_NSR",
+            "linkNumber": 6,
+            "linkTo": 10,
+            "linkFrom": 9,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.8576362240982348,
+                        0.5
+                    ]
+                },
+                {
+                    "coords": [
+                        0.9616270145817345,
+                        0.5034168564920274
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_North_Battleford_J_Cochin",
+            "linkNumber": 7,
+            "linkTo": 5,
+            "linkFrom": 4,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.3814274750575595,
+                        0.5079726651480638
+                    ]
+                },
+                {
+                    "coords": [
+                        0.3806600153491942,
+                        0.3097949886104784
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "In_BattleMouth_05FF001_J_North_Battleford",
+            "linkNumber": 8,
+            "linkTo": 4,
+            "linkFrom": 6,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.37989255564082886,
+                        0.7881548974943052
+                    ]
+                },
+                {
+                    "coords": [
+                        0.3814274750575595,
+                        0.5079726651480638
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "In_EagleCr_05GC006_J_EagleCr",
+            "linkNumber": 9,
+            "linkTo": 34,
+            "linkFrom": 7,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.5663852647735994,
+                        0.7881548974943052
+                    ]
+                },
+                {
+                    "coords": [
+                        0.5671527244819647,
+                        0.510250569476082
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "In_Sturgeon_05GF002_J_PA",
+            "linkNumber": 10,
+            "linkTo": 35,
+            "linkFrom": 8,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.7540291634689179,
+                        0.265375854214123
+                    ]
+                },
+                {
+                    "coords": [
+                        0.7521105141980046,
+                        0.5079726651480638
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_AB_SK_Border_J_Lloydminster",
+            "linkNumber": 11,
+            "linkTo": 3,
+            "linkFrom": 2,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.15003837298541828,
+                        0.5113895216400911
+                    ]
+                },
+                {
+                    "coords": [
+                        0.1496546431312356,
+                        0.7015945330296127
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_Lloydminster_Irr_1",
+            "linkNumber": 12,
+            "linkTo": 11,
+            "linkFrom": 3,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.1496546431312356,
+                        0.7015945330296127
+                    ]
+                },
+                {
+                    "coords": [
+                        0.21488871834228704,
+                        0.8496583143507973
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_North_Battleford_Irr_2",
+            "linkNumber": 13,
+            "linkTo": 12,
+            "linkFrom": 4,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.3814274750575595,
+                        0.5079726651480638
+                    ]
+                },
+                {
+                    "coords": [
+                        0.45932463545663854,
+                        0.6617312072892938
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_EagleCr_Irr_3",
+            "linkNumber": 14,
+            "linkTo": 13,
+            "linkFrom": 34,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.5671527244819647,
+                        0.510250569476082
+                    ]
+                },
+                {
+                    "coords": [
+                        0.5683039140445126,
+                        0.29271070615034167
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_Lloydminster_MW_1",
+            "linkNumber": 15,
+            "linkTo": 14,
+            "linkFrom": 3,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.1496546431312356,
+                        0.7015945330296127
+                    ]
+                },
+                {
+                    "coords": [
+                        0.15118956254796623,
+                        0.908883826879271
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_North_Battleford_MW_2",
+            "linkNumber": 16,
+            "linkTo": 19,
+            "linkFrom": 4,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.3814274750575595,
+                        0.5079726651480638
+                    ]
+                },
+                {
+                    "coords": [
+                        0.33960092095165006,
+                        0.734624145785877
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_EagleCr_MW_3",
+            "linkNumber": 17,
+            "linkTo": 25,
+            "linkFrom": 34,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.5671527244819647,
+                        0.510250569476082
+                    ]
+                },
+                {
+                    "coords": [
+                        0.6227935533384498,
+                        0.3223234624145786
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_Cochin_MW_19",
+            "linkNumber": 18,
+            "linkTo": 31,
+            "linkFrom": 5,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.3806600153491942,
+                        0.3097949886104784
+                    ]
+                },
+                {
+                    "coords": [
+                        0.3806600153491942,
+                        0.09111617312072894
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_Lloydminster_MW_12",
+            "linkNumber": 19,
+            "linkTo": 21,
+            "linkFrom": 3,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.1496546431312356,
+                        0.7015945330296127
+                    ]
+                },
+                {
+                    "coords": [
+                        0.10552570990023023,
+                        0.8416856492027335
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_AB_SK_Border_MW_13",
+            "linkNumber": 20,
+            "linkTo": 29,
+            "linkFrom": 2,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.15003837298541828,
+                        0.5113895216400911
+                    ]
+                },
+                {
+                    "coords": [
+                        0.11166538756715272,
+                        0.29954441913439633
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_AB_SK_Border_MW_4",
+            "linkNumber": 21,
+            "linkTo": 28,
+            "linkFrom": 2,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.15003837298541828,
+                        0.5113895216400911
+                    ]
+                },
+                {
+                    "coords": [
+                        0.14773599386032232,
+                        0.26765375854214124
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_AB_SK_Border_MW_7",
+            "linkNumber": 22,
+            "linkTo": 24,
+            "linkFrom": 2,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.15003837298541828,
+                        0.5113895216400911
+                    ]
+                },
+                {
+                    "coords": [
+                        0.22985418265541058,
+                        0.3359908883826879
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_AB_SK_Border_MW_16",
+            "linkNumber": 23,
+            "linkTo": 18,
+            "linkFrom": 2,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.15003837298541828,
+                        0.5113895216400911
+                    ]
+                },
+                {
+                    "coords": [
+                        0.19301611665387566,
+                        0.2744874715261959
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_North_Battleford_MW_14",
+            "linkNumber": 24,
+            "linkTo": 27,
+            "linkFrom": 4,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.3814274750575595,
+                        0.5079726651480638
+                    ]
+                },
+                {
+                    "coords": [
+                        0.27513430544896395,
+                        0.4430523917995444
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_North_Battleford_MW_10",
+            "linkNumber": 25,
+            "linkTo": 26,
+            "linkFrom": 4,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.3814274750575595,
+                        0.5079726651480638
+                    ]
+                },
+                {
+                    "coords": [
+                        0.48234842670759787,
+                        0.5683371298405467
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_North_Battleford_MW_5",
+            "linkNumber": 26,
+            "linkTo": 16,
+            "linkFrom": 4,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.3814274750575595,
+                        0.5079726651480638
+                    ]
+                },
+                {
+                    "coords": [
+                        0.2985418265541059,
+                        0.6697038724373576
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_North_Battleford_MW_17",
+            "linkNumber": 27,
+            "linkTo": 23,
+            "linkFrom": 4,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.3814274750575595,
+                        0.5079726651480638
+                    ]
+                },
+                {
+                    "coords": [
+                        0.2686108979278588,
+                        0.5854214123006833
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_North_Battleford_MW_8",
+            "linkNumber": 28,
+            "linkTo": 20,
+            "linkFrom": 4,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.3814274750575595,
+                        0.5079726651480638
+                    ]
+                },
+                {
+                    "coords": [
+                        0.4224865694551036,
+                        0.7277904328018223
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_EagleCr_MW_15",
+            "linkNumber": 29,
+            "linkTo": 15,
+            "linkFrom": 34,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.5671527244819647,
+                        0.510250569476082
+                    ]
+                },
+                {
+                    "coords": [
+                        0.5168841135840369,
+                        0.3223234624145786
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_PA_MW_11",
+            "linkNumber": 30,
+            "linkTo": 30,
+            "linkFrom": 35,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.7521105141980046,
+                        0.5079726651480638
+                    ]
+                },
+                {
+                    "coords": [
+                        0.6903300076745971,
+                        0.37471526195899774
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_PA_MW_6",
+            "linkNumber": 31,
+            "linkTo": 22,
+            "linkFrom": 35,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.7521105141980046,
+                        0.5079726651480638
+                    ]
+                },
+                {
+                    "coords": [
+                        0.8353798925556408,
+                        0.6958997722095672
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_PA_MW_9",
+            "linkNumber": 32,
+            "linkTo": 17,
+            "linkFrom": 35,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.7521105141980046,
+                        0.5079726651480638
+                    ]
+                },
+                {
+                    "coords": [
+                        0.75663852647736,
+                        0.7391799544419134
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_PA_MW_18",
+            "linkNumber": 33,
+            "linkTo": 32,
+            "linkFrom": 35,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.7521105141980046,
+                        0.5079726651480638
+                    ]
+                },
+                {
+                    "coords": [
+                        0.7970069071373753,
+                        0.7300683371298405
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_PA_FT_NSR_MinFlow",
+            "linkNumber": 34,
+            "linkTo": 33,
+            "linkFrom": 35,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.7521105141980046,
+                        0.5079726651480638
+                    ]
+                },
+                {
+                    "coords": [
+                        0.8204911742133537,
+                        0.3895216400911162
+                    ]
+                }
             ]
         }
     ]

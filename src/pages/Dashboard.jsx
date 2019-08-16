@@ -41,13 +41,7 @@ class DashboardRoot extends Component {
         this.setState({ 'isSchematicLoading': true });
         axios.get("/assets/files/schematics/" + selectedRegion + ".json")
             .then((response) => {
-                let processedData;
-                if (['alberta', 'northSask', 'northSaskSask', 'stribs', 'tau'].indexOf(selectedRegion) == -1) {
-                 processedData = processSchematic(response.data);
-                }
-                else {
-                    processedData = _.clone(response.data)
-                }
+                let processedData = processSchematic(response.data);
                 this.setState({ 'SchematicData': { ...processedData, selectedRegion, selectedPlace: '' } });
             })
             .catch(() => { toastr["error"]("Failed to load schematic", "ERROR") })
