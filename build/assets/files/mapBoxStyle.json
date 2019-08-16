@@ -46,7 +46,7 @@
             "tileSize": 256
         },
         "composite": {
-            "url": "mapbox://ricardorheeder.769d1jwe,ricardorheeder.1dl04zlc,mapbox.mapbox-streets-v8,ricardorheeder.bte1qt94,ricardorheeder.c6dt0sz0,ricardorheeder.69kwhakb,ricardorheeder.8lerlorm,ricardorheeder.2rkxx4jb,ricardorheeder.1qj15epz,ricardorheeder.c8a3tjmr,ricardorheeder.cl5gmavl,mapbox.mapbox-terrain-v2,ricardorheeder.91oe73uz",
+            "url": "mapbox://ricardorheeder.507hsjb0,ricardorheeder.769d1jwe,ricardorheeder.8p6dg0r7,ricardorheeder.86i8f9b6,ricardorheeder.1dl04zlc,ricardorheeder.asw5fypb,mapbox.mapbox-streets-v8,ricardorheeder.bte1qt94,ricardorheeder.2ktyzhvi,ricardorheeder.69kwhakb,ricardorheeder.c8a3tjmr,ricardorheeder.cl5gmavl,ricardorheeder.3ifjdf5c,mapbox.mapbox-terrain-v2,ricardorheeder.91oe73uz",
             "type": "vector"
         }
     },
@@ -1306,6 +1306,24 @@
             }
         },
         {
+            "id": "new-srb-mb-9v8ifz",
+            "type": "fill",
+            "metadata": {"mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e"},
+            "source": "composite",
+            "source-layer": "NEW_SRB_MB-9v8ifz",
+            "layout": {},
+            "paint": {"fill-color": "hsl(337, 31%, 65%)"}
+        },
+        {
+            "id": "Nelson-Basin",
+            "type": "fill",
+            "metadata": {"mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e"},
+            "source": "composite",
+            "source-layer": "NEW_Nelson_Bound-ar5tva",
+            "layout": {},
+            "paint": {"fill-color": "hsl(337, 31%, 65%)"}
+        },
+        {
             "id": "AB-South-Saskatchewan-River",
             "type": "fill",
             "metadata": { "mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e" },
@@ -1315,22 +1333,13 @@
             "paint": { "fill-color": "hsl(115, 47%, 67%)" }
         },
         {
-            "id": "SK-South-Saskatchewan-River-Upstream",
+            "id": "SK-South-Saskatchewan-River",
             "type": "fill",
-            "metadata": { "mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e" },
+            "metadata": {"mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e"},
             "source": "composite",
-            "source-layer": "SK_SSSubRB-baxwft",
+            "source-layer": "NEW_SSRandSR_SK2-6aww5w",
             "layout": {},
-            "paint": { "fill-color": "hsl(115, 47%, 67%)" }
-        },
-        {
-            "id": "SK-South-Saskatchewan-River-Downstream",
-            "type": "fill",
-            "metadata": { "mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e" },
-            "source": "composite",
-            "source-layer": "SK_SaskSubRB-aj6mog",
-            "layout": {},
-            "paint": { "fill-color": "hsl(115, 47%, 67%)" }
+            "paint": {"fill-color": "hsl(115, 47%, 67%)"}
         },
         {
             "id": "Reddeer-River",
@@ -1349,6 +1358,15 @@
             "source-layer": "AB_Oldman-2mzcdi",
             "layout": {},
             "paint": { "fill-color": "hsl(196, 58%, 77%)" }
+        },
+        {
+            "id": "Stribs-Basin",
+            "type": "fill",
+            "metadata": {"mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e"},
+            "source": "composite",
+            "source-layer": "NEW_STRIBS_Bound_Ca-6hcq0t",
+            "layout": {},
+            "paint": {"fill-color": "#a2d4e6"}
         },
         {
             "id": "SK-North-Saskatchewan-River",
@@ -1376,6 +1394,15 @@
             "source-layer": "AB_Bow-9oizy4",
             "layout": {},
             "paint": { "fill-color": "hsl(46, 78%, 76%)" }
+        },
+        {
+            "id": "Tau-Basin",
+            "type": "fill",
+            "metadata": {"mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e"},
+            "source": "composite",
+            "source-layer": "NEW_TAU_Bound-3c7erf",
+            "layout": {},
+            "paint": {"fill-color": "#f2dc91"}
         },
         {
             "id": "Highwood",
@@ -1417,21 +1444,11 @@
                         "line-width": 3 }
         },
         {
-            "id": "SK-South-Saskatchewan-River-Upstream-Border",
+            "id": "SK-South-Saskatchewan-River-Border",
             "type": "line",
-            "metadata": { "mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e" },
+            "metadata": {"mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e"},
             "source": "composite",
-            "source-layer": "SK_SSSubRB-baxwft",
-            "layout": { "visibility": "none" },
-            "paint": { "line-color": "hsla(0, 0%, 0%, 0.45)",
-                        "line-width": 3 }
-        },
-        {
-            "id": "SK-South-Saskatchewan-River-Downstream-Border",
-            "type": "line",
-            "metadata": { "mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e" },
-            "source": "composite",
-            "source-layer": "SK_SaskSubRB-aj6mog",
+            "source-layer": "NEW_SSRandSR_SK2-6aww5w",
             "layout": { "visibility": "none" },
             "paint": { "line-color": "hsla(0, 0%, 0%, 0.45)",
                         "line-width": 3 }
@@ -1442,6 +1459,26 @@
             "metadata": { "mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e" },
             "source": "composite",
             "source-layer": "AB_RedDeer-4bfoeo",
+            "layout": { "visibility": "none" },
+            "paint": { "line-color": "hsla(0, 0%, 0%, 0.45)",
+                        "line-width": 3 }
+        },
+        {
+            "id": "Stribs-Basin-Border-Static",
+            "type": "line",
+            "metadata": {"mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e"},
+            "source": "composite",
+            "source-layer": "NEW_STRIBS_Bound_Ca-6hcq0t",
+            "layout": { "visibility": "visible" },
+            "paint": { "line-color": "hsla(0, 0%, 0%, 0.45)",
+                        "line-width": 1 }
+        },
+        {
+            "id": "Stribs-Basin-Border",
+            "type": "line",
+            "metadata": {"mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e"},
+            "source": "composite",
+            "source-layer": "NEW_STRIBS_Bound_Ca-6hcq0t",
             "layout": { "visibility": "none" },
             "paint": { "line-color": "hsla(0, 0%, 0%, 0.45)",
                         "line-width": 3 }
@@ -1466,7 +1503,26 @@
             "paint": { "line-color": "hsla(0, 0%, 0%, 0.45)",
                         "line-width": 3 }
         },
-        
+        {
+            "id": "Tau-Basin-Border-Static",
+            "type": "line",
+            "metadata": {"mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e"},
+            "source": "composite",
+            "source-layer": "NEW_TAU_Bound-3c7erf",
+            "layout": { "visibility": "visible" },
+            "paint": { "line-color": "hsla(0, 0%, 0%, 0.45)",
+                        "line-width": 1 }
+        },
+        {
+            "id": "Tau-Basin-Border",
+            "type": "line",
+            "metadata": {"mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e"},
+            "source": "composite",
+            "source-layer": "NEW_TAU_Bound-3c7erf",
+            "layout": { "visibility": "none" },
+            "paint": { "line-color": "hsla(0, 0%, 0%, 0.45)",
+                        "line-width": 3 }
+        },
         {
             "id": "Highwood-Border-Static",
             "type": "line",
@@ -2692,79 +2748,6 @@
                 "icon-rotation-alignment": "map"
             },
             "paint": {}
-        },
-        {
-            "id": "LakesHeatMap",
-            "type": "heatmap",
-            "source": "composite",
-            "source-layer": "Lakes_and_Rivers_Shapefile_NA-7lid9o",
-            "minzoom": 4.9,
-            "layout": { "visibility": "none" },
-            "paint": {
-                "heatmap-color": [
-                    "interpolate", ["linear"],
-                    ["heatmap-density"],
-                    0,
-                    "rgba(0, 0, 255, 0)",
-                    0.1,
-                    "hsla(208, 68%, 59%, 0.65)",
-                    0.3,
-                    "hsla(205, 75%, 57%, 0.8)",
-                    0.5,
-                    "hsla(208, 80%, 57%, 0.9)",
-                    0.7,
-                    "hsla(208, 68%, 59%, 0.95)",
-                    1,
-                    "hsl(208, 68%, 59%)"
-                ],
-                "heatmap-radius": [
-                    "interpolate", ["linear"],
-                    ["zoom"],
-                    0,
-                    10,
-                    4.93,
-                    15,
-                    6.24,
-                    20,
-                    7.15,
-                    30,
-                    8.56,
-                    50,
-                    9,
-                    50,
-                    9.05,
-                    1,
-                    22,
-                    1
-                ],
-                "heatmap-opacity": [
-                    "interpolate", ["linear"],
-                    ["zoom"],
-                    0,
-                    0,
-                    5.65,
-                    0,
-                    6.58,
-                    0.78,
-                    8.05,
-                    1,
-                    22,
-                    1
-                ],
-                "heatmap-intensity": 1,
-                "heatmap-weight": [
-                    "interpolate", ["linear"],
-                    ["zoom"],
-                    0,
-                    0.7,
-                    6.43,
-                    0.5,
-                    8.05,
-                    0.3,
-                    22,
-                    0.3
-                ]
-            }
         },
         {
             "id": "settlement-subdivision-label",
@@ -4498,48 +4481,6 @@
                     "blue",
                     "hsl(230, 40%, 58%)",
                     "hsl(0, 0%, 100%)"
-                ]
-            }
-        },
-        {
-            "id": "LakesRiversLine",
-            "type": "line",
-            "metadata": { "mapbox:group": "ebd86dd659473a9e4a63a033d53ce964" },
-            "source": "composite",
-            "source-layer": "Lakes_and_Rivers_Shapefile_NA-7lid9o",
-            "layout": { "visibility": "none" },
-            "paint": {
-                "line-width": [
-                    "interpolate", ["linear"],
-                    ["zoom"],
-                    0,
-                    1,
-                    4.97,
-                    1,
-                    6.01,
-                    1,
-                    22,
-                    0
-                ],
-                "line-color": [
-                    "interpolate", ["linear"],
-                    ["zoom"],
-                    0,
-                    "hsla(208, 68%, 59%, 0.65)",
-                    22,
-                    "hsla(208, 68%, 59%, 0.65)"
-                ],
-                "line-opacity": [
-                    "interpolate", ["linear"],
-                    ["zoom"],
-                    5,
-                    0,
-                    5.5,
-                    1,
-                    6.7,
-                    1,
-                    7,
-                    0
                 ]
             }
         },

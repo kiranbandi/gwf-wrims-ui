@@ -12,15 +12,15 @@ const TOKEN = 'pk.eyJ1IjoicmljYXJkb3JoZWVkZXIiLCJhIjoiY2p4MGl5bWIyMDE1bDN5b2NneH
 import defaultMapStyle from './map-style.jsx';
 
 let basinArray = [
-    'AB-South-Saskatchewan-River',
-    'SK-South-Saskatchewan-River-Upstream',
-    'SK-South-Saskatchewan-River-Downstream',
-    'Reddeer-River',
-    'Oldman-River',
+    'SK-South-Saskatchewan-River',
+    'Highwood',
+    // 'Reddeer-River',
     'SK-North-Saskatchewan-River',
     'AB-North-Saskatchewan-River',
-    'Bow-River',
-    'Highwood'
+    'Tau-Basin',
+    // 'Oldman-River',
+    'Stribs-Basin'
+    
 ];
 
 
@@ -112,7 +112,7 @@ export default class BasinMap extends Component {
         if (this.state.markingMenu.mouseOver) { return } 
         // If hovering over a basin
         if (basin) {
-
+            console.log(event.lngLat)
             if (currentBorderName != curHover ){
                 // reset hoverInfo so that it re-renders to mouse cursor
                 hoverInfo = {
@@ -143,10 +143,6 @@ export default class BasinMap extends Component {
 
         else {
             curHover = ''   // Currently hovering nothing
-
-            if (basinLayerIndex != null) { // CONSIDER REMOVING
-                // mapStyle.layers[basinLayerIndex].paint['fill-color'] = defaultMapStyle.layers[basinLayerIndex].paint['fill-color'];  
-            }
         }
 
         // If the current hover has changed 
@@ -174,7 +170,7 @@ export default class BasinMap extends Component {
 
                 // Highlight current basin(s)
                 editedMapStyle = this.highlightBasin(editedMapStyle, basinLayerIndex, curHover)
-
+                
                 // Border the current basin(s)
                 if (basinBorderLayerIndex != ''){
                     editedMapStyle = this.borderBasin(editedMapStyle, basinBorderLayerIndex, currentBorderName)
@@ -278,16 +274,7 @@ export default class BasinMap extends Component {
 
     highlightBasin(mapToEdit, basinHighlightIndex, basinHighlightName){
 
-        if (basinHighlightName == 'SK-South-Saskatchewan-River-Upstream' || basinHighlightName == 'SK-South-Saskatchewan-River-Downstream') {
-            if (basinHighlightName == 'SK-South-Saskatchewan-River-Upstream') {
-                mapToEdit = mapToEdit.setIn(['layers', basinHighlightIndex + 1, 'paint', 'fill-color'], highlightColor)
-            }
-            else if (basinHighlightName == 'SK-South-Saskatchewan-River-Downstream') {
-                mapToEdit = mapToEdit.setIn(['layers', basinHighlightIndex - 1, 'paint', 'fill-color'], highlightColor)
-            }
-        }
-
-        else if (basinHighlightName == 'SK-North-Saskatchewan-River' || basinHighlightName == 'AB-North-Saskatchewan-River') {
+        if (basinHighlightName == 'SK-North-Saskatchewan-River' || basinHighlightName == 'AB-North-Saskatchewan-River') {
             if (basinHighlightName == 'SK-North-Saskatchewan-River') {
                 mapToEdit = mapToEdit.setIn(['layers', basinHighlightIndex + 1, 'paint', 'fill-color'], highlightColor)
             }
@@ -352,7 +339,7 @@ export default class BasinMap extends Component {
     setPlace(curHover){ 
         console.log("set place")
         // Get information for the Info-Card pop-up
-        if (curHover == 'SK-South-Saskatchewan-River-Upstream' || curHover == 'SK-South-Saskatchewan-River-Downstream') {
+        if (curHover == 'SK-South-Saskatchewan-River') {
             this.setState({
                 place: PLACES[0]
             });
@@ -362,29 +349,19 @@ export default class BasinMap extends Component {
                 place: PLACES[1]
             });
         }
-        else if (curHover == 'Reddeer-River') {
+        else if (curHover == 'SK-North-Saskatchewan-River' || curHover == 'AB-North-Saskatchewan-River') {
             this.setState({
                 place: PLACES[2]
             });
         }
-        else if (curHover == 'SK-North-Saskatchewan-River' || curHover == 'AB-North-Saskatchewan-River') {
+        else if (curHover == 'Tau-Basin') {
             this.setState({
                 place: PLACES[3]
             });
         }
-        else if (curHover == 'Bow-River') {
+        else if (curHover == 'Stribs-Basin') {
             this.setState({
                 place: PLACES[4]
-            });
-        }
-        else if (curHover == 'Oldman-River') {
-            this.setState({
-                place: PLACES[5]
-            });
-        }
-        else if (curHover == 'AB-South-Saskatchewan-River') {
-            this.setState({
-                place: PLACES[6]
             });
         }
     }
