@@ -112,7 +112,7 @@ export default class BasinMap extends Component {
         if (this.state.markingMenu.mouseOver) { return } 
         // If hovering over a basin
         if (basin) {
-            console.log(event.lngLat)
+            // console.log(event.lngLat)
             if (currentBorderName != curHover ){
                 // reset hoverInfo so that it re-renders to mouse cursor
                 hoverInfo = {
@@ -249,7 +249,6 @@ export default class BasinMap extends Component {
 
     closeMarkingMenu(){
         if (this.state.markingMenu.curClick == true){
-            console.log("close marking menu")
             this.setState({
                 markingMenu: {...this.state.markingMenu, curClick: false, mouseOver: false}
             });
@@ -337,7 +336,6 @@ export default class BasinMap extends Component {
     }
 
     setPlace(curHover){ 
-        console.log("set place")
         // Get information for the Info-Card pop-up
         if (curHover == 'SK-South-Saskatchewan-River') {
             this.setState({
@@ -371,7 +369,6 @@ export default class BasinMap extends Component {
         return (
             <Marker key={`marker-${index}`} longitude={place.longitude} latitude={place.latitude}>
                 <PlaceMarker size={20} onClick={() => {
-                    // console.log(place)
                     this.props.onRegionSelect({ 'target': place })
                     // set the popup info for the current place marker
                     this.setState({ popupInfo: place })
@@ -410,8 +407,6 @@ export default class BasinMap extends Component {
     renderHoverPopup() {
         const { hoverInfo } = this.state;
         if (hoverInfo) {
-            // console.log("Hover Info:")
-            // console.log(hoverInfo)
             return (
                 <Popup longitude={hoverInfo.lngLat[0]} latitude={hoverInfo.lngLat[1]} closeButton={false}>
                     <div className="basin-info">{hoverInfo.basinName}</div>
@@ -444,7 +439,6 @@ export default class BasinMap extends Component {
         this.setState({
             markingMenu: {...this.state.markingMenu, curClick: false, mouseOver: false}
         });
-        console.log("schematic clicked")
     }
 
     addMarkingMenu(){
