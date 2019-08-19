@@ -105,27 +105,27 @@ class VerticalSlider extends Component {
 
         return (
             <div className='vertical-slider-container' style={{ 'width': width, 'height': height }}>
-            {/* <Modal show={showModal} onClick={this.hideModal}/> */}
-                    <p className='slider-title'>{currentFactor}</p>
-                    <div className='switch-container'>
-                            <label htmlFor="material-switch">
-                                <Switch
-                                    checked={checked}
-                                    onChange={this.onSwitchChange}
-                                    onColor="#86d3ff"
-                                    onHandleColor="#2693e6"
-                                    handleDiameter={25}
-                                    uncheckedIcon={false}
-                                    checkedIcon={false}
-                                    boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
-                                    activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
-                                    height={15}
-                                    width={48}
-                                    className="react-switch"
-                                    id="material-switch"
-                                />
-                            </label>
-                        </div>
+                <Modal show={showModal} onClick={this.hideModal}/>
+                <p className='slider-title'>{currentFactor}</p>
+                <div className='switch-container'>
+                    <label htmlFor="material-switch">
+                        <Switch
+                            checked={checked}
+                            onChange={this.onSwitchChange}
+                            onColor="#86d3ff"
+                            onHandleColor="#2693e6"
+                            handleDiameter={25}
+                            uncheckedIcon={false}
+                            checkedIcon={false}
+                            boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
+                            activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
+                            height={15}
+                            width={48}
+                            className="react-switch"
+                            id="material-switch"
+                        />
+                    </label>
+                </div>
                 <div className='inner-slider' style={{ 'width': width, 'height': height * 0.70, 'marginBottom': height * 0.05 }}>
                     <Slider vertical value={sliderValue} min={0} marks={factorMarks} step={null} included={false} onChange={this.onSliderChange} defaultValue={initialValue}/>
                 </div>
