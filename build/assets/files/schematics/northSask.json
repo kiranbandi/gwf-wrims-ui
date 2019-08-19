@@ -5,10 +5,17 @@
     },
     "labels": [
         {
-            "name": "",
+            "name": "HPP_Brazeau",
             "coords": [
-                0,
-                0
+                16,
+                55.5
+            ]
+        },
+        {
+            "name": "HPP_BigHorn",
+            "coords": [
+                44,
+                84
             ]
         }
     ],

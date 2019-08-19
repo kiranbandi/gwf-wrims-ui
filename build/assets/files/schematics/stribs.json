@@ -8,10 +8,26 @@
     },
     "labels": [
         {
-            "name": "",
+            "name": "Upstream of Lethbridge",
             "coords": [
-                0,
-                0
+                2,
+                4
+            ]
+        },
+
+        {
+            "name": "St. Mary River",
+            "coords": [
+                80,
+                20
+            ]
+        },
+
+        {
+            "name": "Belly River",
+            "coords": [
+                44,
+                39.5
             ]
         }
     ],

@@ -8,10 +8,26 @@
     },
     "labels": [
         {
-            "name": "",
+            "name": "North Battleford",
             "coords": [
-                0,
-                0
+                78,
+                48
+            ]
+        },
+
+        {
+            "name": "Lloydminister",
+            "coords": [
+                31.5,
+                68.5
+            ]
+        },
+
+        {
+            "name": "In39_NSR",
+            "coords": [
+                175,
+                48
             ]
         }
     ],

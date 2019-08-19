@@ -1,6 +1,6 @@
 {
     "title": {
-        "label": "TransAlta Utilities Model",
+        "label": "TransAlta Utilities",
         "coords": [
             0,
             0
@@ -8,10 +8,34 @@
     },
     "labels": [
         {
-            "name": "",
+            "name": "Canyon Dam",
             "coords": [
-                0,
-                0
+                23,
+                58
+            ]
+        },
+
+        {
+            "name": "Cascade River",
+            "coords": [
+                11,
+                19
+            ]
+        },
+
+        {
+            "name": "Bow River",
+            "coords": [
+                115,
+                23
+            ]
+        },
+
+        {
+            "name": "Kananaskis River",
+            "coords": [
+                87,
+                50
             ]
         }
     ],
