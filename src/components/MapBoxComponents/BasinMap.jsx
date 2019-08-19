@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import MapGL, { Marker, Popup, FlyToInterpolator } from 'react-map-gl';
-import PlaceInfo from './PlaceInfo';
-import PlaceMarker from './PlaceMarker';
+import MapGL, { Popup, FlyToInterpolator } from 'react-map-gl';
 import PLACES from '../../utils/static-reference/mapPlaces';
 import MarkingMenu from './MarkingMenu'
 
@@ -9,7 +7,7 @@ import { fromJS } from 'immutable';
 
 const TOKEN = 'pk.eyJ1IjoicmljYXJkb3JoZWVkZXIiLCJhIjoiY2p4MGl5bWIyMDE1bDN5b2NneHh5djJ2biJ9.3ALfBtMIORYFNtXU9RUUnA';
 
-import defaultMapStyle from './map-style.jsx';
+import defaultMapStyle from './MapStyle.jsx';
 
 let basinArray = [
     'SK-South-Saskatchewan-River',
@@ -92,8 +90,6 @@ export default class BasinMap extends Component {
             }
         };
 
-        this.renderPlaceMarker = this.renderPlaceMarker.bind(this);
-        this.renderPopup = this.renderPopup.bind(this);
         this.renderHoverPopup = this.renderHoverPopup.bind(this);
         this._onHover = this._onHover.bind(this);
         this._onMouseDown = this._onMouseDown.bind(this);
@@ -364,44 +360,9 @@ export default class BasinMap extends Component {
         }
     }
 
-    // Can delete
-    renderPlaceMarker(place, index) {
-        return (
-            <Marker key={`marker-${index}`} longitude={place.longitude} latitude={place.latitude}>
-                <PlaceMarker size={20} onClick={() => {
-                    this.props.onRegionSelect({ 'target': place })
-                    // set the popup info for the current place marker
-                    this.setState({ popupInfo: place })
-                }} />
-            </Marker>
-        );
-    };
-
     iconButtonClick = () => { 
         this._goToViewport(this.state.place)
         this.props.onRegionSelect({ 'target': this.state.place })
-    }
-
-    // Can delete
-    renderPopup() {
-        const { popupInfo } = this.state;
-
-        if (popupInfo) {
-            return (
-                popupInfo && (
-                    <Popup
-                        tipSize={5}
-                        anchor="left"
-                        longitude={popupInfo.longitude}
-                        latitude={popupInfo.latitude}
-                        closeOnClick={false}
-                        onClose={() => this.setState({ popupInfo: null })}>
-                        <PlaceInfo info={popupInfo} iconButton={this.iconButtonClick}/>
-                    </Popup>
-                )
-            );
-        }
-        return null;
     }
 
     renderHoverPopup() {

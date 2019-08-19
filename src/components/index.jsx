@@ -8,7 +8,5 @@ export { default as VerticalSlider } from './SingleFilterComponents/VerticalSlid
 export { default as YoutubeLayout } from './YoutubeLayout';
 export { default as LegendPanel } from './MapLegend/LegendPanel';
 export { default as FileUpload } from './FileUpload';
-export { default as PlaceInfo } from './MapBoxComponents/PlaceInfo';
-export { default as PlaceMarker } from './MapBoxComponents/PlaceMarker';
 export { default as BasinMap } from './MapBoxComponents/BasinMap';
 export { default as Modal } from './Modal/';
