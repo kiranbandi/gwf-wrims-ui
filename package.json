@@ -1,5 +1,5 @@
 {
-    "name": "em-cbd-ui",
+    "name": "gwf-ui",
     "version": "1.0.0",
     "description": "GWF UI",
     "main": "src/app.js",
@@ -21,6 +21,7 @@
         "bootstrap": "^4.3.1",
         "bootstrap-select": "^1.13.10",
         "d3": "^5.9.2",
+        "downloadjs": "^1.4.7",
         "immutable": "^4.0.0-rc.12",
         "lodash": "^4.17.10",
         "moment": "^2.23.0",

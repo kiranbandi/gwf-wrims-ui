@@ -5,7 +5,7 @@ import { setMode } from '../../../../redux/actions/actions';
 import ModeCard from './ModeCard'
 
 class UserSelection extends Component {
-
+    
 
 
     render() {

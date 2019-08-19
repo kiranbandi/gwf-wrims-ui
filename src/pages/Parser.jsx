@@ -6,6 +6,8 @@ import toastr from '../utils/toastr';
 import { setFlowData } from '../redux/actions/actions';
 import Loading from 'react-loading';
 import xyParser from '../utils/processors/xyParser';
+import processSchematic from '../utils/processors/processSchematic';
+
 import downloadJSON from '../utils/downloadJSON';
 import _ from 'lodash';
 import getFile from '../utils/getFile';
@@ -34,15 +36,15 @@ class Parser extends Component {
         getFile('xy-file')
             .then((response) => { return xyParser(response); })
             .then((parsedData) => {
-                const clonedData = Object.assign({}, parsedData);
                 this.setState({
                     dataReady: true,
-                    schematicData: clonedData,
-                    jsonData: parsedData,
+                    schematicData: parsedData,
+                    jsonData: processSchematic(parsedData),
                     fileName: document.getElementById("xy-file").files[0].name
                 });
             })
-            .catch(() => {
+            .catch((err) => {
+                console.log(err);
                 toastr["error"]("Failed to process files, Please try again.", "ERROR");
             })
             .finally(() => { this.setState({ processing: false }); });
@@ -97,7 +99,7 @@ class Parser extends Component {
                             width={mapWidth}
                             height={mapWidth / 2}
                             fromDashboard={false} />
-                        <LegendPanel width={widthOfDashboard} />
+                        <LegendPanel width={widthOfDashboard - 100} />
                     </div>
                 }
             </div>

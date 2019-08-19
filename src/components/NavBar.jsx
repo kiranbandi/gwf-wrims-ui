@@ -21,7 +21,6 @@ class NavBar extends Component {
         super(props);
         this.logOut = this.logOut.bind(this);
         this.googleResponse = this.googleResponse.bind(this);
-        this.onSelectUserType = this.onSelectUserType.bind(this);
     }
 
     componentDidMount() {
@@ -34,9 +33,11 @@ class NavBar extends Component {
         });
     }
 
-    onSelectUserType() {
-        const userType = event.target.value;
-        ;
+
+
+    _onSwitchModeButtonClick = () => { 
+        window.scrollTo(0, 0); 
+        this.props.actions.setMode(-1); 
     }
 
     logOut(event) {
@@ -59,7 +60,7 @@ class NavBar extends Component {
     render() {
         const loginRedirectURL = 'https://cas.usask.ca/cas/login?service=' + encodeURIComponent((process.env.NODE_ENV == 'development') ? 'https://localhost:8888/' : 'https://gwf-hci.usask.ca/');
         const { mode, logged_in } = this.props;
-        const nullUserState = (mode === -1)
+        const nullUserState = (mode === -1 || mode === 2)
         return (
             <nav className="navbar navbar-inverse navbar-fixed-top">
                 <div className="container-fluid">
@@ -91,7 +92,8 @@ class NavBar extends Component {
                         <ul className='nav navbar-nav navbar-right'>
                             { !nullUserState && logged_in &&
                                 <li>                              
-                                    <div className="mode-switch-button" onClick={() => this.props.actions.setMode(-1)} >
+        
+                                    <div className="mode-switch-button" onClick={this._onSwitchModeButtonClick} >
                                         {"Switch Mode"}
                                     </div>
                                 </li>

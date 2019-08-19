@@ -30,7 +30,7 @@ class RootSchematic extends Component {
     getTiles(width, height) {
         return _.map(tileMap, (tile, tileIndex) => {
             const pathData = tile.boundingPath.map(function (d) {
-                return [Math.round(d[0] * width), Math.round(d[1] * (height * .985))];
+                return [Math.round(d[0] * width), Math.round(d[1] * height)];
             });
             return <path
                 id={tile.tileID}

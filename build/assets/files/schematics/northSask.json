@@ -3,2178 +3,3112 @@
         "label": "North Saskatchewan (AB)",
         "coords": [0, 0]
     },
-    "lines": [{
-            "name": "In_NSR_WHIRLP_05DA009_Nat_J_1",
-            "linkNum": 1,
-            "linkFrom": 3,
-            "linkTo": 2,
-            "type": "inflow",
-            "nodes": [{
-                    "coords": [
-                        29.016858123228406,
-                        87.74592467678471
-                    ]
-                },
-                {
-                    "coords": [
-                        41.10099955243921,
-                        87.63350196739741
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "In_Siffleur_05DA002_J_1",
-            "linkNum": 2,
-            "linkFrom": 4,
-            "linkTo": 2,
-            "type": "inflow",
-            "nodes": [{
-                    "coords": [
-                        41.25018648366404,
-                        95.50309162450816
-                    ]
-                },
-                {
-                    "coords": [
-                        41.10099955243921,
-                        87.63350196739741
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_1_R1_BigHorn",
-            "linkNum": 3,
-            "linkFrom": 2,
-            "linkTo": 1,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        41.10099955243921,
-                        87.63350196739741
-                    ]
-                },
-                {
-                    "coords": [
-                        40.95181262121439,
-                        82.79932546374368
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "R1_BigHorn_J_Cline",
-            "linkNum": 4,
-            "linkFrom": 1,
-            "linkTo": 5,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        40.95181262121439,
-                        82.79932546374368
-                    ]
-                },
-                {
-                    "coords": [
-                        40.95181262121439,
-                        75.04215851602024
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "In_RamMouth_05DC006_J_Ram",
-            "linkNum": 5,
-            "linkFrom": 6,
-            "linkTo": 7,
-            "type": "inflow",
-            "nodes": [{
-                    "coords": [
-                        59.22721169625541,
-                        70.03934794828555
-                    ]
-                },
-                {
-                    "coords": [
-                        40.87721915560197,
-                        70.15177065767286
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_Cline_J_Ram",
-            "linkNum": 6,
-            "linkFrom": 5,
-            "linkTo": 7,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        40.95181262121439,
-                        75.04215851602024
-                    ]
-                },
-                {
-                    "coords": [
-                        40.87721915560197,
-                        70.15177065767286
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_Ram_J_ClWat",
-            "linkNum": 7,
-            "linkFrom": 7,
-            "linkTo": 14,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        40.87721915560197,
-                        70.15177065767286
-                    ]
-                },
-                {
-                    "coords": [
-                        40.81754438311205,
-                        65.48622821810005
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "In_PrarieCr_05DB002_J_ClWat",
-            "linkNum": 8,
-            "linkFrom": 8,
-            "linkTo": 14,
-            "type": "inflow",
-            "nodes": [{
-                    "coords": [
-                        58.92883783380576,
-                        65.54243957279371
-                    ]
-                },
-                {
-                    "coords": [
-                        40.81754438311205,
-                        65.48622821810005
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "In_ClearwaterWat_05DB006_J_RockyMH",
-            "linkNum": 9,
-            "linkFrom": 15,
-            "linkTo": 16,
-            "type": "inflow",
-            "nodes": [{
-                    "coords": [
-                        58.86916306131583,
-                        60.76447442383361
-                    ]
-                },
-                {
-                    "coords": [
-                        40.742950917499634,
-                        60.82068577852726
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_ClWat_J_RockyMH",
-            "linkNum": 10,
-            "linkFrom": 14,
-            "linkTo": 16,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        40.81754438311205,
-                        65.48622821810005
-                    ]
-                },
-                {
-                    "coords": [
-                        40.742950917499634,
-                        60.82068577852726
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_RockyMH_J_Baptiste",
-            "linkNum": 11,
-            "linkFrom": 16,
-            "linkTo": 10,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        40.742950917499634,
-                        60.82068577852726
-                    ]
-                },
-                {
-                    "coords": [
-                        40.728032224377145,
-                        54.52501405283867
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "In_Baptiste_05DC012_J_Baptiste",
-            "linkNum": 12,
-            "linkFrom": 9,
-            "linkTo": 10,
-            "type": "inflow",
-            "nodes": [{
-                    "coords": [
-                        58.48127704013129,
-                        54.412591343451375
-                    ]
-                },
-                {
-                    "coords": [
-                        40.728032224377145,
-                        54.52501405283867
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_Baptiste_J_DSBrazeau",
-            "linkNum": 13,
-            "linkFrom": 10,
-            "linkTo": 11,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        40.728032224377145,
-                        54.52501405283867
-                    ]
-                },
-                {
-                    "coords": [
-                        40.728032224377145,
-                        48.34176503653738
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "R2_Brazeau_J_Nordegg",
-            "linkNum": 14,
-            "linkFrom": 17,
-            "linkTo": 48,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        15.455766074891839,
-                        48.735244519392914
-                    ]
-                },
-                {
-                    "coords": [
-                        27.82336267342981,
-                        48.51039910061832
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "In_Brazeau_05DD007_J_UPBrazeau",
-            "linkNum": 15,
-            "linkFrom": 13,
-            "linkTo": 49,
-            "type": "inflow",
-            "nodes": [{
-                    "coords": [
-                        7.60853349246606,
-                        56.7734682405846
-                    ]
-                },
-                {
-                    "coords": [
-                        7.60853349246606,
-                        48.84766722878021
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "In_Nordegg_05DD009_J_Nordegg",
-            "linkNum": 16,
-            "linkFrom": 12,
-            "linkTo": 48,
-            "type": "inflow",
-            "nodes": [{
-                    "coords": [
-                        27.748769207817396,
-                        39.23552557616639
-                    ]
-                },
-                {
-                    "coords": [
-                        27.82336267342981,
-                        48.51039910061832
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_DSBrazeau_J_RoseCr",
-            "linkNum": 17,
-            "linkFrom": 11,
-            "linkTo": 18,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        40.728032224377145,
-                        48.34176503653738
-                    ]
-                },
-                {
-                    "coords": [
-                        40.51917052066239,
-                        26.700393479482855
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_RoseCr_J_Modeste",
-            "linkNum": 18,
-            "linkFrom": 18,
-            "linkTo": 19,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        40.51917052066239,
-                        26.700393479482855
-                    ]
-                },
-                {
-                    "coords": [
-                        51.78278382813666,
-                        26.644182124789207
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_Modeste_J_WabmL",
-            "linkNum": 19,
-            "linkFrom": 19,
-            "linkTo": 20,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        51.78278382813666,
-                        26.644182124789207
-                    ]
-                },
-                {
-                    "coords": [
-                        60.435625839176495,
-                        26.53175941540191
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_WabmL_J_StrawB",
-            "linkNum": 20,
-            "linkFrom": 20,
-            "linkTo": 21,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        60.435625839176495,
-                        26.53175941540191
-                    ]
-                },
-                {
-                    "coords": [
-                        69.98358943756527,
-                        26.41933670601461
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_StrawB_J_Edmonton",
-            "linkNum": 21,
-            "linkFrom": 21,
-            "linkTo": 22,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        69.98358943756527,
-                        26.41933670601461
-                    ]
-                },
-                {
-                    "coords": [
-                        82.96285245412503,
-                        26.41933670601461
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_Edmonton_RF1",
-            "linkNum": 22,
-            "linkFrom": 22,
-            "linkTo": 74,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        82.96285245412503,
-                        26.41933670601461
-                    ]
-                },
-                {
-                    "coords": [
-                        94.2264657615993,
-                        26.363125351320964
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_Androssan_J_Sturgeon",
-            "linkNum": 23,
-            "linkFrom": 23,
-            "linkTo": 24,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        102.20796658212741,
-                        26.194491287240023
-                    ]
-                },
-                {
-                    "coords": [
-                        109.21975234969419,
-                        26.194491287240023
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_Sturgeon_J_RedWat",
-            "linkNum": 24,
-            "linkFrom": 24,
-            "linkTo": 25,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        109.21975234969419,
-                        26.194491287240023
-                    ]
-                },
-                {
-                    "coords": [
-                        116.38072504848576,
-                        26.082068577852723
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_RedWat_J_WaskaT",
-            "linkNum": 25,
-            "linkFrom": 25,
-            "linkTo": 26,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        116.38072504848576,
-                        26.082068577852723
-                    ]
-                },
-                {
-                    "coords": [
-                        126.07787557809938,
-                        25.96964586846543
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_WaskaT_J_SmokyL",
-            "linkNum": 26,
-            "linkFrom": 26,
-            "linkTo": 27,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        126.07787557809938,
-                        25.96964586846543
-                    ]
-                },
-                {
-                    "coords": [
-                        132.79128748321648,
-                        26.082068577852723
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_SmokyL_J_ElkP1",
-            "linkNum": 27,
-            "linkFrom": 27,
-            "linkTo": 28,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        132.79128748321648,
-                        26.082068577852723
-                    ]
-                },
-                {
-                    "coords": [
-                        142.33925108160525,
-                        26.082068577852723
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_ElkP1_J_ElkP2",
-            "linkNum": 28,
-            "linkFrom": 28,
-            "linkTo": 29,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        142.33925108160525,
-                        26.082068577852723
-                    ]
-                },
-                {
-                    "coords": [
-                        150.9920930926451,
-                        25.96964586846543
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_ElkP2_J_Vermilion",
-            "linkNum": 29,
-            "linkFrom": 29,
-            "linkTo": 30,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        150.9920930926451,
-                        25.96964586846543
-                    ]
-                },
-                {
-                    "coords": [
-                        166.05997314635238,
-                        25.96964586846543
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_Vermilion_J_ABtoSK",
-            "linkNum": 30,
-            "linkFrom": 30,
-            "linkTo": 31,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        166.05997314635238,
-                        25.96964586846543
-                    ]
-                },
-                {
-                    "coords": [
-                        174.26525436371773,
-                        25.857223159078135
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "RF2_NSR_ABtoSK",
-            "linkNum": 31,
-            "linkFrom": 73,
-            "linkTo": 47,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        184.3353722213934,
-                        26.025857223159075
-                    ]
-                },
-                {
-                    "coords": [
-                        192.54065343875877,
-                        26.025857223159075
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "In_Tomahawk_05DE009_J_Modeste",
-            "linkNum": 32,
-            "linkFrom": 32,
-            "linkTo": 19,
-            "type": "inflow",
-            "nodes": [{
-                    "coords": [
-                        51.93197075936149,
-                        36.20011242270939
-                    ]
-                },
-                {
-                    "coords": [
-                        51.78278382813666,
-                        26.644182124789207
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "In_Wabakum_05DE003_J_WabmL",
-            "linkNum": 33,
-            "linkFrom": 33,
-            "linkTo": 20,
-            "type": "inflow",
-            "nodes": [{
-                    "coords": [
-                        60.435625839176495,
-                        12.366498032602586
-                    ]
-                },
-                {
-                    "coords": [
-                        60.435625839176495,
-                        26.53175941540191
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "In_Strawberry_05DF004_J_StrawB",
-            "linkNum": 34,
-            "linkFrom": 34,
-            "linkTo": 21,
-            "type": "inflow",
-            "nodes": [{
-                    "coords": [
-                        70.1327763687901,
-                        32.04047217537943
-                    ]
-                },
-                {
-                    "coords": [
-                        69.98358943756527,
-                        26.41933670601461
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "In_PointeCr_05EB902_J_Androssan",
-            "linkNum": 35,
-            "linkFrom": 35,
-            "linkTo": 23,
-            "type": "inflow",
-            "nodes": [{
-                    "coords": [
-                        102.0587796509026,
-                        19.33670601461495
-                    ]
-                },
-                {
-                    "coords": [
-                        102.20796658212741,
-                        26.194491287240023
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "In_Sturgeon_05EA001_J_Sturgeon",
-            "linkNum": 36,
-            "linkFrom": 36,
-            "linkTo": 24,
-            "type": "inflow",
-            "nodes": [{
-                    "coords": [
-                        109.21975234969419,
-                        34.40134907251265
-                    ]
-                },
-                {
-                    "coords": [
-                        109.21975234969419,
-                        26.194491287240023
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "In_RedWat_05EC005_J_RedWat",
-            "linkNum": 37,
-            "linkFrom": 37,
-            "linkTo": 25,
-            "type": "inflow",
-            "nodes": [{
-                    "coords": [
-                        116.23153811726095,
-                        15.51433389544688
-                    ]
-                },
-                {
-                    "coords": [
-                        116.38072504848576,
-                        26.082068577852723
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "In_WaskatenauCr_05EC002_J_WaskaT",
-            "linkNum": 38,
-            "linkFrom": 38,
-            "linkTo": 26,
-            "type": "inflow",
-            "nodes": [{
-                    "coords": [
-                        126.07787557809938,
-                        37.09949409780776
-                    ]
-                },
-                {
-                    "coords": [
-                        126.07787557809938,
-                        25.96964586846543
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "In_WhiteEr_05EC006_J_SmokyL",
-            "linkNum": 39,
-            "linkFrom": 39,
-            "linkTo": 27,
-            "type": "inflow",
-            "nodes": [{
-                    "coords": [
-                        132.79128748321648,
-                        19.111860595840362
-                    ]
-                },
-                {
-                    "coords": [
-                        132.79128748321648,
-                        26.082068577852723
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "In_Atimoswe_05ED002_J_ElkP1",
-            "linkNum": 40,
-            "linkFrom": 40,
-            "linkTo": 28,
-            "type": "inflow",
-            "nodes": [{
-                    "coords": [
-                        142.33925108160525,
-                        12.816188870151771
-                    ]
-                },
-                {
-                    "coords": [
-                        142.33925108160525,
-                        26.082068577852723
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "In_Moosehills_05ED003_J_ElkP2",
-            "linkNum": 41,
-            "linkFrom": 41,
-            "linkTo": 29,
-            "type": "inflow",
-            "nodes": [{
-                    "coords": [
-                        151.29046695509473,
-                        33.277121978639684
-                    ]
-                },
-                {
-                    "coords": [
-                        150.9920930926451,
-                        25.96964586846543
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "In_RoseCr_05DE007_J_RoseCr",
-            "linkNum": 42,
-            "linkFrom": 42,
-            "linkTo": 18,
-            "type": "inflow",
-            "nodes": [{
-                    "coords": [
-                        22.318364911233775,
-                        26.812816188870155
-                    ]
-                },
-                {
-                    "coords": [
-                        40.51917052066239,
-                        26.700393479482855
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "In_Blackmud_05DF003_J_BlackWhite",
-            "linkNum": 43,
-            "linkFrom": 45,
-            "linkTo": 43,
-            "type": "inflow",
-            "nodes": [{
-                    "coords": [
-                        96.83723705803374,
-                        46.76784710511524
-                    ]
-                },
-                {
-                    "coords": [
-                        83.33581978218709,
-                        39.29173693086003
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "In_Whitemud_05DF006_J_BlackWhite",
-            "linkNum": 44,
-            "linkFrom": 44,
-            "linkTo": 43,
-            "type": "inflow",
-            "nodes": [{
-                    "coords": [
-                        75.27972549604655,
-                        47.16132658797077
-                    ]
-                },
-                {
-                    "coords": [
-                        83.33581978218709,
-                        39.29173693086003
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_BlackWhite_J_Edmonton",
-            "linkNum": 45,
-            "linkFrom": 43,
-            "linkTo": 22,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        83.33581978218709,
-                        39.29173693086003
-                    ]
-                },
-                {
-                    "coords": [
-                        82.96285245412503,
-                        26.41933670601461
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "In_Vermilion_05EE007_J_Vermilion",
-            "linkNum": 46,
-            "linkFrom": 46,
-            "linkTo": 30,
-            "type": "inflow",
-            "nodes": [{
-                    "coords": [
-                        165.98537968073995,
-                        37.380550871276
-                    ]
-                },
-                {
-                    "coords": [
-                        166.05997314635238,
-                        25.96964586846543
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_Nordegg_J_DSBrazeau",
-            "linkNum": 47,
-            "linkFrom": 48,
-            "linkTo": 11,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        27.82336267342981,
-                        48.51039910061832
-                    ]
-                },
-                {
-                    "coords": [
-                        40.728032224377145,
-                        48.34176503653738
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_UPBrazeau_R2_Brazeau",
-            "linkNum": 48,
-            "linkFrom": 49,
-            "linkTo": 17,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        7.60853349246606,
-                        48.84766722878021
-                    ]
-                },
-                {
-                    "coords": [
-                        15.455766074891839,
-                        48.735244519392914
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "In_BrownCr_05DD004_J_UPBrazeau",
-            "linkNum": 49,
-            "linkFrom": 50,
-            "linkTo": 49,
-            "type": "inflow",
-            "nodes": [{
-                    "coords": [
-                        7.459346561241236,
-                        39.516582349634625
-                    ]
-                },
-                {
-                    "coords": [
-                        7.60853349246606,
-                        48.84766722878021
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_RoseCr_MW_11",
-            "linkNum": 50,
-            "linkFrom": 18,
-            "linkTo": 51,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        40.51917052066239,
-                        26.700393479482855
-                    ]
-                },
-                {
-                    "coords": [
-                        25.302103535730268,
-                        23.440134907251263
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_RoseCr_Irr_11",
-            "linkNum": 51,
-            "linkFrom": 18,
-            "linkTo": 52,
-            "type": "agri",
-            "nodes": [{
-                    "coords": [
-                        40.51917052066239,
-                        26.700393479482855
-                    ]
-                },
-                {
-                    "coords": [
-                        46.41205430404297,
-                        18.21247892074199
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_Edmonton_Irr_22",
-            "linkNum": 52,
-            "linkFrom": 22,
-            "linkTo": 54,
-            "type": "agri",
-            "nodes": [{
-                    "coords": [
-                        82.96285245412503,
-                        26.41933670601461
-                    ]
-                },
-                {
-                    "coords": [
-                        98.47829330150681,
-                        7.082630691399664
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_RoseCr_MW_12",
-            "linkNum": 53,
-            "linkFrom": 18,
-            "linkTo": 53,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        40.51917052066239,
-                        26.700393479482855
-                    ]
-                },
-                {
-                    "coords": [
-                        25.973444726241983,
-                        20.123664980326026
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_Vermilion_Irr_33",
-            "linkNum": 54,
-            "linkFrom": 30,
-            "linkTo": 56,
-            "type": "agri",
-            "nodes": [{
-                    "coords": [
-                        166.05997314635238,
-                        25.96964586846543
-                    ]
-                },
-                {
-                    "coords": [
-                        150.69371923019546,
-                        18.437324339516582
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_RoseCr_MW_13",
-            "linkNum": 55,
-            "linkFrom": 18,
-            "linkTo": 55,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        40.51917052066239,
-                        26.700393479482855
-                    ]
-                },
-                {
-                    "coords": [
-                        28.211248694614355,
-                        16.807195053400786
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_Edmonton_MW_21",
-            "linkNum": 56,
-            "linkFrom": 22,
-            "linkTo": 57,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        82.96285245412503,
-                        26.41933670601461
-                    ]
-                },
-                {
-                    "coords": [
-                        72.14679994032524,
-                        17.144463181562674
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_Vermilion_MW_31",
-            "linkNum": 57,
-            "linkFrom": 30,
-            "linkTo": 58,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        166.05997314635238,
-                        25.96964586846543
-                    ]
-                },
-                {
-                    "coords": [
-                        154.42339251081606,
-                        15.739179314221472
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_RoseCr_MW_14",
-            "linkNum": 58,
-            "linkFrom": 18,
-            "linkTo": 59,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        40.51917052066239,
-                        26.700393479482855
-                    ]
-                },
-                {
-                    "coords": [
-                        31.791735044010146,
-                        14.277684092186622
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_RoseCr_MW_15",
-            "linkNum": 59,
-            "linkFrom": 18,
-            "linkTo": 60,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        40.51917052066239,
-                        26.700393479482855
-                    ]
-                },
-                {
-                    "coords": [
-                        35.81978218708041,
-                        11.69196177627881
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_RoseCr_MW_16",
-            "linkNum": 60,
-            "linkFrom": 18,
-            "linkTo": 61,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        40.51917052066239,
-                        26.700393479482855
-                    ]
-                },
-                {
-                    "coords": [
-                        40.36998358943757,
-                        9.050028105677347
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_Edmonton_MW_22",
-            "linkNum": 61,
-            "linkFrom": 22,
-            "linkTo": 62,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        82.96285245412503,
-                        26.41933670601461
-                    ]
-                },
-                {
-                    "coords": [
-                        76.02566015217069,
-                        14.333895446880272
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_Vermilion_MW_32",
-            "linkNum": 62,
-            "linkFrom": 30,
-            "linkTo": 63,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        166.05997314635238,
-                        25.96964586846543
-                    ]
-                },
-                {
-                    "coords": [
-                        159.0481873787856,
-                        14.05283867341203
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_Edmonton_MW_24",
-            "linkNum": 63,
-            "linkFrom": 22,
-            "linkTo": 64,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        82.96285245412503,
-                        26.41933670601461
-                    ]
-                },
-                {
-                    "coords": [
-                        84.45472176637327,
-                        8.993816750983699
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_Edmonton_MW_25",
-            "linkNum": 64,
-            "linkFrom": 22,
-            "linkTo": 65,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        82.96285245412503,
-                        26.41933670601461
-                    ]
-                },
-                {
-                    "coords": [
-                        89.07951663434284,
-                        6.632939853850478
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_Edmonton_MW_26",
-            "linkNum": 65,
-            "linkFrom": 22,
-            "linkTo": 66,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        82.96285245412503,
-                        26.41933670601461
-                    ]
-                },
-                {
-                    "coords": [
-                        94.00268536476206,
-                        4.4969083754918495
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_Edmonton_MW_23",
-            "linkNum": 66,
-            "linkFrom": 22,
-            "linkTo": 67,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        82.96285245412503,
-                        26.41933670601461
-                    ]
-                },
-                {
-                    "coords": [
-                        81.24720274503954,
-                        11.523327712197865
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_Vermilion_MW_33",
-            "linkNum": 67,
-            "linkFrom": 30,
-            "linkTo": 68,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        166.05997314635238,
-                        25.96964586846543
-                    ]
-                },
-                {
-                    "coords": [
-                        165.91078621512756,
-                        9.555930297920181
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_Vermilion_MW_34",
-            "linkNum": 68,
-            "linkFrom": 30,
-            "linkTo": 71,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        166.05997314635238,
-                        25.96964586846543
-                    ]
-                },
-                {
-                    "coords": [
-                        171.43070267044607,
-                        9.89319842608207
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_Vermilion_MW_35",
-            "linkNum": 69,
-            "linkFrom": 30,
-            "linkTo": 69,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        166.05997314635238,
-                        25.96964586846543
-                    ]
-                },
-                {
-                    "coords": [
-                        177.69655378188872,
-                        11.69196177627881
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_Vermilion_MW_36",
-            "linkNum": 70,
-            "linkFrom": 30,
-            "linkTo": 70,
-            "type": "demand",
-            "nodes": [{
-                    "coords": [
-                        166.05997314635238,
-                        25.96964586846543
-                    ]
-                },
-                {
-                    "coords": [
-                        181.72460092495896,
-                        14.277684092186622
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "J_ABtoSK_RF2",
-            "linkNum": 72,
-            "linkFrom": 31,
-            "linkTo": 73,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        174.26525436371773,
-                        25.857223159078135
-                    ]
-                },
-                {
-                    "coords": [
-                        184.3353722213934,
-                        26.025857223159075
-                    ]
-                }
-            ],
-            "reverse": false
-        },
-        {
-            "name": "RF1_J_Androssan",
-            "linkNum": 73,
-            "linkFrom": 74,
-            "linkTo": 23,
-            "type": "river",
-            "nodes": [{
-                    "coords": [
-                        94.2264657615993,
-                        26.363125351320964
-                    ]
-                },
-                {
-                    "coords": [
-                        102.20796658212741,
-                        26.194491287240023
-                    ]
-                }
-            ],
-            "reverse": false
+    "labels": [
+        {
+            "name": "HPP_Brazeau",
+            "coords": [
+                16,
+                55.5
+            ]
+        },
+        {
+            "name": "HPP_BigHorn",
+            "coords": [
+                44,
+                84
+            ]
         }
     ],
-    "artifacts": [{
-            "name": "R1_BigHorn",
-            "nodeNum": 1,
-            "type": "reservoir",
-            "coords": [
-                40.95181262121439,
-                82.79932546374368
-            ],
-            "size": 1
-        },
+    "demands": [
         {
-            "name": "R2_Brazeau",
-            "nodeNum": 17,
-            "type": "reservoir",
-            "coords": [
-                15.455766074891839,
-                48.735244519392914
-            ],
-            "size": 1
-        },
-        {
-            "name": "NSR_ABtoSK",
-            "nodeNum": 47,
-            "type": "sink",
-            "coords": [
-                192.54065343875877,
-                26.025857223159075
-            ],
-            "size": 1
-        }
-    ],
-    "markers": [{
-            "name": "J_1",
-            "nodeNum": 2,
-            "type": "junction",
-            "coords": [
-                41.10099955243921,
-                87.63350196739741
-            ]
-        },
-        {
-            "name": "In_NSR_WHIRLP_05DA009_Nat",
-            "nodeNum": 3,
-            "type": "inflow",
-            "coords": [
-                29.016858123228406,
-                87.74592467678471
-            ]
-        },
-        {
-            "name": "In_Siffleur_05DA002",
-            "nodeNum": 4,
-            "type": "inflow",
-            "coords": [
-                41.25018648366404,
-                95.50309162450816
-            ]
-        },
-        {
-            "name": "J_Cline",
-            "nodeNum": 5,
-            "type": "junction",
-            "coords": [
-                40.95181262121439,
-                75.04215851602024
-            ]
-        },
-        {
-            "name": "In_RamMouth_05DC006",
-            "nodeNum": 6,
-            "type": "inflow",
-            "coords": [
-                59.22721169625541,
-                70.03934794828555
-            ]
-        },
-        {
-            "name": "J_Ram",
-            "nodeNum": 7,
-            "type": "junction",
-            "coords": [
-                40.87721915560197,
-                70.15177065767286
-            ]
-        },
-        {
-            "name": "In_PrarieCr_05DB002",
-            "nodeNum": 8,
-            "type": "inflow",
-            "coords": [
-                58.92883783380576,
-                65.54243957279371
-            ]
-        },
-        {
-            "name": "In_Baptiste_05DC012",
-            "nodeNum": 9,
-            "type": "inflow",
-            "coords": [
-                58.48127704013129,
-                54.412591343451375
-            ]
-        },
-        {
-            "name": "J_Baptiste",
-            "nodeNum": 10,
-            "type": "junction",
-            "coords": [
-                40.728032224377145,
-                54.52501405283867
-            ]
-        },
-        {
-            "name": "J_DSBrazeau",
-            "nodeNum": 11,
-            "type": "junction",
-            "coords": [
-                40.728032224377145,
-                48.34176503653738
-            ]
-        },
-        {
-            "name": "In_Nordegg_05DD009",
-            "nodeNum": 12,
-            "type": "inflow",
-            "coords": [
-                27.748769207817396,
-                39.23552557616639
-            ]
-        },
-        {
-            "name": "In_Brazeau_05DD007",
-            "nodeNum": 13,
-            "type": "inflow",
-            "coords": [
-                7.60853349246606,
-                56.7734682405846
-            ]
-        },
-        {
-            "name": "J_ClWat",
-            "nodeNum": 14,
-            "type": "junction",
-            "coords": [
-                40.81754438311205,
-                65.48622821810005
-            ]
-        },
-        {
-            "name": "In_ClearwaterWat_05DB006",
-            "nodeNum": 15,
-            "type": "inflow",
-            "coords": [
-                58.86916306131583,
-                60.76447442383361
-            ]
-        },
-        {
-            "name": "J_RockyMH",
-            "nodeNum": 16,
-            "type": "junction",
-            "coords": [
-                40.742950917499634,
-                60.82068577852726
-            ]
-        },
-        {
-            "name": "J_RoseCr",
-            "nodeNum": 18,
-            "type": "junction",
-            "coords": [
-                40.51917052066239,
-                26.700393479482855
-            ]
-        },
-        {
-            "name": "J_Modeste",
-            "nodeNum": 19,
-            "type": "junction",
-            "coords": [
-                51.78278382813666,
-                26.644182124789207
-            ]
-        },
-        {
-            "name": "J_WabmL",
-            "nodeNum": 20,
-            "type": "junction",
-            "coords": [
-                60.435625839176495,
-                26.53175941540191
-            ]
-        },
-        {
-            "name": "J_StrawB",
-            "nodeNum": 21,
-            "type": "junction",
-            "coords": [
-                69.98358943756527,
-                26.41933670601461
-            ]
-        },
-        {
-            "name": "J_Edmonton",
-            "nodeNum": 22,
-            "type": "junction",
-            "coords": [
-                82.96285245412503,
-                26.41933670601461
-            ]
-        },
-        {
-            "name": "J_Androssan",
-            "nodeNum": 23,
-            "type": "junction",
-            "coords": [
-                102.20796658212741,
-                26.194491287240023
-            ]
-        },
-        {
-            "name": "J_Sturgeon",
-            "nodeNum": 24,
-            "type": "junction",
-            "coords": [
-                109.21975234969419,
-                26.194491287240023
-            ]
-        },
-        {
-            "name": "J_RedWat",
-            "nodeNum": 25,
-            "type": "junction",
-            "coords": [
-                116.38072504848576,
-                26.082068577852723
-            ]
-        },
-        {
-            "name": "J_WaskaT",
-            "nodeNum": 26,
-            "type": "junction",
-            "coords": [
-                126.07787557809938,
-                25.96964586846543
-            ]
-        },
-        {
-            "name": "J_SmokyL",
-            "nodeNum": 27,
-            "type": "junction",
-            "coords": [
-                132.79128748321648,
-                26.082068577852723
-            ]
-        },
-        {
-            "name": "J_ElkP1",
-            "nodeNum": 28,
-            "type": "junction",
-            "coords": [
-                142.33925108160525,
-                26.082068577852723
-            ]
-        },
-        {
-            "name": "J_ElkP2",
-            "nodeNum": 29,
-            "type": "junction",
-            "coords": [
-                150.9920930926451,
-                25.96964586846543
-            ]
-        },
-        {
-            "name": "J_Vermilion",
-            "nodeNum": 30,
-            "type": "junction",
-            "coords": [
-                166.05997314635238,
-                25.96964586846543
-            ]
-        },
-        {
-            "name": "J_ABtoSK",
-            "nodeNum": 31,
-            "type": "junction",
-            "coords": [
-                174.26525436371773,
-                25.857223159078135
-            ]
-        },
-        {
-            "name": "In_Tomahawk_05DE009",
-            "nodeNum": 32,
-            "type": "inflow",
-            "coords": [
-                51.93197075936149,
-                36.20011242270939
-            ]
-        },
-        {
-            "name": "In_Wabakum_05DE003",
-            "nodeNum": 33,
-            "type": "inflow",
-            "coords": [
-                60.435625839176495,
-                12.366498032602586
-            ]
-        },
-        {
-            "name": "In_Strawberry_05DF004",
-            "nodeNum": 34,
-            "type": "inflow",
-            "coords": [
-                70.1327763687901,
-                32.04047217537943
-            ]
-        },
-        {
-            "name": "In_PointeCr_05EB902",
-            "nodeNum": 35,
-            "type": "inflow",
-            "coords": [
-                102.0587796509026,
-                19.33670601461495
-            ]
-        },
-        {
-            "name": "In_Sturgeon_05EA001",
-            "nodeNum": 36,
-            "type": "inflow",
-            "coords": [
-                109.21975234969419,
-                34.40134907251265
-            ]
-        },
-        {
-            "name": "In_RedWat_05EC005",
-            "nodeNum": 37,
-            "type": "inflow",
-            "coords": [
-                116.23153811726095,
-                15.51433389544688
-            ]
-        },
-        {
-            "name": "In_WaskatenauCr_05EC002",
-            "nodeNum": 38,
-            "type": "inflow",
-            "coords": [
-                126.07787557809938,
-                37.09949409780776
-            ]
-        },
-        {
-            "name": "In_WhiteEr_05EC006",
-            "nodeNum": 39,
-            "type": "inflow",
-            "coords": [
-                132.79128748321648,
-                19.111860595840362
-            ]
-        },
-        {
-            "name": "In_Atimoswe_05ED002",
-            "nodeNum": 40,
-            "type": "inflow",
-            "coords": [
-                142.33925108160525,
-                12.816188870151771
-            ]
-        },
-        {
-            "name": "In_Moosehills_05ED003",
-            "nodeNum": 41,
-            "type": "inflow",
-            "coords": [
-                151.29046695509473,
-                33.277121978639684
-            ]
-        },
-        {
-            "name": "In_RoseCr_05DE007",
-            "nodeNum": 42,
-            "type": "inflow",
-            "coords": [
-                22.318364911233775,
-                26.812816188870155
-            ]
-        },
-        {
-            "name": "J_BlackWhite",
-            "nodeNum": 43,
-            "type": "junction",
-            "coords": [
-                83.33581978218709,
-                39.29173693086003
-            ]
-        },
-        {
-            "name": "In_Whitemud_05DF006",
-            "nodeNum": 44,
-            "type": "inflow",
-            "coords": [
-                75.27972549604655,
-                47.16132658797077
-            ]
-        },
-        {
-            "name": "In_Blackmud_05DF003",
-            "nodeNum": 45,
-            "type": "inflow",
-            "coords": [
-                96.83723705803374,
-                46.76784710511524
-            ]
-        },
-        {
-            "name": "In_Vermilion_05EE007",
-            "nodeNum": 46,
-            "type": "inflow",
-            "coords": [
-                165.98537968073995,
-                37.380550871276
-            ]
-        },
-        {
-            "name": "J_Nordegg",
-            "nodeNum": 48,
-            "type": "junction",
-            "coords": [
-                27.82336267342981,
-                48.51039910061832
-            ]
-        },
-        {
-            "name": "J_UPBrazeau",
-            "nodeNum": 49,
-            "type": "junction",
-            "coords": [
-                7.60853349246606,
-                48.84766722878021
-            ]
-        },
-        {
-            "name": "In_BrownCr_05DD004",
-            "nodeNum": 50,
-            "type": "inflow",
-            "coords": [
-                7.459346561241236,
-                39.516582349634625
-            ]
-        },
-        {
-            "name": "MW_11",
             "nodeNum": 51,
-            "type": "demand",
-            "coords": [
-                25.302103535730268,
-                23.440134907251263
+            "name": "MW_11",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.12651051767865135,
+                        0.23440134907251264
+                    ]
+                }
             ]
         },
         {
-            "name": "Irr_11",
             "nodeNum": 52,
-            "type": "agri",
-            "coords": [
-                46.41205430404297,
-                18.21247892074199
+            "name": "Irr_11",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.23206027152021486,
+                        0.1821247892074199
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_12",
             "nodeNum": 53,
-            "type": "demand",
-            "coords": [
-                25.973444726241983,
-                20.123664980326026
+            "name": "MW_12",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.12986722363120992,
+                        0.20123664980326025
+                    ]
+                }
             ]
         },
         {
-            "name": "Irr_22",
             "nodeNum": 54,
-            "type": "agri",
-            "coords": [
-                98.47829330150681,
-                7.082630691399664
+            "name": "Irr_22",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.492391466507534,
+                        0.07082630691399663
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_13",
             "nodeNum": 55,
-            "type": "demand",
-            "coords": [
-                28.211248694614355,
-                16.807195053400786
+            "name": "MW_13",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.14105624347307177,
+                        0.16807195053400786
+                    ]
+                }
             ]
         },
         {
-            "name": "Irr_33",
             "nodeNum": 56,
-            "type": "agri",
-            "coords": [
-                150.69371923019546,
-                18.437324339516582
+            "name": "Irr_33",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.7534685961509773,
+                        0.18437324339516584
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_21",
             "nodeNum": 57,
-            "type": "demand",
-            "coords": [
-                72.14679994032524,
-                17.144463181562674
+            "name": "MW_21",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.3607339997016262,
+                        0.17144463181562675
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_31",
             "nodeNum": 58,
-            "type": "demand",
-            "coords": [
-                154.42339251081606,
-                15.739179314221472
+            "name": "MW_31",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.7721169625540802,
+                        0.15739179314221471
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_14",
             "nodeNum": 59,
-            "type": "demand",
-            "coords": [
-                31.791735044010146,
-                14.277684092186622
+            "name": "MW_14",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.15895867522005072,
+                        0.1427768409218662
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_15",
             "nodeNum": 60,
-            "type": "demand",
-            "coords": [
-                35.81978218708041,
-                11.69196177627881
+            "name": "MW_15",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.17909891093540206,
+                        0.11691961776278809
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_16",
             "nodeNum": 61,
-            "type": "demand",
-            "coords": [
-                40.36998358943757,
-                9.050028105677347
+            "name": "MW_16",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.20184991794718785,
+                        0.09050028105677346
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_22",
             "nodeNum": 62,
-            "type": "demand",
-            "coords": [
-                76.02566015217069,
-                14.333895446880272
+            "name": "MW_22",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.3801283007608534,
+                        0.1433389544688027
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_32",
             "nodeNum": 63,
-            "type": "demand",
-            "coords": [
-                159.0481873787856,
-                14.05283867341203
+            "name": "MW_32",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.795240936893928,
+                        0.1405283867341203
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_24",
             "nodeNum": 64,
-            "type": "demand",
-            "coords": [
-                84.45472176637327,
-                8.993816750983699
+            "name": "MW_24",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.4222736088318664,
+                        0.08993816750983699
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_25",
             "nodeNum": 65,
-            "type": "demand",
-            "coords": [
-                89.07951663434284,
-                6.632939853850478
+            "name": "MW_25",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.4453975831717142,
+                        0.06632939853850478
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_26",
             "nodeNum": 66,
-            "type": "demand",
-            "coords": [
-                94.00268536476206,
-                4.4969083754918495
+            "name": "MW_26",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.4700134268238103,
+                        0.044969083754918496
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_23",
             "nodeNum": 67,
-            "type": "demand",
-            "coords": [
-                81.24720274503954,
-                11.523327712197865
+            "name": "MW_23",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.40623601372519774,
+                        0.11523327712197864
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_33",
             "nodeNum": 68,
-            "type": "demand",
-            "coords": [
-                165.91078621512756,
-                9.555930297920181
+            "name": "MW_33",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.8295539310756378,
+                        0.0955593029792018
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_35",
             "nodeNum": 69,
-            "type": "demand",
-            "coords": [
-                177.69655378188872,
-                11.69196177627881
+            "name": "MW_35",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.8884827689094436,
+                        0.11691961776278809
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_36",
             "nodeNum": 70,
-            "type": "demand",
-            "coords": [
-                181.72460092495896,
-                14.277684092186622
+            "name": "MW_36",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.9086230046247948,
+                        0.1427768409218662
+                    ]
+                }
             ]
         },
         {
-            "name": "MW_34",
             "nodeNum": 71,
-            "type": "demand",
-            "coords": [
-                171.43070267044607,
-                9.89319842608207
+            "name": "MW_34",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.8571535133522303,
+                        0.09893198426082069
+                    ]
+                }
             ]
         },
         {
-            "name": "RF2",
+            "nodeNum": 72,
+            "name": "FT_NSR05EF001_DeerCr",
+            "type": "Demand",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.8806504550201403,
+                        0.21079258010118043
+                    ]
+                }
+            ]
+        }
+    ],
+    "nonStorage": [
+        {
+            "nodeNum": 2,
+            "name": "J_1",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.20550499776219605,
+                        0.8763350196739741
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 3,
+            "name": "In_NSR_WHIRLP_05DA009_Nat",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.14508429061614203,
+                        0.8774592467678471
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 4,
+            "name": "In_Siffleur_05DA002",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.20625093241832018,
+                        0.9550309162450815
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 5,
+            "name": "J_Cline",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.20475906310607192,
+                        0.7504215851602024
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 6,
+            "name": "In_RamMouth_05DC006",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.29613605848127705,
+                        0.7003934794828556
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 7,
+            "name": "J_Ram",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.20438609577800987,
+                        0.7015177065767285
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 8,
+            "name": "In_PrarieCr_05DB002",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.2946441891690288,
+                        0.6554243957279371
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 9,
+            "name": "In_Baptiste_05DC012",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.2924063852006564,
+                        0.5441259134345138
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 10,
+            "name": "J_Baptiste",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.20364016112188574,
+                        0.5452501405283867
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 11,
+            "name": "J_DSBrazeau",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.20364016112188574,
+                        0.4834176503653738
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 12,
+            "name": "In_Nordegg_05DD009",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.138743846039087,
+                        0.39235525576166386
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 13,
+            "name": "In_Brazeau_05DD007",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.0380426674623303,
+                        0.567734682405846
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 14,
+            "name": "J_ClWat",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.20408772191556024,
+                        0.6548622821810005
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 15,
+            "name": "In_ClearwaterWat_05DB006",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.29434581530657916,
+                        0.6076447442383361
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 16,
+            "name": "J_RockyMH",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.20371475458749816,
+                        0.6082068577852726
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 18,
+            "name": "J_RoseCr",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.20259585260331198,
+                        0.26700393479482853
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 19,
+            "name": "J_Modeste",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.2589139191406833,
+                        0.26644182124789206
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 20,
+            "name": "J_WabmL",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.3021781291958825,
+                        0.2653175941540191
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 21,
+            "name": "J_StrawB",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.3499179471878264,
+                        0.2641933670601461
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 22,
+            "name": "J_Edmonton",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.4148142622706251,
+                        0.2641933670601461
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 23,
+            "name": "J_Androssan",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.511039832910637,
+                        0.26194491287240024
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 24,
+            "name": "J_Sturgeon",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.5460987617484709,
+                        0.26194491287240024
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 25,
+            "name": "J_RedWat",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.5819036252424288,
+                        0.26082068577852724
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 26,
+            "name": "J_WaskaT",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.6303893778904969,
+                        0.2596964586846543
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 27,
+            "name": "J_SmokyL",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.6639564374160825,
+                        0.26082068577852724
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 28,
+            "name": "J_ElkP1",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.7116962554080263,
+                        0.26082068577852724
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 29,
+            "name": "J_ElkP2",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.7549604654632255,
+                        0.2596964586846543
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 30,
+            "name": "J_Vermilion",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.8302998657317618,
+                        0.2596964586846543
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 31,
+            "name": "J_ABtoSK",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.8713262718185887,
+                        0.25857223159078135
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 32,
+            "name": "In_Tomahawk_05DE009",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.25965985379680745,
+                        0.36200112422709385
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 33,
+            "name": "In_Wabakum_05DE003",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.3021781291958825,
+                        0.12366498032602585
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 34,
+            "name": "In_Strawberry_05DF004",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.35066388184395053,
+                        0.32040472175379425
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 35,
+            "name": "In_PointeCr_05EB902",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.510293898254513,
+                        0.19336706014614952
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 36,
+            "name": "In_Sturgeon_05EA001",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.5460987617484709,
+                        0.3440134907251265
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 37,
+            "name": "In_RedWat_05EC005",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.5811576905863047,
+                        0.1551433389544688
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 38,
+            "name": "In_WaskatenauCr_05EC002",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.6303893778904969,
+                        0.37099494097807756
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 39,
+            "name": "In_WhiteEr_05EC006",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.6639564374160825,
+                        0.1911186059584036
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 40,
+            "name": "In_Atimoswe_05ED002",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.7116962554080263,
+                        0.1281618887015177
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 41,
+            "name": "In_Moosehills_05ED003",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.7564523347754737,
+                        0.33277121978639684
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 42,
+            "name": "In_RoseCr_05DE007",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.11159182455616888,
+                        0.26812816188870153
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 43,
+            "name": "J_BlackWhite",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.41667909891093546,
+                        0.39291736930860033
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 44,
+            "name": "In_Whitemud_05DF006",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.3763986274802328,
+                        0.4716132658797077
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 45,
+            "name": "In_Blackmud_05DF003",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.48418618529016866,
+                        0.46767847105115234
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 46,
+            "name": "In_Vermilion_05EE007",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.8299268984036998,
+                        0.37380550871275997
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 48,
+            "name": "J_Nordegg",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.13911681336714904,
+                        0.48510399100618323
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 49,
+            "name": "J_UPBrazeau",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.0380426674623303,
+                        0.4884766722878021
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 50,
+            "name": "In_BrownCr_05DD004",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.03729673280620618,
+                        0.39516582349634627
+                    ]
+                }
+            ]
+        },
+        {
             "nodeNum": 73,
-            "type": "junction",
-            "coords": [
-                184.3353722213934,
-                26.025857223159075
+            "name": "RF2",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.921676861106967,
+                        0.26025857223159077
+                    ]
+                }
             ]
         },
         {
-            "name": "RF1",
             "nodeNum": 74,
-            "type": "junction",
-            "coords": [
-                94.2264657615993,
-                26.363125351320964
+            "name": "RF1",
+            "type": "NonStorage",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.4711323288079965,
+                        0.26363125351320965
+                    ]
+                }
+            ]
+        }
+    ],
+    "sinks": [
+        {
+            "nodeNum": 47,
+            "name": "NSR_ABtoSK",
+            "type": "Sink",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.9627032671937938,
+                        0.26025857223159077
+                    ]
+                }
+            ]
+        }
+    ],
+    "reservoirs": [
+        {
+            "nodeNum": 1,
+            "name": "R1_BigHorn",
+            "type": "Reservoir",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.20475906310607192,
+                        0.8279932546374368
+                    ]
+                }
+            ]
+        },
+        {
+            "nodeNum": 17,
+            "name": "R2_Brazeau",
+            "type": "Reservoir",
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "nodes": [
+                {
+                    "coords": [
+                        0.07727883037445919,
+                        0.4873524451939292
+                    ]
+                }
+            ]
+        }
+    ],
+    "links": [
+        {
+            "linkName": "In_NSR_WHIRLP_05DA009_Nat_J_1",
+            "linkNumber": 1,
+            "linkTo": 2,
+            "linkFrom": 3,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.14508429061614203,
+                        0.8774592467678471
+                    ]
+                },
+                {
+                    "coords": [
+                        0.20550499776219605,
+                        0.8763350196739741
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "In_Siffleur_05DA002_J_1",
+            "linkNumber": 2,
+            "linkTo": 2,
+            "linkFrom": 4,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.20625093241832018,
+                        0.9550309162450815
+                    ]
+                },
+                {
+                    "coords": [
+                        0.20550499776219605,
+                        0.8763350196739741
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_1_R1_BigHorn",
+            "linkNumber": 3,
+            "linkTo": 1,
+            "linkFrom": 2,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.20550499776219605,
+                        0.8763350196739741
+                    ]
+                },
+                {
+                    "coords": [
+                        0.20475906310607192,
+                        0.8279932546374368
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "R1_BigHorn_J_Cline",
+            "linkNumber": 4,
+            "linkTo": 5,
+            "linkFrom": 1,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.20475906310607192,
+                        0.8279932546374368
+                    ]
+                },
+                {
+                    "coords": [
+                        0.20475906310607192,
+                        0.7504215851602024
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "In_RamMouth_05DC006_J_Ram",
+            "linkNumber": 5,
+            "linkTo": 7,
+            "linkFrom": 6,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.29613605848127705,
+                        0.7003934794828556
+                    ]
+                },
+                {
+                    "coords": [
+                        0.20438609577800987,
+                        0.7015177065767285
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_Cline_J_Ram",
+            "linkNumber": 6,
+            "linkTo": 7,
+            "linkFrom": 5,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.20475906310607192,
+                        0.7504215851602024
+                    ]
+                },
+                {
+                    "coords": [
+                        0.20438609577800987,
+                        0.7015177065767285
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_Ram_J_ClWat",
+            "linkNumber": 7,
+            "linkTo": 14,
+            "linkFrom": 7,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.20438609577800987,
+                        0.7015177065767285
+                    ]
+                },
+                {
+                    "coords": [
+                        0.20408772191556024,
+                        0.6548622821810005
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "In_PrarieCr_05DB002_J_ClWat",
+            "linkNumber": 8,
+            "linkTo": 14,
+            "linkFrom": 8,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.2946441891690288,
+                        0.6554243957279371
+                    ]
+                },
+                {
+                    "coords": [
+                        0.20408772191556024,
+                        0.6548622821810005
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "In_ClearwaterWat_05DB006_J_RockyMH",
+            "linkNumber": 9,
+            "linkTo": 16,
+            "linkFrom": 15,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.29434581530657916,
+                        0.6076447442383361
+                    ]
+                },
+                {
+                    "coords": [
+                        0.20371475458749816,
+                        0.6082068577852726
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_ClWat_J_RockyMH",
+            "linkNumber": 10,
+            "linkTo": 16,
+            "linkFrom": 14,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.20408772191556024,
+                        0.6548622821810005
+                    ]
+                },
+                {
+                    "coords": [
+                        0.20371475458749816,
+                        0.6082068577852726
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_RockyMH_J_Baptiste",
+            "linkNumber": 11,
+            "linkTo": 10,
+            "linkFrom": 16,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.20371475458749816,
+                        0.6082068577852726
+                    ]
+                },
+                {
+                    "coords": [
+                        0.20364016112188574,
+                        0.5452501405283867
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "In_Baptiste_05DC012_J_Baptiste",
+            "linkNumber": 12,
+            "linkTo": 10,
+            "linkFrom": 9,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.2924063852006564,
+                        0.5441259134345138
+                    ]
+                },
+                {
+                    "coords": [
+                        0.20364016112188574,
+                        0.5452501405283867
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_Baptiste_J_DSBrazeau",
+            "linkNumber": 13,
+            "linkTo": 11,
+            "linkFrom": 10,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.20364016112188574,
+                        0.5452501405283867
+                    ]
+                },
+                {
+                    "coords": [
+                        0.20364016112188574,
+                        0.4834176503653738
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "R2_Brazeau_J_Nordegg",
+            "linkNumber": 14,
+            "linkTo": 48,
+            "linkFrom": 17,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.07727883037445919,
+                        0.4873524451939292
+                    ]
+                },
+                {
+                    "coords": [
+                        0.13911681336714904,
+                        0.48510399100618323
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "In_Brazeau_05DD007_J_UPBrazeau",
+            "linkNumber": 15,
+            "linkTo": 49,
+            "linkFrom": 13,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.0380426674623303,
+                        0.567734682405846
+                    ]
+                },
+                {
+                    "coords": [
+                        0.0380426674623303,
+                        0.4884766722878021
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "In_Nordegg_05DD009_J_Nordegg",
+            "linkNumber": 16,
+            "linkTo": 48,
+            "linkFrom": 12,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.138743846039087,
+                        0.39235525576166386
+                    ]
+                },
+                {
+                    "coords": [
+                        0.13911681336714904,
+                        0.48510399100618323
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_DSBrazeau_J_RoseCr",
+            "linkNumber": 17,
+            "linkTo": 18,
+            "linkFrom": 11,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.20364016112188574,
+                        0.4834176503653738
+                    ]
+                },
+                {
+                    "coords": [
+                        0.20259585260331198,
+                        0.26700393479482853
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_RoseCr_J_Modeste",
+            "linkNumber": 18,
+            "linkTo": 19,
+            "linkFrom": 18,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.20259585260331198,
+                        0.26700393479482853
+                    ]
+                },
+                {
+                    "coords": [
+                        0.2589139191406833,
+                        0.26644182124789206
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_Modeste_J_WabmL",
+            "linkNumber": 19,
+            "linkTo": 20,
+            "linkFrom": 19,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.2589139191406833,
+                        0.26644182124789206
+                    ]
+                },
+                {
+                    "coords": [
+                        0.3021781291958825,
+                        0.2653175941540191
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_WabmL_J_StrawB",
+            "linkNumber": 20,
+            "linkTo": 21,
+            "linkFrom": 20,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.3021781291958825,
+                        0.2653175941540191
+                    ]
+                },
+                {
+                    "coords": [
+                        0.3499179471878264,
+                        0.2641933670601461
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_StrawB_J_Edmonton",
+            "linkNumber": 21,
+            "linkTo": 22,
+            "linkFrom": 21,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.3499179471878264,
+                        0.2641933670601461
+                    ]
+                },
+                {
+                    "coords": [
+                        0.4148142622706251,
+                        0.2641933670601461
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_Edmonton_RF1",
+            "linkNumber": 22,
+            "linkTo": 74,
+            "linkFrom": 22,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.4148142622706251,
+                        0.2641933670601461
+                    ]
+                },
+                {
+                    "coords": [
+                        0.4711323288079965,
+                        0.26363125351320965
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_Androssan_J_Sturgeon",
+            "linkNumber": 23,
+            "linkTo": 24,
+            "linkFrom": 23,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.511039832910637,
+                        0.26194491287240024
+                    ]
+                },
+                {
+                    "coords": [
+                        0.5460987617484709,
+                        0.26194491287240024
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_Sturgeon_J_RedWat",
+            "linkNumber": 24,
+            "linkTo": 25,
+            "linkFrom": 24,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.5460987617484709,
+                        0.26194491287240024
+                    ]
+                },
+                {
+                    "coords": [
+                        0.5819036252424288,
+                        0.26082068577852724
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_RedWat_J_WaskaT",
+            "linkNumber": 25,
+            "linkTo": 26,
+            "linkFrom": 25,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.5819036252424288,
+                        0.26082068577852724
+                    ]
+                },
+                {
+                    "coords": [
+                        0.6303893778904969,
+                        0.2596964586846543
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_WaskaT_J_SmokyL",
+            "linkNumber": 26,
+            "linkTo": 27,
+            "linkFrom": 26,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.6303893778904969,
+                        0.2596964586846543
+                    ]
+                },
+                {
+                    "coords": [
+                        0.6639564374160825,
+                        0.26082068577852724
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_SmokyL_J_ElkP1",
+            "linkNumber": 27,
+            "linkTo": 28,
+            "linkFrom": 27,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.6639564374160825,
+                        0.26082068577852724
+                    ]
+                },
+                {
+                    "coords": [
+                        0.7116962554080263,
+                        0.26082068577852724
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_ElkP1_J_ElkP2",
+            "linkNumber": 28,
+            "linkTo": 29,
+            "linkFrom": 28,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.7116962554080263,
+                        0.26082068577852724
+                    ]
+                },
+                {
+                    "coords": [
+                        0.7549604654632255,
+                        0.2596964586846543
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_ElkP2_J_Vermilion",
+            "linkNumber": 29,
+            "linkTo": 30,
+            "linkFrom": 29,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.7549604654632255,
+                        0.2596964586846543
+                    ]
+                },
+                {
+                    "coords": [
+                        0.8302998657317618,
+                        0.2596964586846543
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_Vermilion_J_ABtoSK",
+            "linkNumber": 30,
+            "linkTo": 31,
+            "linkFrom": 30,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.8302998657317618,
+                        0.2596964586846543
+                    ]
+                },
+                {
+                    "coords": [
+                        0.8713262718185887,
+                        0.25857223159078135
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "RF2_NSR_ABtoSK",
+            "linkNumber": 31,
+            "linkTo": 47,
+            "linkFrom": 73,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.921676861106967,
+                        0.26025857223159077
+                    ]
+                },
+                {
+                    "coords": [
+                        0.9627032671937938,
+                        0.26025857223159077
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "In_Tomahawk_05DE009_J_Modeste",
+            "linkNumber": 32,
+            "linkTo": 19,
+            "linkFrom": 32,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.25965985379680745,
+                        0.36200112422709385
+                    ]
+                },
+                {
+                    "coords": [
+                        0.2589139191406833,
+                        0.26644182124789206
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "In_Wabakum_05DE003_J_WabmL",
+            "linkNumber": 33,
+            "linkTo": 20,
+            "linkFrom": 33,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.3021781291958825,
+                        0.12366498032602585
+                    ]
+                },
+                {
+                    "coords": [
+                        0.3021781291958825,
+                        0.2653175941540191
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "In_Strawberry_05DF004_J_StrawB",
+            "linkNumber": 34,
+            "linkTo": 21,
+            "linkFrom": 34,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.35066388184395053,
+                        0.32040472175379425
+                    ]
+                },
+                {
+                    "coords": [
+                        0.3499179471878264,
+                        0.2641933670601461
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "In_PointeCr_05EB902_J_Androssan",
+            "linkNumber": 35,
+            "linkTo": 23,
+            "linkFrom": 35,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.510293898254513,
+                        0.19336706014614952
+                    ]
+                },
+                {
+                    "coords": [
+                        0.511039832910637,
+                        0.26194491287240024
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "In_Sturgeon_05EA001_J_Sturgeon",
+            "linkNumber": 36,
+            "linkTo": 24,
+            "linkFrom": 36,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.5460987617484709,
+                        0.3440134907251265
+                    ]
+                },
+                {
+                    "coords": [
+                        0.5460987617484709,
+                        0.26194491287240024
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "In_RedWat_05EC005_J_RedWat",
+            "linkNumber": 37,
+            "linkTo": 25,
+            "linkFrom": 37,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.5811576905863047,
+                        0.1551433389544688
+                    ]
+                },
+                {
+                    "coords": [
+                        0.5819036252424288,
+                        0.26082068577852724
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "In_WaskatenauCr_05EC002_J_WaskaT",
+            "linkNumber": 38,
+            "linkTo": 26,
+            "linkFrom": 38,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.6303893778904969,
+                        0.37099494097807756
+                    ]
+                },
+                {
+                    "coords": [
+                        0.6303893778904969,
+                        0.2596964586846543
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "In_WhiteEr_05EC006_J_SmokyL",
+            "linkNumber": 39,
+            "linkTo": 27,
+            "linkFrom": 39,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.6639564374160825,
+                        0.1911186059584036
+                    ]
+                },
+                {
+                    "coords": [
+                        0.6639564374160825,
+                        0.26082068577852724
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "In_Atimoswe_05ED002_J_ElkP1",
+            "linkNumber": 40,
+            "linkTo": 28,
+            "linkFrom": 40,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.7116962554080263,
+                        0.1281618887015177
+                    ]
+                },
+                {
+                    "coords": [
+                        0.7116962554080263,
+                        0.26082068577852724
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "In_Moosehills_05ED003_J_ElkP2",
+            "linkNumber": 41,
+            "linkTo": 29,
+            "linkFrom": 41,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.7564523347754737,
+                        0.33277121978639684
+                    ]
+                },
+                {
+                    "coords": [
+                        0.7549604654632255,
+                        0.2596964586846543
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "In_RoseCr_05DE007_J_RoseCr",
+            "linkNumber": 42,
+            "linkTo": 18,
+            "linkFrom": 42,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.11159182455616888,
+                        0.26812816188870153
+                    ]
+                },
+                {
+                    "coords": [
+                        0.20259585260331198,
+                        0.26700393479482853
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "In_Blackmud_05DF003_J_BlackWhite",
+            "linkNumber": 43,
+            "linkTo": 43,
+            "linkFrom": 45,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.48418618529016866,
+                        0.46767847105115234
+                    ]
+                },
+                {
+                    "coords": [
+                        0.41667909891093546,
+                        0.39291736930860033
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "In_Whitemud_05DF006_J_BlackWhite",
+            "linkNumber": 44,
+            "linkTo": 43,
+            "linkFrom": 44,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.3763986274802328,
+                        0.4716132658797077
+                    ]
+                },
+                {
+                    "coords": [
+                        0.41667909891093546,
+                        0.39291736930860033
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_BlackWhite_J_Edmonton",
+            "linkNumber": 45,
+            "linkTo": 22,
+            "linkFrom": 43,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.41667909891093546,
+                        0.39291736930860033
+                    ]
+                },
+                {
+                    "coords": [
+                        0.4148142622706251,
+                        0.2641933670601461
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "In_Vermilion_05EE007_J_Vermilion",
+            "linkNumber": 46,
+            "linkTo": 30,
+            "linkFrom": 46,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.8299268984036998,
+                        0.37380550871275997
+                    ]
+                },
+                {
+                    "coords": [
+                        0.8302998657317618,
+                        0.2596964586846543
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_Nordegg_J_DSBrazeau",
+            "linkNumber": 47,
+            "linkTo": 11,
+            "linkFrom": 48,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.13911681336714904,
+                        0.48510399100618323
+                    ]
+                },
+                {
+                    "coords": [
+                        0.20364016112188574,
+                        0.4834176503653738
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_UPBrazeau_R2_Brazeau",
+            "linkNumber": 48,
+            "linkTo": 17,
+            "linkFrom": 49,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.0380426674623303,
+                        0.4884766722878021
+                    ]
+                },
+                {
+                    "coords": [
+                        0.07727883037445919,
+                        0.4873524451939292
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "In_BrownCr_05DD004_J_UPBrazeau",
+            "linkNumber": 49,
+            "linkTo": 49,
+            "linkFrom": 50,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.03729673280620618,
+                        0.39516582349634627
+                    ]
+                },
+                {
+                    "coords": [
+                        0.0380426674623303,
+                        0.4884766722878021
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_RoseCr_MW_11",
+            "linkNumber": 50,
+            "linkTo": 51,
+            "linkFrom": 18,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.20259585260331198,
+                        0.26700393479482853
+                    ]
+                },
+                {
+                    "coords": [
+                        0.12651051767865135,
+                        0.23440134907251264
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_RoseCr_Irr_11",
+            "linkNumber": 51,
+            "linkTo": 52,
+            "linkFrom": 18,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.20259585260331198,
+                        0.26700393479482853
+                    ]
+                },
+                {
+                    "coords": [
+                        0.23206027152021486,
+                        0.1821247892074199
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_Edmonton_Irr_22",
+            "linkNumber": 52,
+            "linkTo": 54,
+            "linkFrom": 22,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.4148142622706251,
+                        0.2641933670601461
+                    ]
+                },
+                {
+                    "coords": [
+                        0.492391466507534,
+                        0.07082630691399663
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_RoseCr_MW_12",
+            "linkNumber": 53,
+            "linkTo": 53,
+            "linkFrom": 18,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.20259585260331198,
+                        0.26700393479482853
+                    ]
+                },
+                {
+                    "coords": [
+                        0.12986722363120992,
+                        0.20123664980326025
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_Vermilion_Irr_33",
+            "linkNumber": 54,
+            "linkTo": 56,
+            "linkFrom": 30,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.8302998657317618,
+                        0.2596964586846543
+                    ]
+                },
+                {
+                    "coords": [
+                        0.7534685961509773,
+                        0.18437324339516584
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_RoseCr_MW_13",
+            "linkNumber": 55,
+            "linkTo": 55,
+            "linkFrom": 18,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.20259585260331198,
+                        0.26700393479482853
+                    ]
+                },
+                {
+                    "coords": [
+                        0.14105624347307177,
+                        0.16807195053400786
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_Edmonton_MW_21",
+            "linkNumber": 56,
+            "linkTo": 57,
+            "linkFrom": 22,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.4148142622706251,
+                        0.2641933670601461
+                    ]
+                },
+                {
+                    "coords": [
+                        0.3607339997016262,
+                        0.17144463181562675
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_Vermilion_MW_31",
+            "linkNumber": 57,
+            "linkTo": 58,
+            "linkFrom": 30,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.8302998657317618,
+                        0.2596964586846543
+                    ]
+                },
+                {
+                    "coords": [
+                        0.7721169625540802,
+                        0.15739179314221471
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_RoseCr_MW_14",
+            "linkNumber": 58,
+            "linkTo": 59,
+            "linkFrom": 18,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.20259585260331198,
+                        0.26700393479482853
+                    ]
+                },
+                {
+                    "coords": [
+                        0.15895867522005072,
+                        0.1427768409218662
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_RoseCr_MW_15",
+            "linkNumber": 59,
+            "linkTo": 60,
+            "linkFrom": 18,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.20259585260331198,
+                        0.26700393479482853
+                    ]
+                },
+                {
+                    "coords": [
+                        0.17909891093540206,
+                        0.11691961776278809
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_RoseCr_MW_16",
+            "linkNumber": 60,
+            "linkTo": 61,
+            "linkFrom": 18,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.20259585260331198,
+                        0.26700393479482853
+                    ]
+                },
+                {
+                    "coords": [
+                        0.20184991794718785,
+                        0.09050028105677346
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_Edmonton_MW_22",
+            "linkNumber": 61,
+            "linkTo": 62,
+            "linkFrom": 22,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.4148142622706251,
+                        0.2641933670601461
+                    ]
+                },
+                {
+                    "coords": [
+                        0.3801283007608534,
+                        0.1433389544688027
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_Vermilion_MW_32",
+            "linkNumber": 62,
+            "linkTo": 63,
+            "linkFrom": 30,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.8302998657317618,
+                        0.2596964586846543
+                    ]
+                },
+                {
+                    "coords": [
+                        0.795240936893928,
+                        0.1405283867341203
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_Edmonton_MW_24",
+            "linkNumber": 63,
+            "linkTo": 64,
+            "linkFrom": 22,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.4148142622706251,
+                        0.2641933670601461
+                    ]
+                },
+                {
+                    "coords": [
+                        0.4222736088318664,
+                        0.08993816750983699
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_Edmonton_MW_25",
+            "linkNumber": 64,
+            "linkTo": 65,
+            "linkFrom": 22,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.4148142622706251,
+                        0.2641933670601461
+                    ]
+                },
+                {
+                    "coords": [
+                        0.4453975831717142,
+                        0.06632939853850478
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_Edmonton_MW_26",
+            "linkNumber": 65,
+            "linkTo": 66,
+            "linkFrom": 22,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.4148142622706251,
+                        0.2641933670601461
+                    ]
+                },
+                {
+                    "coords": [
+                        0.4700134268238103,
+                        0.044969083754918496
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_Edmonton_MW_23",
+            "linkNumber": 66,
+            "linkTo": 67,
+            "linkFrom": 22,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.4148142622706251,
+                        0.2641933670601461
+                    ]
+                },
+                {
+                    "coords": [
+                        0.40623601372519774,
+                        0.11523327712197864
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_Vermilion_MW_33",
+            "linkNumber": 67,
+            "linkTo": 68,
+            "linkFrom": 30,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.8302998657317618,
+                        0.2596964586846543
+                    ]
+                },
+                {
+                    "coords": [
+                        0.8295539310756378,
+                        0.0955593029792018
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_Vermilion_MW_34",
+            "linkNumber": 68,
+            "linkTo": 71,
+            "linkFrom": 30,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.8302998657317618,
+                        0.2596964586846543
+                    ]
+                },
+                {
+                    "coords": [
+                        0.8571535133522303,
+                        0.09893198426082069
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_Vermilion_MW_35",
+            "linkNumber": 69,
+            "linkTo": 69,
+            "linkFrom": 30,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.8302998657317618,
+                        0.2596964586846543
+                    ]
+                },
+                {
+                    "coords": [
+                        0.8884827689094436,
+                        0.11691961776278809
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_Vermilion_MW_36",
+            "linkNumber": 70,
+            "linkTo": 70,
+            "linkFrom": 30,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.8302998657317618,
+                        0.2596964586846543
+                    ]
+                },
+                {
+                    "coords": [
+                        0.9086230046247948,
+                        0.1427768409218662
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_ABtoSK_FT_NSR05EF001_DeerCr",
+            "linkNumber": 71,
+            "linkTo": 72,
+            "linkFrom": 31,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.8713262718185887,
+                        0.25857223159078135
+                    ]
+                },
+                {
+                    "coords": [
+                        0.8806504550201403,
+                        0.21079258010118043
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "J_ABtoSK_RF2",
+            "linkNumber": 72,
+            "linkTo": 73,
+            "linkFrom": 31,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.8713262718185887,
+                        0.25857223159078135
+                    ]
+                },
+                {
+                    "coords": [
+                        0.921676861106967,
+                        0.26025857223159077
+                    ]
+                }
+            ]
+        },
+        {
+            "linkName": "RF1_J_Androssan",
+            "linkNumber": 73,
+            "linkTo": 23,
+            "linkFrom": 74,
+            "shiftCoords": [
+                0,
+                0
+            ],
+            "reverse": false,
+            "nodes": [
+                {
+                    "coords": [
+                        0.4711323288079965,
+                        0.26363125351320965
+                    ]
+                },
+                {
+                    "coords": [
+                        0.511039832910637,
+                        0.26194491287240024
+                    ]
+                }
             ]
         }
     ]

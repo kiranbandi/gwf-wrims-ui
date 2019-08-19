@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { RiverMap, FilterPanel, FlowPanel, RootSchematic, VerticalSlider, Modal } from '../components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { setFlowData } from '../redux/actions/actions';
+import { setFlowData, setMode } from '../redux/actions/actions';
 import axios from 'axios';
 import toastr from '../utils/toastr';
 import Loading from 'react-loading';
@@ -25,6 +25,15 @@ class DashboardRoot extends Component {
         this.onPlaceSelect = this.onPlaceSelect.bind(this);
     }
 
+    componentWillUnmount() {
+
+        const { mode, actions } = this.props;
+
+        if (mode !== 2) {
+            actions.setMode(-1);
+        }
+    }
+
 
 
     onRegionSelect(event) {
@@ -32,13 +41,7 @@ class DashboardRoot extends Component {
         this.setState({ 'isSchematicLoading': true });
         axios.get("/assets/files/schematics/" + selectedRegion + ".json")
             .then((response) => {
-                let processedData;
-                if (['alberta', 'northSask', 'northSaskSask', 'stribs', 'tau'].indexOf(selectedRegion) == -1) {
-                 processedData = processSchematic(response.data);
-                }
-                else {
-                    processedData = _.clone(response.data)
-                }
+                let processedData = processSchematic(response.data);
                 this.setState({ 'SchematicData': { ...processedData, selectedRegion, selectedPlace: '' } });
             })
             .catch(() => { toastr["error"]("Failed to load schematic", "ERROR") })
@@ -103,7 +106,7 @@ class DashboardRoot extends Component {
 
         return (
             <div className='dashboard-page-root' >
-                <Modal show={mode === -1} componentID={"userSelection"} />
+                <Modal show={mode === -1 || mode === 2} componentID={"userSelection"} />
 
                 <RootSchematic
                     width={widthOfDashboard}
@@ -149,7 +152,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({ setFlowData }, dispatch)
+        actions: bindActionCreators({ setFlowData, setMode }, dispatch)
     };
 }
 
