@@ -23,7 +23,7 @@ class RootSchematic extends Component {
     }
 
 
-    handleChange(isMapShown) {
+    handleChange() {
         this.setState({ isMapShown: !this.state.isMapShown });
     }
 

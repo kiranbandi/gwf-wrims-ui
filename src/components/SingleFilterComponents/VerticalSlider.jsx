@@ -4,29 +4,60 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import 'rc-slider/assets/index.css';
 import Slider from 'rc-slider';
+import Switch from "react-switch";
+
 import { getFlowData } from '../../utils/requestServer';
 import { setFlowData } from '../../redux/actions/actions';
 import toastr from '../../utils/toastr';
 
-const marks = {
-    0: <strong>Base</strong>,
-    50: <strong>5%</strong>,
-    100: <strong>10%</strong>
+import Modal from '../Modal' 
+
+const decreaseSupplyMarks = {
+    0: <strong>-10%</strong>,
+    50: <strong>-5%</strong>,
+    100: <strong>Base</strong>
 };
+
+const increaseDemandMarks = {
+    0: <strong>Base</strong>,
+    50: <strong>+5%</strong>,
+    100: <strong>+10%</strong>
+};
+
 
 class VerticalSlider extends Component {
 
     constructor(props) {
         super(props);
         this.onSliderChange = this.onSliderChange.bind(this);
+        this.state = {
+            currentMode: 0,
+            sliderValue: 100,
+            showModal: false
+        }
+    }
+
+    learnMore = () => {
+        this.setState({showModal: true});
+    }
+
+    hideModal = () => {
+        this.setState({showModal: false});
+    }
+
+    onSwitchChange = () => {
+        let newMode = Math.abs(this.state.currentMode - 1);
+        let newSliderVal = newMode === 0? 100 : 0; 
+        this.setState({ currentMode: newMode, sliderValue: newSliderVal });
     }
 
     onSliderChange(value) {
+        this.setState({ sliderValue: value });
         let { actions, flowData = {} } = this.props, { flowParams = null, name, isLoading = false } = flowData;
 
         if (!isLoading) {
             if (!!flowParams) {
-                flowParams.threshold = value == 100 ? 'ten' : value == 50 ? 'five' : 'base';
+                flowParams.threshold = value == 0 ? 'ten' : value == 50 ? 'five' : 'base';
                 actions.setFlowData({ dataList: [], name, flowParams, isLoading: true });
                 getFlowData(flowParams)
                     .then((records) => {
@@ -51,17 +82,55 @@ class VerticalSlider extends Component {
 
 
     render() {
+
         let { width, height, flowData = {} } = this.props,
             { flowParams = { threshold: 'base' } } = flowData, { threshold = 'base' } = flowParams;
+        
+        var { currentMode, sliderValue, showModal } = this.state
 
-        let sliderValue = threshold == 'ten' ? 100 : threshold == 'five' ? 50 : 0;
+        let checked, currentFactor, factorMarks, initialValue;        
+        if (currentMode === 0) {
+            checked = false;
+            currentFactor = "Decrease Supply";
+            factorMarks = decreaseSupplyMarks;
+            initialValue = 100;
+        }
+        else if (currentMode === 1) {
+            checked = true;
+            currentFactor = "Increase Demand";
+            factorMarks = increaseDemandMarks;
+            initialValue = 0;
+        }    
 
 
         return (
             <div className='vertical-slider-container' style={{ 'width': width, 'height': height }}>
-                <div className='inner-slider' style={{ 'width': width, 'height': height * 0.80, 'marginBottom': height * 0.1 }}>
-                    <p className='slider-title'>Decrease Supply</p>
-                    <Slider vertical value={sliderValue} min={0} marks={marks} step={null} onChange={this.onSliderChange} defaultValue={0} />
+            {/* <Modal show={showModal} onClick={this.hideModal}/> */}
+                    <p className='slider-title'>{currentFactor}</p>
+                    <div className='switch-container'>
+                            <label htmlFor="material-switch">
+                                <Switch
+                                    checked={checked}
+                                    onChange={this.onSwitchChange}
+                                    onColor="#86d3ff"
+                                    onHandleColor="#2693e6"
+                                    handleDiameter={25}
+                                    uncheckedIcon={false}
+                                    checkedIcon={false}
+                                    boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
+                                    activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
+                                    height={15}
+                                    width={48}
+                                    className="react-switch"
+                                    id="material-switch"
+                                />
+                            </label>
+                        </div>
+                <div className='inner-slider' style={{ 'width': width, 'height': height * 0.70, 'marginBottom': height * 0.05 }}>
+                    <Slider vertical value={sliderValue} min={0} marks={factorMarks} step={null} included={false} onChange={this.onSliderChange} defaultValue={initialValue}/>
+                </div>
+                <div className="info-icon" title="Learn More" onClick={this.learnMore}>
+                    <span className="icon icon-info-with-circle sample-icon"></span>
                 </div>
             </div>
         );

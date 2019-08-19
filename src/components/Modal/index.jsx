@@ -18,12 +18,12 @@ class Modal extends Component {
     
     render() {
         
-        const { componentID, show } = this.props;
+        const { componentID, show, onClick = () => { return; } } = this.props;
 
         const { modalComponents } = this.state;
 
         return (
-            <div className={"modal-root" + (show? " visible" : "")}>
+            <div className={"modal-root" + (show? " visible" : "")} onClick={onClick}>
                 {modalComponents[componentID] && modalComponents[componentID]}    
             </div>
         );

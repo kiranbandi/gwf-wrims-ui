@@ -8,10 +8,18 @@
     vertical-align: top;
     .slider-title {
         font-weight: bold;
+        margin-top: 6px;
+
+    }
+
+    .switch-container {
+        &>label {
+            margin-bottom: 0px;
+        }
     }
     .inner-slider {
         float: left;
-        margin-top: 10px;
+        margin-top: 5px;
         .rc-slider-vertical {
             text-align: center;
             display: inline-block;
@@ -20,6 +28,15 @@
         }
         strong {
             font-size: 14px;
+        }
+    }
+
+    .info-icon {
+        cursor: pointer;
+        color: #d0d0d0;
+
+        &:hover {
+            color: white;
         }
     }
 }
