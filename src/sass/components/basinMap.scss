@@ -8,3 +8,43 @@
     font-weight: bold;
     text-transform: uppercase;
 }
+
+.marking-menu-button {
+    .icon {
+        font-size: 35px;
+        margin: 0 0px;
+        padding: 0;
+        border: none;
+        background: none;
+        color: #252830;
+        &:focus {
+            outline: none !important;
+        }
+    }
+    .basin-image-div {
+        float: right;
+        margin-top: -50px;
+        .polaroid {
+            border: 1px solid rgb(0, 0, 0);
+            border-radius: 8px;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+        .text-container {
+            text-align: center;
+            padding: 2px 20px;
+        }
+        .basin-image {
+            border: 1px solid rgb(0, 0, 0);
+            border-radius: 8px;
+        }
+        .text-styling {
+            color: black;
+            font-size: 16px;
+        }
+    }
+    .icon-image {
+        margin-right: 10px;
+    }
+}
