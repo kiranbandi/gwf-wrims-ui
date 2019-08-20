@@ -23,19 +23,14 @@ let basinArray = [
 
 const selectColor = "hsla(0, 36%, 71%, 0)" // have a translucent color for basin selection
 
-const highlightColor = "hsl(0, 36%, 71%)"
 let curHover = ''
 let prevHover = ''
 
-let basinHighlightLayerIndex = null
 let basinSelectedLayerIndex = null
 let basinPrevSelectedLayerIndex = ''
 let basinBorderLayerIndex = ''
-let basinPrevBorderLayerIndex = ''
 
 let editedMapStyle = null;
-let currentBorderName = ''
-let currentHighlightName = ''
 let currentSelectedName = ''
 
 export default class BasinMap extends Component {
@@ -92,9 +87,6 @@ export default class BasinMap extends Component {
         };
 
         this.renderHoverPopup = this.renderHoverPopup.bind(this);
-        this._onHover = this._onHover.bind(this);
-        this._onMouseDown = this._onMouseDown.bind(this);
-        // this._onMouseUp = this._onMouseUp.bind(this);
 
         this.addMarkingMenu = this.addMarkingMenu.bind(this);
     }
@@ -108,7 +100,7 @@ export default class BasinMap extends Component {
         // If hovering over a basin
         if (basin) {
             // console.log(event.lngLat)
-            if (currentBorderName != curHover ){
+            if (currentSelectedName != curHover ){
                 // reset hoverInfo so that it re-renders to mouse cursor
                 hoverInfo = {
                     lngLat: event.lngLat,
@@ -116,7 +108,7 @@ export default class BasinMap extends Component {
                 };
                 this.setState({ hoverInfo })
             }
-            if (currentBorderName == curHover){
+            if (currentSelectedName == curHover){
                 hoverInfo = null;
                 this.setState({ hoverInfo })
             }
@@ -149,8 +141,7 @@ export default class BasinMap extends Component {
 
                 // Keeps the basin selected when the cursor is hovering outside of the basins
                 if (basinSelectedLayerIndex != ''){
-                    editedMapStyle = this.highlightBasin(editedMapStyle, basinSelectedLayerIndex, currentHighlightName, selectColor)
-                    // editedMapStyle = this.borderBasin(editedMapStyle, basinBorderLayerIndex, currentBorderName)
+                    editedMapStyle = this.highlightBasin(editedMapStyle, basinSelectedLayerIndex, currentSelectedName, selectColor)
                 }
 
                 this.setState({
@@ -160,14 +151,12 @@ export default class BasinMap extends Component {
             } else {
 
                 editedMapStyle = defaultMapStyle   // reset the map edits
-                // Highlight current basin(s)
-                // editedMapStyle = this.highlightBasin(editedMapStyle, basinHighlightLayerIndex, curHover)
-                editedMapStyle = this.borderBasin(editedMapStyle, basinBorderLayerIndex, currentBorderName)
-
                 // Border the current basin(s)
+                editedMapStyle = this.borderBasin(editedMapStyle, basinBorderLayerIndex)
+
+                // Highlight the current basin(s)
                 if (basinSelectedLayerIndex != ''){
-                    editedMapStyle = this.highlightBasin(editedMapStyle, basinSelectedLayerIndex, currentHighlightName, selectColor)
-                    // editedMapStyle = this.borderBasin(editedMapStyle, basinBorderLayerIndex, currentBorderName)
+                    editedMapStyle = this.highlightBasin(editedMapStyle, basinSelectedLayerIndex, currentSelectedName, selectColor)
                 }
 
                 this.setState({
@@ -185,28 +174,17 @@ export default class BasinMap extends Component {
 
         if (curHover == '' || this.state.markingMenu.mouseOver) { return }  // If not hovering over anything, don't do anything 
 
-        // basinBorderLayerIndex = this.getBasinBorderLayerIndex()
-        // // Unselect the previous basin
-        // if (basinPrevBorderLayerIndex != ''){
-        //     editedMapStyle = this.unborderBasin(editedMapStyle, basinPrevBorderLayerIndex, currentBorderName)
-        // }
-        // basinPrevBorderLayerIndex = basinBorderLayerIndex   // Store the previous border index
-        
-        // basinHighlightLayerIndex = this.getBasinLayerIndex()
         basinSelectedLayerIndex = this.getBasinLayerIndex()
         // Unselect the previous basin
         if (basinPrevSelectedLayerIndex != ''){
             editedMapStyle = defaultMapStyle
-            editedMapStyle = this.borderBasin(editedMapStyle, basinBorderLayerIndex, currentBorderName)
+            editedMapStyle = this.borderBasin(editedMapStyle, basinBorderLayerIndex) // Reapply border
         }
         basinPrevSelectedLayerIndex = basinSelectedLayerIndex   // Store the previous border index
 
-        currentBorderName = curHover    // Store current basin-border's name
-        currentHighlightName = curHover
         currentSelectedName = curHover
 
         // Apply border, repaint current basin
-        // editedMapStyle = this.borderBasin(editedMapStyle, basinBorderLayerIndex, currentBorderName)
         editedMapStyle = this.highlightBasin(editedMapStyle, basinSelectedLayerIndex, currentSelectedName, selectColor)
 
         this.setState({
@@ -305,7 +283,7 @@ export default class BasinMap extends Component {
         return mapToEdit
     }
 
-    borderBasin(mapToEdit, basinBorderIndex, basinBorderName){
+    borderBasin(mapToEdit, basinBorderIndex, basinBorderName=''){
 
         // if (basinBorderName == 'SK-North-Saskatchewan-River' || basinBorderName == 'AB-North-Saskatchewan-River') {
         //     if (basinBorderName == 'SK-North-Saskatchewan-River') {
