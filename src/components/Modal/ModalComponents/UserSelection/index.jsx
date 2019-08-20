@@ -32,7 +32,7 @@ class UserSelection extends Component {
                     
                     <ModeCard
                         title={`Explore water management scenarios for the basin`}
-                        text={`In this mode, users will be able to access models built to explore user questions for particular locations or policy issues.`}
+                        text={`In this mode, you will be able to access models built to answer and explore questions for particular locations or policy issues.`}
                         innerElements={[
                             <div className="one-examples-title" key={'card-1-examples'}>{`Some Examples: `}</div>,
                             <ul className="one-examples-content" key={'card-1-example-descriptions'}>
@@ -45,12 +45,12 @@ class UserSelection extends Component {
                         onClick={() => setMode(0)}/>
                     <ModeCard
                         title={`Dive deeper into the model`}
-                        text={`In this mode, users can see more mechanics of how the model calculates water information and browse through more details about the water users in the basin. `}
+                        text={`In this mode, you will see more mechanics of how the model calculates water information and browse through more details about the water uses in the basin. `}
                         onClick={() => setMode(1)}/>
                         
                     <ModeCard
                         title={`Learn more about the basin and the tool`}
-                        text={`In this mode, users can learn more about the decision support tool and what it can do, and learn more about the Nelson drainage system and water management concepts.`}
+                        text={`In this mode, you can learn more about the decision support tool and what it does, and you can learn more about the Nelson drainage system and water management concepts.`}
                         onClick={() => setMode(2)}/>
                     </div>
             </div>

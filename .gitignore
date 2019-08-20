@@ -63,4 +63,4 @@ build/assets/bundle
 
 
 # ignore configuration file
-config.json
+src/config/
