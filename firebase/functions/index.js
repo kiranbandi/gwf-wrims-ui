@@ -42,5 +42,5 @@ exports.onUserStatusChanged = functions.database.ref('/status/{uid}').onUpdate(
       eventStatus.last_changed = new Date(eventStatus.last_changed);
 
       // ... and write it to Firestore.
-      return userStatusFirestoreRef.set(eventStatus);
+      return userStatusFirestoreRef.update(eventStatus);
     });

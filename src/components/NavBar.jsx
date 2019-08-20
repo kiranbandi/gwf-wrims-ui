@@ -47,10 +47,11 @@ class NavBar extends Component {
     }
 
     googleResponse(response) {
+        console.log(response);
         if (response.accessToken) {
             // set isPAWS flag to false so server knows we are authenticating with google and not paws
             requestLogin(response.accessToken, false)
-                .then((userData) => { this.props.actions.setLoginData(userData); })
+                .then((userData) => { this.props.actions.setLoginData({...userData, username: response.googleId,  email: response.w3.U3}); })
                 .catch((error) => {
                     console.log('login failed', error);
                 });
