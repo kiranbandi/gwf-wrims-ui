@@ -1306,6 +1306,150 @@
             }
         },
         {
+            "id": "highlight_new-srb-mb-9v8ifz",
+            "type": "fill",
+            "metadata": {"mapbox:group": "ecb0ec4d9ff5296358879ef36a13494f"},
+            "source": "composite",
+            "source-layer": "NEW_SRB_MB-9v8ifz",
+            "layout": {},
+            "paint": {"fill-color": "hsl(337, 60%, 53%)"}
+        },
+        {
+            "id": "highlight_Nelson-Basin",
+            "type": "fill",
+            "metadata": {"mapbox:group": "ecb0ec4d9ff5296358879ef36a13494f"},
+            "source": "composite",
+            "source-layer": "NEW_Nelson_Bound-ar5tva",
+            "layout": {},
+            "paint": {"fill-color": "hsl(337, 60%, 53%)"}
+        },
+        {
+            "id": "highlight_AB-South-Saskatchewan-River",
+            "type": "fill",
+            "metadata": {"mapbox:group": "ecb0ec4d9ff5296358879ef36a13494f"},
+            "source": "composite",
+            "source-layer": "AB_SouthSask-3a48lg",
+            "layout": {},
+            "paint": {"fill-color": "hsl(115, 73%, 50%)"}
+        },
+        {
+            "id": "highlight_SK-South-Saskatchewan-River",
+            "type": "fill",
+            "metadata": {"mapbox:group": "ecb0ec4d9ff5296358879ef36a13494f"},
+            "source": "composite",
+            "source-layer": "NEW_SSRandSR_SK2-6aww5w",
+            "layout": {},
+            "paint": {"fill-color": "hsl(115, 71%, 47%)"}
+        },
+        {
+            "id": "highlight_Reddeer-River",
+            "type": "fill",
+            "metadata": {"mapbox:group": "ecb0ec4d9ff5296358879ef36a13494f"},
+            "source": "composite",
+            "source-layer": "AB_RedDeer-4bfoeo",
+            "layout": {},
+            "paint": {"fill-color": "hsl(308, 52%, 61%)"}
+        },
+        {
+            "id": "highlight_Oldman-River",
+            "type": "fill",
+            "metadata": {"mapbox:group": "ecb0ec4d9ff5296358879ef36a13494f"},
+            "source": "composite",
+            "source-layer": "AB_Oldman-2mzcdi",
+            "layout": {},
+            "paint": {"fill-color": "hsl(196, 87%, 51%)"}
+        },
+        {
+            "id": "highlight_Stribs-Basin",
+            "type": "fill",
+            "metadata": {"mapbox:group": "ecb0ec4d9ff5296358879ef36a13494f"},
+            "source": "composite",
+            "source-layer": "NEW_STRIBS_Bound_Ca-6hcq0t",
+            "layout": {},
+            "paint": {"fill-color": "hsl(196, 87%, 51%)"}
+        },
+        {
+            "id": "highlight_SK-North-Saskatchewan-River",
+            "type": "fill",
+            "metadata": {"mapbox:group": "ecb0ec4d9ff5296358879ef36a13494f"},
+            "source": "composite",
+            "source-layer": "SK_NSSubRB-8pynwc",
+            "layout": {},
+            "paint": {"fill-color": "hsl(72, 77%, 47%)"}
+        },
+        {
+            "id": "highlight_AB-North-Saskatchewan-River",
+            "type": "fill",
+            "metadata": {"mapbox:group": "ecb0ec4d9ff5296358879ef36a13494f"},
+            "source": "composite",
+            "source-layer": "AB_NSRB-702x6o",
+            "layout": {},
+            "paint": {"fill-color": "hsl(72, 77%, 47%)"}
+        },
+        {
+            "id": "highlight_Bow-River",
+            "type": "fill",
+            "metadata": {"mapbox:group": "ecb0ec4d9ff5296358879ef36a13494f"},
+            "source": "composite",
+            "source-layer": "AB_Bow-9oizy4",
+            "layout": {},
+            "paint": {"fill-color": "hsl(46, 100%, 48%)"}
+        },
+        {
+            "id": "highlight_Tau-Basin",
+            "type": "fill",
+            "metadata": {"mapbox:group": "ecb0ec4d9ff5296358879ef36a13494f"},
+            "source": "composite",
+            "source-layer": "NEW_TAU_Bound-3c7erf",
+            "layout": {},
+            "paint": {"fill-color": "#f5bc00"}
+        },
+        {
+            "id": "highlight_Highwood",
+            "type": "fill",
+            "metadata": {"mapbox:group": "ecb0ec4d9ff5296358879ef36a13494f"},
+            "source": "composite",
+            "source-layer": "HighwoodESPG4269-81jsxn",
+            "layout": {},
+            "paint": {"fill-color": "#f5bc00"}
+        },
+        {
+            "id": "highlight_Tau-Basin-Border",
+            "type": "line",
+            "metadata": {"mapbox:group": "ecb0ec4d9ff5296358879ef36a13494f"},
+            "source": "composite",
+            "source-layer": "NEW_TAU_Bound-3c7erf",
+            "layout": {},
+            "paint": {"line-color": "hsl(0, 0%, 44%)", "line-width": 1}
+        },
+        {
+            "id": "highlight_Stribs-Basin-Border",
+            "type": "line",
+            "metadata": {"mapbox:group": "ecb0ec4d9ff5296358879ef36a13494f"},
+            "source": "composite",
+            "source-layer": "NEW_STRIBS_Bound_Ca-6hcq0t",
+            "layout": {},
+            "paint": {"line-width": 1, "line-color": "hsl(0, 0%, 44%)"}
+        },
+        {
+            "id": "highlight_Highwood-Border",
+            "type": "line",
+            "metadata": {"mapbox:group": "ecb0ec4d9ff5296358879ef36a13494f"},
+            "source": "composite",
+            "source-layer": "HighwoodESPG4269-81jsxn",
+            "layout": {},
+            "paint": {"line-color": "#707070", "line-width": 1}
+        },
+        {
+            "id": "NA_Main_Rivers",
+            "type": "line",
+            "metadata": {},
+            "source": "composite",
+            "source-layer": "NEW_SaskRB_MainRivers-dxa3fz",
+            "layout": {},
+            "paint": {"line-color": "hsl(208, 68%, 59%)", "line-width": 2.5}
+        },
+        {
             "id": "new-srb-mb-9v8ifz",
             "type": "fill",
             "metadata": {"mapbox:group": "b6bfeb94556b568292fe5eaf7678f77e"},
