@@ -342,7 +342,7 @@ export default class BasinMap extends Component {
     }
 
     _onViewportChange = viewport =>{
-        console.log("on viewport change")
+        // console.log("on viewport change")
 
         this.setState({
         viewport: {...this.state.viewport, ...viewport}
@@ -370,7 +370,7 @@ export default class BasinMap extends Component {
         const { popupInfo } = this.state;
 
         if (this.state.markingMenu.curClick){
-            console.log("add marking menu")
+            // console.log("add marking menu")
 
             return ( 
                 <MarkingMenu
