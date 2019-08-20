@@ -133,7 +133,7 @@ export default class BasinMap extends Component {
         // We have hovered off of a basin
         if ((curHover != prevHover) || (curHover == '' && basinArray.indexOf(prevHover) > -1)) {
             prevHover = curHover    // Set previous hover to what was previously hovered
-
+            this.closeMarkingMenu()
             if (curHover == '') {
                 hoverInfo = ''
 
@@ -268,15 +268,15 @@ export default class BasinMap extends Component {
     }
 
     highlightBasin(mapToEdit, basinHighlightIndex, basinHighlightName, color){
-
-        // if (basinHighlightName == 'SK-North-Saskatchewan-River' || basinHighlightName == 'AB-North-Saskatchewan-River') {
-        //     if (basinHighlightName == 'SK-North-Saskatchewan-River') {
-        //         mapToEdit = mapToEdit.setIn(['layers', basinHighlightIndex + 1, 'paint', 'fill-color'], highlightColor)
-        //     }
-        //     else if (basinHighlightName == 'AB-North-Saskatchewan-River') {
-        //         mapToEdit = mapToEdit.setIn(['layers', basinHighlightIndex - 1, 'paint', 'fill-color'], highlightColor)
-        //     }
-        // }
+        if (basinHighlightName == 'Tau-Basin' ) {
+            mapToEdit = mapToEdit.setIn(['layers', basinHighlightIndex + 1, 'paint', 'fill-color'], color)
+        }
+        else if (basinHighlightName == 'Highwood' ) {
+            mapToEdit = mapToEdit.setIn(['layers', basinHighlightIndex - 1, 'paint', 'fill-color'], color)
+        }
+        else if (basinHighlightName == 'Stribs-Basin' ) {
+            mapToEdit = mapToEdit.setIn(['layers', basinHighlightIndex - 1, 'paint', 'fill-color'], color)
+        }
 
         mapToEdit = mapToEdit.setIn(['layers', basinHighlightIndex, 'paint', 'fill-color'], color)
 
@@ -284,30 +284,12 @@ export default class BasinMap extends Component {
     }
 
     borderBasin(mapToEdit, basinBorderIndex, basinBorderName=''){
-
-        // if (basinBorderName == 'SK-North-Saskatchewan-River' || basinBorderName == 'AB-North-Saskatchewan-River') {
-        //     if (basinBorderName == 'SK-North-Saskatchewan-River') {
-        //         mapToEdit = mapToEdit.setIn(['layers', basinBorderIndex + 1, 'layout', 'visibility'], "visible")
-        //     }
-        //     else if (basinBorderName == 'AB-North-Saskatchewan-River') {
-        //         mapToEdit = mapToEdit.setIn(['layers', basinBorderIndex - 1, 'layout', 'visibility'], "visible")
-        //     }
-        // }
         mapToEdit = mapToEdit.setIn(['layers', basinBorderIndex, 'layout', 'visibility'], "visible")
 
         return mapToEdit
     }
 
     unborderBasin(mapToEdit, basinBorderIndex, basinBorderName){
-
-        // if (basinBorderName == 'SK-North-Saskatchewan-River' || basinBorderName == 'AB-North-Saskatchewan-River') {
-        //     if (basinBorderName == 'SK-North-Saskatchewan-River') {
-        //         mapToEdit = mapToEdit.setIn(['layers', basinBorderIndex + 1, 'layout', 'visibility'], "none")
-        //     }
-        //     else if (basinBorderName == 'AB-North-Saskatchewan-River') {
-        //         mapToEdit = mapToEdit.setIn(['layers', basinBorderIndex - 1, 'layout', 'visibility'], "none")
-        //     }
-        // }
         mapToEdit = mapToEdit.setIn(['layers', basinBorderIndex, 'layout', 'visibility'], "none")
 
         return mapToEdit
