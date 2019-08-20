@@ -8,6 +8,7 @@ export const setUser = () => {
         const firebase = getFirebase();
         const uid = getState().delta.username;
         const email = getState().delta.email;
+        const basin = "";
 
           
         // Realtime Database Reference
@@ -29,13 +30,16 @@ export const setUser = () => {
         var isOfflineForFirestore = {
             state: "offline",
             last_changed: firestore.FieldValue.serverTimestamp(),
-            email
+            email,
+            basin 
+
         };
 
         var isOnlineForFirestore = {
             state: "online",
             last_changed: firestore.FieldValue.serverTimestamp(),
-            email 
+            email,
+            basin 
         };
             
 
@@ -57,6 +61,22 @@ export const setUser = () => {
         });
   
         //   dispatch({type: types.SET_USER, uid});
+    }};
+
+export const setUserBasin = (newBasin) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+        
+        const firestore = getFirestore();
+        const userUID = getState().delta.username;
+
+        let userRef = { collection: 'users', doc: userUID };
+        let userRefUpdate = { basin: newBasin };
+
+
+        firestore.update(userRef, userRefUpdate).then(() => {
+                dispatch({type: types.SET_USER_BASIN, basin: newBasin});
+                return;
+            })
     }};
 
 export function loginSuccess(userDetails) {

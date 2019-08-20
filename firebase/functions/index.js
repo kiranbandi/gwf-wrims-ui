@@ -40,6 +40,7 @@ exports.onUserStatusChanged = functions.database.ref('/status/{uid}').onUpdate(
 
       // Otherwise, we convert the last_changed field to a Date
       eventStatus.last_changed = new Date(eventStatus.last_changed);
+      eventStatus.basin = "";
 
       // ... and write it to Firestore.
       return userStatusFirestoreRef.update(eventStatus);

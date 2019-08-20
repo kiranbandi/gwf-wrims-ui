@@ -4,6 +4,8 @@ export default {
     username: sessionStorage.username,
     email: sessionStorage.email,
 
+    userBasin: '',
+
 
     filterMesh: {
       //Demands

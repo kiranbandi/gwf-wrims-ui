@@ -38,6 +38,7 @@ class DashboardRoot extends Component {
 
     onRegionSelect(event) {
         const selectedRegion = event.target.id || 'highwood';
+
         this.setState({ 'isSchematicLoading': true });
         axios.get("/assets/files/schematics/" + selectedRegion + ".json")
             .then((response) => {
@@ -103,6 +104,7 @@ class DashboardRoot extends Component {
         mapWidth = mapWidth - widthOfSlider;
 
         const { mode } = this.props;
+
 
         return (
             <div className='dashboard-page-root' >

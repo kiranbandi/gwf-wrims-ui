@@ -12,3 +12,5 @@ export { default as PlaceInfo } from './MapBoxComponents/PlaceInfo';
 export { default as PlaceMarker } from './MapBoxComponents/PlaceMarker';
 export { default as BasinMap } from './MapBoxComponents/BasinMap';
 export { default as Modal } from './Modal/';
+export { default as UserActivityPanel } from './UserActivityPanel';
+

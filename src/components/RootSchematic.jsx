@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import * as d3 from 'd3';
 import tileMap from '../utils/static-reference/tileMap';
 import Switch from "react-switch";
-import { BasinMap } from '../components';
+import { BasinMap, UserActivityPanel } from '../components';
 import { connect } from 'react-redux';
 
 //  Image url handling is convoluted in scss , much easier to set inline and get images from root
@@ -46,7 +46,7 @@ class RootSchematic extends Component {
 
     render() {
 
-        let { width = 1000, selectedPlace, mode } = this.props, { isMapShown } = this.state;
+        let { width = 1000, selectedPlace, mode, cwe = false } = this.props, { isMapShown } = this.state;
 
         let isModeZero = (mode === 0);
 
@@ -92,24 +92,27 @@ class RootSchematic extends Component {
                         </div>}
 
                 </div>
-                <div className='place-selection-container'>
-                    <h2 className='text-primary'>Places of Interest</h2>
-                    <div className='list-container'>
-                        {/* bad idea to attach so many events , need to refactor and attach single event to parent */}
-                        {/* id is model#type#name#number */}
-                        <p onClick={this.props.onPlaceSelect} id='southSask#link#J_3_J1_RF#8' className={selectedPlace == 'southSask#link#J_3_J1_RF#8' ? 'selected-button' : ''}>City of Saskatoon</p>
-                        <p onClick={this.props.onPlaceSelect} id='southSask#link#J2_RF_J_38#98' className={selectedPlace == 'southSask#link#J2_RF_J_38#98' ? 'selected-button' : ''}>Cumberland Delta</p>
-                        <p onClick={this.props.onPlaceSelect} id='southSask#reservoir#R1_LDief#1' className={selectedPlace == 'southSask#reservoir#R1_LDief#1' ? 'selected-button' : ''}>Diefenbaker Lake</p>
-                        <p onClick={this.props.onPlaceSelect} id='southSask#demand#QuAppelle_0#14' className={selectedPlace == 'southSask#demand#QuAppelle_0#14' ? 'selected-button' : ''}>Qu'Appelle Withdrawal</p>
-                        <p onClick={this.props.onPlaceSelect} id='southSask#inflow#In76_SWIFTCCr#61' className={selectedPlace == 'southSask#inflow#In76_SWIFTCCr#61' ? 'selected-button' : ''}>Swift Current Creek</p>
-                        <p onClick={this.props.onPlaceSelect} id='southSask#inflow#In5_PrinceA#79' className={selectedPlace == 'southSask#inflow#In5_PrinceA#79' ? 'selected-button' : ''}>Prince Albert Inflow</p>
-                        <p onClick={this.props.onPlaceSelect} id='highwood#link#J_LBowDiv_J_HW8#23' className={"highwood " + (selectedPlace == 'highwood#link#J_LBowDiv_J_HW8#23' ? 'selected-button' : '')} >Little Bow Diversion</p>
-                        <p onClick={this.props.onPlaceSelect} id='highwood#reservoir#R2_WomenCR#1' className={"highwood " + (selectedPlace == 'highwood#reservoir#R2_WomenCR#1' ? 'selected-button' : '')} >Women's Coulee Reservoir</p>
-                        <p onClick={this.props.onPlaceSelect} id='highwood#link#J_MosqCr_MW_302_ClearL#18' className={"highwood " + (selectedPlace == 'highwood#link#J_MosqCr_MW_302_ClearL#18' ? 'selected-button' : '')} >Clear Lake Diversion</p>
-                        <p onClick={this.props.onPlaceSelect} id='highwood#link#J_HW9_MW_401_FrankL#38' className={"highwood " + (selectedPlace == 'highwood#link#J_HW9_MW_401_FrankL#38' ? 'selected-button' : '')} >Frank Lake Diversion</p>
+                {cwe? 
+                    <UserActivityPanel width={width}/> 
+                    :
+                    <div className='place-selection-container'>
+                        <h2 className='text-primary'>Places of Interest</h2>
+                        <div className='list-container'>
+                            {/* bad idea to attach so many events , need to refactor and attach single event to parent
+                            id is model#type#name#number */}
+                            <p onClick={this.props.onPlaceSelect} id='southSask#link#J_3_J1_RF#8' className={selectedPlace == 'southSask#link#J_3_J1_RF#8' ? 'selected-button' : ''}>City of Saskatoon</p>
+                            <p onClick={this.props.onPlaceSelect} id='southSask#link#J2_RF_J_38#98' className={selectedPlace == 'southSask#link#J2_RF_J_38#98' ? 'selected-button' : ''}>Cumberland Delta</p>
+                            <p onClick={this.props.onPlaceSelect} id='southSask#reservoir#R1_LDief#1' className={selectedPlace == 'southSask#reservoir#R1_LDief#1' ? 'selected-button' : ''}>Diefenbaker Lake</p>
+                            <p onClick={this.props.onPlaceSelect} id='southSask#demand#QuAppelle_0#14' className={selectedPlace == 'southSask#demand#QuAppelle_0#14' ? 'selected-button' : ''}>Qu'Appelle Withdrawal</p>
+                            <p onClick={this.props.onPlaceSelect} id='southSask#inflow#In76_SWIFTCCr#61' className={selectedPlace == 'southSask#inflow#In76_SWIFTCCr#61' ? 'selected-button' : ''}>Swift Current Creek</p>
+                            <p onClick={this.props.onPlaceSelect} id='southSask#inflow#In5_PrinceA#79' className={selectedPlace == 'southSask#inflow#In5_PrinceA#79' ? 'selected-button' : ''}>Prince Albert Inflow</p>
+                            <p onClick={this.props.onPlaceSelect} id='highwood#link#J_LBowDiv_J_HW8#23' className={"highwood " + (selectedPlace == 'highwood#link#J_LBowDiv_J_HW8#23' ? 'selected-button' : '')} >Little Bow Diversion</p>
+                            <p onClick={this.props.onPlaceSelect} id='highwood#reservoir#R2_WomenCR#1' className={"highwood " + (selectedPlace == 'highwood#reservoir#R2_WomenCR#1' ? 'selected-button' : '')} >Women's Coulee Reservoir</p>
+                            <p onClick={this.props.onPlaceSelect} id='highwood#link#J_MosqCr_MW_302_ClearL#18' className={"highwood " + (selectedPlace == 'highwood#link#J_MosqCr_MW_302_ClearL#18' ? 'selected-button' : '')} >Clear Lake Diversion</p>
+                            <p onClick={this.props.onPlaceSelect} id='highwood#link#J_HW9_MW_401_FrankL#38' className={"highwood " + (selectedPlace == 'highwood#link#J_HW9_MW_401_FrankL#38' ? 'selected-button' : '')} >Frank Lake Diversion</p>
+                        </div>
                     </div>
-                </div>
-
+                }
             </div>
         );
     }

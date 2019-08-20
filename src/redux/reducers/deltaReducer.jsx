@@ -12,6 +12,8 @@ export default function deltaReducer(state = initialState.delta, action) {
       return Object.assign({}, state, { username: action.username })
     case types.SET_EMAIL:
       return Object.assign({}, state, { email: action.email })
+    case types.SET_USER_BASIN:
+      return Object.assign({}, state, { userBasin: action.basin })
     case types.SET_FLOW_DATA:
       return Object.assign({}, state, { flowData: action.flowData })
 

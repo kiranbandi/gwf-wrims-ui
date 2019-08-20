@@ -47,7 +47,6 @@ class NavBar extends Component {
     }
 
     googleResponse(response) {
-        console.log(response);
         if (response.accessToken) {
             // set isPAWS flag to false so server knows we are authenticating with google and not paws
             requestLogin(response.accessToken, false)

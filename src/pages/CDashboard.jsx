@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { RiverMap, FilterPanel, FlowPanel, RootSchematic, VerticalSlider, Modal } from '../components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { setFlowData, setMode, setUser } from '../redux/actions/actions';
+import { setFlowData, setMode, setUser, setUserBasin } from '../redux/actions/actions';
 import axios from 'axios';
 import toastr from '../utils/toastr';
 import Loading from 'react-loading';
@@ -19,7 +19,7 @@ class DashboardRoot extends Component {
         this.state = {
             isSchematicLoading: false,
             selectedPlace: '',
-            SchematicData: { lines: [], artifacts: [], labels: [], markers: [], selectedRegion: null }
+            SchematicData: { lines: [], artifacts: [], labels: [], markers: [], selectedRegion: null },
         };
         this.onRegionSelect = this.onRegionSelect.bind(this);
         this.onPlaceSelect = this.onPlaceSelect.bind(this);
@@ -42,6 +42,8 @@ class DashboardRoot extends Component {
 
     onRegionSelect(event) {
         const selectedRegion = event.target.id || 'highwood';
+        this.props.actions.setUserBasin(selectedRegion);
+
         this.setState({ 'isSchematicLoading': true });
         axios.get("/assets/files/schematics/" + selectedRegion + ".json")
             .then((response) => {
@@ -96,7 +98,7 @@ class DashboardRoot extends Component {
 
     render() {
         const { isSchematicLoading, selectedPlace,
-            SchematicData = { lines: [], artifacts: [], labels: [], markers: [] } } = this.state;
+            SchematicData = { lines: [], artifacts: [], labels: [], markers: [] }, currentBasin } = this.state;
 
         //125px to offset the 30px margin on both sides and vertical scroll bar width
         let widthOfDashboard = document.body.getBoundingClientRect().width - 100,
@@ -116,7 +118,9 @@ class DashboardRoot extends Component {
                     width={widthOfDashboard}
                     selectedPlace={selectedPlace}
                     onPlaceSelect={this.onPlaceSelect}
-                    onRegionSelect={this.onRegionSelect} />
+                    onRegionSelect={this.onRegionSelect}
+                    cwe={true} 
+                />
 
                 {isSchematicLoading ?
                     <Loading className='loader' type='spin' height='100px' width='100px' color='#d6e5ff' delay={-1} /> :
@@ -156,7 +160,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({ setFlowData, setMode, setUser }, dispatch)
+        actions: bindActionCreators({ setFlowData, setMode, setUser, setUserBasin }, dispatch)
     };
 }
 
