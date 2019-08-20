@@ -39,6 +39,9 @@
         "react-youtube": "^7.9.0",
         "redux": "^4.0.0",
         "redux-thunk": "^2.3.0",
+        "redux-firestore": "^0.8.0",
+        "react-redux-firebase": "^2.3.0",
+        "firebase": "^6.3.3",
         "toastr": "^2.1.4"
     },
     "devDependencies": {

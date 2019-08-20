@@ -43,6 +43,7 @@ class NavBar extends Component {
     logOut(event) {
         event.preventDefault();
         this.props.actions.setLogoutData();
+        document.location.reload(true);
     }
 
     googleResponse(response) {
