@@ -18,7 +18,7 @@ let basinArray = [
     'Tau-Basin',
     // 'Oldman-River',
     'Stribs-Basin'
-    
+
 ];
 
 const selectColor = "hsla(0, 36%, 71%, 0)" // have a translucent color for basin selection
@@ -57,30 +57,30 @@ export default class BasinMap extends Component {
                 yPos: 0,
                 mouseOver: false
             },
-            displayImage : false,
+            displayImage: false,
             canDrag: true,
             canScroll: true,
 
-            basinStruct : {
+            basinStruct: {
                 southSask: {
-                    displayName : "South-Saskatchewan-River",
+                    displayName: "South-Saskatchewan-River",
                     highlightColor: "hsl(115, 67%, 47%)"
                 },
                 northSaskSask: {
-                    displayName : "SK-North-Saskatchewan-River",
+                    displayName: "SK-North-Saskatchewan-River",
                     highlightColor: "hsl(72, 66%, 44%)"
                 },
                 northSask: {
-                    displayName : "AB-North-Saskatchewan-River",
+                    displayName: "AB-North-Saskatchewan-River",
                     highlightColor: "hsl(72, 66%, 44%)"
                 },
 
                 stribs: {
-                    displayName : "SK-North-Saskatchewan-River",
+                    displayName: "SK-North-Saskatchewan-River",
                     highlightColor: "hsl(115, 67%, 87%)"
                 },
                 highwood: {
-                    displayName : "Highwood-River",
+                    displayName: "Highwood-River",
                     highlightColor: "hsla(46, 99%, 56%, 0)"
                 },
             }
@@ -96,11 +96,11 @@ export default class BasinMap extends Component {
         let hoverInfo = null;
         const basin = event.features && event.features.find(f => basinArray.indexOf(f.layer.id) > -1);
 
-        if (this.state.markingMenu.mouseOver) { return } 
+        if (this.state.markingMenu.mouseOver) { return }
         // If hovering over a basin
         if (basin) {
             // console.log(event.lngLat)
-            if (currentSelectedName != curHover ){
+            if (currentSelectedName != curHover) {
                 // reset hoverInfo so that it re-renders to mouse cursor
                 hoverInfo = {
                     lngLat: event.lngLat,
@@ -108,7 +108,7 @@ export default class BasinMap extends Component {
                 };
                 this.setState({ hoverInfo })
             }
-            if (currentSelectedName == curHover){
+            if (currentSelectedName == curHover) {
                 hoverInfo = null;
                 this.setState({ hoverInfo })
             }
@@ -140,7 +140,7 @@ export default class BasinMap extends Component {
                 editedMapStyle = defaultMapStyle
 
                 // Keeps the basin selected when the cursor is hovering outside of the basins
-                if (basinSelectedLayerIndex != ''){
+                if (basinSelectedLayerIndex != '') {
                     editedMapStyle = this.highlightBasin(editedMapStyle, basinSelectedLayerIndex, currentSelectedName, selectColor)
                 }
 
@@ -155,7 +155,7 @@ export default class BasinMap extends Component {
                 editedMapStyle = this.borderBasin(editedMapStyle, basinBorderLayerIndex)
 
                 // Highlight the current basin(s)
-                if (basinSelectedLayerIndex != ''){
+                if (basinSelectedLayerIndex != '') {
                     editedMapStyle = this.highlightBasin(editedMapStyle, basinSelectedLayerIndex, currentSelectedName, selectColor)
                 }
 
@@ -176,7 +176,7 @@ export default class BasinMap extends Component {
 
         basinSelectedLayerIndex = this.getBasinLayerIndex()
         // Unselect the previous basin
-        if (basinPrevSelectedLayerIndex != ''){
+        if (basinPrevSelectedLayerIndex != '') {
             editedMapStyle = defaultMapStyle
             editedMapStyle = this.borderBasin(editedMapStyle, basinBorderLayerIndex) // Reapply border
         }
@@ -192,7 +192,7 @@ export default class BasinMap extends Component {
         });
 
         this.setPlace(curHover);
-        
+
         // Update popupInfo state to new place selected
         if (this.state.place != null) {
             // set the popup info for the current place marker
@@ -200,33 +200,33 @@ export default class BasinMap extends Component {
         }
 
         // If a basin is selected, place the marking menu down, else, remove the marking menu
-        if (curHover != ''){
-            if ( !this.state.markingMenu.mouseOver ) {
+        if (curHover != '') {
+            if (!this.state.markingMenu.mouseOver) {
                 this.setState({
-                    markingMenu: {...this.state.markingMenu, curClick: true, xPos: event.point[0] - 12.5, yPos: event.point[1] - 12.5},
+                    markingMenu: { ...this.state.markingMenu, curClick: true, xPos: event.point[0] - 12.5, yPos: event.point[1] - 12.5 },
                 });
             }
-        }else{
+        } else {
             this.closeMarkingMenu();
         }
 
         // If mouse button up, impossible to be hovering
-        this.setState({canDrag: true, canScroll: true})
+        this.setState({ canDrag: true, canScroll: true })
     }
 
     _onMouseDown = event => {
         // If not hovering over a marking menu button AND if mouse down THEN remove the marking menu
-        if ( this.state.markingMenu.mouseOver == false ){
+        if (this.state.markingMenu.mouseOver == false) {
             this.setState({
-                markingMenu: {...this.state.markingMenu, curClick: false}
+                markingMenu: { ...this.state.markingMenu, curClick: false }
             });
         }
-        if (this.state.markingMenu.mouseOver){
-            this.setState({canDrag: false, canScroll: false})
+        if (this.state.markingMenu.mouseOver) {
+            this.setState({ canDrag: false, canScroll: false })
         }
     };
 
-    getBasinLayerIndex(){
+    getBasinLayerIndex() {
         let layers = defaultMapStyle.get('layers')
         let basinHighlightLayerIndex = layers.findIndex((l) => {
             return l.toObject().id == (curHover)
@@ -234,7 +234,7 @@ export default class BasinMap extends Component {
         return basinHighlightLayerIndex
     }
 
-    getBasinBorderLayerIndex(){
+    getBasinBorderLayerIndex() {
         // Get index of the current basin's border
         let layers = defaultMapStyle.get('layers')
         let layerIndex = layers.findIndex((l) => {
@@ -243,10 +243,10 @@ export default class BasinMap extends Component {
         return layerIndex
     }
 
-    closeMarkingMenu(){
-        if (this.state.markingMenu.curClick == true){
+    closeMarkingMenu() {
+        if (this.state.markingMenu.curClick == true) {
             this.setState({
-                markingMenu: {...this.state.markingMenu, curClick: false, mouseOver: false}
+                markingMenu: { ...this.state.markingMenu, curClick: false, mouseOver: false }
             });
         }
     }
@@ -254,27 +254,27 @@ export default class BasinMap extends Component {
     mouseOut() {
         // Indicates that we finished hovering over a button
         this.setState({
-            markingMenu: {...this.state.markingMenu, mouseOver: false}
+            markingMenu: { ...this.state.markingMenu, mouseOver: false }
         });
     }
-    
+
     mouseOver() {
         // Clears hover info, so that it dissapears while hovering over a button
         // Indicates that we are hovering over a button
         this.setState({
-            markingMenu: {...this.state.markingMenu, mouseOver: true},
+            markingMenu: { ...this.state.markingMenu, mouseOver: true },
             hoverInfo: null
         });
     }
 
-    highlightBasin(mapToEdit, basinHighlightIndex, basinHighlightName, color){
-        if (basinHighlightName == 'Tau-Basin' ) {
+    highlightBasin(mapToEdit, basinHighlightIndex, basinHighlightName, color) {
+        if (basinHighlightName == 'Tau-Basin') {
             mapToEdit = mapToEdit.setIn(['layers', basinHighlightIndex + 1, 'paint', 'fill-color'], color)
         }
-        else if (basinHighlightName == 'Highwood' ) {
+        else if (basinHighlightName == 'Highwood') {
             mapToEdit = mapToEdit.setIn(['layers', basinHighlightIndex - 1, 'paint', 'fill-color'], color)
         }
-        else if (basinHighlightName == 'Stribs-Basin' ) {
+        else if (basinHighlightName == 'Stribs-Basin') {
             mapToEdit = mapToEdit.setIn(['layers', basinHighlightIndex - 1, 'paint', 'fill-color'], color)
         }
 
@@ -283,19 +283,19 @@ export default class BasinMap extends Component {
         return mapToEdit
     }
 
-    borderBasin(mapToEdit, basinBorderIndex, basinBorderName=''){
+    borderBasin(mapToEdit, basinBorderIndex, basinBorderName = '') {
         mapToEdit = mapToEdit.setIn(['layers', basinBorderIndex, 'layout', 'visibility'], "visible")
 
         return mapToEdit
     }
 
-    unborderBasin(mapToEdit, basinBorderIndex, basinBorderName){
+    unborderBasin(mapToEdit, basinBorderIndex, basinBorderName) {
         mapToEdit = mapToEdit.setIn(['layers', basinBorderIndex, 'layout', 'visibility'], "none")
 
         return mapToEdit
     }
 
-    setPlace(curHover){ 
+    setPlace(curHover) {
         // Get information for the Info-Card pop-up
         if (curHover == 'SK-South-Saskatchewan-River') {
             this.setState({
@@ -324,7 +324,7 @@ export default class BasinMap extends Component {
         }
     }
 
-    iconButtonClick = () => { 
+    iconButtonClick = () => {
         this._goToViewport(this.state.place)
         this.props.onRegionSelect({ 'target': this.state.place })
     }
@@ -341,72 +341,72 @@ export default class BasinMap extends Component {
         return null;
     }
 
-    _onViewportChange = viewport =>{
+    _onViewportChange = viewport => {
         // console.log("on viewport change")
 
         this.setState({
-        viewport: {...this.state.viewport, ...viewport}
+            viewport: { ...this.state.viewport, ...viewport }
         });
     }
 
-    _goToViewport = ({longitude, latitude, zoom}) => {
+    _goToViewport = ({ longitude, latitude, zoom }) => {
         this._onViewportChange({
-          longitude,
-          latitude,
-          zoom,
-          transitionInterpolator: new FlyToInterpolator(),
-          transitionDuration: 1500
+            longitude,
+            latitude,
+            zoom,
+            transitionInterpolator: new FlyToInterpolator(),
+            transitionDuration: 1500
         });
-      };
+    };
 
-    viewSchematic(){
+    viewSchematic() {
         this.iconButtonClick()
         this.setState({
-            markingMenu: {...this.state.markingMenu, curClick: false, mouseOver: false}
+            markingMenu: { ...this.state.markingMenu, curClick: false, mouseOver: false }
         });
     }
 
-    addMarkingMenu(){
+    addMarkingMenu() {
         const { popupInfo } = this.state;
 
-        if (this.state.markingMenu.curClick){
+        if (this.state.markingMenu.curClick) {
             // console.log("add marking menu")
 
-            return ( 
+            return (
                 <MarkingMenu
                     x={this.state.markingMenu.xPos}
                     y={this.state.markingMenu.yPos}
                     type="circle"
-                    margin={45}
+                    margin={35}
                 >
                     <div className="button marking-menu-button" onMouseOut={() => this.mouseOut()} onMouseOver={() => this.mouseOver()} >
-                        <button className="icon icon-location-pin" />
+                        <button className="icon icon-controller-record" />
                     </div>
-                    <div className="button marking-menu-button"  onMouseOut={() => this.mouseOut()} onMouseOver={() => this.mouseOver()}>
-                        <button className="icon icon-image" onClick={() => this.setState({displayImage: !this.state.displayImage})}/>
+                    <div className="button marking-menu-button" onMouseOut={() => this.mouseOut()} onMouseOver={() => this.mouseOver()}>
+                        <button className="icon icon-image" onClick={() => { event.preventDefault(); this.setState({ displayImage: !this.state.displayImage }) }} />
                         <div className="basin-image-div" >
-                            {this.state.displayImage 
-                            ? <div className="polaroid">
-                                <img className="basin-image" width={240} src={popupInfo.image} />
-                                <div className="text-container">
-                                    <p className="text-styling">{popupInfo.name}</p>
-                                </div> 
-                            </div>
-                            : <img/>
+                            {this.state.displayImage
+                                ? <div className="polaroid">
+                                    <img className="basin-image" width={240} src={popupInfo.image} />
+                                    <div className="text-container">
+                                        <p className="text-styling">{popupInfo.name}</p>
+                                    </div>
+                                </div>
+                                : <img />
                             }
                         </div>
                     </div>
-                    <div className="button marking-menu-button"  onMouseOut={() => this.mouseOut()} onMouseOver={() => this.mouseOver()}>
-                        <button className="icon icon-air" onClick={() => this.viewSchematic()}/>
+                    <div className="button marking-menu-button" onMouseOut={() => this.mouseOut()} onMouseOver={() => this.mouseOver()}>
+                        <button className="icon icon-pie-chart" onClick={() => this.viewSchematic()} />
                     </div>
-                    <div className="button marking-menu-button"  onMouseOut={() => this.mouseOut()} onMouseOver={() => this.mouseOver()}>
-                        <a className="icon icon-info-with-circle"  target="_new" href={`http://en.wikipedia.org/w/index.php?title=Special:Search&search=${`${popupInfo.name}`}`} />
+                    <div className="button marking-menu-button" onMouseOut={() => this.mouseOut()} onMouseOver={() => this.mouseOver()}>
+                        <a className="icon icon-info-with-circle" target="_new" href={`http://en.wikipedia.org/w/index.php?title=Special:Search&search=${`${popupInfo.name}`}`} />
                     </div>
                 </MarkingMenu>
             )
         }
-        else{
-            return('')
+        else {
+            return ('')
         }
     }
 
@@ -429,7 +429,7 @@ export default class BasinMap extends Component {
                     doubleClickZoom={false}
                     dragRotate={false}
                     minZoom={2}
-                    
+
                     onHover={this._onHover}
                     onMouseDown={this._onMouseDown}
                     onMouseUp={this._onMouseUp}
@@ -440,7 +440,7 @@ export default class BasinMap extends Component {
                     {this.renderHoverPopup()}
 
                     <div className="markingMenuDiv">
-                        {this.addMarkingMenu()}                
+                        {this.addMarkingMenu()}
                     </div>
                 </MapGL>
 

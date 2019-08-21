@@ -6,9 +6,9 @@ export default [
     // northSask.json (AB)
     { "id": "northSask", "name": "North Saskatchewan River", "image": "https://upload.wikimedia.org/wikipedia/commons/e/e1/NSRGlacialFlats.JPG", "latitude": 52.80, "longitude": -110.98, "zoom": 6.2 },
     // tau.json    
-    { "id": "tau", "name": "TransAlta Utilities", "image": "https://en.wikipedia.org/wiki/TransAlta", "latitude": 51.152, "longitude": -115.293, "zoom": 7.7 },
+    { "id": "tau", "name": "TransAlta Utilities", "image": "https://upload.wikimedia.org/wikipedia/commons/9/93/Bow-river-banff-np.jpg", "latitude": 51.152, "longitude": -115.293, "zoom": 7.7 },
     // stribs.json
-    { "id": "stribs", "name": "Southern Tributaries", "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/South_Saskatchewan_River.jpg/240px-South_Saskatchewan_River.jpg", "latitude": 49.5, "longitude": -113.668, "zoom": 7.6 },
+    { "id": "stribs", "name": "Southern Tributaries", "image": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Oldman_river-Alberta.JPG", "latitude": 49.5, "longitude": -113.668, "zoom": 7.6 },
 
 
     // { "id": "bow", "name": "Bow River", "image": "https://upload.wikimedia.org/wikipedia/commons/9/93/Bow-river-banff-np.jpg", "latitude": 50.851, "longitude": -113.883, "zoom": 7 },
