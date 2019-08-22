@@ -16,7 +16,7 @@ export default class LegendPanel extends Component {
 
             svgPathWidth = width * 0.38, // Width is around 40%
             // PATH VARIABLES
-            numberOfPaths = 4, // When adding a new path, increment numberOfPaths and make sure the increments_Paths is multiplied by the array index
+            numberOfPaths = 5, // When adding a new path, increment numberOfPaths and make sure the increments_Paths is multiplied by the array index
             increments_Paths = svgPathWidth / numberOfPaths, startingPoint_Paths = (increments_Paths / 2) - 30
             ;
 
@@ -88,46 +88,58 @@ export default class LegendPanel extends Component {
 
                     <div className='filter-div path-div'>
                         <svg className='flow-data-chart' width={svgPathWidth} height="60">
+
                             <g className='lines-container'>
                                 <path className='flow-spark-line'
                                     transform={"translate(" + (startingPoint_Paths + (increments_Paths * 0)) + ", 5)"}
-                                    key={'river-line-green'}
+                                    key={'river-line-river'}
                                     d=" M 5 10 L 60 10"
-                                    stroke={'#51a83a'}
-                                    strokeWidth={'2.25'}
+                                    stroke={'#47c5ff'}
+                                    strokeWidth={'4'}
                                     className={'river forward-flow'}
                                 />
-                                <text x={(startingPoint_Paths + (increments_Paths * 0))} y="52.5" className="legend-label">IRRIGATION</text>
+                                <text x={(startingPoint_Paths + (increments_Paths * 0) + 15)} y="52.5" className="legend-label">RIVER</text>
+
 
                                 <path className='flow-spark-line'
                                     transform={"translate(" + (startingPoint_Paths + (increments_Paths * 1)) + ", 5)"}
-                                    key={'river-line-blue'}
+                                    key={'river-line-agri'}
                                     d=" M 5 10 L 60 10"
-                                    stroke={'#428dff'}
-                                    strokeWidth={'2.25'}
+                                    stroke={'#51a83a'}
+                                    strokeWidth={'4'}
                                     className={'river forward-flow'}
                                 />
-                                <text x={(startingPoint_Paths + (increments_Paths * 1) - 15)} y="52.5" className="legend-label">NON-IRRIGATION</text>
+                                <text x={(startingPoint_Paths + (increments_Paths * 1))} y="52.5" className="legend-label">IRRIGATION</text>
 
                                 <path className='flow-spark-line'
                                     transform={"translate(" + (startingPoint_Paths + (increments_Paths * 2)) + ", 5)"}
-                                    key={'river-line-gray'}
+                                    key={'river-line-demand'}
                                     d=" M 5 10 L 60 10"
-                                    stroke={'#92cce3'}
-                                    strokeWidth={'2.25'}
+                                    stroke={'#7e7e7e'}
+                                    strokeWidth={'4'}
                                     className={'river forward-flow'}
                                 />
-                                <text x={(startingPoint_Paths + (increments_Paths * 2) + 9)} y="52.5" className="legend-label">INFLOW</text>
+                                <text x={(startingPoint_Paths + (increments_Paths * 2) - 15)} y="52.5" className="legend-label">NON-IRRIGATION</text>
 
                                 <path className='flow-spark-line'
                                     transform={"translate(" + (startingPoint_Paths + (increments_Paths * 3)) + ", 5)"}
-                                    key={'river-line-orange'}
+                                    key={'river-line-inflow'}
                                     d=" M 5 10 L 60 10"
-                                    stroke={'#f7a02e'}
-                                    strokeWidth={'2.25'}
+                                    stroke={'#92cce3'}
+                                    strokeWidth={'4'}
                                     className={'river forward-flow'}
                                 />
-                                <text x={(startingPoint_Paths + (increments_Paths * 3) + 2)} y="52.5" className="legend-label">DIVERSION</text>
+                                <text x={(startingPoint_Paths + (increments_Paths * 3) + 9)} y="52.5" className="legend-label">INFLOW</text>
+
+                                <path className='flow-spark-line'
+                                    transform={"translate(" + (startingPoint_Paths + (increments_Paths * 4)) + ", 5)"}
+                                    key={'river-line-diversion'}
+                                    d=" M 5 10 L 60 10"
+                                    stroke={'#f7a02e'}
+                                    strokeWidth={'4'}
+                                    className={'river forward-flow'}
+                                />
+                                <text x={(startingPoint_Paths + (increments_Paths * 4) + 2)} y="52.5" className="legend-label">DIVERSION</text>
                             </g>
                         </svg>
                     </div>
