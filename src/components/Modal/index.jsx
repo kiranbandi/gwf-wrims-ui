@@ -13,12 +13,12 @@ class Modal extends Component {
                 "userSelection" : <UserSelection/>
             }
         }
-        
+        this.args = [];
     }
     
     render() {
         
-        const { componentID, show, onClick = () => { return; } } = this.props;
+        const { componentID, show, onClick = () => { return; }, args = []} = this.props;
 
         const { modalComponents } = this.state;
 
