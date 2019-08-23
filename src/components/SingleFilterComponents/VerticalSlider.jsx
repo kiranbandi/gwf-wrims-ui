@@ -103,7 +103,9 @@ class VerticalSlider extends Component {
         }
         
         var sliderHeight = ((height - 90)  * .875);
-        sliderHeight = sliderHeight < 320? ((sliderHeight)  * .975) : sliderHeight;
+        sliderHeight = sliderHeight < 320? ((sliderHeight)  * .95) : sliderHeight;
+
+        var marginBottom = sliderHeight < 320? (sliderHeight * 0.065) : (sliderHeight * 0.045);
 
 
 
@@ -130,12 +132,11 @@ class VerticalSlider extends Component {
                         />
                     </label>
                 </div>
-                <div className='inner-slider' style={{ 'width': width, 'height': sliderHeight, 'marginBottom': (sliderHeight * 0.045)}}>
+                <div className='inner-slider' style={{ 'width': width, 'height': sliderHeight, marginBottom}}>
                     <Slider vertical value={sliderValue} min={0} marks={factorMarks} step={null} included={false} onChange={this.onSliderChange} defaultValue={initialValue}/>
                 </div>
                 <div className="info-icon" title="Learn More" onClick={this.learnMore}>
                     <span className="icon icon-info-with-circle sample-icon"></span>
-                    &nbsp;
                 </div>
             </div>
         );
