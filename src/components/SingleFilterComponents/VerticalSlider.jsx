@@ -100,7 +100,11 @@ class VerticalSlider extends Component {
             currentFactor = "Increase Demand";
             factorMarks = increaseDemandMarks;
             initialValue = 0;
-        }    
+        }
+        
+        var sliderHeight = ((height - 90)  * .875);
+        sliderHeight = sliderHeight < 320? ((sliderHeight)  * .975) : sliderHeight;
+
 
 
         return (
@@ -118,7 +122,7 @@ class VerticalSlider extends Component {
                             uncheckedIcon={false}
                             checkedIcon={false}
                             boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
-                            activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
+                            activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.27"
                             height={15}
                             width={48}
                             className="react-switch"
@@ -126,11 +130,12 @@ class VerticalSlider extends Component {
                         />
                     </label>
                 </div>
-                <div className='inner-slider' style={{ 'width': width, 'height': height * 0.70, 'marginBottom': height * 0.05 }}>
+                <div className='inner-slider' style={{ 'width': width, 'height': sliderHeight, 'marginBottom': (sliderHeight * 0.045)}}>
                     <Slider vertical value={sliderValue} min={0} marks={factorMarks} step={null} included={false} onChange={this.onSliderChange} defaultValue={initialValue}/>
                 </div>
                 <div className="info-icon" title="Learn More" onClick={this.learnMore}>
                     <span className="icon icon-info-with-circle sample-icon"></span>
+                    &nbsp;
                 </div>
             </div>
         );

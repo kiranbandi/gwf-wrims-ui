@@ -8,11 +8,12 @@
     vertical-align: top;
     .slider-title {
         font-weight: bold;
-        margin-top: 6px;
+        margin-top: 5px;
 
     }
 
     .switch-container {
+        margin: 0px 0px;
         &>label {
             margin-bottom: 0px;
         }
@@ -20,6 +21,7 @@
     .inner-slider {
         float: left;
         margin-top: 5px;
+
         .rc-slider-vertical {
             text-align: center;
             display: inline-block;
