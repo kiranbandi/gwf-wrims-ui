@@ -24,7 +24,8 @@
     .filter-div {
         display: inline-block;
         vertical-align: text-top;
-        margin: 15px;
+        margin-top: 15px;
+        margin-bottom: 15px;
         svg {
             display: inline-block;
             // margin: 0px auto;
@@ -33,10 +34,14 @@
     .icon-div {
         // width: 50%;
         float: left;
+        margin-right: 0;
+        margin-left: 30px;
     }
     .path-div {
         // width: 45%;
         float: right;
+        margin-left: 0;
+        margin-right: 30px
     }
     .filter-general {
         width: auto;
@@ -116,7 +121,7 @@
                 stroke-width: 30px;
             }
             &.type-demand {
-                fill: #428dff;
+                fill: #7e7e7e;
                 stroke-width: 30px;
             }
             &.type-reservoir {
@@ -124,7 +129,7 @@
                 stroke-width: 30px;
             }
             &.type-sink {
-                fill: #d75b5b;
+                fill: white;
                 stroke-width: 30px;
             }
         }
