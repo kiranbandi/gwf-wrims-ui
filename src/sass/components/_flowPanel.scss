@@ -27,7 +27,7 @@
         position: absolute;
     }
     .statcard-button {
-        margin: 2px 2px 2px 0px;
+        margin: 2px 5.8px;
         background: #1a1c22;
         color: white;
     }
@@ -37,6 +37,12 @@
 
     .two-button-group {
         width: 40px;
+
+        .btn.statcard-button {
+            &:focus {
+                outline: none;
+            }
+        }
     }
     .metrics-container {
         margin-top: 10px;

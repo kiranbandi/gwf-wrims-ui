@@ -172,7 +172,7 @@ class FlowPanel extends Component {
                                 {this.addStatCards(metrics, innerWidth)}
                             </div>
 
-                            <div className={"sm-root" + (this.state.dropDownVisible ? " sm-visible" : " sm-hidden")} style={{ 'width': ((.65) * width) + "px", transform: `translateX(${((.35) * width) + 4}px)` }}>
+                            <div className={"sm-root" + (this.state.dropDownVisible ? " sm-visible" : " sm-hidden")} style={{ 'width': ((.65) * width) + "px", transform: `translateX(${((.3456) * width)}px)` }}>
                                 <div className={"sm-options-container" + (this.state.dropDownVisible ? " sm-visible" : " sm-hidden")} style={{ width: (((.65) * width) - 70) + "px" }}>
                                     {this.state.statcards.map((statcard, idx) => {
                                         return (
@@ -241,7 +241,7 @@ class FlowPanel extends Component {
                                         </g>
                                     </svg>  
                                 </div>
-                                <span className="btx-text" style={{transform: "translate(0px,-2px)" }}> &nbsp;POWER FIGURES&nbsp;</span>
+                                <span className="btx-text" style={{transform: "translate(0px,-2px)" }}>&nbsp;POWER FIGURES&nbsp;</span>
                             </div>
                         </div>}    
                     </div> 
