@@ -36,6 +36,11 @@
     .info-icon {
         cursor: pointer;
         color: #d0d0d0;
+        
+        .icon {
+            font-size: 20px;
+            margin: 0 4px;
+        }
 
         &:hover {
             color: white;
