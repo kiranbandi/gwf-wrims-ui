@@ -114,7 +114,7 @@ class VerticalSlider extends Component {
                 <Modal show={showModal} onClick={this.hideModal}/>
                 <p className='slider-title'>{currentFactor}</p>
                 <div className='switch-container'>
-                    <label htmlFor="material-switch">
+                    <label htmlFor="vertical-slider-switch">
                         <Switch
                             checked={checked}
                             onChange={this.onSwitchChange}
@@ -128,7 +128,7 @@ class VerticalSlider extends Component {
                             height={15}
                             width={48}
                             className="react-switch"
-                            id="material-switch"
+                            id="vertical-slider-switch"
                         />
                     </label>
                 </div>
