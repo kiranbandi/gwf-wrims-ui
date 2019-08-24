@@ -39,10 +39,12 @@ class VerticalSlider extends Component {
 
     learnMore = () => {
         this.setState({showModal: true});
+        window.scrollTo(0, 0); 
+
     }
 
     hideModal = () => {
-        this.setState({showModal: false});
+        // this.setState({showModal: false});
     }
 
     onSwitchChange = () => {
@@ -111,7 +113,7 @@ class VerticalSlider extends Component {
 
         return (
             <div className='vertical-slider-container' style={{ 'width': width, 'height': height }}>
-                <Modal show={showModal} onClick={this.hideModal}/>
+                <Modal show={showModal} componentID={`infoContainer`} args={[3]} onClick={this.hideModal}/>
                 <p className='slider-title'>{currentFactor}</p>
                 <div className='switch-container'>
                     <label htmlFor="vertical-slider-switch">
