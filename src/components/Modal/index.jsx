@@ -1,30 +1,28 @@
 import React, { Component } from 'react';
-import { UserSelection } from './ModalComponents'
+import { UserSelection, InformationContainer } from './ModalComponents'
 
 class Modal extends Component {
     
     constructor(props) {
         super(props);
-
-        this.componentID = undefined;
-        this.show = false;
         this.state = {
             modalComponents: {
-                "userSelection" : <UserSelection/>
+                "userSelection" : function(args) { return ( <UserSelection args={args}/> ); },
+                "infoContainer" : function(args) { return ( <InformationContainer args={args}/> ); } 
+
             }
         }
-        this.args = [];
     }
     
     render() {
         
-        const { componentID, show, onClick = () => { return; }, args = []} = this.props;
+        const { componentID = "", show = false, onClick = () => { return; }, args = []} = this.props;
 
         const { modalComponents } = this.state;
 
         return (
             <div className={"modal-root" + (show? " visible" : "")} onClick={onClick}>
-                {modalComponents[componentID] && modalComponents[componentID]}    
+                {modalComponents[componentID] && modalComponents[componentID](args)}    
             </div>
         );
     }
