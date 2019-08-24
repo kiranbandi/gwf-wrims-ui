@@ -8,7 +8,7 @@
         stroke-dasharray: 9, 5;
         stroke-linecap: round;
         fill: none;
-        stroke: #5c6b84;
+        stroke: #47c5ff;
         cursor: pointer;
         &.highlight {
             stroke: red !important;
@@ -17,7 +17,7 @@
             stroke: #51a83a;
         }
         &.type-demand {
-            stroke: #428dff;
+            stroke: #7e7e7e;
         }
         &.type-inflow {
             stroke: #92cce3;
@@ -81,11 +81,11 @@
                 stroke-width: 30px;
             }
             &.type-demand {
-                fill: #428dff;
+                fill: #7e7e7e;
                 stroke-width: 30px;
             }
             &.type-junction {
-                fill: #5c6b84;
+                fill: #47c5ff;
                 stroke-width: 30px;
             }
         }

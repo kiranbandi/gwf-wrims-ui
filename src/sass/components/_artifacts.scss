@@ -17,8 +17,8 @@
     }
     .sink {
         cursor: pointer;
-        circle {
-            fill: #d75b5b;
+        .sinkBorder {
+            fill: white;
         }
         text {
             color: black;
