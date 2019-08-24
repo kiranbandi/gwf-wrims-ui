@@ -2,9 +2,11 @@
 @import 'vendor/toastr';
 // import components- contains each self-contained component in its own .scss partial
 @import 'components/Modal/modal';
+
 @import 'components/Modal/ModalComponents/UserSelection/root';
 @import 'components/Modal/ModalComponents/UserSelection/modeCard';
 
+@import 'components/Modal/ModalComponents/InformationContainer/root';
 
 @import 'components/fileUpload';
 @import 'components/container';

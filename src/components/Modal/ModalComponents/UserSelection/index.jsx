@@ -6,7 +6,10 @@ import ModeCard from './ModeCard'
 
 class UserSelection extends Component {
     
-
+    constructor(props) {
+        super(props)
+    }
+    
 
     render() {
         let widthOfPage = document.body.getBoundingClientRect().width,
