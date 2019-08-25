@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { RiverMap, FilterPanel, FlowPanel, RootSchematic, VerticalSlider, Modal } from '../components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { setFlowData, setMode } from '../redux/actions/actions';
+import { setFlowData, setMode, setInfoModalState } from '../redux/actions/actions';
 import axios from 'axios';
 import toastr from '../utils/toastr';
 import Loading from 'react-loading';
@@ -85,9 +85,9 @@ class DashboardRoot extends Component {
             })
             // turn off file processing loader
             .finally(() => { this.setState({ 'isSchematicLoading': false }) });
-
-
     }
+
+    
 
 
     render() {
@@ -102,11 +102,16 @@ class DashboardRoot extends Component {
         // reduce the width of the slider from the map
         mapWidth = mapWidth - widthOfSlider;
 
-        const { mode } = this.props;
+        const { mode, infoModalState, actions } = this.props;
 
         return (
             <div className='dashboard-page-root' >
                 <Modal show={mode === -1 || mode === 2} componentID={"userSelection"} />
+                <Modal  
+                    show={infoModalState[0]} 
+                    componentID={`infoContainer`} 
+                    closeButton={true}
+                    onClose={() => { actions.setInfoModalState([false, 0]); }} />
 
                 <RootSchematic
                     width={widthOfDashboard}
@@ -146,13 +151,14 @@ class DashboardRoot extends Component {
 function mapStateToProps(state) {
     return {
         flowData: state.delta.flowData,
-        mode: state.delta.mode
+        mode: state.delta.mode,
+        infoModalState: state.delta.infoModalState
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({ setFlowData, setMode }, dispatch)
+        actions: bindActionCreators({ setFlowData, setMode, setInfoModalState }, dispatch)
     };
 }
 

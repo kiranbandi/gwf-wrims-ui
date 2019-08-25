@@ -109,3 +109,7 @@ export function setMode(mode) {
 
     return { type: types.SET_MODE, mode }
 }
+
+export function setInfoModalState(data) {
+    return { type: types.SET_INFO_MODAL_STATE, data }
+}
