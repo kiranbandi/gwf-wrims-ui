@@ -1,6 +1,8 @@
 
 .modal-root {
     position: absolute;
+    top: 0%;
+    left: 0%;
     z-index: 2000;
     width: 100%;
     height: 100%;
@@ -15,16 +17,7 @@
         transition: visibility 0s linear 0s, opacity 300ms;
     }
 
-    // .modal-componenets-container {
-    //     height: 28%;
-    //     background: #363b4c;
-    //     width: 44%;
-    //     position: relative;
-    //     top: 5%;
-    //     margin: 0 auto;
-    //     border-radius: 15px;
-    //     padding-bottom: 3%;
-    // }
+
 }
 
 

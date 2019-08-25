@@ -241,7 +241,7 @@ class FlowPanel extends Component {
                                         </g>
                                     </svg>  
                                 </div>
-                                <span className="btx-text" style={{transform: "translate(0px,-2px)" }}> &nbsp;POWER FIGURES&nbsp;</span>
+                                <span className="btx-text" style={{transform: "translate(0px,-2px)" }}>&nbsp;POWER FIGURES&nbsp;</span>
                             </div>
                         </div>}    
                     </div> 
