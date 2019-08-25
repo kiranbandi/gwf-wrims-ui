@@ -110,9 +110,11 @@ class NavBar extends Component {
                                 :
                                 <span className='login-container'>
                                     <span className='login-text'>Login</span>
+                                    <span className="login-container-seperator">|</span>
                                     <a href={loginRedirectURL}>
                                         <span style={logoIconStyle} className="paws-icon"></span>
                                     </a>
+                                    <span className="login-container-seperator">|</span>
                                     <GoogleLogin
                                         theme='dark'
                                         clientId={GOOGLE_ID}
