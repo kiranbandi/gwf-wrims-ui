@@ -7,7 +7,7 @@ import Slider from 'rc-slider';
 import Switch from "react-switch";
 
 import { getFlowData } from '../../utils/requestServer';
-import { setFlowData } from '../../redux/actions/actions';
+import { setFlowData, setInfoModalState } from '../../redux/actions/actions';
 import toastr from '../../utils/toastr';
 
 import Modal from '../Modal' 
@@ -33,19 +33,14 @@ class VerticalSlider extends Component {
         this.state = {
             currentMode: 0,
             sliderValue: 100,
-            showModal: false
         }
     }
 
     learnMore = () => {
-        this.setState({showModal: true});
+        this.props.actions.setInfoModalState([true, 2]);
         window.scrollTo(0, 0); 
-
     }
 
-    hideModal = () => {
-        // this.setState({showModal: false});
-    }
 
     onSwitchChange = () => {
         let newMode = Math.abs(this.state.currentMode - 1);
@@ -85,7 +80,7 @@ class VerticalSlider extends Component {
 
     render() {
 
-        let { width, height, flowData = {} } = this.props,
+        let { width, height, flowData = {}, actions } = this.props,
             { flowParams = { threshold: 'base' } } = flowData, { threshold = 'base' } = flowParams;
         
         var { currentMode, sliderValue, showModal } = this.state
@@ -113,7 +108,6 @@ class VerticalSlider extends Component {
 
         return (
             <div className='vertical-slider-container' style={{ 'width': width, 'height': height }}>
-                <Modal show={showModal} componentID={`infoContainer`} args={[3]} onClick={this.hideModal}/>
                 <p className='slider-title'>{currentFactor}</p>
                 <div className='switch-container'>
                     <label htmlFor="vertical-slider-switch">
@@ -126,7 +120,7 @@ class VerticalSlider extends Component {
                             uncheckedIcon={false}
                             checkedIcon={false}
                             boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
-                            activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.27"
+                            activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.27)"
                             height={15}
                             width={48}
                             className="react-switch"
@@ -154,7 +148,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({ setFlowData }, dispatch)
+        actions: bindActionCreators({ setFlowData, setInfoModalState }, dispatch)
     };
 }
 
