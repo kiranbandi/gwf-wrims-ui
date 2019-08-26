@@ -38,6 +38,7 @@ export default class BasinMap extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            componentMounted: false,
             mapStyle: defaultMapStyle,
             viewport: {
                 width: 400,
@@ -67,6 +68,20 @@ export default class BasinMap extends Component {
         this.addMarkingMenu = this.addMarkingMenu.bind(this);
     }
 
+    componentDidMount(){
+        this.setState({ componentMounted: true })
+
+        curHover = ''
+        prevHover = ''
+
+        basinSelectedLayerIndex = null
+        basinPrevSelectedLayerIndex = ''
+        basinBorderLayerIndex = ''
+
+        editedMapStyle = null;
+        currentSelectedName = ''
+
+    }
 
     _onHover = event => {
         let hoverInfo = null;
@@ -318,8 +333,6 @@ export default class BasinMap extends Component {
     }
 
     _onViewportChange = viewport => {
-        // console.log("on viewport change")
-
         this.setState({
             viewport: { ...this.state.viewport, ...viewport }
         });
@@ -388,6 +401,7 @@ export default class BasinMap extends Component {
 
     render() {
         let { viewport, mapStyle } = this.state, { width } = this.props;
+        const { componentMounted } = this.state
 
         // set the viewports for the map
         viewport.width = width;
@@ -401,7 +415,7 @@ export default class BasinMap extends Component {
                     mapboxApiAccessToken={TOKEN}
                     {...viewport}
 
-                    onViewportChange={this._onViewportChange}
+                    onViewportChange={(viewport) => { if (componentMounted) { this.setState({ viewport }) } }}
                     doubleClickZoom={false}
                     dragRotate={false}
                     minZoom={2}
