@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
 import tileMap from '../utils/static-reference/tileMap';
+import readwareBlobs from '../utils/static-reference/readwareBlobs';
 import Switch from "react-switch";
 import { BasinMap, UserActivityPanel } from '../components';
 import { connect } from 'react-redux';
@@ -43,6 +44,17 @@ class RootSchematic extends Component {
             </path>
         })
     }
+
+    getReadwareBlobs = (width, height) => {
+        return readwareBlobs.map((blob, idx) => {
+            return (<g className="readware-blob" transform={`translate(${Math.round(blob.coords[0] * width)}, ${Math.round(blob.coords[1] * height)})`} key={idx}>
+                        <circle r={`10.5px`} fill={`red`}></circle>
+                        <text className="readware-blob-text heavy">{`100`}</text>
+                    </g>)
+        }) 
+    }
+
+
 
     render() {
 
@@ -87,7 +99,8 @@ class RootSchematic extends Component {
                         <BasinMap width={width} onRegionSelect={this.props.onRegionSelect} /> :
                         <div id='root-schema' className='image-container' style={backgroundStyleSchematic}>
                             <svg className='tile-container' width={width} height={width / 2.15}>
-                                {this.getTiles(width, width / 2.15)}
+                                <g className="root-schematic-tiles">{this.getTiles(width, width / 2.15)}</g>
+                                <g className="root-schematic-readware-blobs">{this.getReadwareBlobs(width, width / 2.15)}</g>
                             </svg>
                         </div>}
 
