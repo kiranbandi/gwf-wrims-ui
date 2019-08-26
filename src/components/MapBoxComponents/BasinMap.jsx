@@ -80,7 +80,10 @@ export default class BasinMap extends Component {
 
         editedMapStyle = null;
         currentSelectedName = ''
+    }
 
+    componentWillUnmount(){
+        this.setState({ componentMounted: false })
     }
 
     _onHover = event => {
@@ -234,14 +237,6 @@ export default class BasinMap extends Component {
         return layerIndex
     }
 
-    closeMarkingMenu() {
-        if (this.state.markingMenu.curClick == true) {
-            this.setState({
-                markingMenu: { ...this.state.markingMenu, curClick: false, mouseOver: false }
-            });
-        }
-    }
-
     mouseOut() {
         // Indicates that we finished hovering over a button
         this.setState({
@@ -339,13 +334,13 @@ export default class BasinMap extends Component {
     }
 
     _goToViewport = ({ longitude, latitude, zoom }) => {
-        this._onViewportChange({
+        this.state.componentMounted ? this._onViewportChange({
             longitude,
             latitude,
             zoom,
             transitionInterpolator: new FlyToInterpolator(),
             transitionDuration: 1500
-        });
+        }) : null;
     };
 
     viewSchematic() {
@@ -362,6 +357,7 @@ export default class BasinMap extends Component {
             // console.log("add marking menu")
 
             return (
+            <div ref="markingmenu">
                 <MarkingMenu
                     x={this.state.markingMenu.xPos}
                     y={this.state.markingMenu.yPos}
@@ -392,10 +388,19 @@ export default class BasinMap extends Component {
                         <a className="icon icon-info-with-circle" target="_new" href={`http://en.wikipedia.org/w/index.php?title=Special:Search&search=${`${popupInfo.name}`}`} />
                     </div>
                 </MarkingMenu>
+            </div>
+                
             )
         }
-        else {
-            return ('')
+        else {''}
+        
+    }
+    
+    closeMarkingMenu() {
+        if (this.state.markingMenu.curClick == true) { 
+            this.setState({
+                markingMenu: { ...this.state.markingMenu, curClick: false, mouseOver: false }
+            });
         }
     }
 
@@ -415,7 +420,7 @@ export default class BasinMap extends Component {
                     mapboxApiAccessToken={TOKEN}
                     {...viewport}
 
-                    onViewportChange={(viewport) => { if (componentMounted) { this.setState({ viewport }) } }}
+                    onViewportChange={componentMounted ? this._onViewportChange : null }
                     doubleClickZoom={false}
                     dragRotate={false}
                     minZoom={2}
