@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { RiverMap, FilterPanel, FlowPanel, RootSchematic, VerticalSlider, Modal } from '../components';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { setFlowData, setMode, setUser, setUserBasin } from '../redux/actions/actions';
 import axios from 'axios';
 import toastr from '../utils/toastr';
@@ -10,6 +8,9 @@ import processSchematic from '../utils/processors/processSchematic';
 import { getFlowData } from '../utils/requestServer';
 import _ from 'lodash';
 import LegendPanel from '../components/MapLegend/LegendPanel';
+import { compose, bindActionCreators } from 'redux';
+import { firestoreConnect } from 'react-redux-firebase'
+import { connect } from 'react-redux'
 
 
 class DashboardRoot extends Component {
@@ -98,7 +99,7 @@ class DashboardRoot extends Component {
 
     render() {
         const { isSchematicLoading, selectedPlace,
-            SchematicData = { lines: [], artifacts: [], labels: [], markers: [] }, currentBasin } = this.state;
+            SchematicData = { lines: [], artifacts: [], labels: [], markers: [] } } = this.state;
 
         //125px to offset the 30px margin on both sides and vertical scroll bar width
         let widthOfDashboard = document.body.getBoundingClientRect().width - 100,
@@ -108,7 +109,47 @@ class DashboardRoot extends Component {
         // reduce the width of the slider from the map
         mapWidth = mapWidth - widthOfSlider;
 
-        const { mode } = this.props;
+        const {  } = this.props;
+
+        const { mode, datastore, username, userBasin } = this.props;
+
+
+        let activeUsers = datastore.ordered.users? datastore.ordered.users.filter((user) => (user.id !== username) && (user.state === 'online')) : [];
+        
+        let activeBasinUsers = {
+            alberta:{
+                users: []
+            },
+            northSask:{
+                users: []
+            },
+            northSaskSask:{
+                users: []
+            },
+            southSask:{
+                users: []
+            },
+            tau:{
+                users: []
+            },
+            highwood:{
+                users: []
+            },
+            stribs:{
+                users: []
+            }
+        }
+
+        activeUsers.forEach((user) => {
+            let userData = user.basin;
+
+            if (activeBasinUsers[userData]) {
+                activeBasinUsers[userData].users.push(user.email);
+            };
+
+        });
+            
+        // let activeBasinUsers = (userBasin === "")? undefined : activeUsers.filter((user) => (user.basin === userBasin));
 
         return (
             <div className='dashboard-page-root' >
@@ -120,6 +161,10 @@ class DashboardRoot extends Component {
                     onPlaceSelect={this.onPlaceSelect}
                     onRegionSelect={this.onRegionSelect}
                     cwe={true} 
+                    mode={mode}
+                    activeUsers={activeUsers}
+                    activeBasinUsers={activeBasinUsers}
+                    userBasin={userBasin}
                 />
 
                 {isSchematicLoading ?
@@ -151,12 +196,15 @@ class DashboardRoot extends Component {
     }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
     return {
         flowData: state.delta.flowData,
-        mode: state.delta.mode
+        mode: state.delta.mode,
+        username: state.delta.username,
+        datastore: state.firestore,
+        userBasin: state.delta.userBasin
     };
-}
+};
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -164,4 +212,9 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DashboardRoot);
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    firestoreConnect([
+        { collection: 'users' }
+    ])
+)(DashboardRoot);

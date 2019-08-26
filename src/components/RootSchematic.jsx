@@ -1,11 +1,13 @@
 /*global $*/
 import React, { Component } from 'react';
-import * as d3 from 'd3';
+import { line } from 'd3';
 import tileMap from '../utils/static-reference/tileMap';
 import readwareBlobs from '../utils/static-reference/readwareBlobs';
 import Switch from "react-switch";
 import { BasinMap, UserActivityPanel } from '../components';
-import { connect } from 'react-redux';
+import { compose, bindActionCreators } from 'redux';
+import { firestoreConnect } from 'react-redux-firebase'
+import { connect } from 'react-redux'
 
 //  Image url handling is convoluted in scss , much easier to set inline and get images from root
 let backgroundStyleSchematic = { background: 'url(assets/img/overall.png)', backgroundSize: '100%' };
@@ -17,7 +19,6 @@ class RootSchematic extends Component {
 
         this.state = {
             isMapShown: false,
-
         };
         this.getTiles = this.getTiles.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -35,7 +36,7 @@ class RootSchematic extends Component {
             });
             return <path
                 id={tile.tileID}
-                d={d3.line()(pathData)}
+                d={line()(pathData)}
                 className='tile'
                 stroke={tile.color}
                 onClick={this.props.onRegionSelect}
@@ -45,12 +46,19 @@ class RootSchematic extends Component {
         })
     }
 
-    getReadwareBlobs = (width, height) => {
-        return readwareBlobs.map((blob, idx) => {
-            return (<g className="readware-blob" transform={`translate(${Math.round(blob.coords[0] * width)}, ${Math.round(blob.coords[1] * height)})`} key={idx}>
-                        <circle r={`10.5px`} fill={`red`}></circle>
-                        <text className="readware-blob-text heavy">{`100`}</text>
-                    </g>)
+    getReadwareBlobs = (width, height, activeBasinUsers) => {
+        return Object.keys(readwareBlobs).map((basin, idx) => {
+
+            let userCount = activeBasinUsers[basin].users.length;
+
+            let countWeight = (userCount < 10)? " light" : (userCount < 100)? " medium" : " heavy";
+
+            if (userCount !== 0) {
+                return (<g className="readware-blob" transform={`translate(${Math.round(readwareBlobs[basin].coords[0] * width)}, ${Math.round(readwareBlobs[basin].coords[1] * height)})`} key={idx}>
+                            <circle r={`10.5px`} fill={`red`}></circle>
+                            <text className={"readware-blob-text" + countWeight}>{userCount}</text>
+                        </g>)
+            }
         }) 
     }
 
@@ -59,6 +67,8 @@ class RootSchematic extends Component {
     render() {
 
         let { width = 1000, selectedPlace, mode, cwe = false } = this.props, { isMapShown } = this.state;
+
+        const { activeUsers, activeBasinUsers, userBasin } = this.props;
 
         let isModeZero = (mode === 0);
 
@@ -100,13 +110,13 @@ class RootSchematic extends Component {
                         <div id='root-schema' className='image-container' style={backgroundStyleSchematic}>
                             <svg className='tile-container' width={width} height={width / 2.15}>
                                 <g className="root-schematic-tiles">{this.getTiles(width, width / 2.15)}</g>
-                                <g className="root-schematic-readware-blobs">{this.getReadwareBlobs(width, width / 2.15)}</g>
+                                <g className="root-schematic-readware-blobs">{this.getReadwareBlobs(width, (width / 2.15), activeBasinUsers)}</g>
                             </svg>
                         </div>}
 
                 </div>
                 {cwe? 
-                    <UserActivityPanel width={width}/> 
+                    <UserActivityPanel width={width} activeUsers={activeUsers} activeBasinUsers={activeBasinUsers} userBasin={userBasin}/> 
                     :
                     <div className='place-selection-container'>
                         <h2 className='text-primary'>Places of Interest</h2>
@@ -131,10 +141,7 @@ class RootSchematic extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        mode: state.delta.mode
-    };
-}
 
-export default connect(mapStateToProps, null)(RootSchematic);
+
+
+export default RootSchematic;

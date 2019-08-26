@@ -28,8 +28,7 @@ class App extends Component {
         <Router history={hashHistory}>
           <Route path='/' component={Container} pawsTicket={pawsTicket}>
             <IndexRoute component={Home} />
-            <Route path='CDashboard' component={CDashboard} onEnter={checkloginStatus} />
-            <Route path='Dashboard' component={Dashboard} onEnter={checkloginStatus} />
+            <Route path='Dashboard' component={CDashboard} onEnter={checkloginStatus} />
             <Route path='Parser' component={Parser} onEnter={checkloginStatus} />
             <Route path='*' component={NotFound} />
           </Route>
