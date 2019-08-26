@@ -31,9 +31,6 @@ class RiverMap extends Component {
     }
 
     onItemClick(itemType, params) {
-        let basin = this.props.userData.split("#")[0];
-
-        this.props.actions.setUserData(`${basin}#${params.type}#${params.name}#${params.nodeNum}`);
 
         let { schematicData, actions, flowData = {}, fromDashboard = true } = this.props,
             { flowParams = { threshold: 'base' }, isLoading = false } = flowData;
@@ -68,6 +65,7 @@ class RiverMap extends Component {
             }
 
             flowParams = { modelID, threshold, number, type };
+            this.props.actions.setUserData(`${modelID}#${type}#${name}#${number}`);
 
             actions.setFlowData({ dataList: [], name, flowParams, isLoading: true });
             getFlowData(flowParams)
@@ -203,7 +201,6 @@ function mapStateToProps(state) {
     return {
         flowData: state.delta.flowData,
         filterMesh: state.delta.filterMesh,
-        userData: state.delta.userData
     };
 }
 
