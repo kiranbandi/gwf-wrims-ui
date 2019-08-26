@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import LegendIcon from '../MapLegend/LegendIcon'
+import { onePointHull } from '../../utils/hullGenerator'
+
 
 export default class Markers extends Component {
 
@@ -20,10 +22,14 @@ export default class Markers extends Component {
             reservoirIconScale = (xScale(1) - xScale(0)) / 90;
         let tempOffset = reservoirIconScale * 150;
 
+        let hullPoint = undefined;
+
+
         const reservoirList = _.map(_.filter(artifacts, (d) => d.type == 'reservoir'),
             (reservoir, index) => {
                 let isPowerReservoir = ["R1_LDief", "R6_Cod", "R7_Tobin"].includes(reservoir.name);
                 const { coords, size = 1 } = reservoir;
+                if (highlightName == reservoir.name) { hullPoint = [[xScale(coords[0]), yScale(coords[1])]]; }
                 return <g key={'reservoir-' + index} className={'reservoir' + ((highlightName == reservoir.name) ? ' highlight' : '')}
                     onDoubleClick={this.onArtifactClick.bind(this, reservoir)}
                     transform={"translate(" + (+xScale(coords[0]) - (tempOffset)) + "," + (+yScale(coords[1]) - (tempOffset)) + ") scale(" + (size * reservoirIconScale) + ")"}>
@@ -53,6 +59,8 @@ export default class Markers extends Component {
         const sinkList = _.map(_.filter(artifacts, (d) => d.type == 'sink'),
             (sink, index) => {
                 const { coords, size = 1 } = sink;
+                if (highlightName == sink.name) { hullPoint = [[xScale(coords[0]), yScale(coords[1])]]; }
+
                 return <g key={'sink-' + index} className={'sink' + ((highlightName == sink.name) ? ' highlight' : '')}
                             transform={"translate(" + (+xScale(coords[0]) - (tempOffset)) + "," + (+yScale(coords[1]) - (tempOffset)) + ") scale(" + (size * reservoirIconScale) + ")"}>
                             <circle className="sinkBorder" cx='150' cy='150' r='200'></circle>
@@ -66,6 +74,16 @@ export default class Markers extends Component {
                         </g>
             })
 
-        return (<g className='artifacts-container'>{[...reservoirList, ...sinkList]}</g>)
+        return <g className='artifacts-container'>
+                    {[...reservoirList, ...sinkList]}
+                    {hullPoint &&
+                     <path
+                        fill={"transparent"}
+                        stroke={`#fd9050`}
+                        strokeWidth={"2.5px"}
+                        d={onePointHull(hullPoint, 13.5)}
+                        className={"hull-path"}>
+                    </path>}
+                </g>
     }
 }

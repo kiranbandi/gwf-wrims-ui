@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { line } from 'd3';
 import _ from 'lodash';
+import { twoPointHull } from '../../utils/hullGenerator'
 
 export default class RiverLines extends Component {
 
@@ -24,9 +25,12 @@ export default class RiverLines extends Component {
         });
         const d3Line = line().x((d) => d.x).y((d) => d.y);
 
+        let hullPoints = undefined;
+
         return (
             <g className='lines-container'>
                 {_.map(lines, (d, index) => {
+                    if (highlightName == d.name) { hullPoints = [[d.newNodes[0].x, d.newNodes[0].y], [d.newNodes[1].x, d.newNodes[1].y]]; }
                     return <path
                         onDoubleClick={this.onLinkClick.bind(this, d)}
                         key={'river-line-' + index}
@@ -36,7 +40,14 @@ export default class RiverLines extends Component {
                         className={((highlightName == d.name) ? 'highlight ' : ' ') + 'flowLine type-' + (d.type) + " " + (d.reverse ? 'reverse-flow' : 'forward-flow')}>
                     </path>
                 })}
+                {hullPoints &&
+                     <path
+                        fill={"transparent"}
+                        stroke={`#fd9050`}
+                        strokeWidth={"2.5px"}
+                        d={twoPointHull(hullPoints, 13.5)}
+                        className={"hull-path"}>
+                    </path>}
             </g>)
     }
 }
-
