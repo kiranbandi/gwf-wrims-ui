@@ -17,7 +17,7 @@ export default class Markers extends Component {
 
     render() {
 
-        let { artifacts = [], xScale, yScale, highlightName = '' } = this.props,
+        let { artifacts = [], xScale, yScale, highlightName = '', trackedNode } = this.props,
             // scale relative to the size of the screen
             reservoirIconScale = (xScale(1) - xScale(0)) / 90;
         let tempOffset = reservoirIconScale * 150;
@@ -29,7 +29,7 @@ export default class Markers extends Component {
             (reservoir, index) => {
                 let isPowerReservoir = ["R1_LDief", "R6_Cod", "R7_Tobin"].includes(reservoir.name);
                 const { coords, size = 1 } = reservoir;
-                if (highlightName == reservoir.name) { hullPoint = [[xScale(coords[0]), yScale(coords[1])]]; }
+                if (trackedNode == reservoir.name) { hullPoint = [[xScale(coords[0]), yScale(coords[1])]]; }
                 return <g key={'reservoir-' + index} className={'reservoir' + ((highlightName == reservoir.name) ? ' highlight' : '')}
                     onDoubleClick={this.onArtifactClick.bind(this, reservoir)}
                     transform={"translate(" + (+xScale(coords[0]) - (tempOffset)) + "," + (+yScale(coords[1]) - (tempOffset)) + ") scale(" + (size * reservoirIconScale) + ")"}>
@@ -75,7 +75,6 @@ export default class Markers extends Component {
             })
 
         return <g className='artifacts-container'>
-                    {[...reservoirList, ...sinkList]}
                     {hullPoint &&
                      <path
                         fill={"transparent"}
@@ -84,6 +83,7 @@ export default class Markers extends Component {
                         d={onePointHull(hullPoint, 13.5)}
                         className={"hull-path"}>
                     </path>}
+                    {[...reservoirList, ...sinkList]}
                 </g>
     }
 }

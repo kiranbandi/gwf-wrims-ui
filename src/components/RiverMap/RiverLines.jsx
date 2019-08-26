@@ -15,7 +15,7 @@ export default class RiverLines extends Component {
     }
 
     render() {
-        const { lines, xScale, yScale, lineWidth, highlightName = '' } = this.props;
+        const { lines, xScale, yScale, lineWidth, highlightName = '', trackedLink } = this.props;
 
         _.map(lines, (line) => {
             const { shiftCoords = [0, 0] } = line;
@@ -27,19 +27,20 @@ export default class RiverLines extends Component {
 
         let hullPoints = undefined;
 
+        const linksList = _.map(lines, (d, index) => {
+            if (trackedLink == d.name) { hullPoints = [[d.newNodes[0].x, d.newNodes[0].y], [d.newNodes[1].x, d.newNodes[1].y]]; }
+            return <path
+                onDoubleClick={this.onLinkClick.bind(this, d)}
+                key={'river-line-' + index}
+                id={d.name}
+                d={d3Line(d.newNodes)}
+                strokeWidth={lineWidth}
+                className={((highlightName == d.name) ? 'highlight ' : ' ') + 'flowLine type-' + (d.type) + " " + (d.reverse ? 'reverse-flow' : 'forward-flow')}>
+            </path>
+        })
+
         return (
             <g className='lines-container'>
-                {_.map(lines, (d, index) => {
-                    if (highlightName == d.name) { hullPoints = [[d.newNodes[0].x, d.newNodes[0].y], [d.newNodes[1].x, d.newNodes[1].y]]; }
-                    return <path
-                        onDoubleClick={this.onLinkClick.bind(this, d)}
-                        key={'river-line-' + index}
-                        id={d.name}
-                        d={d3Line(d.newNodes)}
-                        strokeWidth={lineWidth}
-                        className={((highlightName == d.name) ? 'highlight ' : ' ') + 'flowLine type-' + (d.type) + " " + (d.reverse ? 'reverse-flow' : 'forward-flow')}>
-                    </path>
-                })}
                 {hullPoints &&
                      <path
                         fill={"transparent"}
@@ -48,6 +49,7 @@ export default class RiverLines extends Component {
                         d={twoPointHull(hullPoints, 13.5)}
                         className={"hull-path"}>
                     </path>}
+                {linksList}
             </g>)
     }
 }

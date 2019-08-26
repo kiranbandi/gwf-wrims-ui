@@ -19,7 +19,7 @@ export default class Markers extends Component {
         const { flowData = {}, width, height } = this.props,
             { dataList = [], path = {}, isLoading = false } = flowData;
 
-        let { markers = [], xScale, yScale, highlightName = '' } = this.props,
+        let { markers = [], xScale, yScale, highlightName = '', trackedNode } = this.props,
             markerSizeScale = (xScale(1) - xScale(0)) / 90;
         
         let hullPoint = undefined;
@@ -28,7 +28,7 @@ export default class Markers extends Component {
         const markerList = _.map(markers, (marker, index) => {
             const { name, coords, type = "agri" } = marker;
 
-            if (highlightName == marker.name) { hullPoint = [[xScale(coords[0]), yScale(coords[1])]]; }
+            if (trackedNode == marker.name) { hullPoint = [[xScale(coords[0]), yScale(coords[1])]]; }
 
             let markerSizeScaleTemp = markerSizeScale,
                 tempOffset = markerSizeScale * 150;
@@ -68,13 +68,13 @@ export default class Markers extends Component {
             }
         });
 
-        return (<g className='river-marker-container'>{markerList}{hullPoint &&
+        return (<g className='river-marker-container'>{hullPoint &&
             <path
                fill={"transparent"}
                stroke={`#fd9050`}
                strokeWidth={"2.5px"}
                d={onePointHull(hullPoint, 13.5)}
                className={"hull-path"}>
-           </path>}</g>)
+           </path>}{markerList}</g>)
     }
 }
