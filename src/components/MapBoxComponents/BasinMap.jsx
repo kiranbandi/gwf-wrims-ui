@@ -293,19 +293,24 @@ export default class BasinMap extends Component {
                 place: PLACES[1]
             });
         }
-        else if (curHover == 'SK-North-Saskatchewan-River' || curHover == 'AB-North-Saskatchewan-River') {
+        else if (curHover == 'SK-North-Saskatchewan-River') {
             this.setState({
                 place: PLACES[2]
             });
         }
-        else if (curHover == 'Tau-Basin') {
+        else if (curHover == 'AB-North-Saskatchewan-River') {
             this.setState({
                 place: PLACES[3]
             });
         }
-        else if (curHover == 'Stribs-Basin') {
+        else if (curHover == 'Tau-Basin') {
             this.setState({
                 place: PLACES[4]
+            });
+        }
+        else if (curHover == 'Stribs-Basin') {
+            this.setState({
+                place: PLACES[5]
             });
         }
     }
