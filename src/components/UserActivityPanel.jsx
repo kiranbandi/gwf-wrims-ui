@@ -1,36 +1,38 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 
 class UserActivityPanel extends Component {
 
     render() {
 
-        const { width, activeUsers, activeBasinUsers, userBasin } = this.props;
+        const { width, activeUsers, activeBasinUsers, userData, onTrackedUserSelect, trackedUser } = this.props;
+
+        const userBasin = userData.split("#")[0];
         
         return (
             <div className= "user-activity-panel-root">
-                <div className="active-users" style={{height: ((width / 2.15) * .4) + 55}}>
-                    <h1 className='text-primary switch-custom-label'>Active Users</h1>
+                <div className="active-users-container" style={{height: ((width / 2.15) * .4) + 30}}>
+                    <div className='auc-title'>Active Users</div>
                     <div className="user-list-container" style={{height: ((width / 2.15) * .4) - 26}}>
                         {
                             activeUsers.map((user, idx) => {
-                                return(<div className="active-user" key={idx}>{user.email}</div>)
+                                return(<div className={"active-user" + ((user.id === trackedUser)? " tracked" : "")} key={idx} onClick={() => { onTrackedUserSelect(user.id); }}>{user.email}</div>)
                             })
                         }
                     </div>
                 </div>
-                {(userBasin !== "") && <div className="active-users" style={{height: ((width / 2.15) * .4) + 55}}>
-                    <div style={{padding: '0px 6px'}}>
-                        <h1 className='text-primary switch-custom-label'>Active Users on this Basin</h1>
-                    </div>    
-                    <div className="user-list-container" style={{height: ((width / 2.15) * .4) - 26}}>
-                        {
-                            activeBasinUsers[userBasin].users.map((user, idx) => {
-                                return(<div className="active-user" key={idx}>{user.email}</div>)
-                            })
-                        }
-                    </div>
-                </div>}
+                {(userBasin !== "") && 
+                    <div className="active-users-container" style={{height: ((width / 2.15) * .4) + 30}}>
+                        <div className='auc-title'>Active Users on this Basin</div>
+                        <div className="user-list-container" style={{height: ((width / 2.15) * .4) - 26}}>
+                            {
+                                activeBasinUsers[userBasin].users.map((user, idx) => {
+                                    return(<div className={"active-user" + ((user.id === trackedUser)? " tracked" : "")} key={idx} onClick={() => { onTrackedUserSelect(user.id); }}>{user.email}</div>)
+                                })
+                            }
+                        </div>
+                    </div>}
+                <div className="ua-reset" onClick={() => { onTrackedUserSelect(""); }} title={"Clear all tracking data"}><span className="icon icon-cw"></span>RESET</div>    
             </div>
         )
     }

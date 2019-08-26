@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { RiverMap, FilterPanel, FlowPanel, RootSchematic, VerticalSlider, Modal } from '../components';
-import { setFlowData, setMode, setUser, setUserBasin } from '../redux/actions/actions';
+import { setFlowData, setMode, setUser, setUserData, setTrackedUser } from '../redux/actions/actions';
 import axios from 'axios';
 import toastr from '../utils/toastr';
 import Loading from 'react-loading';
@@ -22,6 +22,7 @@ class DashboardRoot extends Component {
             selectedPlace: '',
             SchematicData: { lines: [], artifacts: [], labels: [], markers: [], selectedRegion: null },
         };
+        this.onTrackedUserSelect = this.onTrackedUserSelect.bind(this);
         this.onRegionSelect = this.onRegionSelect.bind(this);
         this.onPlaceSelect = this.onPlaceSelect.bind(this);
     }
@@ -39,11 +40,46 @@ class DashboardRoot extends Component {
         }
     }
 
+    onTrackedUserSelect(userID) {
 
+        const { actions, datastore, trackedUser } = this.props;
+        
+        if (userID === "") { 
+            if (userID !== trackedUser) { 
+                actions.setTrackedUser(""); 
+            } 
+            return;
+         }
+
+        actions.setTrackedUser(userID);
+        
+        let trackedUserData = datastore.ordered.users? datastore.ordered.users.filter((user) => (user.id === userID) && (user.state === 'online')) : [];
+
+        if (trackedUserData.length === 0) {
+            actions.setTrackedUser('');
+            return;
+        }
+        
+        if ((trackedUserData[0].data === "") || trackedUserData[0].data === "###") { 
+            this.setState({SchematicData: { lines: [], artifacts: [], labels: [], markers: [], selectedRegion: null }});
+            this.props.actions.setUserData(`###`); 
+            return; 
+        }
+
+        if ((trackedUserData[0].data).slice(-3) === "###") {
+            this.onRegionSelect({target: { id: trackedUserData[0].data.split("#")[0]}}); 
+            return; 
+        }
+
+        this.onPlaceSelect({target: { id: trackedUserData[0].data}});
+        return;
+    }
 
     onRegionSelect(event) {
+        if (event.target.id === "" || event === "") { return; }
+
         const selectedRegion = event.target.id || 'highwood';
-        this.props.actions.setUserBasin(selectedRegion);
+        this.props.actions.setUserData(`${selectedRegion}###`);
 
         this.setState({ 'isSchematicLoading': true });
         axios.get("/assets/files/schematics/" + selectedRegion + ".json")
@@ -58,6 +94,8 @@ class DashboardRoot extends Component {
 
     onPlaceSelect(event) {
         /* id is model#type#name#number */
+        if (event.target.id === "" || event === "" || event.target.id === "###") { return; }
+        this.props.actions.setUserData(event.target.id);
         const selectorList = event.target.id.split("#");
 
         let selectedRegion = selectorList[0],
@@ -109,12 +147,18 @@ class DashboardRoot extends Component {
         // reduce the width of the slider from the map
         mapWidth = mapWidth - widthOfSlider;
 
-        const {  } = this.props;
-
-        const { mode, datastore, username, userBasin } = this.props;
+        const { mode, datastore, username, userData, trackedUser } = this.props;
 
 
         let activeUsers = datastore.ordered.users? datastore.ordered.users.filter((user) => (user.id !== username) && (user.state === 'online')) : [];
+
+        let trackedUserData = datastore.ordered.users? datastore.ordered.users.filter((user) => (user.id === trackedUser) && (user.state === 'online')) : [];
+
+        if (trackedUserData.length === 0 && trackedUser !== "") { this.onTrackedUserSelect(""); }
+
+        let TUData = (trackedUserData.length === 0)? "###" : ((trackedUserData[0].data).slice(-3) === "###")? "###" : trackedUserData[0].data; 
+
+        let trackedNode = TUData.split("#")[2];
         
         let activeBasinUsers = {
             alberta:{
@@ -141,12 +185,11 @@ class DashboardRoot extends Component {
         }
 
         activeUsers.forEach((user) => {
-            let userData = user.basin;
+            let uData = user.data.split("#");
 
-            if (activeBasinUsers[userData]) {
-                activeBasinUsers[userData].users.push(user.email);
+            if (activeBasinUsers[uData[0]]) {
+                activeBasinUsers[uData[0]].users.push(user);
             };
-
         });
             
         // let activeBasinUsers = (userBasin === "")? undefined : activeUsers.filter((user) => (user.basin === userBasin));
@@ -164,7 +207,9 @@ class DashboardRoot extends Component {
                     mode={mode}
                     activeUsers={activeUsers}
                     activeBasinUsers={activeBasinUsers}
-                    userBasin={userBasin}
+                    userData={userData}
+                    onTrackedUserSelect={this.onTrackedUserSelect}
+                    trackedUser={trackedUser}
                 />
 
                 {isSchematicLoading ?
@@ -178,7 +223,8 @@ class DashboardRoot extends Component {
                                     width={mapWidth}
                                     height={mapWidth / 1.75}
                                     isMock={false}
-                                    scaleFix={!(mode === 1)} />
+                                    scaleFix={!(mode === 1)} 
+                                    trackedNode={trackedNode}/>
 
                                 {(mode === 1) && <VerticalSlider
                                     width={widthOfSlider}
@@ -202,13 +248,14 @@ const mapStateToProps = (state) => {
         mode: state.delta.mode,
         username: state.delta.username,
         datastore: state.firestore,
-        userBasin: state.delta.userBasin
+        userData: state.delta.userData,
+        trackedUser: state.delta.trackedUser
     };
 };
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({ setFlowData, setMode, setUser, setUserBasin }, dispatch)
+        actions: bindActionCreators({ setFlowData, setMode, setUser, setUserData, setTrackedUser }, dispatch)
     };
 }
 

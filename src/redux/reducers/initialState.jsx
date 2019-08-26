@@ -4,7 +4,8 @@ export default {
     username: sessionStorage.username,
     email: sessionStorage.email,
 
-    userBasin: '',
+    userData: '###',
+    trackedUser: '',
 
 
     filterMesh: {

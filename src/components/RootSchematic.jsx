@@ -51,12 +51,15 @@ class RootSchematic extends Component {
 
             let userCount = activeBasinUsers[basin].users.length;
 
+            let titleText = userCount === 1? `1 user is active on this basin` : `${userCount} users are active on this basin`;
+
             let countWeight = (userCount < 10)? " light" : (userCount < 100)? " medium" : " heavy";
 
             if (userCount !== 0) {
                 return (<g className="readware-blob" transform={`translate(${Math.round(readwareBlobs[basin].coords[0] * width)}, ${Math.round(readwareBlobs[basin].coords[1] * height)})`} key={idx}>
                             <circle r={`10.5px`} fill={`red`}></circle>
                             <text className={"readware-blob-text" + countWeight}>{userCount}</text>
+                            <title>{titleText}</title>
                         </g>)
             }
         }) 
@@ -68,7 +71,7 @@ class RootSchematic extends Component {
 
         let { width = 1000, selectedPlace, mode, cwe = false } = this.props, { isMapShown } = this.state;
 
-        const { activeUsers, activeBasinUsers, userBasin } = this.props;
+        const { activeUsers, activeBasinUsers, userData, trackedUser } = this.props;
 
         let isModeZero = (mode === 0);
 
@@ -116,7 +119,13 @@ class RootSchematic extends Component {
 
                 </div>
                 {cwe? 
-                    <UserActivityPanel width={width} activeUsers={activeUsers} activeBasinUsers={activeBasinUsers} userBasin={userBasin}/> 
+                    <UserActivityPanel 
+                        width={width} 
+                        activeUsers={activeUsers} 
+                        activeBasinUsers={activeBasinUsers} 
+                        userData={userData} 
+                        onTrackedUserSelect={this.props.onTrackedUserSelect}
+                        trackedUser={trackedUser}/> 
                     :
                     <div className='place-selection-container'>
                         <h2 className='text-primary'>Places of Interest</h2>
