@@ -20,7 +20,7 @@ export default function configureStore() {
       reactReduxFirebase(firebaseConfig))
     : 
     compose(
-      applyMiddleware(thunkthunk.withExtraArgument({getFirestore, getFirebase})),
+      applyMiddleware(thunk.withExtraArgument({getFirestore, getFirebase})),
       reduxFirestore(firebaseConfig),
       reactReduxFirebase(firebaseConfig)
     ))
