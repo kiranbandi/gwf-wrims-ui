@@ -60,30 +60,6 @@ export default class BasinMap extends Component {
             displayImage: false,
             canDrag: true,
             canScroll: true,
-
-            basinStruct: {
-                southSask: {
-                    displayName: "South-Saskatchewan-River",
-                    highlightColor: "hsl(115, 67%, 47%)"
-                },
-                northSaskSask: {
-                    displayName: "SK-North-Saskatchewan-River",
-                    highlightColor: "hsl(72, 66%, 44%)"
-                },
-                northSask: {
-                    displayName: "AB-North-Saskatchewan-River",
-                    highlightColor: "hsl(72, 66%, 44%)"
-                },
-
-                stribs: {
-                    displayName: "SK-North-Saskatchewan-River",
-                    highlightColor: "hsl(115, 67%, 87%)"
-                },
-                highwood: {
-                    displayName: "Highwood-River",
-                    highlightColor: "hsla(46, 99%, 56%, 0)"
-                },
-            }
         };
 
         this.renderHoverPopup = this.renderHoverPopup.bind(this);
