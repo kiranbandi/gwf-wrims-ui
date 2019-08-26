@@ -66,6 +66,9 @@
             }
 
             .root-schematic-readware-blobs {
+                user-select: none;
+                cursor: pointer;
+                
                 .readware-blob-text {
                     fill: white;
                     font-weight: 400;

@@ -5,13 +5,20 @@
     margin-top: 55px;
     margin-left: 10px;
 
-    .active-users {
+    .active-users-container {
         margin: 5px;
         background: #212131;
         border-radius: 15px;
         padding: 4px;
         overflow: hidden;
         min-width: 310px;
+
+        .auc-title {
+            font-size: 1.8em;
+            color: #1ca8dd;
+            font-weight: bolder;
+            padding: 5px 10px;
+        }
 
         .user-list-container {
             overflow-y: auto;
@@ -22,6 +29,17 @@
                 margin: 4px;
                 border-radius: 5px;
                 padding: 4px;
+                user-select: none;
+                cursor: pointer;
+
+                &:hover {
+                    border: 1px solid #c5c5c5;
+                }
+
+                &.tracked {
+                    border: 1px solid white;
+                    font-weight: 500;
+                }
             }
         }
 
@@ -46,6 +64,29 @@
         }
         
     
+    }
+
+    .ua-reset {
+        
+        cursor: pointer;
+        background: #212131;
+        width: max-content;
+        margin: 16px auto;
+        font-size: 1.8em;
+        color: #1ca8dd;
+        font-weight: bolder;
+        padding: 5px 10px;
+        border-radius: 10px;
+        
+        span {
+            font-size: 0.9em;
+            padding: 0px 6px;
+        }
+
+        &:hover {
+            background: #ff2a2ac2;
+            color: white;
+        }
     }
 
 }
