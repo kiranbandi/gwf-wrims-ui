@@ -99,7 +99,7 @@ export default class BasinMap extends Component {
 
         // If hovering over a basin
         if (basin) {
-            // console.log(event.lngLat)
+            // console.log(event.lngLat) // Used for printing the LatLong of the cursor on the basin
             if (currentSelectedName != curHover) {
                 // Resetting the hoverInfo allows the pop-up to re-render at the mouse's current position
                 hoverInfo = {
