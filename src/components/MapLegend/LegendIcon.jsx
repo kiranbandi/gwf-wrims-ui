@@ -5,11 +5,22 @@ export default class LegendIcon extends Component {
         super(props);
     }
 
-
+    /**
+     * Stores the configurations for the svg objects based on the icon type
+     */
     render() {
         
         const { title, textX, textY="52.5", type, circleTransform, imageTransform, selected=false, hasText = true } = this.props;
-
+        /**
+         *  title: The text to be displayed under the legend's icon
+         *  textX: The X transform of the text
+         *  textY: The Y transform of the text
+         *  type: The type of icon for the svg element used in the legend [sink, agri, demand, reservoir]
+         *  circleTransform: The X/Y transform of the circle
+         *  imageTransform: The X/Y transform of the image to be displayed over the circle
+         *  selected: If the marker was selected by the user, the circle will be displayed in red
+         *  hasText: IF the marker needs text within the circle
+         */
         return (
             <g>
                 <g key={'marker-' + type} id={title} className={!selected ? "river-marker" : "river-marker highlight"}
