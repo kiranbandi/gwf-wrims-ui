@@ -1,4 +1,3 @@
-/*global $*/
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -9,9 +8,7 @@ import IrrigationFilter from './FilterPanelComponents/IrrigationFilter.jsx';
 import NonIrrigationFilter from './FilterPanelComponents/NonIrrigationFilter.jsx';
 import YearRangeSlider from '../../SingleFilterComponents/YearRangeSlider';
 
-
 class FilterPanel extends Component {
-
     constructor(props) {
         super(props);
     }
@@ -19,6 +16,7 @@ class FilterPanel extends Component {
     render() {
         const { filterMesh, schematicData = { lines: [], artifacts: [], labels: [], markers: [] } } = this.props;
 
+        // Renders each of the componentes and passes the necessary data to filter through data
         return (
             <div className='filter-root-container '>
                 <div>
