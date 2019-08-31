@@ -4,11 +4,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import 'rc-slider/assets/index.css';
 import Slider from 'rc-slider';
+import _ from 'lodash';
 import { getFlowData } from '../../utils/requestServer';
 import { setFlowData } from '../../redux/actions/actions';
-import toastr from '../../utils/toastr';
 import Switch from "react-switch";
-
 
 const UPPERBOUND = 1990, LOWERBOUND = 2015;
 var markRange = {};
@@ -35,22 +34,34 @@ class YearRangeSlider extends Component {
         };
     }
 
+    /**
+     * Sets the upperbound to the lowerbound value
+     */
     handleChange(checked) {
         this.setState({ checked, upperBound: this.state.lowerBound });
     }
 
+    /**
+     * Changes the lower bound value
+     */
     onLowerBoundChange = (e) => {
         if (!(e.target.value > markRange[2020]) && !(e.target.value < markRange[1920]) && (e.target.value < this.state.upperBound)) {
             this.setState({ lowerBound: e.target.value > this.state.lowerBound ? +e.target.value + 4 : +e.target.value - 4 });
         }
     }
 
+    /**
+     * Changes the upper bound value
+     */
     onUpperBoundChange = (e) => {
         if (!(e.target.value > markRange[2020]) && !(e.target.value < markRange[1920]) && (e.target.value > this.state.lowerBound)) {
             this.setState({ upperBound: e.target.value > this.state.upperBound ? +e.target.value + 4 : +e.target.value - 4 });
         }
     }
 
+    /**
+     * Called when the slider changes as a multi slider
+     */
     onSliderChangeMulti = (value) => {
         this.setState({
             value,
@@ -59,6 +70,9 @@ class YearRangeSlider extends Component {
         });
     }
 
+    /**
+     * Called when the slider changes as a single slider
+     */
     onSliderChangeSingle = (value) => {
         this.setState({
             lowerBound: value,
@@ -66,11 +80,17 @@ class YearRangeSlider extends Component {
         })
     }
 
+    /**
+     * Applies the year range and processes the data
+     */
     handleApply = () => {
         const { lowerBound, upperBound } = this.state;
         this.setState({ value: [lowerBound, upperBound] });
     }
 
+    /** 
+     * Clears the data
+     */
     handleClear = () => {
         console.log("Clear doughnut chart")
     }
