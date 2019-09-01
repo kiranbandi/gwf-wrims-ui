@@ -31,7 +31,7 @@
         "react-bootstrap-select": "^0.14.0",
         "react-dom": "^16.4.1",
         "react-loading": "^2.0.3",
-        "react-map-gl": "^5.0.3",
+        "react-map-gl": "^5.0.10",
         "react-motion": "^0.5.2",
         "react-motion-menu": "^0.4.4",
         "react-redux": "^5.0.7",

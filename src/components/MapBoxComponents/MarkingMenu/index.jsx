@@ -18,7 +18,7 @@ export default class MarkingMenu extends Component {
     openSpeed: PropTypes.number,
     reverse: PropTypes.bool,
   }
-
+  
   static defaultProps = {
     x: 0,
     y: 0,
