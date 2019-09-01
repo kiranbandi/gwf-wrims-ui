@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import MapGL, { Popup, FlyToInterpolator } from 'react-map-gl';
 import PLACES from '../../utils/static-reference/mapPlaces';
 import MarkingMenu from './MarkingMenu'
-
 import { fromJS } from 'immutable';
+import defaultMapStyle from './MapStyle.jsx';
 
 const TOKEN = 'pk.eyJ1IjoicmljYXJkb3JoZWVkZXIiLCJhIjoiY2p4MGl5bWIyMDE1bDN5b2NneHh5djJ2biJ9.3ALfBtMIORYFNtXU9RUUnA';
 
-import defaultMapStyle from './MapStyle.jsx';
-
+// An array used to contain the basin names from MapStyle.jsx that are to be interacted with
 let basinArray = [
     'SK-South-Saskatchewan-River',
     'Highwood',
@@ -21,7 +20,7 @@ let basinArray = [
 
 ];
 
-const selectColor = "hsla(0, 36%, 71%, 0)" // have a translucent color for basin selection
+const selectColor = "hsla(0, 36%, 71%, 0)" // A translucent color for basin selection
 
 let curHover = ''
 let prevHover = ''
@@ -38,6 +37,7 @@ export default class BasinMap extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            componentMounted: false, // Used to stop errors for the onviewportChange() method
             mapStyle: defaultMapStyle,
             viewport: {
                 width: 400,
@@ -46,161 +46,165 @@ export default class BasinMap extends Component {
                 longitude: -110.75,
                 zoom: 5.1
             },
-            popupInfo: null,
-            hoverInfo: null,
-            mapSelectedBorder: defaultMapStyle,
-            place: null,
+            popupInfo: null,    // Used for the Marking Menu's variables 
+            hoverInfo: null,    // Used for displaying the basin's names when hovering
+            place: null,        // Used to store the current selected place/Basin
             markingMenu: {
-                curClick: false,
-                prevClick: false,
+                curClick: false,    // If clicked, curClick = true, else, curClick = false
+                prevClick: false,   // What curClick previously was
                 xPos: 0,
                 yPos: 0,
-                mouseOver: false
+                mouseOver: false    // If the cursor is hovering over the Marking Menu
             },
-            displayImage: false,
-            canDrag: true,
-            canScroll: true,
-
-            basinStruct: {
-                southSask: {
-                    displayName: "South-Saskatchewan-River",
-                    highlightColor: "hsl(115, 67%, 47%)"
-                },
-                northSaskSask: {
-                    displayName: "SK-North-Saskatchewan-River",
-                    highlightColor: "hsl(72, 66%, 44%)"
-                },
-                northSask: {
-                    displayName: "AB-North-Saskatchewan-River",
-                    highlightColor: "hsl(72, 66%, 44%)"
-                },
-
-                stribs: {
-                    displayName: "SK-North-Saskatchewan-River",
-                    highlightColor: "hsl(115, 67%, 87%)"
-                },
-                highwood: {
-                    displayName: "Highwood-River",
-                    highlightColor: "hsla(46, 99%, 56%, 0)"
-                },
-            }
+            displayImage: false,    // A toggled boolean on whether or not to display the Marking Menu's image
         };
 
         this.renderHoverPopup = this.renderHoverPopup.bind(this);
-
         this.addMarkingMenu = this.addMarkingMenu.bind(this);
     }
 
+    componentDidMount(){
+        this.setState({ componentMounted: true })
 
+        curHover = ''
+        prevHover = ''
+
+        basinSelectedLayerIndex = null
+        basinPrevSelectedLayerIndex = ''
+        basinBorderLayerIndex = ''
+
+        editedMapStyle = null;
+        currentSelectedName = ''
+    }
+
+    componentWillUnmount(){
+        this.setState({ componentMounted: false })
+    }
+
+    /**
+     * The cursor's hovering events on the basin map such as:
+     *  - Setting the basin's bordering
+     *  - Setting the Hover information
+     *  - Retrieving the name of the currently hovered basin
+     * 
+     * @event: The event object tracked by react-map-gl
+     */
     _onHover = event => {
-        let hoverInfo = null;
+        let hoverInfo = null; // Resetting the hoverInfo allows the pop-up to re-render at the mouse's current position
+
+        // True if event.features is available, and the name is within the basinArray object
         const basin = event.features && event.features.find(f => basinArray.indexOf(f.layer.id) > -1);
 
-        if (this.state.markingMenu.mouseOver) { return }
+        if (this.state.markingMenu.mouseOver) { return }    // If the cursor is hovering over the marking menu, don't do anything
+
         // If hovering over a basin
         if (basin) {
-            // console.log(event.lngLat)
+            // console.log(event.lngLat) // Used for printing the LatLong of the cursor on the basin
             if (currentSelectedName != curHover) {
-                // reset hoverInfo so that it re-renders to mouse cursor
+                // Resetting the hoverInfo allows the pop-up to re-render at the mouse's current position
                 hoverInfo = {
                     lngLat: event.lngLat,
                     basinName: basin.layer.id.split("-").join(" ")
                 };
                 this.setState({ hoverInfo })
-            }
-            if (currentSelectedName == curHover) {
+            } else {    // To prevent the pop-up when hovering over the currently selected Basin
                 hoverInfo = null;
-                this.setState({ hoverInfo })
+                this.setState({ hoverInfo })    
             }
 
             let basinNameId = basin.layer.id;   // Store basin name as ID
 
-            curHover = basinNameId  // store basin ID as current hover
-            // Check that we are not still hovering over same basin ()
+            curHover = basinNameId  // Store basin ID as current hover
+            // Check that we are not still hovering over same basin
             if (prevHover != curHover) {
                 // We are hovering over new basin - make changes
-
-                basinBorderLayerIndex = this.getBasinBorderLayerIndex()
+                // Get the border layer index, so that a border can be applied to the basin we are currently hovering over
+                basinBorderLayerIndex = this.getBasinBorderLayerIndex() 
             }
+        } else {
+            curHover = ''   // If basin=false, currently hovering over none of the desired basins
         }
 
-        else {
-            curHover = ''   // Currently hovering nothing
-        }
-
-        // If the current hover has changed 
-        // OR
-        // We have hovered off of a basin
+        // If the current hover has changed OR if we are hovering over no basins
         if ((curHover != prevHover) || (curHover == '' && basinArray.indexOf(prevHover) > -1)) {
             prevHover = curHover    // Set previous hover to what was previously hovered
-            this.closeMarkingMenu()
-            if (curHover == '') {
+            this.closeMarkingMenu() // Close the Marking Menu when hovering over new area
+            
+            // If we aren't hovering over any of the desired basins, reset the map
+            if (curHover == '') {   
                 hoverInfo = ''
-
                 editedMapStyle = defaultMapStyle
 
-                // Keeps the basin selected when the cursor is hovering outside of the basins
+                // Keeps the Selected Basin even when hovering outside of the basins
                 if (basinSelectedLayerIndex != '') {
                     editedMapStyle = this.highlightBasin(editedMapStyle, basinSelectedLayerIndex, currentSelectedName, selectColor)
                 }
 
-                this.setState({
-                    mapStyle: editedMapStyle,
-                    hoverInfo
-                })
             } else {
-
-                editedMapStyle = defaultMapStyle   // reset the map edits
+                // Reset the edited map
+                editedMapStyle = defaultMapStyle   
                 // Border the current basin(s)
                 editedMapStyle = this.borderBasin(editedMapStyle, basinBorderLayerIndex)
-
-                // Highlight the current basin(s)
+                // If there is a basin selected, highlight the current basin
                 if (basinSelectedLayerIndex != '') {
                     editedMapStyle = this.highlightBasin(editedMapStyle, basinSelectedLayerIndex, currentSelectedName, selectColor)
                 }
-
-                this.setState({
-                    mapStyle: editedMapStyle,
-                    hoverInfo
-                });
             }
+            this.setState({
+                mapStyle: editedMapStyle,
+                hoverInfo
+            })
         }
     };
 
-    // Handling clicks on the map and where to redirect users
+    /**
+     * The cursor's onMouseUp events on the basin map
+     * Deals with most of the onClick actions such as:
+     *  - Setting the basin highlighting
+     *  - Setting the Pop-up information
+     *  - Opening/Closign the Marking Menu
+     * 
+     * @event: The event object tracked by react-map-gl
+     */
     _onMouseUp = event => {
-        let hoverInfo = null;
+        let hoverInfo = null; // Resetting the hoverInfo allows the pop-up to re-render at the mouse's current position
         this.setState({ hoverInfo })
 
-        if (curHover == '' || this.state.markingMenu.mouseOver) { return }  // If not hovering over anything, don't do anything 
-
+        // If not hovering over anything, or hovering over the Marking Menu, don't do anything 
+        if (curHover == '' || this.state.markingMenu.mouseOver) { return }
+        
+        // Get the Basin Layer currently being hovered over
         basinSelectedLayerIndex = this.getBasinLayerIndex()
-        // Unselect the previous basin
+
+        // Unselect the previous basin by resetting the map
         if (basinPrevSelectedLayerIndex != '') {
             editedMapStyle = defaultMapStyle
             editedMapStyle = this.borderBasin(editedMapStyle, basinBorderLayerIndex) // Reapply border
         }
-        basinPrevSelectedLayerIndex = basinSelectedLayerIndex   // Store the previous border index
+        basinPrevSelectedLayerIndex = basinSelectedLayerIndex   // Store the previous border's index
 
+        // Store the name of the currently selected basin
         currentSelectedName = curHover
 
-        // Apply border, repaint current basin
+        // Repaint current basin
         editedMapStyle = this.highlightBasin(editedMapStyle, basinSelectedLayerIndex, currentSelectedName, selectColor)
 
         this.setState({
             mapStyle: editedMapStyle
         });
 
-        this.setPlace(curHover);
+        // Set the current place selected to the basin selected
+        this.setPlace(currentSelectedName); 
 
-        // Update popupInfo state to new place selected
+        // Update popupInfo state to the newly selected place 
         if (this.state.place != null) {
-            // set the popup info for the current place marker
+            // Set the popup info for the current place marker
             this.setState({ popupInfo: this.state.place }) // viewport
         }
 
-        // If a basin is selected, place the marking menu down, else, remove the marking menu
+        // If a basin is selected, open the Marking Menu at the current location, else, remove the marking menu
         if (curHover != '') {
+            // If not already hovering over the Marking Menu, then open the Marking Menu at the current location
             if (!this.state.markingMenu.mouseOver) {
                 this.setState({
                     markingMenu: { ...this.state.markingMenu, curClick: true, xPos: event.point[0] - 12.5, yPos: event.point[1] - 12.5 },
@@ -209,23 +213,26 @@ export default class BasinMap extends Component {
         } else {
             this.closeMarkingMenu();
         }
-
-        // If mouse button up, impossible to be hovering
-        this.setState({ canDrag: true, canScroll: true })
     }
 
+    /**
+     * The cursor's onMouseDown events on the basin map
+     * 
+     * @event: The event object tracked by react-map-gl
+     */
     _onMouseDown = event => {
-        // If not hovering over a marking menu button AND if mouse down THEN remove the marking menu
+        // If not hovering over the Marking Menu button close the Marking Menu
         if (this.state.markingMenu.mouseOver == false) {
             this.setState({
                 markingMenu: { ...this.state.markingMenu, curClick: false }
             });
         }
-        if (this.state.markingMenu.mouseOver) {
-            this.setState({ canDrag: false, canScroll: false })
-        }
     };
 
+    /**
+     * Get the selected basin's layer index
+     * Layer index is useful for editing layers within MapStyle.jsx
+     */
     getBasinLayerIndex() {
         let layers = defaultMapStyle.get('layers')
         let basinHighlightLayerIndex = layers.findIndex((l) => {
@@ -234,6 +241,10 @@ export default class BasinMap extends Component {
         return basinHighlightLayerIndex
     }
 
+    /**
+     * Get the currently hovered basin's layer index
+     * Layer index is useful for editing layers within MapStyle.jsx
+     */
     getBasinBorderLayerIndex() {
         // Get index of the current basin's border
         let layers = defaultMapStyle.get('layers')
@@ -243,30 +254,33 @@ export default class BasinMap extends Component {
         return layerIndex
     }
 
-    closeMarkingMenu() {
-        if (this.state.markingMenu.curClick == true) {
-            this.setState({
-                markingMenu: { ...this.state.markingMenu, curClick: false, mouseOver: false }
-            });
-        }
-    }
-
+    /**
+     * Used to toggle the state on if the mouse if hovering OFF the Marking Menu
+     */
     mouseOut() {
-        // Indicates that we finished hovering over a button
         this.setState({
             markingMenu: { ...this.state.markingMenu, mouseOver: false }
         });
     }
 
+    /**
+     * Used to toggle the state on if the mouse if hovering ON the Marking Menu
+     */
     mouseOver() {
-        // Clears hover info, so that it dissapears while hovering over a button
-        // Indicates that we are hovering over a button
         this.setState({
             markingMenu: { ...this.state.markingMenu, mouseOver: true },
             hoverInfo: null
         });
     }
 
+    /**
+     * The logic to apply highlighting to desired basin(s)
+     * 
+     * @mapToEdit The mapstyle to edit
+     * @basinHighlightIndex The layer index to use
+     * @basinHighlightName The layer name to use for special cases
+     * @color The color to highlight to
+     */
     highlightBasin(mapToEdit, basinHighlightIndex, basinHighlightName, color) {
         if (basinHighlightName == 'Tau-Basin') {
             mapToEdit = mapToEdit.setIn(['layers', basinHighlightIndex + 1, 'paint', 'fill-color'], color)
@@ -283,20 +297,37 @@ export default class BasinMap extends Component {
         return mapToEdit
     }
 
-    borderBasin(mapToEdit, basinBorderIndex, basinBorderName = '') {
+    /**
+     * The logic to apply bordering to desired basin(s)
+     * 
+     * @mapToEdit The mapstyle to edit
+     * @basinBorderIndex The layer index to use
+     */
+    borderBasin(mapToEdit, basinBorderIndex) {
         mapToEdit = mapToEdit.setIn(['layers', basinBorderIndex, 'layout', 'visibility'], "visible")
 
         return mapToEdit
     }
 
-    unborderBasin(mapToEdit, basinBorderIndex, basinBorderName) {
+    /**
+     * The logic to unborder to desired basin(s)
+     * 
+     * @mapToEdit The mapstyle to edit
+     * @basinBorderIndex The layer index to use
+     */
+    unborderBasin(mapToEdit, basinBorderIndex) {
         mapToEdit = mapToEdit.setIn(['layers', basinBorderIndex, 'layout', 'visibility'], "none")
 
         return mapToEdit
     }
 
+    /**
+     * Sets the state of place to once of the places within /utils/static-reference/mapPlaces
+     * Get information for the Info-Card pop-up
+     * 
+     * @curHover The basin that is currently being hovered
+     */
     setPlace(curHover) {
-        // Get information for the Info-Card pop-up
         if (curHover == 'SK-South-Saskatchewan-River') {
             this.setState({
                 place: PLACES[0]
@@ -307,28 +338,39 @@ export default class BasinMap extends Component {
                 place: PLACES[1]
             });
         }
-        else if (curHover == 'SK-North-Saskatchewan-River' || curHover == 'AB-North-Saskatchewan-River') {
+        else if (curHover == 'SK-North-Saskatchewan-River') {
             this.setState({
                 place: PLACES[2]
             });
         }
-        else if (curHover == 'Tau-Basin') {
+        else if (curHover == 'AB-North-Saskatchewan-River') {
             this.setState({
                 place: PLACES[3]
             });
         }
-        else if (curHover == 'Stribs-Basin') {
+        else if (curHover == 'Tau-Basin') {
             this.setState({
                 place: PLACES[4]
             });
         }
+        else if (curHover == 'Stribs-Basin') {
+            this.setState({
+                place: PLACES[5]
+            });
+        }
     }
 
+    /**
+     * The onClick method for the Marking menu's buttons
+     */
     iconButtonClick = () => {
-        this._goToViewport(this.state.place)
-        this.props.onRegionSelect({ 'target': this.state.place })
+        this._goToViewport(this.state.place)    // Moves the viewport to the designated area
+        this.props.onRegionSelect({ 'target': this.state.place })   // Selects the region
     }
 
+    /**
+     * Renders the basin's name while hovering over the basin
+     */
     renderHoverPopup() {
         const { hoverInfo } = this.state;
         if (hoverInfo) {
@@ -341,24 +383,39 @@ export default class BasinMap extends Component {
         return null;
     }
 
+    /**
+     * Method for react-map-gl to render any changes onto the viewport
+     * 
+     * @viewport The current viewport used by react-map-gl
+     */
     _onViewportChange = viewport => {
-        // console.log("on viewport change")
-
         this.setState({
             viewport: { ...this.state.viewport, ...viewport }
         });
     }
 
+    /**
+     * Method for react-map-gl to transition the viewport to the new latlng location with a zoom
+     * 
+     * @longitude The lng. to move to
+     * @latitude The lat. to move to
+     * @zoom The zoom level for the viewport
+     */
     _goToViewport = ({ longitude, latitude, zoom }) => {
-        this._onViewportChange({
+        this.state.componentMounted ? this._onViewportChange({
             longitude,
             latitude,
             zoom,
             transitionInterpolator: new FlyToInterpolator(),
             transitionDuration: 1500
-        });
+        }) : null;
     };
 
+    /**
+     * An onClick event for the Marking Menu
+     * Opens the schematic for viewing at the bottom of the schrren
+     * Hides the Marking Menu
+     */
     viewSchematic() {
         this.iconButtonClick()
         this.setState({
@@ -366,6 +423,10 @@ export default class BasinMap extends Component {
         });
     }
 
+    /**
+     * Opens the Marking Menu onto the current position of the mouse
+     * Will be rendered from within the React render method
+     */
     addMarkingMenu() {
         const { popupInfo } = this.state;
 
@@ -373,6 +434,7 @@ export default class BasinMap extends Component {
             // console.log("add marking menu")
 
             return (
+            <div ref="markingmenu">
                 <MarkingMenu
                     x={this.state.markingMenu.xPos}
                     y={this.state.markingMenu.yPos}
@@ -403,17 +465,30 @@ export default class BasinMap extends Component {
                         <a className="icon icon-info-with-circle" target="_new" href={`http://en.wikipedia.org/w/index.php?title=Special:Search&search=${`${popupInfo.name}`}`} />
                     </div>
                 </MarkingMenu>
+            </div>
+                
             )
         }
-        else {
-            return ('')
+        else {''}
+        
+    }
+    
+    /**
+     * Closes the Marking Menu if it was open
+     */
+    closeMarkingMenu() {
+        if (this.state.markingMenu.curClick == true) { 
+            this.setState({
+                markingMenu: { ...this.state.markingMenu, curClick: false, mouseOver: false }
+            });
         }
     }
 
     render() {
         let { viewport, mapStyle } = this.state, { width } = this.props;
+        const { componentMounted } = this.state
 
-        // set the viewports for the map
+        // Set the viewports for the map
         viewport.width = width;
         viewport.height = width / 2.5;
 
@@ -425,7 +500,7 @@ export default class BasinMap extends Component {
                     mapboxApiAccessToken={TOKEN}
                     {...viewport}
 
-                    onViewportChange={this._onViewportChange}
+                    onViewportChange={componentMounted ? this._onViewportChange : null }
                     doubleClickZoom={false}
                     dragRotate={false}
                     minZoom={2}
@@ -434,7 +509,7 @@ export default class BasinMap extends Component {
                     onMouseDown={this._onMouseDown}
                     onMouseUp={this._onMouseUp}
 
-                    // if transition, dragging, panning, potating, or zooming, close menu
+                    // If transition, dragging, panning, potating, or zooming, then close the Marking Menu
                     onInteractionStateChange={() => this.closeMarkingMenu()}
                 >
                     {this.renderHoverPopup()}
@@ -443,7 +518,6 @@ export default class BasinMap extends Component {
                         {this.addMarkingMenu()}
                     </div>
                 </MapGL>
-
             </div>
         );
     }
