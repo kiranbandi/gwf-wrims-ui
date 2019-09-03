@@ -8,7 +8,7 @@ import { GoogleLogin } from 'react-google-login';
 import { requestLogin } from '../utils/requestServer';
 import { setMode } from '../redux/actions/actions';
 
-
+let backgroundStyleGoogleLogo = { background: 'url(assets/img/google/g-logo.png)', backgroundSize: '100%' };
 // Google client ID for the GWF project 
 const GOOGLE_ID = '35101241949-nlhoc8npcecg7il8589aq194cc5cboab.apps.googleusercontent.com';
 
@@ -72,20 +72,23 @@ class NavBar extends Component {
                             <span className="icon-bar"></span>
                         </button>
                         <Link data-toggle="collapse" data-target="#navbar" className="navbar-brand navbar-brand-emphasized" to='/'>
-                            <span className="icon icon-home navbar-brand-icon"></span> Home
-                            </Link>
+                            <span className="icon icon-home navbar-brand-icon"></span>
+                            Home
+                        </Link>
                     </div>
                     <div id="navbar" className="navbar-collapse collapse ">
 
                         <ul className='nav navbar-nav'>
                             <li>
                                 <Link to={'/Dashboard'}>
-                                    <span className="icon icon-line-graph"></span> Dashboard
+                                    <span className="icon icon-line-graph"></span> 
+                                    Dashboard
                                 </Link>
                             </li>
                             <li>
-                            <Link to={'/Parser'}>
-                                    <span className="icon icon-classic-computer"></span> MODSIM Parser
+                                <Link to={'/Parser'}>
+                                    <span className="icon icon-classic-computer"></span> 
+                                    MODSIM Parser
                                 </Link>
                             </li>
                         </ul>
@@ -93,9 +96,10 @@ class NavBar extends Component {
                             { !nullUserState && logged_in &&
                                 <li>                              
         
-                                    <div className="mode-switch-button" onClick={this._onSwitchModeButtonClick} >
-                                        {"Switch Mode"}
-                                    </div>
+                                    <a className="mode-switch-button" onClick={this._onSwitchModeButtonClick}>
+                                        <span className="icon icon icon-sound-mix"></span> 
+                                        SWITCH MODE
+                                    </a>
                                 </li>
                             }
                             <li> {this.props.logged_in ?
@@ -106,6 +110,7 @@ class NavBar extends Component {
                                 :
                                 <span className='login-container'>
                                     <span className='login-text'>Login</span>
+                                    <span className="login-container-seperator">|</span>
                                     <a href={loginRedirectURL}>
                                         <span style={logoIconStyle} className="paws-icon"></span>
                                     </a>
@@ -119,7 +124,7 @@ class NavBar extends Component {
                                         icon={false}
                                         cookiePolicy={'single_host_origin'}>
                                         <span className='login-internal'>
-                                            <span className="icon icon-google-plus-with-circle"></span>
+                                            <div className="google-logo" style={backgroundStyleGoogleLogo}></div>
                                         </span>
                                     </GoogleLogin>
                                 </span>
