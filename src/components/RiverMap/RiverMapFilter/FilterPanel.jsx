@@ -36,9 +36,9 @@ class FilterPanel extends Component {
                         <LabelFilter />
                     </div>
                 </div>
-                <div>
+                {/* <div>
                     <YearRangeSlider width={this.props.width} height={this.props.height} />
-                </div>
+                </div> */}
             </div>
         );
     }

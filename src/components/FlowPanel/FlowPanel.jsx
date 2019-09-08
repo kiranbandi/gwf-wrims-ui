@@ -153,7 +153,7 @@ class FlowPanel extends Component {
 
     render() {
         const { flowData = {}, width, height } = this.props,
-            { dataList = [], name = '', isLoading = false, flowParams = { threshold: 'base' } } = flowData,
+            { dataList = [], name = '', isLoading = false, flowParams = { threshold: 'base-base' } } = flowData,
             innerWidth = width - 60,
             innerHeight = height - (175);
 
@@ -178,7 +178,7 @@ class FlowPanel extends Component {
                     <div className='flow-inner-container'>
                         <p className='exclaimatory-text'>* All values are in 1000m<sup>3</sup>/week</p>
                         <div className='entire-panel' style={{ width, height: '90px' }}>
-                            <div className='metrics-container' style={{ 'width': width - 70 }}>
+                            <div className='metrics-container' style={{ 'width': width - 50 }}>
                                 {this.addStatCards(metrics, innerWidth)}
                             </div>
 

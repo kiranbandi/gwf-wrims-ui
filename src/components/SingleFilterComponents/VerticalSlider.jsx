@@ -10,7 +10,7 @@ import { getFlowData } from '../../utils/requestServer';
 import { setFlowData } from '../../redux/actions/actions';
 import toastr from '../../utils/toastr';
 
-import Modal from '../Modal' 
+import Modal from '../Modal'
 
 const decreaseSupplyMarks = {
     0: <strong>-10%</strong>,
@@ -38,26 +38,36 @@ class VerticalSlider extends Component {
     }
 
     learnMore = () => {
-        this.setState({showModal: true});
+        this.setState({ showModal: true });
     }
 
     hideModal = () => {
-        this.setState({showModal: false});
+        this.setState({ showModal: false });
     }
 
     onSwitchChange = () => {
         let newMode = Math.abs(this.state.currentMode - 1);
-        let newSliderVal = newMode === 0? 100 : 0; 
-        this.setState({ currentMode: newMode, sliderValue: newSliderVal });
+        let newSliderVal = newMode === 0 ? 100 : 0;
+        this.setState({ currentMode: newMode }, () => { this.onSliderChange(newSliderVal) });
     }
 
     onSliderChange(value) {
         this.setState({ sliderValue: value });
-        let { actions, flowData = {} } = this.props, { flowParams = null, name, isLoading = false } = flowData;
+        let { actions, flowData = {} } = this.props,
+            { currentMode = 0 } = this.state,
+            { flowParams = null, name, isLoading = false } = flowData;
 
         if (!isLoading) {
             if (!!flowParams) {
-                flowParams.threshold = value == 0 ? 'ten' : value == 50 ? 'five' : 'base';
+
+
+                if (currentMode == 0) {
+                    flowParams.threshold = value == 0 ? 'ten-decrease' : value == 50 ? 'five-decrease' : 'base-base';
+                }
+                else {
+                    flowParams.threshold = value == 0 ? 'base-base' : value == 50 ? 'five-increase' : 'ten-increase';
+                }
+
                 actions.setFlowData({ dataList: [], name, flowParams, isLoading: true });
                 getFlowData(flowParams)
                     .then((records) => {
@@ -84,11 +94,11 @@ class VerticalSlider extends Component {
     render() {
 
         let { width, height, flowData = {} } = this.props,
-            { flowParams = { threshold: 'base' } } = flowData, { threshold = 'base' } = flowParams;
-        
+            { flowParams = { threshold: 'base-base' } } = flowData, { threshold = 'base-base' } = flowParams;
+
         var { currentMode, sliderValue, showModal } = this.state
 
-        let checked, currentFactor, factorMarks, initialValue;        
+        let checked, currentFactor, factorMarks, initialValue;
         if (currentMode === 0) {
             checked = false;
             currentFactor = "Decrease Supply";
@@ -101,17 +111,17 @@ class VerticalSlider extends Component {
             factorMarks = increaseDemandMarks;
             initialValue = 0;
         }
-        
-        var sliderHeight = ((height - 90)  * .875);
-        sliderHeight = sliderHeight < 320? ((sliderHeight)  * .95) : sliderHeight;
 
-        var marginBottom = sliderHeight < 320? (sliderHeight * 0.065) : (sliderHeight * 0.045);
+        var sliderHeight = ((height - 90) * .875);
+        sliderHeight = sliderHeight < 320 ? ((sliderHeight) * .95) : sliderHeight;
+
+        var marginBottom = sliderHeight < 320 ? (sliderHeight * 0.065) : (sliderHeight * 0.045);
 
 
 
         return (
             <div className='vertical-slider-container' style={{ 'width': width, 'height': height }}>
-                <Modal show={showModal} onClick={this.hideModal}/>
+                <Modal show={showModal} onClick={this.hideModal} />
                 <p className='slider-title'>{currentFactor}</p>
                 <div className='switch-container'>
                     <label htmlFor="vertical-slider-switch">
@@ -132,8 +142,8 @@ class VerticalSlider extends Component {
                         />
                     </label>
                 </div>
-                <div className='inner-slider' style={{ 'width': width, 'height': sliderHeight, marginBottom}}>
-                    <Slider vertical value={sliderValue} min={0} marks={factorMarks} step={null} included={false} onChange={this.onSliderChange} defaultValue={initialValue}/>
+                <div className='inner-slider' style={{ 'width': width, 'height': sliderHeight, marginBottom }}>
+                    <Slider vertical value={sliderValue} min={0} marks={factorMarks} step={null} included={false} onChange={this.onSliderChange} defaultValue={initialValue} />
                 </div>
                 <div className="info-icon" title="Learn More" onClick={this.learnMore}>
                     <span className="icon icon-info-with-circle sample-icon"></span>

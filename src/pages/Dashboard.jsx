@@ -62,7 +62,7 @@ class DashboardRoot extends Component {
                 processedData = processSchematic(response.data);
                 flowParams = {
                     modelID: selectorList[0],
-                    threshold: 'base',
+                    threshold: 'base-base',
                     number: selectorList[3],
                     type: selectorList[1]
                 };
