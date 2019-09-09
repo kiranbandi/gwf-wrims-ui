@@ -11,9 +11,10 @@ import { setMode } from '../redux/actions/actions';
 let backgroundStyleGoogleLogo = { background: 'url(assets/img/google/g-logo.png)', backgroundSize: '100%' };
 // Google client ID for the GWF project 
 const GOOGLE_ID = '35101241949-nlhoc8npcecg7il8589aq194cc5cboab.apps.googleusercontent.com';
-
 //  Image url handling is convoluted in scss , much easier to set inline and get images from root
 let logoIconStyle = { background: 'url(assets/img/pawslogo.png)', backgroundSize: '100%' };
+// List of allowed usernames to have access to edit map nodes
+let accessList = ['vkb698', 'iss469', 'rir954'];
 
 class NavBar extends Component {
 
@@ -35,9 +36,9 @@ class NavBar extends Component {
 
 
 
-    _onSwitchModeButtonClick = () => { 
-        window.scrollTo(0, 0); 
-        this.props.actions.setMode(-1); 
+    _onSwitchModeButtonClick = () => {
+        window.scrollTo(0, 0);
+        this.props.actions.setMode(-1);
     }
 
     logOut(event) {
@@ -59,8 +60,11 @@ class NavBar extends Component {
 
     render() {
         const loginRedirectURL = 'https://cas.usask.ca/cas/login?service=' + encodeURIComponent((process.env.NODE_ENV == 'development') ? 'https://localhost:8888/' : 'https://gwf-hci.usask.ca/');
-        const { mode, logged_in } = this.props;
-        const nullUserState = (mode === -1 || mode === 2)
+        const { mode, logged_in, username } = this.props;
+        const nullUserState = (mode === -1 || mode === 2);
+        // show map tagger only to people in the accessList
+        const showMapTagger = accessList.indexOf(username) > -1;
+
         return (
             <nav className="navbar navbar-inverse navbar-fixed-top">
                 <div className="container-fluid">
@@ -81,29 +85,36 @@ class NavBar extends Component {
                         <ul className='nav navbar-nav'>
                             <li>
                                 <Link to={'/Dashboard'}>
-                                    <span className="icon icon-line-graph"></span> 
+                                    <span className="icon icon-line-graph"></span>
                                     Dashboard
                                 </Link>
                             </li>
+                            {showMapTagger &&
+                                <li>
+                                    <Link to={'/MapTagger'}>
+                                        <span className="icon icon-new-message"></span>
+                                        Map Editor
+                                </Link>
+                                </li>}
                             <li>
                                 <Link to={'/Parser'}>
-                                    <span className="icon icon-classic-computer"></span> 
+                                    <span className="icon icon-classic-computer"></span>
                                     MODSIM Parser
                                 </Link>
                             </li>
                         </ul>
                         <ul className='nav navbar-nav navbar-right'>
-                            { !nullUserState && logged_in &&
-                                <li>                              
-        
+                            {!nullUserState && logged_in &&
+                                <li>
+
                                     <a className="mode-switch-button" onClick={this._onSwitchModeButtonClick}>
-                                        <span className="icon icon icon-sound-mix"></span> 
+                                        <span className="icon icon icon-sound-mix"></span>
                                         SWITCH MODE
                                     </a>
                                 </li>
                             }
                             <li> {this.props.logged_in ?
-                                
+
                                 <Link to='/Logout' onClick={this.logOut}>
                                     <span className="icon icon-log-out"></span> Logout
                                         </Link>
