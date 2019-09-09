@@ -28,17 +28,17 @@
             font-size: 20px;
         }
         &.demand {
-            background-color: #428dff;
-            border-color: #428dff;
+            background-color: #7e7e7e;
+            border-color: #7e7e7e;
             path {
                 fill: white;
             }
             &.outline {
-                color: #428dff;
+                color: #7e7e7e;
                 background-color: transparent;
-                border-color: #428dff;
+                border-color: #7e7e7e;
                 path {
-                    fill: #428dff;
+                    fill: #7e7e7e;
                 }
             }
         }
@@ -53,13 +53,13 @@
             }
         }
         &.inflow {
-            background-color: #5c6b84;
-            border-color: #5c6b84;
+            background-color: #92cce3;
+            border-color: #92cce3;
             color: white;
             &.outline {
-                color: #5c6b84;
+                color: #92cce3;
                 background-color: transparent;
-                border-color: #5c6b84;
+                border-color: #92cce3;
             }
         }
         &.agri {

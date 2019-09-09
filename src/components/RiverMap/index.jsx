@@ -33,7 +33,7 @@ class RiverMap extends Component {
     onItemClick(itemType, params) {
 
         let { schematicData, actions, flowData = {}, fromDashboard = true } = this.props,
-            { flowParams = { threshold: 'base' }, isLoading = false } = flowData;
+            { flowParams = { threshold: 'base-base' }, isLoading = false } = flowData;
 
         if (!fromDashboard) { return; }
 

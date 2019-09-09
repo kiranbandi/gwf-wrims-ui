@@ -24,7 +24,7 @@ class AmenitiesFilter extends Component {
         const { filterMesh, schematicData = { lines: [], artifacts: [], labels: [], markers: [] } } = this.props,
             { areAmenitiesVisible = false, visibleAmenities = [] } = filterMesh;
 
-        // filter out all demands , then get the name of the demand and finally sort 
+        // filter out all amenities , then get the name of the amenity and finally sort 
         const amenitiesList = _.map(_.filter(schematicData.lines,
             (d) => { return (d.type == 'diversion' || d.type == 'diversion') }),
             (d) => d.name)
@@ -53,7 +53,7 @@ class AmenitiesFilter extends Component {
                             styles={{ option: (styles) => ({ ...styles, color: 'black', textAlign: 'left' }) }}
                             onChange={this.onSelectChange} />
                     </div>
-                    {/* Adding a button to toggle all demands */}
+                    {/* Adding a button to toggle all amenities */}
                     <button
                         className={"eye custom-icon-button diversion " + ('icon btn ') + (areAmenitiesVisible ? '' : 'outline') +
                             (areAmenitiesVisible ? ' icon-eye' : ' icon-eye-with-line')}

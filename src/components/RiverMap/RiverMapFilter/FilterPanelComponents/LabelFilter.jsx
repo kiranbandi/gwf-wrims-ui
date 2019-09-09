@@ -13,13 +13,11 @@ class LabelFilter extends Component {
         this.props.actions.toggleLabelVisibility();
     }
 
-
     render() {
         const { filterMesh, schematicData = { lines: [], artifacts: [], labels: [], markers: [] } } = this.props,
             { areLabelsVisible = false } = filterMesh;
 
         return (
-
             <div>
                 <div>
                     <button
@@ -28,7 +26,6 @@ class LabelFilter extends Component {
                         onClick={this.onLabelToggleClick}> HIDE LABELS
                 </button>
                 </div>
-
             </div>
         );
     }
