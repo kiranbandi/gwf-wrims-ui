@@ -20,9 +20,10 @@
 @import 'components/yearRangeSlider';
 @import 'components/youtubeLayout';
 @import 'components/basinMap';
-
+@import 'components/editPanel';
 // import pages contains page-specific styling
 @import 'pages/tools';
 @import 'pages/home';
 @import 'pages/notFound';
 @import 'pages/dashboard';
+@import 'pages/mapTagger';

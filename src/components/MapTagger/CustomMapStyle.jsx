@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import MAP_STYLE from '../../../build/assets/files/mapbox-advanced.json';
+import MAP_STYLE from '../../../build/assets/files/mapbox-basic.json';
 
 // Make a copy of the map style to export for use
 const defaultMapStyle = {

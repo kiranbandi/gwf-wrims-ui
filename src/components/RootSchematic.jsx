@@ -79,8 +79,8 @@ class RootSchematic extends Component {
             isMapShown = true;
         }
 
-        // downscale by 20%
-        width = width * .75;
+        // downscale selectively based on the content being shown
+        width = width * (isMapShown ? 0.85 : 0.75);
         backgroundStyleSchematic = { ...backgroundStyleSchematic, width: width, height: width / 2.15 };
 
         return (
@@ -107,7 +107,7 @@ class RootSchematic extends Component {
                                 />
                             </label>
                         </div>}
-                    {!isModeZero && <h2 className='text-primary'>Select a <b>Region</b> to Investigate or Pick a <b>Place</b></h2>}
+                    <h2 className='text-primary m-l'> Select a <b>Region</b> to Investigate or Pick a <b>Place</b></h2>
                     {isMapShown ?
                         <BasinMap width={width} onRegionSelect={this.props.onRegionSelect} /> :
                         <div id='root-schema' className='image-container' style={backgroundStyleSchematic}>
@@ -116,7 +116,6 @@ class RootSchematic extends Component {
                                 <g className="root-schematic-readware-blobs">{this.getReadwareBlobs(width, (width / 2.15), activeBasinUsers)}</g>
                             </svg>
                         </div>}
-
                 </div>
                 {cwe? 
                     <UserActivityPanel 
@@ -145,6 +144,23 @@ class RootSchematic extends Component {
                         </div>
                     </div>
                 }
+                {!isMapShown && <div className='place-selection-container'>
+                    <h2 className='text-primary'>Places of Interest</h2>
+                    <div className='list-container'>
+                        {/* bad idea to attach so many events , need to refactor and attach single event to parent */}
+                        {/* id is model#type#name#number */}
+                        <p onClick={this.props.onPlaceSelect} id='southSask#link#J_3_J1_RF#8' className={selectedPlace == 'southSask#link#J_3_J1_RF#8' ? 'selected-button' : ''}>City of Saskatoon</p>
+                        <p onClick={this.props.onPlaceSelect} id='southSask#link#J2_RF_J_38#98' className={selectedPlace == 'southSask#link#J2_RF_J_38#98' ? 'selected-button' : ''}>Cumberland Delta</p>
+                        <p onClick={this.props.onPlaceSelect} id='southSask#reservoir#R1_LDief#1' className={selectedPlace == 'southSask#reservoir#R1_LDief#1' ? 'selected-button' : ''}>Diefenbaker Lake</p>
+                        <p onClick={this.props.onPlaceSelect} id='southSask#demand#QuAppelle_0#14' className={selectedPlace == 'southSask#demand#QuAppelle_0#14' ? 'selected-button' : ''}>Qu'Appelle Withdrawal</p>
+                        <p onClick={this.props.onPlaceSelect} id='southSask#inflow#In76_SWIFTCCr#61' className={selectedPlace == 'southSask#inflow#In76_SWIFTCCr#61' ? 'selected-button' : ''}>Swift Current Creek</p>
+                        <p onClick={this.props.onPlaceSelect} id='southSask#inflow#In5_PrinceA#79' className={selectedPlace == 'southSask#inflow#In5_PrinceA#79' ? 'selected-button' : ''}>Prince Albert Inflow</p>
+                        <p onClick={this.props.onPlaceSelect} id='highwood#link#J_LBowDiv_J_HW8#23' className={"highwood " + (selectedPlace == 'highwood#link#J_LBowDiv_J_HW8#23' ? 'selected-button' : '')} >Little Bow Diversion</p>
+                        <p onClick={this.props.onPlaceSelect} id='highwood#reservoir#R2_WomenCR#1' className={"highwood " + (selectedPlace == 'highwood#reservoir#R2_WomenCR#1' ? 'selected-button' : '')} >Women's Coulee Reservoir</p>
+                        <p onClick={this.props.onPlaceSelect} id='highwood#link#J_MosqCr_MW_302_ClearL#18' className={"highwood " + (selectedPlace == 'highwood#link#J_MosqCr_MW_302_ClearL#18' ? 'selected-button' : '')} >Clear Lake Diversion</p>
+                        <p onClick={this.props.onPlaceSelect} id='highwood#link#J_HW9_MW_401_FrankL#38' className={"highwood " + (selectedPlace == 'highwood#link#J_HW9_MW_401_FrankL#38' ? 'selected-button' : '')} >Frank Lake Diversion</p>
+                    </div>
+                </div>}
             </div>
         );
     }

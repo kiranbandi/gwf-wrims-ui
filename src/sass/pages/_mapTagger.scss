@@ -1,0 +1,31 @@
+.map-tagger-root {
+    margin: 30px 25px;
+    .filter-root-box {
+        .name-box {
+            display: inline-block;
+            margin-right: 20px;
+        }
+        .filter-label {
+            margin-right: 20px;
+            font-size: 1.25em;
+            vertical-align: -webkit-baseline-middle;
+        }
+        .button-box {
+            display: inline-block;
+            button {
+                font-size: 15px;
+            }
+            .filter-loader {
+                display: inline-block;
+                margin-left: 10px;
+                vertical-align: top;
+            }
+        }
+    }
+    .mapboxDiv {
+        &>div {
+            background: white;
+        }
+        display: inline-block;
+    }
+}
