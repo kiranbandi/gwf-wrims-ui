@@ -74,7 +74,8 @@ class VerticalSlider extends Component {
                         let dataList = _.map(records, (d) => (
                             {
                                 'flow': (Math.round(Number(d.flow) * 1000) / 1000),
-                                'timestamp': d.timestamp
+                                'timestamp': d.timestamp,
+                                'power': (Math.round(Number(d.power) * 1000) / 1000)
                             }));
                         actions.setFlowData({ dataList, name, flowParams, isLoading: false });
                     })

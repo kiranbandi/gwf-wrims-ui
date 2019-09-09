@@ -46,6 +46,7 @@ class FlowPanel extends Component {
     }
 
     componentDidUpdate() {
+   
         const { flowData = {} } = this.props, { dataList = [] } = flowData; // populate datalist
         // populate the data with flow data or power data
         const timePeriodList = this.state.showPowerData? (_.map(dataList, (d) => d.power)) : _.map(dataList, (d) => d.flow);
