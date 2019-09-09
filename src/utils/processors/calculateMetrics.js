@@ -39,8 +39,6 @@ export default function(dataList, name, threshold) {
             winterMinor = '',
             spawningMinor = '';
 
-        debugger;
-
         // if there is previous data and it is for the same node 
         // and the previous threshold was base and the current one is five or ten
         if (previousData && (name == previousData.name) && previousData.threshold == 'base-base' && (threshold == 'five-decrease' || threshold == 'ten-decrease' || threshold == 'five-increase' || threshold == 'ten-increase')) {

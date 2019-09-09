@@ -490,7 +490,7 @@ export default class BasinMap extends Component {
 
         // Set the viewports for the map
         viewport.width = width;
-        viewport.height = width / 2.5;
+        viewport.height = width / 2;
 
         return (
             <div className="mapboxDiv">
