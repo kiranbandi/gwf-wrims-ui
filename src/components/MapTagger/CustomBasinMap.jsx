@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import MapGL, { Popup, FlyToInterpolator } from 'react-map-gl';
-import PLACES from '../../utils/static-reference/mapPlaces';
+import MapGL, { Marker } from 'react-map-gl';
 import { fromJS } from 'immutable';
-import defaultMapStyle from './MapStyle.jsx';
+import CustomMapStyle from './CustomMapStyle';
+import MarkerIcon from './MarkerIcon';
 
 const TOKEN = 'pk.eyJ1IjoicmljYXJkb3JoZWVkZXIiLCJhIjoiY2p4MGl5bWIyMDE1bDN5b2NneHh5djJ2biJ9.3ALfBtMIORYFNtXU9RUUnA';
 
@@ -10,41 +10,26 @@ const TOKEN = 'pk.eyJ1IjoicmljYXJkb3JoZWVkZXIiLCJhIjoiY2p4MGl5bWIyMDE1bDN5b2NneH
 let basinArray = [
     'SK-South-Saskatchewan-River',
     'Highwood',
-    // 'Reddeer-River',
     'SK-North-Saskatchewan-River',
     'AB-North-Saskatchewan-River',
     'Tau-Basin',
-    // 'Oldman-River',
     'Stribs-Basin'
 
 ];
 
-const selectColor = "hsla(0, 36%, 71%, 0)" // A translucent color for basin selection
 
-let curHover = ''
-let prevHover = ''
-
-let basinSelectedLayerIndex = null
-let basinPrevSelectedLayerIndex = ''
-let basinBorderLayerIndex = ''
-
-let editedMapStyle = null;
-let currentSelectedName = ''
-
-export default class BasinMap extends Component {
+export default class CustomBasinMap extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             componentMounted: false, // Used to stop errors for the onviewportChange() method
-            mapStyle: defaultMapStyle,
+            mapStyle: CustomMapStyle,
             viewport: {
-                width: 400,
-                height: 400,
-                latitude: 52.25,
-                longitude: -110.75,
-                zoom: 5.1
-            } 
+                latitude: this.props.latitude,
+                longitude: this.props.longitude,
+                zoom: this.props.zoom
+            }
         };
     }
 
@@ -67,30 +52,37 @@ export default class BasinMap extends Component {
         });
     }
 
+    renderMarker(nodeList) {
+        return _.map(nodeList, (node, index) => {
+            return <Marker key={'maker-' + index} longitude={node.longitude} latitude={node.latitude}>
+                <MarkerIcon type={node.type} />
+            </Marker>
+        })
+    }
+
 
     render() {
-        let { viewport, mapStyle } = this.state, { width } = this.props;
+        let { viewport, mapStyle } = this.state, { width, onMapClick, currentNodes } = this.props;
         const { componentMounted } = this.state
 
         // Set the viewports for the map
         viewport.width = width;
         viewport.height = width / 2;
 
+
         return (
             <div className="mapboxDiv">
-
                 <MapGL
+                    className='root-map'
                     mapStyle={fromJS(mapStyle)}
                     mapboxApiAccessToken={TOKEN}
                     {...viewport}
-
                     onViewportChange={componentMounted ? this._onViewportChange : null}
+                    onClick={onMapClick}
                     doubleClickZoom={false}
                     dragRotate={false}
-                    minZoom={2}>
-
-                    <div className="markingMenuDiv">
-                    </div>
+                    minZoom={5}>
+                    {this.renderMarker(currentNodes)}
                 </MapGL>
             </div>
         );

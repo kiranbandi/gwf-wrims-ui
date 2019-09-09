@@ -42,8 +42,8 @@ export default class BasinMap extends Component {
             viewport: {
                 width: 400,
                 height: 400,
-                latitude: 52.25,
-                longitude: -110.75,
+                latitude: 52,
+                longitude: -105.75,
                 zoom: 5.1
             },
             popupInfo: null,    // Used for the Marking Menu's variables 

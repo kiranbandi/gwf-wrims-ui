@@ -10,3 +10,7 @@ export { default as LegendPanel } from './MapLegend/LegendPanel';
 export { default as FileUpload } from './FileUpload';
 export { default as BasinMap } from './MapBoxComponents/BasinMap';
 export { default as Modal } from './Modal/';
+
+// map tagger components 
+export { default as CustomBasinMap } from './MapTagger/CustomBasinMap';
+export { default as EditPanel } from './MapTagger/EditPanel';

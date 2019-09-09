@@ -5,6 +5,8 @@ import { bindActionCreators } from 'redux';
 import Loading from 'react-loading';
 import { getNodes } from '../utils/requestServer';
 import toastr from '../utils/toastr';
+import { CustomBasinMap, EditPanel } from '../components';
+import PLACES from '../utils/static-reference/mapPlaces';
 
 const BasinList = [
     { 'id': 'tau', 'label': 'Trans Alta Utilities' },
@@ -15,6 +17,16 @@ const BasinList = [
     { 'id': 'southSask', 'label': 'South Saskatchewan River (Saskatchewan)' }
 ];
 
+const baseMarker = {
+    number: 0, // unique code identifier for each marker
+    type: '',
+    modelID: '',
+    note: '',
+    link: '',
+    latitude: '',
+    longitude: ''
+};
+
 
 class MapTagger extends Component {
 
@@ -22,20 +34,47 @@ class MapTagger extends Component {
         super(props);
         this.state = {
             isLoaderVisible: false,
+            innerLoaderState: false,
+            deleteLoaderState: false,
             currentModel: '',
-            currentNodes: []
+            currentNodes: [],
+            selectedNode: -1,
+            markerType: '',
+            markerNote: '',
+            markerLink: '',
+            editModeON: false
         };
         this.loadNodes = this.loadNodes.bind(this);
         this.onChange = this.onChange.bind(this);
+        this.onMapClick = this.onMapClick.bind(this);
+    }
+
+
+    onMapClick(marker) {
+
+        const { lngLat } = marker;
+
+        let { currentNodes, selectedNode, editModeON } = this.state;
+
+        if (!editModeON) {
+            if (selectedNode == -1) {
+                selectedNode = currentNodes.push({ latitude: lngLat[1], longitude: lngLat[0], type: 'new' }) - 1;
+            }
+            else {
+                currentNodes[selectedNode].latitude = lngLat[1];
+                currentNodes[selectedNode].longitude = lngLat[0];
+            }
+            this.setState({ currentNodes, selectedNode });
+        }
     }
 
     loadNodes() {
 
-        const { currentModel = '' } = this.state;
+        const currentModel = document.getElementById('currentModel').value || '';
 
         if (currentModel.length > 0) {
 
-            this.setState({ isLoaderVisible: true });
+            this.setState({ isLoaderVisible: true, currentModel });
             // get the nodes for the current select basin
             getNodes(currentModel)
                 .then((currentNodes) => {
@@ -60,18 +99,25 @@ class MapTagger extends Component {
     render() {
 
         //125px to offset the 30px margin on both sides and vertical scroll bar width
-        let widthOfDashboard = document.body.getBoundingClientRect().width - 100;
+        const widthOfDashboard = document.body.getBoundingClientRect().width - 100,
+            { isLoaderVisible, currentModel, selectedNode,
+                innerLoaderState, deleteLoaderState, editModeON,
+                currentNodes, markerNote, markerType } = this.state;
 
-        const { isLoaderVisible, currentModel } = this.state;
+
+        // set the zoom and lat long level if a sub model has been selected
+        var place = _.find(PLACES, (d) => d.id == currentModel) || {};
+
+        const { latitude = 52, longitude = -105.75, zoom = 5.1 } = place;
 
 
 
         return (
             <div className='map-tagger-root' >
-                <div className='text-xs-center text-sm-left root-box'>
+                <div className='filter-root-box'>
                     <div className='name-box'>
                         <label className='filter-label'>Select a Model</label>
-                        <select id='currentModel' value={currentModel} className="custom-select" onChange={this.onChange}>
+                        <select id='currentModel' defaultValue={currentModel} className="custom-select">
                             <option key={'placeholder'} value={''}>Please Select</option>
                             {BasinList.map((val, index) => { return <option key={index} value={val.id}> {val.label}</option> })}
                         </select>
@@ -83,6 +129,31 @@ class MapTagger extends Component {
                         </button>
                     </div>
                 </div>
+                {currentModel.length > 0 &&
+
+                    <div className='m-t'>
+                        <CustomBasinMap
+                            key={'map-' + currentModel}
+                            modelID={currentModel}
+                            latitude={latitude}
+                            longitude={longitude}
+                            zoom={zoom}
+                            onMapClick={this.onMapClick}
+                            currentNodes={currentNodes}
+                            width={widthOfDashboard * 0.75} />
+                        <EditPanel
+                            onChange={this.onChange}
+                            selectedNode={selectedNode}
+                            model={_.find(BasinList, (d) => d.id == currentModel)}
+                            markerType={markerType}
+                            markerNote={markerNote}
+
+                            innerLoaderState={innerLoaderState}
+                            deleteLoaderState={deleteLoaderState}
+                            editModeON={editModeON}
+
+                            width={widthOfDashboard * 0.25} />
+                    </div>}
             </div>
         );
     }
