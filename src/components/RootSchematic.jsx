@@ -54,8 +54,8 @@ class RootSchematic extends Component {
             isMapShown = true;
         }
 
-        // downscale by 20%
-        width = width * .75;
+        // downscale selectively based on the content being shown
+        width = width * (isMapShown ? 0.85 : 0.75);
         backgroundStyleSchematic = { ...backgroundStyleSchematic, width: width, height: width / 2.15 };
 
         return (
@@ -82,7 +82,7 @@ class RootSchematic extends Component {
                                 />
                             </label>
                         </div>}
-                    {!isModeZero && <h2 className='text-primary'>Select a <b>Region</b> to Investigate or Pick a <b>Place</b></h2>}
+                    <h2 className='text-primary m-l'> Select a <b>Region</b> to Investigate or Pick a <b>Place</b></h2>
                     {isMapShown ?
                         <BasinMap width={width} onRegionSelect={this.props.onRegionSelect} /> :
                         <div id='root-schema' className='image-container' style={backgroundStyleSchematic}>
@@ -90,9 +90,8 @@ class RootSchematic extends Component {
                                 {this.getTiles(width, width / 2.15)}
                             </svg>
                         </div>}
-
                 </div>
-                <div className='place-selection-container'>
+                {!isMapShown && <div className='place-selection-container'>
                     <h2 className='text-primary'>Places of Interest</h2>
                     <div className='list-container'>
                         {/* bad idea to attach so many events , need to refactor and attach single event to parent */}
@@ -108,8 +107,7 @@ class RootSchematic extends Component {
                         <p onClick={this.props.onPlaceSelect} id='highwood#link#J_MosqCr_MW_302_ClearL#18' className={"highwood " + (selectedPlace == 'highwood#link#J_MosqCr_MW_302_ClearL#18' ? 'selected-button' : '')} >Clear Lake Diversion</p>
                         <p onClick={this.props.onPlaceSelect} id='highwood#link#J_HW9_MW_401_FrankL#38' className={"highwood " + (selectedPlace == 'highwood#link#J_HW9_MW_401_FrankL#38' ? 'selected-button' : '')} >Frank Lake Diversion</p>
                     </div>
-                </div>
-
+                </div>}
             </div>
         );
     }

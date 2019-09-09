@@ -490,7 +490,7 @@ export default class BasinMap extends Component {
 
         // Set the viewports for the map
         viewport.width = width;
-        viewport.height = width / 2;
+        viewport.height = width / 2.5;
 
         return (
             <div className="mapboxDiv">
@@ -503,7 +503,7 @@ export default class BasinMap extends Component {
                     onViewportChange={componentMounted ? this._onViewportChange : null}
                     doubleClickZoom={false}
                     dragRotate={false}
-                    minZoom={2}
+                    minZoom={5}
 
                     onHover={this._onHover}
                     onMouseDown={this._onMouseDown}
