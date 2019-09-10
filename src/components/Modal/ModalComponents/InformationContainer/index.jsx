@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { setInfoModalState } from '../../../../redux/actions/actions';
-s
+
 class InformationContainer extends Component {
 
     constructor(props) {
@@ -12,30 +12,30 @@ class InformationContainer extends Component {
         this.state = {
             tabs: { 
                 0: { 
-                    tabName: "River Map", 
+                    tabName: "Basin Schematic", 
                     cur: 0, 
                     thumbs: []
                 },
                 1: { 
-                    tabName: "Flow Graph",
+                    tabName: "Scenario Editor",
                     cur: 0, 
                     thumbs: [] 
                 }, 
-                2: { 
-                    tabName: "Vertical Slider", 
-                    cur: 0, 
-                    thumbs: [] 
-                }, 
-                3: { 
-                    tabName: "Metrics", 
-                    cur: 0, 
-                    thumbs: [] 
-                }, 
-                4: { 
-                    tabName: "Filter Panel", 
-                    cur: 0, 
-                    thumbs: [] 
-                }
+                // 2: { 
+                //     tabName: "Flow Graph", 
+                //     cur: 0, 
+                //     thumbs: [] 
+                // }, 
+                // 3: { 
+                //     tabName: "Metrics", 
+                //     cur: 0, 
+                //     thumbs: [] 
+                // }, 
+                // 4: { 
+                //     tabName: "Filter Panel", 
+                //     cur: 0, 
+                //     thumbs: [] 
+                // }
             }
         }
     }
