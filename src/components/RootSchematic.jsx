@@ -55,7 +55,7 @@ class RootSchematic extends Component {
         }
 
         // downscale selectively based on the content being shown
-        width = width * (isMapShown ? 0.85 : 0.75);
+        width = width * (isMapShown ? 1 : 0.75);
         backgroundStyleSchematic = { ...backgroundStyleSchematic, width: width, height: width / 2.15 };
 
         return (
@@ -84,7 +84,10 @@ class RootSchematic extends Component {
                         </div>}
                     <h2 className='text-primary m-l'> Select a <b>Region</b> to Investigate or Pick a <b>Place</b></h2>
                     {isMapShown ?
-                        <BasinMap width={width} onRegionSelect={this.props.onRegionSelect} /> :
+                        <BasinMap
+                            width={width}
+                            onPlaceSelect={this.props.onPlaceSelect}
+                            onRegionSelect={this.props.onRegionSelect} /> :
                         <div id='root-schema' className='image-container' style={backgroundStyleSchematic}>
                             <svg className='tile-container' width={width} height={width / 2.15}>
                                 {this.getTiles(width, width / 2.15)}

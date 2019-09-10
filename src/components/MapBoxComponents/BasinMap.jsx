@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import MapGL, { Popup, FlyToInterpolator } from 'react-map-gl';
+import MapGL, { Popup, Marker, FlyToInterpolator } from 'react-map-gl';
 import PLACES from '../../utils/static-reference/mapPlaces';
+import { getNodes } from '../../utils/requestServer';
 import MarkingMenu from './MarkingMenu'
+import MarkerIcon from '../MapTagger/MarkerIcon';
 import { fromJS } from 'immutable';
 import defaultMapStyle from './MapStyle.jsx';
 
@@ -61,6 +63,7 @@ export default class BasinMap extends Component {
 
         this.renderHoverPopup = this.renderHoverPopup.bind(this);
         this.addMarkingMenu = this.addMarkingMenu.bind(this);
+        this.onCustomMarkerClick = this.onCustomMarkerClick.bind(this);
     }
 
     componentDidMount() {
@@ -79,6 +82,25 @@ export default class BasinMap extends Component {
 
     componentWillUnmount() {
         this.setState({ componentMounted: false })
+    }
+
+
+    // custom marker events - kiran // will refactor in future
+    onCustomMarkerClick(event) {
+        // stop event from bubbling
+        event.stopPropagation();
+        const { currentNodes } = this.state;
+        const marker = currentNodes[event.currentTarget.id.split("-")[1]];
+        if (marker.link && marker.link.length > 0) {
+            this.props.onPlaceSelect({ 'target': { 'id': marker.link } });
+
+            this.setState({
+                hoverInfo: {
+                    lngLat: [+marker.longitude, +marker.latitude],
+                    basinName: marker.note
+                }
+            });
+        }
     }
 
     /**
@@ -366,6 +388,9 @@ export default class BasinMap extends Component {
     iconButtonClick = () => {
         this._goToViewport(this.state.place)    // Moves the viewport to the designated area
         this.props.onRegionSelect({ 'target': this.state.place })   // Selects the region
+        // get nodes for the selected sub basin
+        getNodes(this.state.place.id).then((currentNodes) => { this.setState({ currentNodes }) })
+
     }
 
     /**
@@ -484,8 +509,27 @@ export default class BasinMap extends Component {
         }
     }
 
+    /**
+ * Renders Custom Markers created in Map Editor
+ */
+    renderMarker(nodeList) {
+        return _.map(nodeList, (node, index) => {
+            return <Marker
+                key={'maker-' + index}
+                longitude={+node.longitude}
+                latitude={+node.latitude}
+                onMouseOver={() => { debugger }}>
+                <MarkerIcon
+                    type={node.type}
+                    id={index}
+                    onMouseOver={() => { debugger }}
+                    onClick={this.onCustomMarkerClick} />
+            </Marker>
+        })
+    }
+
     render() {
-        let { viewport, mapStyle } = this.state, { width } = this.props;
+        let { viewport, mapStyle, currentNodes } = this.state, { width } = this.props;
         const { componentMounted } = this.state
 
         // Set the viewports for the map
@@ -512,11 +556,13 @@ export default class BasinMap extends Component {
                     // If transition, dragging, panning, potating, or zooming, then close the Marking Menu
                     onInteractionStateChange={() => this.closeMarkingMenu()}
                 >
+
                     {this.renderHoverPopup()}
 
                     <div className="markingMenuDiv">
                         {this.addMarkingMenu()}
                     </div>
+                    {this.renderMarker(currentNodes)}
                 </MapGL>
             </div>
         );
