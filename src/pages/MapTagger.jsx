@@ -40,6 +40,29 @@ class MapTagger extends Component {
         this.onMapClick = this.onMapClick.bind(this);
         this.onEditSubmit = this.onEditSubmit.bind(this);
         this.onDelete = this.onDelete.bind(this);
+        this.onMapPointClick = this.onMapPointClick.bind(this);
+    }
+
+    onMapPointClick(event) {
+        let { selectedNode, currentNodes } = this.state;
+        // get the index of the node that has been clicked and type cast it to a number
+        const clickedNode = +event.currentTarget.id.split("-")[1];
+        //  if a different node has been clicked than the current one then enter edit mode
+        if (selectedNode != clickedNode) {
+            const marker = currentNodes[clickedNode];
+
+            // remove markers that dont have numbers meaning are temp nodes that the user has ignored
+            currentNodes = _.filter(currentNodes, (d) => !!d.number);
+
+            this.setState({
+                selectedNode: clickedNode,
+                markerType: marker.type,
+                markerNote: marker.note,
+                markerLink: marker.link,
+                editModeON: true,
+                currentNodes
+            });
+        }
     }
 
 
@@ -56,7 +79,43 @@ class MapTagger extends Component {
         }
         else {
             if (editModeON) {
-                // make a call to edit the selected node then 
+
+                // get the element from the current nodes list 
+                let marker = currentNodes[selectedNode];
+                //  add other elements to the marker
+                marker = {
+                    'latitude': String(marker.latitude),
+                    'longitude': String(marker.longitude),
+                    'note': markerNote,
+                    'link': markerLink,
+                    'type': markerType,
+                    'modelID': currentModel,
+                    'number': marker.number
+                }
+
+                // toggle inner loader
+                this.setState({ innerLoaderState: true });
+
+                updateNode(marker)
+                    .then((response) => {
+                        // store the new node permanently
+                        currentNodes[selectedNode] = marker;
+                        // reset the form
+                        this.setState({
+                            currentNodes,
+                            selectedNode: -1,
+                            markerType: '',
+                            markerNote: '',
+                            markerLink: '',
+                            editModeON: false
+                        });
+                    })
+                    // toggle loader once request is completed
+                    .finally(() => {
+                        this.setState({ innerLoaderState: false });
+                    });
+
+
             }
             else {
 
@@ -78,8 +137,6 @@ class MapTagger extends Component {
 
                 registerNode(marker)
                     .then((response) => {
-
-                        debugger;
                         // store the new node permanently
                         currentNodes[selectedNode] = marker;
                         // reset the form
@@ -103,8 +160,36 @@ class MapTagger extends Component {
 
     onDelete() {
 
+        event.preventDefault();
 
+        let { selectedNode, currentNodes, currentModel } = this.state;
 
+        if (selectedNode != -1) {
+            // toggle inner loader
+            this.setState({ deleteLoaderState: true });
+
+            // get the element from the current nodes list 
+            let marker = currentNodes[selectedNode];
+
+            deleteNode({ modelID: currentModel, number: marker.number })
+                .then((response) => {
+                    // remove the selected node permanently
+                    currentNodes.splice(selectedNode, 1);
+                    // reset the form
+                    this.setState({
+                        currentNodes,
+                        selectedNode: -1,
+                        markerType: '',
+                        markerNote: '',
+                        markerLink: '',
+                        editModeON: false
+                    });
+                })
+                // toggle loader once request is completed
+                .finally(() => {
+                    this.setState({ deleteLoaderState: false });
+                });
+        }
     }
 
 
@@ -123,6 +208,15 @@ class MapTagger extends Component {
                 currentNodes[selectedNode].longitude = lngLat[0];
             }
             this.setState({ currentNodes, selectedNode });
+        }
+        else {
+            this.setState({
+                selectedNode: -1,
+                editModeON: false,
+                markerType: '',
+                markerNote: '',
+                markerLink: '',
+            });
         }
     }
 
@@ -157,10 +251,18 @@ class MapTagger extends Component {
     }
 
     onChange(event) {
-        this.setState({ [event.target.id]: event.target.value });
+
+        let { selectedNode, currentNodes, markerType } = this.state;
+
+        if (event.target.id == 'markerType') {
+            markerType = event.target.value;
+            currentNodes[selectedNode].type = markerType || 'new';
+            this.setState({ markerType, currentNodes });
+        }
+        else {
+            this.setState({ [event.target.id]: event.target.value });
+        }
     }
-
-
 
 
     render() {
@@ -206,6 +308,7 @@ class MapTagger extends Component {
                             longitude={longitude}
                             zoom={zoom}
                             onMapClick={this.onMapClick}
+                            onMapPointClick={this.onMapPointClick}
                             currentNodes={currentNodes}
                             width={widthOfDashboard * 0.75} />
                         <EditPanel

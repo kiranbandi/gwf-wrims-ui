@@ -12,7 +12,9 @@ var endPoints = {
     getFlowData: endPointRoot + "/records/flow-data",
     getYearlyData: endPointRoot + "/records/yearly-flow-data",
     getNodes: endPointRoot + "/nodes/get-nodes",
-    registerNode: endPointRoot + "/nodes/register-node"
+    registerNode: endPointRoot + "/nodes/register-node",
+    updateNode: endPointRoot + "/nodes/update-node",
+    deleteNode: endPointRoot + "/nodes/delete-node"
 }
 
 module.exports = endPoints;

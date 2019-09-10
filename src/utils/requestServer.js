@@ -61,6 +61,24 @@ requestServer.registerNode = function(markerParams) {
     });
 }
 
+requestServer.updateNode = function(markerParams) {
+    return new Promise((resolve, reject) => {
+        axios.post(endPoints.updateNode, {...markerParams }, { headers: { 'authorization': 'Bearer ' + sessionStorage.jwt } })
+            .then((response) => { resolve(response.data) })
+            .catch((err) => errorCallback(err, reject));
+    });
+}
+
+requestServer.deleteNode = function(markerParams) {
+    return new Promise((resolve, reject) => {
+        axios.post(endPoints.deleteNode, {...markerParams }, { headers: { 'authorization': 'Bearer ' + sessionStorage.jwt } })
+            .then((response) => { resolve(response.data) })
+            .catch((err) => errorCallback(err, reject));
+    });
+}
+
+
+
 
 function errorCallback(error, reject) {
     if (error.response && error.response.data) {
