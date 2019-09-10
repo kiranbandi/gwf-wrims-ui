@@ -4,6 +4,7 @@ import { fromJS } from 'immutable';
 import CustomMapStyle from './CustomMapStyle';
 import MarkerIcon from './MarkerIcon';
 
+
 const TOKEN = 'pk.eyJ1IjoicmljYXJkb3JoZWVkZXIiLCJhIjoiY2p4MGl5bWIyMDE1bDN5b2NneHh5djJ2biJ9.3ALfBtMIORYFNtXU9RUUnA';
 
 // An array used to contain the basin names from MapStyle.jsx that are to be interacted with
@@ -31,6 +32,7 @@ export default class CustomBasinMap extends Component {
                 zoom: this.props.zoom
             }
         };
+        this.renderMarker = this.renderMarker.bind(this);
     }
 
     componentDidMount() {
@@ -55,7 +57,7 @@ export default class CustomBasinMap extends Component {
     renderMarker(nodeList) {
         return _.map(nodeList, (node, index) => {
             return <Marker key={'maker-' + index} longitude={+node.longitude} latitude={+node.latitude}>
-                <MarkerIcon type={node.type} />
+                <MarkerIcon type={node.type} id={index} onClick={this.props.onMapPointClick} />
             </Marker>
         })
     }

@@ -32,6 +32,7 @@ export default class Markers extends Component {
         // Reservoirs may either be normal reservoirs or power reservoirs
         const reservoirList = _.map(_.filter(artifacts, (d) => d.type == 'reservoir'),
             (reservoir, index) => {
+
                 let isPowerReservoir = ["R1_LDief", "R6_Cod", "R7_Tobin"].includes(reservoir.name);
                 const { coords, size = 1 } = reservoir;
                 if (trackedNode == reservoir.name) { hullPoint = [[xScale(coords[0]), yScale(coords[1])]]; }

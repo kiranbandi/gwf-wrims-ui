@@ -16,3 +16,4 @@ export { default as UserActivityPanel } from './UserActivityPanel';
 // map tagger components 
 export { default as CustomBasinMap } from './MapTagger/CustomBasinMap';
 export { default as EditPanel } from './MapTagger/EditPanel';
+export { default as RiverMapModal } from './MapTagger/RiverMapModal';

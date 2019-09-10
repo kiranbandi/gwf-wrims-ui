@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import { } from '../components';
 import uniqid from 'uniqid';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import Loading from 'react-loading';
 import { getNodes, registerNode, updateNode, deleteNode } from '../utils/requestServer';
 import toastr from '../utils/toastr';
-import { CustomBasinMap, EditPanel } from '../components';
+import { CustomBasinMap, EditPanel, RiverMapModal } from '../components';
 import PLACES from '../utils/static-reference/mapPlaces';
 
 const BasinList = [
@@ -19,7 +16,7 @@ const BasinList = [
 ];
 
 
-class MapTagger extends Component {
+export default class MapTagger extends Component {
 
     constructor(props) {
         super(props);
@@ -33,13 +30,50 @@ class MapTagger extends Component {
             markerType: '',
             markerNote: '',
             markerLink: '',
-            editModeON: false
+            editModeON: false,
+            isModalVisible: false
         };
         this.loadNodes = this.loadNodes.bind(this);
         this.onChange = this.onChange.bind(this);
         this.onMapClick = this.onMapClick.bind(this);
         this.onEditSubmit = this.onEditSubmit.bind(this);
         this.onDelete = this.onDelete.bind(this);
+        this.onMapPointClick = this.onMapPointClick.bind(this);
+        this.toggleModal = this.toggleModal.bind(this);
+        this.setMarkerLink = this.setMarkerLink.bind(this);
+    }
+
+
+    setMarkerLink(markerLink) {
+        this.setState({ markerLink });
+    }
+
+
+    toggleModal(event) {
+        event.preventDefault();
+        this.setState({ isModalVisible: !this.state.isModalVisible });
+    }
+
+    onMapPointClick(event) {
+        let { selectedNode, currentNodes } = this.state;
+        // get the index of the node that has been clicked and type cast it to a number
+        const clickedNode = +event.currentTarget.id.split("-")[1];
+        //  if a different node has been clicked than the current one then enter edit mode
+        if (selectedNode != clickedNode) {
+            const marker = currentNodes[clickedNode];
+
+            // remove markers that dont have numbers meaning are temp nodes that the user has ignored
+            currentNodes = _.filter(currentNodes, (d) => !!d.number);
+
+            this.setState({
+                selectedNode: clickedNode,
+                markerType: marker.type,
+                markerNote: marker.note,
+                markerLink: marker.link,
+                editModeON: true,
+                currentNodes
+            });
+        }
     }
 
 
@@ -56,7 +90,43 @@ class MapTagger extends Component {
         }
         else {
             if (editModeON) {
-                // make a call to edit the selected node then 
+
+                // get the element from the current nodes list 
+                let marker = currentNodes[selectedNode];
+                //  add other elements to the marker
+                marker = {
+                    'latitude': String(marker.latitude),
+                    'longitude': String(marker.longitude),
+                    'note': markerNote,
+                    'link': markerLink,
+                    'type': markerType,
+                    'modelID': currentModel,
+                    'number': marker.number
+                }
+
+                // toggle inner loader
+                this.setState({ innerLoaderState: true });
+
+                updateNode(marker)
+                    .then((response) => {
+                        // store the new node permanently
+                        currentNodes[selectedNode] = marker;
+                        // reset the form
+                        this.setState({
+                            currentNodes,
+                            selectedNode: -1,
+                            markerType: '',
+                            markerNote: '',
+                            markerLink: '',
+                            editModeON: false
+                        });
+                    })
+                    // toggle loader once request is completed
+                    .finally(() => {
+                        this.setState({ innerLoaderState: false });
+                    });
+
+
             }
             else {
 
@@ -78,8 +148,6 @@ class MapTagger extends Component {
 
                 registerNode(marker)
                     .then((response) => {
-
-                        debugger;
                         // store the new node permanently
                         currentNodes[selectedNode] = marker;
                         // reset the form
@@ -103,8 +171,36 @@ class MapTagger extends Component {
 
     onDelete() {
 
+        event.preventDefault();
 
+        let { selectedNode, currentNodes, currentModel } = this.state;
 
+        if (selectedNode != -1) {
+            // toggle inner loader
+            this.setState({ deleteLoaderState: true });
+
+            // get the element from the current nodes list 
+            let marker = currentNodes[selectedNode];
+
+            deleteNode({ modelID: currentModel, number: marker.number })
+                .then((response) => {
+                    // remove the selected node permanently
+                    currentNodes.splice(selectedNode, 1);
+                    // reset the form
+                    this.setState({
+                        currentNodes,
+                        selectedNode: -1,
+                        markerType: '',
+                        markerNote: '',
+                        markerLink: '',
+                        editModeON: false
+                    });
+                })
+                // toggle loader once request is completed
+                .finally(() => {
+                    this.setState({ deleteLoaderState: false });
+                });
+        }
     }
 
 
@@ -123,6 +219,15 @@ class MapTagger extends Component {
                 currentNodes[selectedNode].longitude = lngLat[0];
             }
             this.setState({ currentNodes, selectedNode });
+        }
+        else {
+            this.setState({
+                selectedNode: -1,
+                editModeON: false,
+                markerType: '',
+                markerNote: '',
+                markerLink: '',
+            });
         }
     }
 
@@ -157,10 +262,18 @@ class MapTagger extends Component {
     }
 
     onChange(event) {
-        this.setState({ [event.target.id]: event.target.value });
+
+        let { selectedNode, currentNodes, markerType } = this.state;
+
+        if (event.target.id == 'markerType') {
+            markerType = event.target.value;
+            currentNodes[selectedNode].type = markerType || 'new';
+            this.setState({ markerType, currentNodes });
+        }
+        else {
+            this.setState({ [event.target.id]: event.target.value });
+        }
     }
-
-
 
 
     render() {
@@ -168,8 +281,9 @@ class MapTagger extends Component {
         //125px to offset the 30px margin on both sides and vertical scroll bar width
         const widthOfDashboard = document.body.getBoundingClientRect().width - 100,
             { isLoaderVisible, currentModel, selectedNode,
-                innerLoaderState, deleteLoaderState, editModeON,
-                currentNodes, markerNote, markerType } = this.state;
+                innerLoaderState, deleteLoaderState,
+                editModeON, currentNodes, markerNote,
+                markerLink, markerType, isModalVisible } = this.state;
 
 
         // set the zoom and lat long level if a sub model has been selected
@@ -181,7 +295,14 @@ class MapTagger extends Component {
 
         return (
             <div className='map-tagger-root' >
-                <div className='filter-root-box'>
+                {isModalVisible &&
+                    <RiverMapModal
+                        markerLink={markerLink}
+                        setMarkerLink={this.setMarkerLink}
+                        currentModel={currentModel}
+                        width={widthOfDashboard * 0.60}
+                        toggleModal={this.toggleModal} />}
+                <div className='filter-root-box m-t'>
                     <div className='name-box'>
                         <label className='filter-label'>Select a Model</label>
                         <select id='currentModel' defaultValue={currentModel} className="custom-select">
@@ -206,6 +327,7 @@ class MapTagger extends Component {
                             longitude={longitude}
                             zoom={zoom}
                             onMapClick={this.onMapClick}
+                            onMapPointClick={this.onMapPointClick}
                             currentNodes={currentNodes}
                             width={widthOfDashboard * 0.75} />
                         <EditPanel
@@ -216,6 +338,7 @@ class MapTagger extends Component {
                             markerNote={markerNote}
                             onEditSubmit={this.onEditSubmit}
                             onDelete={this.onDelete}
+                            toggleModal={this.toggleModal}
                             innerLoaderState={innerLoaderState}
                             deleteLoaderState={deleteLoaderState}
                             editModeON={editModeON}
@@ -225,16 +348,3 @@ class MapTagger extends Component {
         );
     }
 }
-
-function mapStateToProps(state) {
-    return {
-    };
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators({}, dispatch)
-    };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(MapTagger);

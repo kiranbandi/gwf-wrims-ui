@@ -1,31 +1,32 @@
 import React, { PureComponent } from 'react';
+import LegendIcon from '../MapLegend/LegendIcon';
 
-const ICON = `M20.2,15.7L20.2,15.7c1.1-1.6,1.8-3.6,1.8-5.7c0-5.6-4.5-10-10-10S2,4.5,2,10c0,2,0.6,3.9,1.6,5.4c0,0.1,0.1,0.2,0.2,0.3
-  c0,0,0.1,0.1,0.1,0.2c0.2,0.3,0.4,0.6,0.7,0.9c2.6,3.1,7.4,7.6,7.4,7.6s4.8-4.5,7.4-7.5c0.2-0.3,0.5-0.6,0.7-0.9
-  C20.1,15.8,20.2,15.8,20.2,15.7z`;
 
-const pinStyle = {
-    cursor: 'pointer',
-    fill: '#d00',
-    stroke: 'none'
-};
-
-export default class CityPin extends PureComponent {
+export default class MarkerIcon extends PureComponent {
     render() {
-        const { size = 20, onClick } = this.props;
+
+        const { size = 30, onClick, type = 'agri', id = '' } = this.props;
 
         return (
-            <svg
+            <svg className='river-marker'
                 height={size}
-                viewBox="0 0 24 24"
-                style={{
-                    ...pinStyle,
-                    transform: `translate(${-size / 2}px,${-size}px)`
-                }}
-                onClick={onClick}
-            >
-                <path d={ICON} />
+                id={'custom-' + id}
+                viewBox="0 0 30 30"
+                onClick={onClick}>
+                {getIcon(type)}
             </svg>
         );
+    }
+}
+
+
+function getIcon(type) {
+    switch (type) {
+        case 'Irrigation Demand': return <LegendIcon circleTransform={"translate(5, 5) scale(0.07)"} imageTransform={"translate(5, 5) scale(0.042)"} type={"agri"} hasText={false} />;
+        case 'Inflow': return <LegendIcon circleTransform={"translate(5, 5) scale(0.07)"} imageTransform={"translate(5, 5) scale(0.07)"} type={"inflow"} hasText={false} />
+        case 'Industrial/Public Consumption': return <LegendIcon circleTransform={"translate(5, 5) scale(0.07)"} imageTransform={"translate(5, 5) scale(0.046)"} type={"demand"} hasText={false} />
+        case 'Reservoir': return <LegendIcon circleTransform={"translate(5, 5) scale(0.07)"} imageTransform={"translate(7.5, 5) scale(0.045)"} type={"reservoir"} hasText={false} title="RESERVOIR" />
+        case 'Power generating Reservoir': return <LegendIcon circleTransform={"translate(5, 5) scale(0.07)"} imageTransform={"translate(6.5, 5) scale(0.044)"} type={"reservoir"} hasText={false} hasText={false} title={''} />
+        case 'new': return <circle cx='15' cy='15' r='15' className={'custom-marker'}> </circle>
     }
 }
