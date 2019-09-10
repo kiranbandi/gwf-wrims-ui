@@ -13,7 +13,7 @@ class UserSelection extends Component {
             onMobile = false;
 
         if (widthOfPage > 1170) {
-            widthOfPage = 1000
+            widthOfPage = 1350
         }
         else if (widthOfPage < 700) {
             onMobile = true;
@@ -24,7 +24,7 @@ class UserSelection extends Component {
         const { setMode } = actions;
 
         return (
-            <div className="us-root" style={{width: widthOfPage, height: .60 * widthOfPage}}>
+            <div className="us-root" style={{width: widthOfPage, height: .50 * widthOfPage}}>
                 <div className="us-text">
                     {"What would you like to do today?"}
                 </div>
@@ -33,15 +33,6 @@ class UserSelection extends Component {
                     <ModeCard
                         title={`Explore water management scenarios for the basin`}
                         text={`In this mode, you will be able to access models built to answer and explore questions for particular locations or policy issues.`}
-                        innerElements={[
-                            <div className="one-examples-title" key={'card-1-examples'}>{`Some Examples: `}</div>,
-                            <ul className="one-examples-content" key={'card-1-example-descriptions'}>
-                                <li>{`Water management futures for the Saskatchewan River Basin`}</li>
-                                <li>{`Reservoir management scenarios for hydro-power generation in the Upper Nelson basin`}</li>
-                                <li>{`Farmers and water use behavior in the Bow River Basin`}</li>
-                                <li>{`Wetland drainage in the prairie region`}</li>
-                            </ul>
-                        ]}
                         onClick={() => setMode(0)}/>
                     <ModeCard
                         title={`Dive deeper into the model`}
@@ -52,6 +43,10 @@ class UserSelection extends Component {
                         title={`Learn more about the basin and the tool`}
                         text={`In this mode, you can learn more about the decision support tool and what it does, and you can learn more about the Nelson drainage system and water management concepts.`}
                         onClick={() => setMode(2)}/>
+                    <ModeCard
+                        title={`Collaborate with other users`}
+                        text={`In this mode, you can collaborate with other users to interact with the basin.`}
+                        onClick={() => setMode(3)}/>
                     </div>
             </div>
         );
