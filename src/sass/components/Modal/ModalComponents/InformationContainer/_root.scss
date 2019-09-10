@@ -15,8 +15,9 @@
     }
 
     .ic-tab-container {
-        text-align: center;
+        text-align: left;
         margin-top: 10px;
+        margin-left: 6px;
     
         .ic-tab {
             -moz-user-select: none;
@@ -51,7 +52,7 @@
         height: 86%;
         background: #0c1229;
         margin: 0 auto;
-        border-radius: 10px;
+        border-radius: 0px 10px 10px 10px;
         z-index: 1;
         transform: translateY(-15px);
         text-align: initial;
