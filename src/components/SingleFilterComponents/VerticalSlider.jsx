@@ -47,8 +47,8 @@ class VerticalSlider extends Component {
 
     onSwitchChange = () => {
         let newMode = Math.abs(this.state.currentMode - 1);
-        let newSliderVal = newMode === 0? 100 : 0; 
-        this.setState({ currentMode: newMode, sliderValue: newSliderVal });
+        let newSliderVal = newMode === 0 ? 100 : 0;
+        this.setState({ currentMode: newMode }, () => { this.onSliderChange(newSliderVal) });
     }
 
     onSliderChange(value) {
@@ -64,14 +64,23 @@ class VerticalSlider extends Component {
 
         if (!isLoading) {
             if (!!flowParams) {
-                flowParams.threshold = value == 0 ? 'ten' : value == 50 ? 'five' : 'base';
+
+
+                if (currentMode == 0) {
+                    flowParams.threshold = value == 0 ? 'ten-decrease' : value == 50 ? 'five-decrease' : 'base-base';
+                }
+                else {
+                    flowParams.threshold = value == 0 ? 'base-base' : value == 50 ? 'five-increase' : 'ten-increase';
+                }
+
                 actions.setFlowData({ dataList: [], name, flowParams, isLoading: true });
                 getFlowData(flowParams)
                     .then((records) => {
                         let dataList = _.map(records, (d) => (
                             {
                                 'flow': (Math.round(Number(d.flow) * 1000) / 1000),
-                                'timestamp': d.timestamp
+                                'timestamp': d.timestamp,
+                                'power': (Math.round(Number(d.power) * 1000) / 1000)
                             }));
                         actions.setFlowData({ dataList, name, flowParams, isLoading: false });
                     })
@@ -90,12 +99,12 @@ class VerticalSlider extends Component {
 
     render() {
 
-        let { width, height, flowData = {}, actions } = this.props,
-            { flowParams = { threshold: 'base' } } = flowData, { threshold = 'base' } = flowParams;
-        
+        let { width, height, flowData = {} } = this.props,
+            { flowParams = { threshold: 'base-base' } } = flowData, { threshold = 'base-base' } = flowParams;
+
         var { currentMode, sliderValue, infoIconStyle } = this.state
 
-        let checked, currentFactor, factorMarks, initialValue;        
+        let checked, currentFactor, factorMarks, initialValue;
         if (currentMode === 0) {
             checked = false;
             currentFactor = "Decrease Supply";
@@ -108,11 +117,11 @@ class VerticalSlider extends Component {
             factorMarks = increaseDemandMarks;
             initialValue = 0;
         }
-        
-        var sliderHeight = ((height - 90)  * .875);
-        sliderHeight = sliderHeight < 320? ((sliderHeight)  * .95) : sliderHeight;
 
-        var marginBottom = sliderHeight < 320? (sliderHeight * 0.065) : (sliderHeight * 0.045);
+        var sliderHeight = ((height - 90) * .875);
+        sliderHeight = sliderHeight < 320 ? ((sliderHeight) * .95) : sliderHeight;
+
+        var marginBottom = sliderHeight < 320 ? (sliderHeight * 0.065) : (sliderHeight * 0.045);
 
 
 
@@ -138,8 +147,8 @@ class VerticalSlider extends Component {
                         />
                     </label>
                 </div>
-                <div className='inner-slider' style={{ 'width': width, 'height': sliderHeight, marginBottom}}>
-                    <Slider vertical value={sliderValue} min={0} marks={factorMarks} step={null} included={false} onChange={this.onSliderChange} defaultValue={initialValue}/>
+                <div className='inner-slider' style={{ 'width': width, 'height': sliderHeight, marginBottom }}>
+                    <Slider vertical value={sliderValue} min={0} marks={factorMarks} step={null} included={false} onChange={this.onSliderChange} defaultValue={initialValue} />
                 </div>
                 <InfoIcon
                     xOffset={-30}

@@ -1,4 +1,3 @@
-/*global $*/
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Loading from 'react-loading';
@@ -12,7 +11,7 @@ class FlowPanel extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            dropDownVisible: false,
+            dropDownVisible: false,     // Toggle to display the dropdown box for the statcards
             statcards: [
                 {
                     name: "Summer Flow",
@@ -30,7 +29,7 @@ class FlowPanel extends Component {
                     visible: true
                 }
             ],
-            showPowerData: false
+            showPowerData: false    // Toggle to view the power data associated with a few reservoir nodes
         }
         
         this.waterFlowToggle = this.waterFlowToggle.bind(this);
@@ -38,7 +37,8 @@ class FlowPanel extends Component {
     }
 
     componentDidMount() {
-        const { flowData = {} } = this.props, { dataList = [] } = flowData;
+        const { flowData = {} } = this.props, { dataList = [] } = flowData; // populate datalist
+        // populate the data with flow data
         const timePeriodList = _.map(dataList, (d) => d.flow);
         if (dataList.length > 0) {
             makeTimeChart(timePeriodList);
@@ -46,10 +46,10 @@ class FlowPanel extends Component {
     }
 
     componentDidUpdate() {
-        const { flowData = {} } = this.props, { dataList = [] } = flowData;
-        
+   
+        const { flowData = {} } = this.props, { dataList = [] } = flowData; // populate datalist
+        // populate the data with flow data or power data
         const timePeriodList = this.state.showPowerData? (_.map(dataList, (d) => d.power)) : _.map(dataList, (d) => d.flow);
-        
         if (dataList.length > 0) {
                 makeTimeChart(timePeriodList);
         }
@@ -71,6 +71,11 @@ class FlowPanel extends Component {
         this.setState({ dropDownVisible: !this.state.dropDownVisible })
     }
 
+    /**
+     * Toggles visibility of selected statcards
+     * 
+     * @statcardID the selected statcard's ID
+     */
     toggleVisibility = (statcardID) => {
         let { statcards } = this.state;
 
@@ -79,13 +84,19 @@ class FlowPanel extends Component {
         this.setState({ statcards: statcards});
     }
 
+    /**
+     * Adds statcard components to be rendered based on selected statcards
+     * 
+     * @metrics Metrics used to display the effects of toggled options
+     * @innerWidth The width allowed for each statcard
+     */
     addStatCards = (metrics, innerWidth) => {
         const { statcards } = this.state;
 
         let visibleStatCards = []
 
         for (let i = 0; i < statcards.length; i++) {
-
+            // Add data for summerflow
             if ((i === 0) && statcards[i].visible) {
                 let summerFlow = metrics[0];
 
@@ -102,7 +113,7 @@ class FlowPanel extends Component {
                     />
                 );
             }
-
+            // Add data for winterflow
             if ((i === 1) && statcards[i].visible) {
                 let winterFlow = metrics[1];
 
@@ -119,7 +130,7 @@ class FlowPanel extends Component {
                     />
                 );
             }
-
+            // Add data for spawning rate
             if ((i === 2) && statcards[i].visible) {
                 let spawningRate = metrics[2];
                 
@@ -143,7 +154,7 @@ class FlowPanel extends Component {
 
     render() {
         const { flowData = {}, width, height } = this.props,
-            { dataList = [], name = '', isLoading = false, flowParams = { threshold: 'base' } } = flowData,
+            { dataList = [], name = '', isLoading = false, flowParams = { threshold: 'base-base' } } = flowData,
             innerWidth = width - 60,
             innerHeight = height - (175);
 
@@ -168,7 +179,7 @@ class FlowPanel extends Component {
                     <div className='flow-inner-container'>
                         <p className='exclaimatory-text'>* All values are in 1000m<sup>3</sup>/week</p>
                         <div className='entire-panel' style={{ width, height: '90px' }}>
-                            <div className='metrics-container' style={{ 'width': width - 70 }}>
+                            <div className='metrics-container' style={{ 'width': width - 50 }}>
                                 {this.addStatCards(metrics, innerWidth)}
                             </div>
 

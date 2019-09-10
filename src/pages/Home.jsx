@@ -52,7 +52,8 @@ class Home extends Component {
             Project.The tools are in the form of novel visualizations and interactive decision - making systems.Global Water
             Futures (GWF) aims to position Canada as a global leader in water science for cold regions and will address
             the strategic needs of the Canadian economy in adapting to change and managing risks of uncertain water futures
-            extreme events. End-user needs will be our beacon and will drive strategy and shape our science.
+            extreme events. End-user needs will be our beacon and will drive strategy and shape our science.To learn more about the
+            GWF Project please visit this link - <a href='https://gwf.usask.ca/'>GWF</a>
           </p>
         </div>
       </div>

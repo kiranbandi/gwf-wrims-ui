@@ -4,9 +4,9 @@ export default [
     // highwood.json
     { "id": "highwood", "name": "Highwood River", "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Highwood_River_AB.JPG/240px-Highwood_River_AB.jpg", "latitude": 50.5, "longitude": -114.41, "zoom": 8 },
     // northSask.json (SK)
-    { "id": "northSaskSK", "name": "North Saskatchewan River", "image": "https://upload.wikimedia.org/wikipedia/commons/e/e1/NSRGlacialFlats.JPG", "latitude": 52.57, "longitude": -108.1, "zoom": 6.2 },
+    { "id": "northSaskSask", "name": "North Saskatchewan River", "image": "https://upload.wikimedia.org/wikipedia/commons/e/e1/NSRGlacialFlats.JPG", "latitude": 52.57, "longitude": -108.1, "zoom": 6.2 },
     // northSask.json (AB)
-     { "id": "northSaskAB", "name": "North Saskatchewan River", "image": "https://upload.wikimedia.org/wikipedia/commons/e/e1/NSRGlacialFlats.JPG", "latitude": 53.015, "longitude": -113.01, "zoom": 6.2 },
+    { "id": "northSask", "name": "North Saskatchewan River", "image": "https://upload.wikimedia.org/wikipedia/commons/e/e1/NSRGlacialFlats.JPG", "latitude": 53.015, "longitude": -113.01, "zoom": 6.2 },
     // tau.json    
     { "id": "tau", "name": "TransAlta Utilities", "image": "https://upload.wikimedia.org/wikipedia/commons/9/93/Bow-river-banff-np.jpg", "latitude": 51.152, "longitude": -115.293, "zoom": 7.7 },
     // stribs.json

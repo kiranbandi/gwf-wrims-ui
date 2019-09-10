@@ -1,10 +1,13 @@
 /*global $*/
 import React, { Component } from 'react';
-import * as d3 from 'd3';
+import { line } from 'd3';
 import tileMap from '../utils/static-reference/tileMap';
+import readwareBlobs from '../utils/static-reference/readwareBlobs';
 import Switch from "react-switch";
-import { BasinMap } from '../components';
-import { connect } from 'react-redux';
+import { BasinMap, UserActivityPanel } from '../components';
+import { compose, bindActionCreators } from 'redux';
+import { firestoreConnect } from 'react-redux-firebase'
+import { connect } from 'react-redux'
 
 //  Image url handling is convoluted in scss , much easier to set inline and get images from root
 let backgroundStyleSchematic = { background: 'url(assets/img/overall.png)', backgroundSize: '100%' };
@@ -16,7 +19,6 @@ class RootSchematic extends Component {
 
         this.state = {
             isMapShown: false,
-
         };
         this.getTiles = this.getTiles.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -34,7 +36,7 @@ class RootSchematic extends Component {
             });
             return <path
                 id={tile.tileID}
-                d={d3.line()(pathData)}
+                d={line()(pathData)}
                 className='tile'
                 stroke={tile.color}
                 onClick={this.props.onRegionSelect}
@@ -44,9 +46,32 @@ class RootSchematic extends Component {
         })
     }
 
+    getReadwareBlobs = (width, height, activeBasinUsers) => {
+        return Object.keys(readwareBlobs).map((basin, idx) => {
+
+            if (activeBasinUsers[basin]) {
+                let userCount = activeBasinUsers[basin].users.length;
+
+                let titleText = userCount === 1? `1 user is active on this basin` : `${userCount} users are active on this basin`;
+
+                let countWeight = (userCount < 10)? " light" : (userCount < 100)? " medium" : " heavy";
+
+                if (userCount !== 0) {
+                    return (<g className="readware-blob" transform={`translate(${Math.round(readwareBlobs[basin].coords[0] * width)}, ${Math.round(readwareBlobs[basin].coords[1] * height)})`} key={idx}>
+                                <circle r={`10.5px`} fill={`red`}></circle>
+                                <text className={"readware-blob-text" + countWeight}>{userCount}</text>
+                                <title>{titleText}</title>
+                            </g>)
+                }
+            }
+        }) 
+    }
+
     render() {
 
-        let { width = 1000, selectedPlace, mode } = this.props, { isMapShown } = this.state;
+        let { width = 1000, selectedPlace, mode }  = this.props, { isMapShown } = this.state;
+
+        const { activeUsers, activeBasinUsers, userData, trackedUser } = this.props;
 
         let isModeZero = (mode === 0);
 
@@ -54,15 +79,18 @@ class RootSchematic extends Component {
             isMapShown = true;
         }
 
-        // downscale by 20%
-        width = width * .75;
+        if (mode === 3) {
+            isMapShown = false;
+        }
+        // downscale selectively based on the content being shown
+        width = width * (isMapShown ? 0.85 : 0.75);
         backgroundStyleSchematic = { ...backgroundStyleSchematic, width: width, height: width / 2.15 };
 
         return (
             <div className='root-schema-container'>
                 <div className='schema-selection-container' style={{ width: width }}>
-                    <h2 className='text-primary switch-custom-label'>Basin Map</h2>
-                    {!isModeZero &&
+                    {(mode !== 3)  && <h2 className='text-primary switch-custom-label'>Basin Map</h2>}
+                    {(!isModeZero && (mode !== 3))  &&
                         <div className='switch-container'>
                             <label htmlFor="material-switch">
                                 <Switch
@@ -82,17 +110,31 @@ class RootSchematic extends Component {
                                 />
                             </label>
                         </div>}
-                    {!isModeZero && <h2 className='text-primary'>Select a <b>Region</b> to Investigate or Pick a <b>Place</b></h2>}
+
+                    {(mode === 3)
+                        ?
+                        <h2 className='text-primary m-l'> Select a <b>Region</b> to Investigate</h2>
+                        :
+                        <h2 className='text-primary m-l'> Select a <b>Region</b> to Investigate or Pick a <b>Place</b></h2>}
+
                     {isMapShown ?
                         <BasinMap width={width} onRegionSelect={this.props.onRegionSelect} /> :
                         <div id='root-schema' className='image-container' style={backgroundStyleSchematic}>
                             <svg className='tile-container' width={width} height={width / 2.15}>
-                                {this.getTiles(width, width / 2.15)}
+                                <g className="root-schematic-tiles">{this.getTiles(width, width / 2.15)}</g>
+                                {(mode === 3) && <g className="root-schematic-readware-blobs">{this.getReadwareBlobs(width, (width / 2.15), activeBasinUsers)}</g>}
                             </svg>
                         </div>}
-
                 </div>
-                <div className='place-selection-container'>
+                {(mode === 3) &&
+                    <UserActivityPanel 
+                        width={width} 
+                        activeUsers={activeUsers} 
+                        activeBasinUsers={activeBasinUsers} 
+                        userData={userData} 
+                        onTrackedUserSelect={this.props.onTrackedUserSelect}
+                        trackedUser={trackedUser}/> }
+                {(!isMapShown && mode !== 3) && <div className='place-selection-container'>
                     <h2 className='text-primary'>Places of Interest</h2>
                     <div className='list-container'>
                         {/* bad idea to attach so many events , need to refactor and attach single event to parent */}
@@ -108,17 +150,13 @@ class RootSchematic extends Component {
                         <p onClick={this.props.onPlaceSelect} id='highwood#link#J_MosqCr_MW_302_ClearL#18' className={"highwood " + (selectedPlace == 'highwood#link#J_MosqCr_MW_302_ClearL#18' ? 'selected-button' : '')} >Clear Lake Diversion</p>
                         <p onClick={this.props.onPlaceSelect} id='highwood#link#J_HW9_MW_401_FrankL#38' className={"highwood " + (selectedPlace == 'highwood#link#J_HW9_MW_401_FrankL#38' ? 'selected-button' : '')} >Frank Lake Diversion</p>
                     </div>
-                </div>
-
+                </div>}
             </div>
         );
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        mode: state.delta.mode
-    };
-}
 
-export default connect(mapStateToProps, null)(RootSchematic);
+
+
+export default RootSchematic;

@@ -24,7 +24,7 @@ class IrrigationFilter extends Component {
         const { filterMesh, schematicData = { lines: [], artifacts: [], labels: [], markers: [] } } = this.props,
             { areIrrigationsVisible = false, visibleIrrigations = [] } = filterMesh;
 
-        // filter out all demands , then get the name of the demand and finally sort 
+        // filter out all irrigations , then get the name of the irrigation and finally sort 
         const irrigationsList = _.map(_.filter(schematicData.markers,
             (d) => { return (d.type == 'agri') }),
             (d) => d.name)
@@ -53,7 +53,7 @@ class IrrigationFilter extends Component {
                             styles={{ option: (styles) => ({ ...styles, color: 'black', textAlign: 'left' }) }}
                             onChange={this.onSelectChange} />
                     </div>
-                    {/* Adding a button to toggle all demands */}
+                    {/* Adding a button to toggle all irrigations */}
                     <button
                         className={"noSelect custom-icon-button agri " + ('icon btn ') + (areIrrigationsVisible ? '' : 'outline')}
                         onClick={this.onIrrigationClick}>

@@ -1,6 +1,12 @@
 export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
 export const LOG_OUT = 'LOG_OUT';
+
 export const SET_USERNAME = 'SET_USERNAME';
+export const SET_EMAIL = 'SET_EMAIL';
+
+export const SET_USER_DATA = 'SET_USER_DATA';
+export const SET_TRACKED_USER = 'SET_TRACKED_USER';
+
 export const SET_FLOW_DATA = 'SET_FLOW_DATA';
 
 //Demand
@@ -29,4 +35,6 @@ export const SET_FILTER_NONIRRIGATION = 'SET_FILTER_NONIRRIGATION';
 export const SET_MODE = 'SET_MODE';
 export const SET_INFO_MODAL_STATE = 'SET_INFO_MODAL_STATE';
 
+
+export const SET_USER = 'SET_USER';
 

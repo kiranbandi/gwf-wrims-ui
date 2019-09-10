@@ -1,5 +1,5 @@
 .root-schema-container {
-    margin: 0px 0px;
+    margin: 0px 0px 20px 0px;
     .schema-selection-container {
         display: inline-block;
     }
@@ -50,17 +50,46 @@
         position: relative;
         background-size: 100% 100%!important;
         .tile-container {
+
             display: block;
-            path {
-                fill: transparent;
-                stroke-width: 6.2px;
-                cursor: pointer;
-                &:hover {
-                    stroke-width: 10px;
-                    fill: #428dff;
-                    opacity: 0.50;
+            .root-schematic-tiles {
+                path {
+                    fill: transparent;
+                    stroke-width: 6.2px;
+                    cursor: pointer;
+                    &:hover {
+                        stroke-width: 10px;
+                        fill: #428dff;
+                        opacity: 0.50;
+                    }
                 }
             }
+
+            .root-schematic-readware-blobs {
+                user-select: none;
+                cursor: pointer;
+                
+                .readware-blob-text {
+                    fill: white;
+                    font-weight: 400;
+
+                    &.light {
+                        transform: translate(-4.5px, 4.5px);
+                        font-size: 14.5px;
+                    }
+
+                    &.medium {
+                        transform: translate(-7.6px, 4.5px);
+                        font-size: 14px;
+                    }
+
+                    &.heavy {
+                        transform: translate(-8.5px, 4px);
+                        font-size: 10.5px;
+                    }
+                }
+            }
+            
         }
         .selection-box {
             content: "";

@@ -24,7 +24,7 @@ class InflowFilter extends Component {
         const { filterMesh, schematicData = { lines: [], artifacts: [], labels: [], markers: [] } } = this.props,
             { areInflowsVisible = false, visibleInflows = [] } = filterMesh;
 
-        // filter out all demands , then get the name of the demand and finally sort 
+        // filter out all inflows , then get the name of the inflow and finally sort 
         const inflowsList = _.map(_.filter(schematicData.markers,
             (d) => { return (d.type == 'inflow' || d.type == 'inflow') }),
             (d) => d.name)
@@ -53,7 +53,7 @@ class InflowFilter extends Component {
                             styles={{ option: (styles) => ({ ...styles, color: 'black', textAlign: 'left' }) }}
                             onChange={this.onSelectChange} />
                     </div>
-                    {/* Adding a button to toggle all demands */}
+                    {/* Adding a button to toggle all inflows */}
                     <button
                         className={"eye custom-icon-button inflow " + ('icon btn ') + (areInflowsVisible ? '' : 'outline') +
                             (areInflowsVisible ? ' icon-eye' : ' icon-eye-with-line')}

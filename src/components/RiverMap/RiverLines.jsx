@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { line } from 'd3';
 import _ from 'lodash';
+import { twoPointHull } from '../../utils/hullGenerator'
 
 export default class RiverLines extends Component {
 
@@ -14,7 +15,7 @@ export default class RiverLines extends Component {
     }
 
     render() {
-        const { lines, xScale, yScale, lineWidth, highlightName = '' } = this.props;
+        const { lines, xScale, yScale, lineWidth, highlightName = '', trackedLink } = this.props;
 
         _.map(lines, (line) => {
             const { shiftCoords = [0, 0] } = line;
@@ -24,19 +25,31 @@ export default class RiverLines extends Component {
         });
         const d3Line = line().x((d) => d.x).y((d) => d.y);
 
+        let hullPoints = undefined;
+
+        const linksList = _.map(lines, (d, index) => {
+            if (trackedLink == d.name) { hullPoints = [[d.newNodes[0].x, d.newNodes[0].y], [d.newNodes[1].x, d.newNodes[1].y]]; }
+            return <path
+                onDoubleClick={this.onLinkClick.bind(this, d)}
+                key={'river-line-' + index}
+                id={d.name}
+                d={d3Line(d.newNodes)}
+                strokeWidth={lineWidth}
+                className={((highlightName == d.name) ? 'highlight ' : ' ') + 'flowLine type-' + (d.type) + " " + (d.reverse ? 'reverse-flow' : 'forward-flow')}>
+            </path>
+        })
+
         return (
             <g className='lines-container'>
-                {_.map(lines, (d, index) => {
-                    return <path
-                        onDoubleClick={this.onLinkClick.bind(this, d)}
-                        key={'river-line-' + index}
-                        id={d.name}
-                        d={d3Line(d.newNodes)}
-                        strokeWidth={lineWidth}
-                        className={((highlightName == d.name) ? 'highlight ' : ' ') + 'flowLine type-' + (d.type) + " " + (d.reverse ? 'reverse-flow' : 'forward-flow')}>
-                    </path>
-                })}
+                {hullPoints &&
+                     <path
+                        fill={"transparent"}
+                        stroke={`#fd9050`}
+                        strokeWidth={"2.5px"}
+                        d={twoPointHull(hullPoints, 13.5)}
+                        className={"hull-path"}>
+                    </path>}
+                {linksList}
             </g>)
     }
 }
-

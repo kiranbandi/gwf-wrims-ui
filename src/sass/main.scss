@@ -9,6 +9,7 @@
 @import 'components/Modal/ModalComponents/InformationContainer/root';
 
 @import 'components/infoIcon';
+@import 'components/userActivityPanel';
 @import 'components/fileUpload';
 @import 'components/container';
 @import 'components/navbar';
@@ -23,9 +24,10 @@
 @import 'components/yearRangeSlider';
 @import 'components/youtubeLayout';
 @import 'components/basinMap';
-
+@import 'components/editPanel';
 // import pages contains page-specific styling
 @import 'pages/tools';
 @import 'pages/home';
 @import 'pages/notFound';
 @import 'pages/dashboard';
+@import 'pages/mapTagger';

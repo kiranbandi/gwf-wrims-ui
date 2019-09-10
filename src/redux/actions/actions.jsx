@@ -1,11 +1,95 @@
 import * as types from './actionTypes';
 import _ from 'lodash';
 import { hashHistory } from 'react-router';
+import { actionTypes } from 'redux-firestore';
+
+export const setUser = () => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+        const firestore = getFirestore();
+        const firebase = getFirebase();
+        const uid = getState().delta.username;
+        const email = getState().delta.email;
+        const data = "";
+
+          
+        // Realtime Database Reference
+        var userStatusDatabaseRef = firebase.database().ref("/status/" + uid);
+
+        var isOfflineForDatabase = {
+        state: "offline",
+        last_changed: firebase.database.ServerValue.TIMESTAMP
+        };
+
+        var isOnlineForDatabase = {
+        state: "online",
+        last_changed: firebase.database.ServerValue.TIMESTAMP
+        };
+        
+        // Cloud Firestore Reference
+        var userStatusFirestoreRef = firestore.doc('/users/' + uid);
+
+        var isOfflineForFirestore = {
+            state: "offline",
+            last_changed: firestore.FieldValue.serverTimestamp(),
+            email,
+            data 
+
+        };
+
+        var isOnlineForFirestore = {
+            state: "online",
+            last_changed: firestore.FieldValue.serverTimestamp(),
+            email,
+            data 
+        };
+            
+
+        firebase.database().ref('.info/connected').on('value', function(snapshot) {
+            if (snapshot.val() === false) {
+                // Instead of simply returning, we'll also set Firestore's state
+                // to 'offline'. This ensures that our Firestore cache is aware
+                // of the switch to 'offline.'
+                userStatusFirestoreRef.set(isOfflineForFirestore);
+                return;
+            };
+
+            userStatusDatabaseRef.onDisconnect().set(isOfflineForDatabase).then(function() {
+                userStatusDatabaseRef.set(isOnlineForDatabase);
+
+                // We'll also add Firestore set here for when we come online.
+                userStatusFirestoreRef.set(isOnlineForFirestore);
+            });
+        });
+  
+        //   dispatch({type: types.SET_USER, uid});
+    }};
+
+export const setUserData = (newData) => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+        
+        const firestore = getFirestore();
+        const userUID = getState().delta.username;
+
+        let userRef = { collection: 'users', doc: userUID };
+        let userRefUpdate = { data: newData };
+
+
+        firestore.update(userRef, userRefUpdate).then(() => {
+                dispatch({type: types.SET_USER_DATA, data: newData});
+                return;
+            })
+    }};
+
+export function setTrackedUser(trackedUser) {
+    return { type: types.SET_TRACKED_USER, trackedUser}
+}
 
 
 export function loginSuccess(userDetails) {
     sessionStorage.setItem('jwt', userDetails.token);
     sessionStorage.setItem('username', userDetails.username);
+    sessionStorage.setItem('email', userDetails.email);
+
     let { state = { nextPathname: '/Dashboard' } } = hashHistory.getCurrentLocation();
     hashHistory.push(state.nextPathname);
     return { type: types.LOG_IN_SUCCESS };
@@ -15,6 +99,8 @@ export function logOutUser() {
     // remove the token and the username from browser storage
     sessionStorage.removeItem('jwt');
     sessionStorage.removeItem('username');
+    sessionStorage.removeItem('email');
+
     // redirect user to home page once he logs out
     hashHistory.push("/");
     return { type: types.LOG_OUT };
@@ -24,9 +110,15 @@ export function setUsername(username) {
     return { type: types.SET_USERNAME, username };
 }
 
+export function setEmail(email) {
+    return { type: types.SET_EMAIL, email };
+}
+
+
 export function setLoginData(userDetails) {
     return dispatch => {
         dispatch(setUsername(userDetails.username));
+        dispatch(setEmail(userDetails.email));
         dispatch(loginSuccess(userDetails));
     };
 }
@@ -34,6 +126,7 @@ export function setLoginData(userDetails) {
 export function setLogoutData() {
     return dispatch => {
         dispatch(setUsername(''));
+        dispatch(setEmail(''));
         dispatch(logOutUser());
     };
 }

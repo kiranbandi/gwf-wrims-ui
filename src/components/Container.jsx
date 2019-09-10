@@ -21,7 +21,7 @@ class Container extends Component {
             this.setState({ showPawsLoginLoader: true });
             // isPAWS flag set to true to differentiate login from google login
             requestLogin(pawsTicket, true)
-                .then((userData) => { this.props.actions.setLoginData(userData) })
+                .then((userData) => { this.props.actions.setLoginData({...userData, email: `${userData.username}@usask.ca`}); })
                 .catch((err) => { console.log(err) })
                 .finally(() => {
                     this.setState({ showPawsLoginLoader: false });

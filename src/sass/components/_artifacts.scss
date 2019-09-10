@@ -1,29 +1,28 @@
-.artifacts-container {
-    .reservoir {
-        cursor: pointer;
-        &>g {
-            fill: black;
-            stroke-width: 8px;
-        }
+.reservoir {
+    cursor: pointer;
+    &>g {
+        fill: black;
+        stroke-width: 8px;
+    }
+    circle {
+        fill: #00bdff;
+        stroke-width: 30px;
+    }
+    &.highlight {
         circle {
-            fill: #00bdff;
-            stroke-width: 30px;
-        }
-        &.highlight {
-            circle {
-                fill: red;
-            }
+            fill: red;
         }
     }
-    .sink {
-        cursor: pointer;
-        .sinkBorder {
-            fill: white;
-        }
-        text {
-            color: black;
-            font-size: 250px;
-            font-weight: bold;
-        }
+}
+
+.sink {
+    cursor: pointer;
+    .sinkBorder {
+        fill: white;
+    }
+    text {
+        color: black;
+        font-size: 250px;
+        font-weight: bold;
     }
 }

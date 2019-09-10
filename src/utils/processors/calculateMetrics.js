@@ -40,8 +40,8 @@ export default function(dataList, name, threshold) {
             spawningMinor = '';
 
         // if there is previous data and it is for the same node 
-        // and the previous threshold was base and the current one is five or then
-        if (previousData && (name == previousData.name) && previousData.threshold == 'base' && (threshold == 'five' || threshold == 'ten')) {
+        // and the previous threshold was base and the current one is five or ten
+        if (previousData && (name == previousData.name) && previousData.threshold == 'base-base' && (threshold == 'five-decrease' || threshold == 'ten-decrease' || threshold == 'five-increase' || threshold == 'ten-increase')) {
             summerMinor = -1 * Math.round(((previousData.summerFlow.major - summerMajor) / (previousData.summerFlow.major)) * 100);
             winterMinor = -1 * Math.round(((previousData.winterFlow.major - winterMajor) / (previousData.winterFlow.major)) * 100);
             spawningMinor = -1 * Math.round(((previousData.spawningRate.major - spawningMajor) / (previousData.spawningRate.major)) * 100);
@@ -56,7 +56,7 @@ export default function(dataList, name, threshold) {
         };
 
         // when threshold is five dont set any values
-        if (threshold == 'base') {
+        if (threshold == 'base-base') {
             window.gwf = {...metrics };
         }
 

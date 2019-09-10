@@ -45,6 +45,40 @@ requestServer.getYearlyData = function(params) {
     });
 }
 
+requestServer.getNodes = function(modelID) {
+    return new Promise((resolve, reject) => {
+        axios.post(endPoints.getNodes, { modelID }, { headers: { 'authorization': 'Bearer ' + sessionStorage.jwt } })
+            .then((response) => { resolve(response.data) })
+            .catch((err) => errorCallback(err, reject));
+    });
+}
+
+requestServer.registerNode = function(markerParams) {
+    return new Promise((resolve, reject) => {
+        axios.post(endPoints.registerNode, {...markerParams }, { headers: { 'authorization': 'Bearer ' + sessionStorage.jwt } })
+            .then((response) => { resolve(response.data) })
+            .catch((err) => errorCallback(err, reject));
+    });
+}
+
+requestServer.updateNode = function(markerParams) {
+    return new Promise((resolve, reject) => {
+        axios.post(endPoints.updateNode, {...markerParams }, { headers: { 'authorization': 'Bearer ' + sessionStorage.jwt } })
+            .then((response) => { resolve(response.data) })
+            .catch((err) => errorCallback(err, reject));
+    });
+}
+
+requestServer.deleteNode = function(markerParams) {
+    return new Promise((resolve, reject) => {
+        axios.post(endPoints.deleteNode, {...markerParams }, { headers: { 'authorization': 'Bearer ' + sessionStorage.jwt } })
+            .then((response) => { resolve(response.data) })
+            .catch((err) => errorCallback(err, reject));
+    });
+}
+
+
+
 
 function errorCallback(error, reject) {
     if (error.response && error.response.data) {

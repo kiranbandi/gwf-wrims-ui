@@ -2,6 +2,12 @@ export default {
   delta: {
     sessionStatus: !!sessionStorage.jwt,
     username: sessionStorage.username,
+    email: sessionStorage.email,
+
+    userData: '###',
+    trackedUser: '',
+
+
     filterMesh: {
       //Demands
       areDemandsVisible: true,

@@ -10,6 +10,12 @@ export default function deltaReducer(state = initialState.delta, action) {
       return Object.assign({}, state, { sessionStatus: false })
     case types.SET_USERNAME:
       return Object.assign({}, state, { username: action.username })
+    case types.SET_EMAIL:
+      return Object.assign({}, state, { email: action.email })
+    case types.SET_USER_DATA:
+      return Object.assign({}, state, { userData: action.data })
+    case types.SET_TRACKED_USER:
+      return Object.assign({}, state, { trackedUser: action.trackedUser })
     case types.SET_FLOW_DATA:
       return Object.assign({}, state, { flowData: action.flowData })
 

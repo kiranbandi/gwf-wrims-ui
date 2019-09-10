@@ -1,0 +1,124 @@
+.map-tagger-root {
+    padding: 30px 25px;
+    .filter-root-box {
+        .name-box {
+            display: inline-block;
+            margin-right: 20px;
+        }
+        .filter-label {
+            margin-right: 20px;
+            font-size: 1.25em;
+            vertical-align: -webkit-baseline-middle;
+        }
+        .button-box {
+            display: inline-block;
+            button {
+                font-size: 15px;
+            }
+        }
+    }
+    .mapboxDiv {
+        &>div {
+            background: white;
+        }
+        display: inline-block;
+    }
+    .filter-loader {
+        display: inline-block;
+        margin-left: 10px;
+        vertical-align: top;
+    }
+    .river-marker {
+        cursor: pointer;
+        circle {
+            &.type-agri {
+                fill: #51a83a;
+                stroke-width: 30px;
+            }
+            &.type-inflow {
+                fill: #92cce3;
+                stroke-width: 30px;
+            }
+            &.type-demand {
+                fill: #7e7e7e;
+                stroke-width: 30px;
+            }
+            &.type-reservoir {
+                fill: #00bdff;
+                stroke-width: 30px;
+            }
+            &.type-sink {
+                fill: white;
+                stroke-width: 30px;
+            }
+        }
+        text {
+            fill: white;
+        }
+        &.highlight {
+            circle {
+                fill: red !important;
+            }
+        }
+        .sink-text {
+            fill: black !important;
+            font-weight: bold;
+        }
+    }
+    .custom-marker {
+        fill: #48579a;
+    }
+    .modal-root {
+        .modal-main {
+            position: fixed;
+            background: #252830;
+            width: 75%;
+            height: auto;
+            top: 12.5%;
+            left: 12.5%;
+            padding: 12px 20px;
+            border-radius: 5px;
+        }
+    }
+    .close {
+        color: #000;
+        background: #fff;
+        border-radius: 10px;
+        width: 20px;
+    }
+    .river-map-modal-container {
+        min-height: 200px;
+        margin: 20px auto;
+        text-align: center;
+        .filter-loader {
+            margin-top: 25px;
+        }
+        .reservoir {
+            cursor: pointer;
+            &>g {
+                fill: black;
+                stroke-width: 8px;
+            }
+            circle {
+                fill: #00bdff;
+                stroke-width: 30px;
+            }
+            &.highlight {
+                circle {
+                    fill: red;
+                }
+            }
+        }
+        .sink {
+            cursor: pointer;
+            .sinkBorder {
+                fill: white;
+            }
+            text {
+                color: black;
+                font-size: 250px;
+                font-weight: bold;
+            }
+        }
+    }
+}

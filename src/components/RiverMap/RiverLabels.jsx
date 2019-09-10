@@ -5,7 +5,6 @@ export default (props) => {
     const { labels = [], xScale, yScale, areLabelsVisible } = props, // *Added
         // font-size relative to the size of the screen
         fontScale = Math.round((xScale(1) - xScale(0)) / 0.3);
-    // console.log(areLabelsVisible)
 
     const labelsList = _.map(labels, (label, index) => {
 

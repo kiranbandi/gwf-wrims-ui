@@ -5,7 +5,7 @@ import * as d3 from 'd3';
 import attachZoom from '../../utils/attachZoom';
 import applyFilterMesh from '../../utils/applyFilterMesh';
 import { getFlowData } from '../../utils/requestServer';
-import { setFlowData, setInfoModalState } from '../../redux/actions/actions';
+import { setFlowData, setUserData, setInfoModalState } from '../../redux/actions/actions';
 
 import _ from 'lodash';
 import RiverLines from './RiverLines';
@@ -37,8 +37,9 @@ class RiverMap extends Component {
     }
 
     onItemClick(itemType, params) {
-        let { schematicData, actions, flowData = {}, fromDashboard = true } = this.props,
-            { flowParams = { threshold: 'base' }, isLoading = false } = flowData;
+
+        let { schematicData, actions, flowData = {}, fromDashboard = true, mode } = this.props,
+            { flowParams = { threshold: 'base-base' }, isLoading = false } = flowData;
 
         if (!fromDashboard) { return; }
 
@@ -70,6 +71,10 @@ class RiverMap extends Component {
             }
 
             flowParams = { modelID, threshold, number, type };
+
+            if (mode === 3) {
+                actions.setUserData(`${modelID}#${type}#${name}#${number}`);
+            }    
 
             actions.setFlowData({ dataList: [], name, flowParams, isLoading: true });
             getFlowData(flowParams)
@@ -108,7 +113,7 @@ class RiverMap extends Component {
         var lineWidthMultiplier = 0.8;
 
         const { schematicData = { lines: [], artifacts: [], labels: [], markers: [], title: {} },
-            width, height, filterMesh, flowData = {} } = this.props,
+            width, height, filterMesh, flowData = {}, trackedNode = "" } = this.props,
             { name = '' } = flowData;
 
 
@@ -159,14 +164,16 @@ class RiverMap extends Component {
                             yScale={yScale}
                             highlightName={name}
                             onItemClick={this.onItemClick}
-                            lineWidth={lineWidth} />
+                            lineWidth={lineWidth}
+                            trackedLink={trackedNode}/>
 
                         <Artifacts
                             xScale={xScale}
                             yScale={yScale}
                             highlightName={name}
                             onItemClick={this.onItemClick}
-                            artifacts={filteredData.artifacts} />
+                            artifacts={filteredData.artifacts} 
+                            trackedNode={trackedNode}/>
 
                         <RiverLabels
                             xScale={xScale}
@@ -180,7 +187,8 @@ class RiverMap extends Component {
                             highlightName={name}
                             onItemClick={this.onItemClick}
                             markers={filteredData.markers}
-                            isMock={this.props.isMock} />
+                            isMock={this.props.isMock} 
+                            trackedNode={trackedNode}/>
 
                     </g>
                     {/* Display the title from the schema */}
@@ -206,13 +214,14 @@ class RiverMap extends Component {
 function mapStateToProps(state) {
     return {
         flowData: state.delta.flowData,
-        filterMesh: state.delta.filterMesh
+        filterMesh: state.delta.filterMesh,
+        mode: state.delta.mode
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({ setFlowData, setInfoModalState }, dispatch)
+        actions: bindActionCreators({ setFlowData, setUserData, setInfoModalState }, dispatch)
     };
 }
 
