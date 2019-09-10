@@ -10,3 +10,5 @@ export { default as LegendPanel } from './MapLegend/LegendPanel';
 export { default as FileUpload } from './FileUpload';
 export { default as BasinMap } from './MapBoxComponents/BasinMap';
 export { default as Modal } from './Modal/';
+export { default as InfoIcon } from './InfoIcon';
+

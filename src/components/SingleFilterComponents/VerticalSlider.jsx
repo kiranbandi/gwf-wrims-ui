@@ -9,8 +9,7 @@ import Switch from "react-switch";
 import { getFlowData } from '../../utils/requestServer';
 import { setFlowData, setInfoModalState } from '../../redux/actions/actions';
 import toastr from '../../utils/toastr';
-
-import Modal from '../Modal' 
+import InfoIcon from '../InfoIcon' 
 
 const decreaseSupplyMarks = {
     0: <strong>-10%</strong>,
@@ -33,11 +32,15 @@ class VerticalSlider extends Component {
         this.state = {
             currentMode: 0,
             sliderValue: 100,
+
+            // solution to a really weird html/css bug
+            infoIconStyle: { position: `absolute`},
+            infoStyleFixDone: false
         }
     }
 
     learnMore = () => {
-        this.props.actions.setInfoModalState([true, 2]);
+        this.props.actions.setInfoModalState([true, 1]);
         window.scrollTo(0, 0); 
     }
 
@@ -50,6 +53,13 @@ class VerticalSlider extends Component {
 
     onSliderChange(value) {
         this.setState({ sliderValue: value });
+        
+        // solution to a really weird html/css bug
+        if (!this.state.infoStyleFixDone) {
+            this.setState({ infoIconStyle: { position: `unset`}});
+            setTimeout(() => { this.setState({ infoIconStyle: { position: `absolute`},  infoStyleFixDone: true }); }, 10);
+        }
+        
         let { actions, flowData = {} } = this.props, { flowParams = null, name, isLoading = false } = flowData;
 
         if (!isLoading) {
@@ -83,7 +93,7 @@ class VerticalSlider extends Component {
         let { width, height, flowData = {}, actions } = this.props,
             { flowParams = { threshold: 'base' } } = flowData, { threshold = 'base' } = flowParams;
         
-        var { currentMode, sliderValue, showModal } = this.state
+        var { currentMode, sliderValue, infoIconStyle } = this.state
 
         let checked, currentFactor, factorMarks, initialValue;        
         if (currentMode === 0) {
@@ -131,9 +141,12 @@ class VerticalSlider extends Component {
                 <div className='inner-slider' style={{ 'width': width, 'height': sliderHeight, marginBottom}}>
                     <Slider vertical value={sliderValue} min={0} marks={factorMarks} step={null} included={false} onChange={this.onSliderChange} defaultValue={initialValue}/>
                 </div>
-                <div className="info-icon" title="Learn More" onClick={this.learnMore}>
-                    <span className="icon icon-info-with-circle sample-icon"></span>
-                </div>
+                <InfoIcon
+                    xOffset={-30}
+                    yOffset={height - 118}
+                    hoverText={`Learn More`}
+                    onClick={this.learnMore} 
+                    style={infoIconStyle}/>
             </div>
         );
     }
