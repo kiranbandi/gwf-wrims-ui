@@ -1,0 +1,17 @@
+.info-icon {
+    cursor: pointer;
+    color: #d0d0d0;
+    width: max-content;
+    position: absolute;
+    height: max-content;
+    display: inline-block;
+    
+    .icon {
+        font-size: 17.5px;
+        margin: 0 4px;
+    }
+
+    &:hover {
+        color: white;
+    }
+}
