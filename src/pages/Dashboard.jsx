@@ -158,7 +158,7 @@ class DashboardRoot extends Component {
         let activeUsers = [], trackedUserData = [], activeBasinUsers = {}, trackedNode = "";    
 
         if (mode === 3) {
-            let activeUsers = datastore.ordered.users? datastore.ordered.users.filter((user) => (user.id !== username) && (user.state === 'online')) : [];
+            activeUsers = datastore.ordered.users? datastore.ordered.users.filter((user) => (user.id !== username) && (user.state === 'online')) : [];
 
             trackedUserData = datastore.ordered.users? datastore.ordered.users.filter((user) => (user.id === trackedUser) && (user.state === 'online')) : [];
 
