@@ -5,13 +5,14 @@ import * as d3 from 'd3';
 import attachZoom from '../../utils/attachZoom';
 import applyFilterMesh from '../../utils/applyFilterMesh';
 import { getFlowData } from '../../utils/requestServer';
-import { setFlowData } from '../../redux/actions/actions';
+import { setFlowData, setInfoModalState } from '../../redux/actions/actions';
 
 import _ from 'lodash';
 import RiverLines from './RiverLines';
 import Artifacts from './Artifacts';
 import RiverLabels from './RiverLabels';
 import Markers from './Markers';
+import InfoIcon from '../InfoIcon'
 
 class RiverMap extends Component {
     constructor(props) {
@@ -28,6 +29,11 @@ class RiverMap extends Component {
         // for when the user is in stakeholder mode
         initialZoomScale = (scaleFix) ? { x: width * 0.045, y: width * 0.015, scale: 1.10 } : initialZoomScale;
         attachZoom('river-map', initialZoomScale);
+    }
+
+    learnMore = () => {
+        this.props.actions.setInfoModalState([true, 0]);
+        window.scrollTo(0, 0); 
     }
 
     onItemClick(itemType, params) {
@@ -186,6 +192,11 @@ class RiverMap extends Component {
                         {title.label}
                     </text>
                 </svg>
+                <InfoIcon
+                    xOffset={-30}
+                    yOffset={height - 28}
+                    hoverText={`Learn More`}
+                    onClick={this.learnMore}/>
             </div >
         );
     }
@@ -201,7 +212,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({ setFlowData }, dispatch)
+        actions: bindActionCreators({ setFlowData, setInfoModalState }, dispatch)
     };
 }
 
