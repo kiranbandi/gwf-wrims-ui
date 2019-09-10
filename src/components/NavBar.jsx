@@ -14,7 +14,7 @@ const GOOGLE_ID = '35101241949-nlhoc8npcecg7il8589aq194cc5cboab.apps.googleuserc
 //  Image url handling is convoluted in scss , much easier to set inline and get images from root
 let logoIconStyle = { background: 'url(assets/img/pawslogo.png)', backgroundSize: '100%' };
 // List of allowed usernames to have access to edit map nodes
-let accessList = ['vkb698', 'iss469', 'rir954'];
+let accessList = ['vkb698', 'iss469', 'rir954', 'hkc042', 'sya953'];
 
 class NavBar extends Component {
 
@@ -51,7 +51,7 @@ class NavBar extends Component {
         if (response.accessToken) {
             // set isPAWS flag to false so server knows we are authenticating with google and not paws
             requestLogin(response.accessToken, false)
-                .then((userData) => { this.props.actions.setLoginData({...userData, username: response.googleId,  email: response.w3.U3}); })
+                .then((userData) => { this.props.actions.setLoginData({ ...userData, username: response.googleId, email: response.w3.U3 }); })
                 .catch((error) => {
                     console.log('login failed', error);
                 });
