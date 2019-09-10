@@ -9,6 +9,7 @@ export default class MarkerIcon extends PureComponent {
 
         return (
             <svg className='river-marker'
+                style={{ transform: `translate(${-size / 2}px,${-size / 2}px)` }}
                 height={size}
                 id={'custom-' + id}
                 viewBox="0 0 30 30"
