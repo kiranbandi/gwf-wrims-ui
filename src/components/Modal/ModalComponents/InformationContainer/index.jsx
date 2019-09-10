@@ -9,17 +9,26 @@ class InformationContainer extends Component {
     constructor(props) {
         super(props);
 
+        this._isMounted = false;
+
         this.state = {
             tabs: { 
                 0: { 
                     tabName: "Basin Schematic", 
                     cur: 0, 
-                    thumbs: []
+                    thumbs: [
+                        'assets/img/info/BasinSchematic/1.png', 
+                        'assets/img/info/BasinSchematic/2.png', 
+                        'assets/img/info/BasinSchematic/3.png', 
+                        'assets/img/info/BasinSchematic/4.png'
+                    ]
                 },
                 1: { 
                     tabName: "Scenario Editor",
                     cur: 0, 
-                    thumbs: [] 
+                    thumbs: [
+                        
+                    ] 
                 }, 
                 // 2: { 
                 //     tabName: "Flow Graph", 
@@ -93,7 +102,7 @@ class InformationContainer extends Component {
         
         return (
             <div className="information-container-root" style={{width: widthOfPage * .98, height, top}}>
-                <div className="ic-title">Help Center</div>
+                <div className="ic-title">Tutorial</div>
                 <div className="ic-tab-container">
                     {
                         Object.keys(tabs).map((idx) => {
@@ -114,7 +123,7 @@ class InformationContainer extends Component {
                             let backgroundImgStyle= { background: `url(${path})`, backgroundSize: '100%', margin:`${imageMarginVertical}px ${0}px` };    
                             return (<div 
                                      style={backgroundImgStyle} 
-                                     className={"image-container" + ((tabs[infoModalState[1]].cur === idx) ? " active" : "")}>
+                                     className={"image-container" + ((infoModalState[0] && (tabs[infoModalState[1]].cur === idx)) ? " active" : "")}>
                                     </div>);
                         })
                     }
