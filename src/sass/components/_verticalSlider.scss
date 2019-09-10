@@ -8,7 +8,7 @@
     vertical-align: top;
     .slider-title {
         font-weight: bold;
-        margin-top: 5px;
+        margin-top: 6px;
 
     }
 
@@ -27,23 +27,13 @@
             display: inline-block;
             margin-left: -40px;
             margin-top: 10px;
+
+            .rc-slider-mark {
+                top: 4px;
+            }
         }
         strong {
             font-size: 14px;
-        }
-    }
-
-    .info-icon {
-        cursor: pointer;
-        color: #d0d0d0;
-        
-        .icon {
-            font-size: 20px;
-            margin: 0 4px;
-        }
-
-        &:hover {
-            color: white;
         }
     }
 }
