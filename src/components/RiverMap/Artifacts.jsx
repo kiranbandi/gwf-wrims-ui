@@ -21,7 +21,7 @@ export default class Markers extends Component {
 
     render() {
 
-        let { artifacts = [], xScale, yScale, highlightName = '', trackedNode } = this.props,
+        let { artifacts = [], xScale, yScale, highlightName = '', trackedNode = "" } = this.props,
             // scale relative to the size of the screen
             reservoirIconScale = (xScale(1) - xScale(0)) / 90;
         let tempOffset = reservoirIconScale * 150;
@@ -62,7 +62,7 @@ export default class Markers extends Component {
         const sinkList = _.map(_.filter(artifacts, (d) => d.type == 'sink'),
             (sink, index) => {
                 const { coords, size = 1 } = sink;
-                if (highlightName == sink.name) { hullPoint = [[xScale(coords[0]), yScale(coords[1])]]; }
+                if (trackedNode == sink.name) { hullPoint = [[xScale(coords[0]), yScale(coords[1])]]; }
 
                 return <g key={'sink-' + index} className={'sink' + ((highlightName == sink.name) ? ' highlight' : '')}
                     transform={"translate(" + (+xScale(coords[0]) - (tempOffset)) + "," + (+yScale(coords[1]) - (tempOffset)) + ") scale(" + (size * reservoirIconScale) + ")"}>

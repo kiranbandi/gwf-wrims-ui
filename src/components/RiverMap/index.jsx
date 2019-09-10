@@ -32,7 +32,7 @@ class RiverMap extends Component {
 
     onItemClick(itemType, params) {
 
-        let { schematicData, actions, flowData = {}, fromDashboard = true } = this.props,
+        let { schematicData, actions, flowData = {}, fromDashboard = true, mode } = this.props,
             { flowParams = { threshold: 'base-base' }, isLoading = false } = flowData;
 
         if (!fromDashboard) { return; }
@@ -65,7 +65,10 @@ class RiverMap extends Component {
             }
 
             flowParams = { modelID, threshold, number, type };
-            this.props.actions.setUserData(`${modelID}#${type}#${name}#${number}`);
+
+            if (mode === 3) {
+                actions.setUserData(`${modelID}#${type}#${name}#${number}`);
+            }    
 
             actions.setFlowData({ dataList: [], name, flowParams, isLoading: true });
             getFlowData(flowParams)
@@ -104,7 +107,7 @@ class RiverMap extends Component {
         var lineWidthMultiplier = 0.8;
 
         const { schematicData = { lines: [], artifacts: [], labels: [], markers: [], title: {} },
-            width, height, filterMesh, flowData = {}, trackedNode } = this.props,
+            width, height, filterMesh, flowData = {}, trackedNode = "" } = this.props,
             { name = '' } = flowData;
 
 
@@ -201,6 +204,7 @@ function mapStateToProps(state) {
     return {
         flowData: state.delta.flowData,
         filterMesh: state.delta.filterMesh,
+        mode: state.delta.mode
     };
 }
 

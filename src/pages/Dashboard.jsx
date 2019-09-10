@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { RiverMap, FilterPanel, FlowPanel, RootSchematic, VerticalSlider, Modal } from '../components';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { setFlowData, setMode } from '../redux/actions/actions';
+import { setFlowData, setMode, setUser, setUserData, setTrackedUser } from '../redux/actions/actions';
 import axios from 'axios';
 import toastr from '../utils/toastr';
 import Loading from 'react-loading';
@@ -10,6 +8,9 @@ import processSchematic from '../utils/processors/processSchematic';
 import { getFlowData } from '../utils/requestServer';
 import _ from 'lodash';
 import LegendPanel from '../components/MapLegend/LegendPanel';
+import { compose, bindActionCreators } from 'redux';
+import { firestoreConnect } from 'react-redux-firebase'
+import { connect } from 'react-redux'
 
 
 class DashboardRoot extends Component {
@@ -19,10 +20,15 @@ class DashboardRoot extends Component {
         this.state = {
             isSchematicLoading: false,
             selectedPlace: '',
-            SchematicData: { lines: [], artifacts: [], labels: [], markers: [], selectedRegion: null }
+            SchematicData: { lines: [], artifacts: [], labels: [], markers: [], selectedRegion: null },
         };
+        this.onTrackedUserSelect = this.onTrackedUserSelect.bind(this);
         this.onRegionSelect = this.onRegionSelect.bind(this);
         this.onPlaceSelect = this.onPlaceSelect.bind(this);
+    }
+
+    componentDidMount() {
+        this.props.actions.setUser();
     }
 
     componentWillUnmount() {
@@ -34,12 +40,51 @@ class DashboardRoot extends Component {
         }
     }
 
+    onTrackedUserSelect(userID) {
+        const { actions, datastore, trackedUser, mode } = this.props;
+        
+        if (mode !== 3) { return; }
+        
+        if (userID === "") { 
+            if (userID !== trackedUser) { 
+                actions.setTrackedUser(""); 
+            } 
+            return;
+         }
 
+        actions.setTrackedUser(userID);
+        
+        let trackedUserData = datastore.ordered.users? datastore.ordered.users.filter((user) => (user.id === userID) && (user.state === 'online')) : [];
+
+        if (trackedUserData.length === 0) {
+            actions.setTrackedUser('');
+            return;
+        }
+        
+        if ((trackedUserData[0].data === "") || trackedUserData[0].data === "###") { 
+            this.setState({SchematicData: { lines: [], artifacts: [], labels: [], markers: [], selectedRegion: null }});
+            this.props.actions.setUserData(`###`); 
+            return; 
+        }
+
+        if ((trackedUserData[0].data).slice(-3) === "###") {
+            this.onRegionSelect({target: { id: trackedUserData[0].data.split("#")[0]}}); 
+            return; 
+        }
+
+        this.onPlaceSelect({target: { id: trackedUserData[0].data}});
+        return;
+    }
 
     onRegionSelect(event) {
+        if (event.target.id === "" || event === "") { return; }
+
         const selectedRegion = event.target.id || 'highwood';
+        
+        if (this.props.mode === 3) { this.props.actions.setUserData(`${selectedRegion}###`); }
 
         this.setState({ 'isSchematicLoading': true });
+        
         axios.get("/assets/files/schematics/" + selectedRegion + ".json")
             .then((response) => {
                 let processedData = processSchematic(response.data);
@@ -52,6 +97,11 @@ class DashboardRoot extends Component {
 
     onPlaceSelect(event) {
         /* id is model#type#name#number */
+        if (event.target.id === "" || event === "" || event.target.id === "###") { return; }
+        
+        // log data if in collaboration mode
+        if (this.props.mode === 3) { this.props.actions.setUserData(event.target.id); }
+
         const selectorList = event.target.id.split("#");
 
         let selectedRegion = selectorList[0],
@@ -103,9 +153,54 @@ class DashboardRoot extends Component {
         // reduce the width of the slider from the map
         mapWidth = mapWidth - widthOfSlider;
 
-        const { mode } = this.props;
+        const { mode, datastore, username, userData, trackedUser } = this.props;
 
+        let activeUsers = [], trackedUserData = [], activeBasinUsers = {}, trackedNode = "";    
 
+        if (mode === 3) {
+            let activeUsers = datastore.ordered.users? datastore.ordered.users.filter((user) => (user.id !== username) && (user.state === 'online')) : [];
+
+            trackedUserData = datastore.ordered.users? datastore.ordered.users.filter((user) => (user.id === trackedUser) && (user.state === 'online')) : [];
+
+            if (trackedUserData.length === 0 && trackedUser !== "") { this.onTrackedUserSelect(""); }
+
+            let TUData = (trackedUserData.length === 0)? "###" : ((trackedUserData[0].data).slice(-3) === "###")? "###" : trackedUserData[0].data; 
+
+            trackedNode = TUData.split("#")[2];
+            
+            activeBasinUsers = {
+                alberta:{
+                    users: []
+                },
+                northSask:{
+                    users: []
+                },
+                northSaskSask:{
+                    users: []
+                },
+                southSask:{
+                    users: []
+                },
+                tau:{
+                    users: []
+                },
+                highwood:{
+                    users: []
+                },
+                stribs:{
+                    users: []
+                }
+            }
+
+            activeUsers.forEach((user) => {
+                let uData = user.data.split("#");
+
+                if (activeBasinUsers[uData[0]]) {
+                    activeBasinUsers[uData[0]].users.push(user);
+                };
+            });
+        }
+            
         return (
             <div className='dashboard-page-root' >
                 <Modal show={mode === -1 || mode === 2} componentID={"userSelection"} />
@@ -114,20 +209,28 @@ class DashboardRoot extends Component {
                     width={widthOfDashboard}
                     selectedPlace={selectedPlace}
                     onPlaceSelect={this.onPlaceSelect}
-                    onRegionSelect={this.onRegionSelect} />
+                    onRegionSelect={this.onRegionSelect}
+                    mode={mode}
+                    activeUsers={activeUsers}
+                    activeBasinUsers={activeBasinUsers}
+                    userData={userData}
+                    onTrackedUserSelect={this.onTrackedUserSelect}
+                    trackedUser={trackedUser}
+                />
 
                 {isSchematicLoading ?
                     <Loading className='loader' type='spin' height='100px' width='100px' color='#d6e5ff' delay={-1} /> :
                     <div className='dashboard-inner-root'>
                         {SchematicData.lines.length > 0 &&
                             <div>
-                                {(mode === 1) && < FilterPanel schematicData={SchematicData} />}
+                                {(mode === 1) && <FilterPanel schematicData={SchematicData} />}
                                 <RiverMap
                                     schematicData={SchematicData}
                                     width={mapWidth}
                                     height={mapWidth / 1.75}
                                     isMock={false}
-                                    scaleFix={!(mode === 1)} />
+                                    scaleFix={!(mode === 1)} 
+                                    trackedNode={trackedNode}/>
 
                                 {(mode === 1) && <VerticalSlider
                                     width={widthOfSlider}
@@ -145,17 +248,26 @@ class DashboardRoot extends Component {
     }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = (state) => {
     return {
         flowData: state.delta.flowData,
-        mode: state.delta.mode
+        mode: state.delta.mode,
+        username: state.delta.username,
+        datastore: state.firestore,
+        userData: state.delta.userData,
+        trackedUser: state.delta.trackedUser
     };
-}
+};
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({ setFlowData, setMode }, dispatch)
+        actions: bindActionCreators({ setFlowData, setMode, setUser, setUserData, setTrackedUser }, dispatch)
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DashboardRoot);
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    firestoreConnect([
+        { collection: 'users' }
+    ])
+)(DashboardRoot);
