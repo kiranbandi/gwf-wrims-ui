@@ -63,8 +63,6 @@
 .river-marker {
     cursor: pointer;
     circle {
-        stroke-width: 10px;
-        stroke: black;
         &.type-agri {
             fill: #51a83a;
         }
@@ -73,14 +71,12 @@
         }
         &.type-demand {
             fill: #7e7e7e;
-            stroke: none;
         }
         &.type-reservoir {
             fill: #00bdff;
         }
         &.type-sink {
             fill: white;
-            stroke: none;
         }
     }
     text {
