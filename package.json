@@ -17,7 +17,7 @@
     "author": "kiranbandi",
     "license": "MIT",
     "dependencies": {
-        "axios": "^0.18.0",
+        "axios": "^0.18.1",
         "bootstrap": "^4.3.1",
         "bootstrap-select": "^1.13.10",
         "d3": "^5.9.2",
