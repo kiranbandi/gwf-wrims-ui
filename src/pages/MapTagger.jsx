@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
-import { } from '../components';
 import uniqid from 'uniqid';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import Loading from 'react-loading';
 import { getNodes, registerNode, updateNode, deleteNode } from '../utils/requestServer';
 import toastr from '../utils/toastr';
-import { CustomBasinMap, EditPanel } from '../components';
+import { CustomBasinMap, EditPanel, RiverMapModal } from '../components';
 import PLACES from '../utils/static-reference/mapPlaces';
 
 const BasinList = [
@@ -19,7 +16,7 @@ const BasinList = [
 ];
 
 
-class MapTagger extends Component {
+export default class MapTagger extends Component {
 
     constructor(props) {
         super(props);
@@ -33,7 +30,8 @@ class MapTagger extends Component {
             markerType: '',
             markerNote: '',
             markerLink: '',
-            editModeON: false
+            editModeON: false,
+            isModalVisible: false
         };
         this.loadNodes = this.loadNodes.bind(this);
         this.onChange = this.onChange.bind(this);
@@ -41,6 +39,19 @@ class MapTagger extends Component {
         this.onEditSubmit = this.onEditSubmit.bind(this);
         this.onDelete = this.onDelete.bind(this);
         this.onMapPointClick = this.onMapPointClick.bind(this);
+        this.toggleModal = this.toggleModal.bind(this);
+        this.setMarkerLink = this.setMarkerLink.bind(this);
+    }
+
+
+    setMarkerLink(markerLink) {
+        this.setState({ markerLink });
+    }
+
+
+    toggleModal(event) {
+        event.preventDefault();
+        this.setState({ isModalVisible: !this.state.isModalVisible });
     }
 
     onMapPointClick(event) {
@@ -270,8 +281,9 @@ class MapTagger extends Component {
         //125px to offset the 30px margin on both sides and vertical scroll bar width
         const widthOfDashboard = document.body.getBoundingClientRect().width - 100,
             { isLoaderVisible, currentModel, selectedNode,
-                innerLoaderState, deleteLoaderState, editModeON,
-                currentNodes, markerNote, markerType } = this.state;
+                innerLoaderState, deleteLoaderState,
+                editModeON, currentNodes, markerNote,
+                markerLink, markerType, isModalVisible } = this.state;
 
 
         // set the zoom and lat long level if a sub model has been selected
@@ -283,7 +295,14 @@ class MapTagger extends Component {
 
         return (
             <div className='map-tagger-root' >
-                <div className='filter-root-box'>
+                {isModalVisible &&
+                    <RiverMapModal
+                        markerLink={markerLink}
+                        setMarkerLink={this.setMarkerLink}
+                        currentModel={currentModel}
+                        width={widthOfDashboard * 0.60}
+                        toggleModal={this.toggleModal} />}
+                <div className='filter-root-box m-t'>
                     <div className='name-box'>
                         <label className='filter-label'>Select a Model</label>
                         <select id='currentModel' defaultValue={currentModel} className="custom-select">
@@ -319,6 +338,7 @@ class MapTagger extends Component {
                             markerNote={markerNote}
                             onEditSubmit={this.onEditSubmit}
                             onDelete={this.onDelete}
+                            toggleModal={this.toggleModal}
                             innerLoaderState={innerLoaderState}
                             deleteLoaderState={deleteLoaderState}
                             editModeON={editModeON}
@@ -328,16 +348,3 @@ class MapTagger extends Component {
         );
     }
 }
-
-function mapStateToProps(state) {
-    return {
-    };
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators({}, dispatch)
-    };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(MapTagger);

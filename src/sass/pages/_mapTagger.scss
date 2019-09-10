@@ -1,5 +1,5 @@
 .map-tagger-root {
-    margin: 30px 25px;
+    padding: 30px 25px;
     .filter-root-box {
         .name-box {
             display: inline-block;
@@ -67,5 +67,58 @@
     }
     .custom-marker {
         fill: #48579a;
+    }
+    .modal-root {
+        .modal-main {
+            position: fixed;
+            background: #252830;
+            width: 75%;
+            height: auto;
+            top: 12.5%;
+            left: 12.5%;
+            padding: 12px 20px;
+            border-radius: 5px;
+        }
+    }
+    .close {
+        color: #000;
+        background: #fff;
+        border-radius: 10px;
+        width: 20px;
+    }
+    .river-map-modal-container {
+        min-height: 200px;
+        margin: 20px auto;
+        text-align: center;
+        .filter-loader {
+            margin-top: 25px;
+        }
+        .reservoir {
+            cursor: pointer;
+            &>g {
+                fill: black;
+                stroke-width: 8px;
+            }
+            circle {
+                fill: #00bdff;
+                stroke-width: 30px;
+            }
+            &.highlight {
+                circle {
+                    fill: red;
+                }
+            }
+        }
+        .sink {
+            cursor: pointer;
+            .sinkBorder {
+                fill: white;
+            }
+            text {
+                color: black;
+                font-size: 250px;
+                font-weight: bold;
+            }
+        }
     }
 }

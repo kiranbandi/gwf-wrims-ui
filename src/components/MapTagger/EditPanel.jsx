@@ -11,7 +11,9 @@ export default class CustomBasinMap extends Component {
 
 
     render() {
-        let { width, model, onChange, markerType = '', selectedNode = -1, markerNote = '', innerLoaderState, deleteLoaderState, editModeON } = this.props;
+        let { width, model, onChange,
+            markerType = '', selectedNode = -1, markerNote = '',
+            innerLoaderState, deleteLoaderState, editModeON, toggleModal } = this.props;
 
         return (
             <div className="edit-panel-root" style={{ width }}>
@@ -42,7 +44,7 @@ export default class CustomBasinMap extends Component {
 
                         <div className="input-group m-b">
                             <span className='inner-span' style={{ verticalAlign: 'top' }}>Link</span>
-                            <button className={"btn btn-info"}>Select on River Map</button>
+                            <button className={"btn btn-info"} onClick={toggleModal}>Select on River Map</button>
                         </div>
 
                         <button className={"btn btn-success-outline create-btn"} type="submit" onClick={this.props.onEditSubmit}>

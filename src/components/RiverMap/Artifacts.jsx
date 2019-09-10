@@ -19,6 +19,7 @@ export default class Markers extends Component {
 
     render() {
 
+
         let { artifacts = [], xScale, yScale, highlightName = '' } = this.props,
             // scale relative to the size of the screen
             reservoirIconScale = (xScale(1) - xScale(0)) / 90;
@@ -26,6 +27,7 @@ export default class Markers extends Component {
         // Reservoirs may either be normal reservoirs or power reservoirs
         const reservoirList = _.map(_.filter(artifacts, (d) => d.type == 'reservoir'),
             (reservoir, index) => {
+
                 let isPowerReservoir = ["R1_LDief", "R6_Cod", "R7_Tobin"].includes(reservoir.name);
                 const { coords, size = 1 } = reservoir;
                 return <g key={'reservoir-' + index} className={'reservoir' + ((highlightName == reservoir.name) ? ' highlight' : '')}
