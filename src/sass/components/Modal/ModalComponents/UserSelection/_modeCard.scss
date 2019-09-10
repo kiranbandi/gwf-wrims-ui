@@ -8,10 +8,9 @@
     border: 2px solid transparent;
     cursor: pointer;
     vertical-align: top;
-
+    position: relative;
     .mode-card-content {
         padding-top: 15px;
-
         .mode-card-title {
             font-size: 1.4em;
             padding: 6px;
@@ -20,25 +19,31 @@
         .mode-card-text {
             padding: 15px;
         }
-    
         .one-examples-title {
             text-align: left;
             padding: 15px;
             font-weight: bold;
         }
-    
         .one-examples-content {
             margin: -8px 0px 0px -5px;
-            
-            li{
+            li {
                 text-align: left;
             }
         }
+        .banner-icon {
+            border: 7.5px solid white;
+            border-radius: 10% 10% 75% 75%;
+            width: 50%;
+            height: auto;
+            margin: 25% 25%;
+            position: absolute;
+            top: 35%;
+            .icon {
+                font-size: 5em;
+            }
+        }
     }
-
     &:hover {
         border: 2px solid #7676af;
-        
     }
-    
 }

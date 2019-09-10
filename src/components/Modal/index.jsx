@@ -7,8 +7,8 @@ class Modal extends Component {
         super(props);
         this.state = {
             modalComponents: {
-                "userSelection": function (args) { return (<UserSelection args={args} />); },
-                "infoContainer": function (args) { return (<InformationContainer args={args} />); }
+                "userSelection": ((args) => <UserSelection args={args} />),
+                "infoContainer": ((args) => <InformationContainer args={args} />)
             }
         }
     }
