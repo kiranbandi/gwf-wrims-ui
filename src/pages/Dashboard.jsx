@@ -237,9 +237,9 @@ class DashboardRoot extends Component {
                                     scaleFix={!(mode === 1)} 
                                     trackedNode={trackedNode}/>
 
-                                {(mode === 1) && <VerticalSlider
+                                <VerticalSlider
                                     width={widthOfSlider}
-                                    height={mapWidth / 1.75} />}
+                                    height={mapWidth / 1.75} />
 
                                 <FlowPanel
                                     width={widthOfDashboard * 0.35}
