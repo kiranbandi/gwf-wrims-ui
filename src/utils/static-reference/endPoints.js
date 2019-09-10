@@ -11,7 +11,8 @@ var endPoints = {
     loginPaws: endPointRoot + "/auth/paws-login",
     getFlowData: endPointRoot + "/records/flow-data",
     getYearlyData: endPointRoot + "/records/yearly-flow-data",
-    getNodes: endPointRoot + "/nodes/get-nodes"
+    getNodes: endPointRoot + "/nodes/get-nodes",
+    registerNode: endPointRoot + "/nodes/register-node"
 }
 
 module.exports = endPoints;

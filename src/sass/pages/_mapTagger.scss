@@ -15,11 +15,6 @@
             button {
                 font-size: 15px;
             }
-            .filter-loader {
-                display: inline-block;
-                margin-left: 10px;
-                vertical-align: top;
-            }
         }
     }
     .mapboxDiv {
@@ -27,5 +22,10 @@
             background: white;
         }
         display: inline-block;
+    }
+    .filter-loader {
+        display: inline-block;
+        margin-left: 10px;
+        vertical-align: top;
     }
 }

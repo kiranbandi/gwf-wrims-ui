@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { } from '../components';
+import uniqid from 'uniqid';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Loading from 'react-loading';
-import { getNodes } from '../utils/requestServer';
+import { getNodes, registerNode, updateNode, deleteNode } from '../utils/requestServer';
 import toastr from '../utils/toastr';
 import { CustomBasinMap, EditPanel } from '../components';
 import PLACES from '../utils/static-reference/mapPlaces';
@@ -16,16 +17,6 @@ const BasinList = [
     { 'id': 'northSaskSask', 'label': 'North Saskatchewan River (Saskatchewan)' },
     { 'id': 'southSask', 'label': 'South Saskatchewan River (Saskatchewan)' }
 ];
-
-const baseMarker = {
-    number: 0, // unique code identifier for each marker
-    type: '',
-    modelID: '',
-    note: '',
-    link: '',
-    latitude: '',
-    longitude: ''
-};
 
 
 class MapTagger extends Component {
@@ -47,6 +38,73 @@ class MapTagger extends Component {
         this.loadNodes = this.loadNodes.bind(this);
         this.onChange = this.onChange.bind(this);
         this.onMapClick = this.onMapClick.bind(this);
+        this.onEditSubmit = this.onEditSubmit.bind(this);
+        this.onDelete = this.onDelete.bind(this);
+    }
+
+
+    onEditSubmit(event) {
+
+        event.preventDefault();
+
+        let { editModeON, markerNote, markerLink, currentModel,
+            markerType, selectedNode, currentNodes } = this.state;
+
+
+        if (markerType.length == 0) {
+            toastr["error"]("Please select a Marker Type", "UPDATE ERROR");
+        }
+        else {
+            if (editModeON) {
+                // make a call to edit the selected node then 
+            }
+            else {
+
+                // get the element from the current nodes list 
+                let marker = currentNodes[selectedNode];
+                //  add other elements to the marker
+                marker = {
+                    'latitude': String(marker.latitude),
+                    'longitude': String(marker.longitude),
+                    'note': markerNote,
+                    'link': markerLink,
+                    'type': markerType,
+                    'modelID': currentModel,
+                    'number': uniqid()
+                }
+
+                // toggle inner loader
+                this.setState({ innerLoaderState: true });
+
+                registerNode(marker)
+                    .then((response) => {
+
+                        debugger;
+                        // store the new node permanently
+                        currentNodes[selectedNode] = marker;
+                        // reset the form
+                        this.setState({
+                            currentNodes,
+                            selectedNode: -1,
+                            markerType: '',
+                            markerNote: '',
+                            markerLink: '',
+                            editModeON: false
+                        });
+                    })
+                    // toggle loader once request is completed
+                    .finally(() => {
+                        this.setState({ innerLoaderState: false });
+                    });
+            }
+        }
+
+    }
+
+    onDelete() {
+
+
+
     }
 
 
@@ -78,7 +136,14 @@ class MapTagger extends Component {
             // get the nodes for the current select basin
             getNodes(currentModel)
                 .then((currentNodes) => {
-                    this.setState({ currentNodes });
+                    this.setState({
+                        currentNodes,
+                        selectedNode: -1,
+                        markerType: '',
+                        markerNote: '',
+                        markerLink: '',
+                        editModeON: false
+                    });
                 })
                 // toggle loader once request is completed
                 .finally(() => {
@@ -94,6 +159,8 @@ class MapTagger extends Component {
     onChange(event) {
         this.setState({ [event.target.id]: event.target.value });
     }
+
+
 
 
     render() {
@@ -147,11 +214,11 @@ class MapTagger extends Component {
                             model={_.find(BasinList, (d) => d.id == currentModel)}
                             markerType={markerType}
                             markerNote={markerNote}
-
+                            onEditSubmit={this.onEditSubmit}
+                            onDelete={this.onDelete}
                             innerLoaderState={innerLoaderState}
                             deleteLoaderState={deleteLoaderState}
                             editModeON={editModeON}
-
                             width={widthOfDashboard * 0.25} />
                     </div>}
             </div>

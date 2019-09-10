@@ -44,7 +44,8 @@
         "redux-firestore": "^0.8.0",
         "react-redux-firebase": "^2.3.0",
         "firebase": "^6.3.3",
-        "toastr": "^2.1.4"
+        "toastr": "^2.1.4",
+        "uniqid": "^5.0.3"
     },
     "devDependencies": {
         "babel-core": "^6.26.3",
