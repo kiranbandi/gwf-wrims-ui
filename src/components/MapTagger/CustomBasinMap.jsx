@@ -54,7 +54,7 @@ export default class CustomBasinMap extends Component {
 
     renderMarker(nodeList) {
         return _.map(nodeList, (node, index) => {
-            return <Marker key={'maker-' + index} longitude={node.longitude} latitude={node.latitude}>
+            return <Marker key={'maker-' + index} longitude={+node.longitude} latitude={+node.latitude}>
                 <MarkerIcon type={node.type} />
             </Marker>
         })

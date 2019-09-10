@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Loading from 'react-loading';
 
 const markerTypes = ['Inflow', 'Irrigation Demand', 'Industrial/Public Consumption', 'Reservoir', 'Power generating Reservoir'];
 
@@ -15,7 +16,11 @@ export default class CustomBasinMap extends Component {
         return (
             <div className="edit-panel-root" style={{ width }}>
                 {selectedNode == -1 ?
-                    <div><h3>Click anywhere on the map to place a marker / Click an existing marker to edit it</h3></div> :
+                    <div className='text-center'>
+                        <h3 className='text-primary'>Click anywhere on the map to place a marker</h3>
+                        <h3>OR</h3>
+                        <h3 className='text-primary'> Click an existing marker to edit it</h3>
+                    </div> :
                     <form>
                         <div className="input-group">
                             <span className='inner-span'>Model Name</span>
@@ -37,20 +42,18 @@ export default class CustomBasinMap extends Component {
 
                         <div className="input-group m-b">
                             <span className='inner-span' style={{ verticalAlign: 'top' }}>Link</span>
-                            <span className='link-select'>Select on River Map</span>
+                            <button className={"btn btn-info"}>Select on River Map</button>
                         </div>
 
-                        <button className={"btn btn-success-outline create-btn"} type="submit" onClick={this.onEditSubmit}>
-                            <span className='create-span'>{editModeON ? "SAVE" : "UPDATE"} </span>
-                            {innerLoaderState && <Loading type='spin' height='25px' width='25px' color='#d6e5ff' delay={-1} />}
+                        <button className={"btn btn-success-outline create-btn"} type="submit" onClick={this.props.onEditSubmit}>
+                            <span className='create-span'>{!editModeON ? "SAVE MARKER" : "UPDATE MARKER"} </span>
+                            {innerLoaderState && <Loading className='filter-loader' type='spin' height='25px' width='25px' color='#d6e5ff' delay={-1} />}
                         </button>
-                        {!editModeON &&
-                            <button className={"btn btn-danger-outline  create-btn m-l"} type="submit" onClick={this.onDelete}>
+                        {editModeON &&
+                            <button className={"btn btn-danger-outline  create-btn m-l"} type="submit" onClick={this.props.onDelete}>
                                 <span className='create-span'>DELETE </span>
-                                {deleteLoaderState && <Loading type='spin' height='25px' width='25px' color='#d6e5ff' delay={-1} />}
+                                {deleteLoaderState && <Loading className='filter-loader' type='spin' height='25px' width='25px' color='#d6e5ff' delay={-1} />}
                             </button>}
-
-
                     </form>}
             </div>
         );

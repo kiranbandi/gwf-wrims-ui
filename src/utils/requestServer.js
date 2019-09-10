@@ -53,6 +53,14 @@ requestServer.getNodes = function(modelID) {
     });
 }
 
+requestServer.registerNode = function(markerParams) {
+    return new Promise((resolve, reject) => {
+        axios.post(endPoints.registerNode, {...markerParams }, { headers: { 'authorization': 'Bearer ' + sessionStorage.jwt } })
+            .then((response) => { resolve(response.data) })
+            .catch((err) => errorCallback(err, reject));
+    });
+}
+
 
 function errorCallback(error, reject) {
     if (error.response && error.response.data) {
