@@ -60,7 +60,10 @@ class VerticalSlider extends Component {
             setTimeout(() => { this.setState({ infoIconStyle: { position: `absolute`},  infoStyleFixDone: true }); }, 10);
         }
         
-        let { actions, flowData = {} } = this.props, { flowParams = null, name, isLoading = false } = flowData;
+        let { actions, flowData = {} } = this.props, 
+            { flowParams = null, name, isLoading = false } = flowData,
+            { currentMode } = this.state;
+
 
         if (!isLoading) {
             if (!!flowParams) {
