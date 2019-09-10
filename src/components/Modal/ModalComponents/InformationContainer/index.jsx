@@ -27,23 +27,29 @@ class InformationContainer extends Component {
                     tabName: "Scenario Editor",
                     cur: 0, 
                     thumbs: [
-                        
+                        'assets/img/info/ScenarioBuilder/1.png',
+                        'assets/img/info/ScenarioBuilder/2.png',
+                        'assets/img/info/ScenarioBuilder/3.png',
+                        'assets/img/info/ScenarioBuilder/4.png'
                     ] 
                 }, 
                 // 2: { 
                 //     tabName: "Flow Graph", 
                 //     cur: 0, 
-                //     thumbs: [] 
+                //     thumbs: [
+                //     ] 
                 // }, 
                 // 3: { 
                 //     tabName: "Metrics", 
                 //     cur: 0, 
-                //     thumbs: [] 
+                //     thumbs: [
+                //     ]  
                 // }, 
                 // 4: { 
                 //     tabName: "Filter Panel", 
                 //     cur: 0, 
-                //     thumbs: [] 
+                //     thumbs: [
+                //     ] 
                 // }
             }
         }
@@ -120,10 +126,11 @@ class InformationContainer extends Component {
                     </div>
                     {
                         tabs[infoModalState[1]].thumbs.map((path, idx) => {
-                            let backgroundImgStyle= { background: `url(${path})`, backgroundSize: '100%', margin:`${imageMarginVertical}px ${0}px` };    
+                            let backgroundImgStyle= { background: `url(${path})`, margin:`${imageMarginVertical}px ${0}px` };    
                             return (<div 
                                      style={backgroundImgStyle} 
-                                     className={"image-container" + ((infoModalState[0] && (tabs[infoModalState[1]].cur === idx)) ? " active" : "")}>
+                                     className={"image-container" + ((infoModalState[0] && (tabs[infoModalState[1]].cur === idx)) ? " active" : "")}
+                                     key={`${path.slice(-3)+idx}`}>
                                     </div>);
                         })
                     }
