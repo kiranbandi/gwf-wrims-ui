@@ -1,30 +1,36 @@
 export default [{
-        id: "xrpzzGsfy7o",
+        id: "q80L9v4kvjs",
+        thumb: "0",
+        title: "Demand/Supply Slider"
+    },
+
+    {
+        id: "0Yo9ulYqNik",
+        thumb: "0",
+        title: "Graph Functionality"
+    },
+
+    {
+        id: "PyULUtdYCX0",
+        thumb: "0",
+        title: "Tutorial Icons"
+    },
+
+    {
+        id: "ociQ6Q9kyQc",
+        thumb: "0",
+        title: "Points Of Interest"
+    },
+
+    {
+        id: "7SmICYV-CqA",
         thumb: "0",
         title: "Region Selection"
     },
 
     {
-        id: "kOvwu_0z2jM",
+        id: "nRAizQ2wz1s",
         thumb: "0",
-        title: "Points of Interest"
-    },
-
-    {
-        id: "QW206F8BTzE",
-        thumb: "0",
-        title: "Selection Filter"
-    },
-
-    {
-        id: "NNAkYbNBeK0",
-        thumb: "0",
-        title: "Decreasing Supply"
-    },
-
-    {
-        id: "Y74jb1V_DOg",
-        thumb: "0",
-        title: "Visualizing Flow Rates"
+        title: "Node Filtering"
     }
 ];
