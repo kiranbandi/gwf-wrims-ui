@@ -13,25 +13,9 @@ requestServer.requestLogin = function(access_token, isPAWS) {
     });
 }
 
-requestServer.getFileCatalog = function() {
-    return new Promise((resolve, reject) => {
-        axios.get(endPoints.getCatalog, { headers: { 'authorization': 'Bearer ' + sessionStorage.jwt } })
-            .then((response) => { resolve(response.data) })
-            .catch((err) => errorCallback(err, reject));
-    });
-}
-
-requestServer.getPathData = function(path) {
-    return new Promise((resolve, reject) => {
-        axios.post(endPoints.getPathData, {...path }, { headers: { 'authorization': 'Bearer ' + sessionStorage.jwt } })
-            .then((response) => { resolve(response.data) })
-            .catch((err) => errorCallback(err, reject));
-    });
-}
-
 requestServer.getFlowData = function(params) {
     return new Promise((resolve, reject) => {
-        axios.post(endPoints.getFlowData, {...params }, { headers: { 'authorization': 'Bearer ' + sessionStorage.jwt } })
+        axios.post(endPoints.getFlowData, {...params })
             .then((response) => { resolve(response.data) })
             .catch((err) => errorCallback(err, reject));
     });
@@ -39,7 +23,7 @@ requestServer.getFlowData = function(params) {
 
 requestServer.getYearlyData = function(params) {
     return new Promise((resolve, reject) => {
-        axios.post(endPoints.getYearlyData, {...params }, { headers: { 'authorization': 'Bearer ' + sessionStorage.jwt } })
+        axios.post(endPoints.getYearlyData, {...params })
             .then((response) => { resolve(response.data) })
             .catch((err) => errorCallback(err, reject));
     });
@@ -47,7 +31,7 @@ requestServer.getYearlyData = function(params) {
 
 requestServer.getNodes = function(modelID) {
     return new Promise((resolve, reject) => {
-        axios.post(endPoints.getNodes, { modelID }, { headers: { 'authorization': 'Bearer ' + sessionStorage.jwt } })
+        axios.post(endPoints.getNodes, { modelID })
             .then((response) => { resolve(response.data) })
             .catch((err) => errorCallback(err, reject));
     });
@@ -76,9 +60,6 @@ requestServer.deleteNode = function(markerParams) {
             .catch((err) => errorCallback(err, reject));
     });
 }
-
-
-
 
 function errorCallback(error, reject) {
     if (error.response && error.response.data) {

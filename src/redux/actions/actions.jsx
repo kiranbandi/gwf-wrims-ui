@@ -1,7 +1,7 @@
 import * as types from './actionTypes';
 import _ from 'lodash';
 import { hashHistory } from 'react-router';
-import { actionTypes } from 'redux-firestore';
+import toastr from '../../utils/toastr';
 
 export const setUser = () => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
@@ -11,20 +11,20 @@ export const setUser = () => {
         const email = getState().delta.email;
         const data = "";
 
-          
+
         // Realtime Database Reference
         var userStatusDatabaseRef = firebase.database().ref("/status/" + uid);
 
         var isOfflineForDatabase = {
-        state: "offline",
-        last_changed: firebase.database.ServerValue.TIMESTAMP
+            state: "offline",
+            last_changed: firebase.database.ServerValue.TIMESTAMP
         };
 
         var isOnlineForDatabase = {
-        state: "online",
-        last_changed: firebase.database.ServerValue.TIMESTAMP
+            state: "online",
+            last_changed: firebase.database.ServerValue.TIMESTAMP
         };
-        
+
         // Cloud Firestore Reference
         var userStatusFirestoreRef = firestore.doc('/users/' + uid);
 
@@ -32,7 +32,7 @@ export const setUser = () => {
             state: "offline",
             last_changed: firestore.FieldValue.serverTimestamp(),
             email,
-            data 
+            data
 
         };
 
@@ -40,11 +40,11 @@ export const setUser = () => {
             state: "online",
             last_changed: firestore.FieldValue.serverTimestamp(),
             email,
-            data 
+            data
         };
-            
 
-        firebase.database().ref('.info/connected').on('value', function(snapshot) {
+
+        firebase.database().ref('.info/connected').on('value', function (snapshot) {
             if (snapshot.val() === false) {
                 // Instead of simply returning, we'll also set Firestore's state
                 // to 'offline'. This ensures that our Firestore cache is aware
@@ -53,20 +53,21 @@ export const setUser = () => {
                 return;
             };
 
-            userStatusDatabaseRef.onDisconnect().set(isOfflineForDatabase).then(function() {
+            userStatusDatabaseRef.onDisconnect().set(isOfflineForDatabase).then(function () {
                 userStatusDatabaseRef.set(isOnlineForDatabase);
 
                 // We'll also add Firestore set here for when we come online.
                 userStatusFirestoreRef.set(isOnlineForFirestore);
             });
         });
-  
+
         //   dispatch({type: types.SET_USER, uid});
-    }};
+    }
+};
 
 export const setUserData = (newData) => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
-        
+
         const firestore = getFirestore();
         const userUID = getState().delta.username;
 
@@ -75,13 +76,14 @@ export const setUserData = (newData) => {
 
 
         firestore.update(userRef, userRefUpdate).then(() => {
-                dispatch({type: types.SET_USER_DATA, data: newData});
-                return;
-            })
-    }};
+            dispatch({ type: types.SET_USER_DATA, data: newData });
+            return;
+        })
+    }
+};
 
 export function setTrackedUser(trackedUser) {
-    return { type: types.SET_TRACKED_USER, trackedUser}
+    return { type: types.SET_TRACKED_USER, trackedUser }
 }
 
 
@@ -200,9 +202,15 @@ export function setMode(mode) {
         hashHistory.push('/');
     }
 
-    return { type: types.SET_MODE, mode }
+    // if a user sets mode 3 and is selecting the collaborative mode , force the user to login first
+    if (mode == 3 && !sessionStorage.jwt) {
+        toastr["error"]("Access to this mode is restricted, Please Login to proceed", "Restricted Access Error");
+        return { type: types.SET_MODE, mode: -1 };
+    };
+
+    return { type: types.SET_MODE, mode };
 }
 
 export function setInfoModalState(data) {
-    return { type: types.SET_INFO_MODAL_STATE, data }
+    return { type: types.SET_INFO_MODAL_STATE, data };
 }

@@ -53,7 +53,7 @@ class UserSelection extends Component {
                     </ModeCard>
                     <ModeCard
                         title={`Collaborate with other users`}
-                        text={`In this mode, you can collaborate with other users to interact with the basin.`}
+                        text={`In this mode, you can collaborate with other users to interact with the basin.You need to login either with your PAWS profile or a gmail account to access this mode.`}
                         onClick={() => setMode(3)} >
                         <div className='banner-icon'><span className="icon icon-users"></span></div>
                     </ModeCard >

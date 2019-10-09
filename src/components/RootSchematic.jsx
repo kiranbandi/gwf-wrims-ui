@@ -5,9 +5,6 @@ import tileMap from '../utils/static-reference/tileMap';
 import readwareBlobs from '../utils/static-reference/readwareBlobs';
 import Switch from "react-switch";
 import { BasinMap, UserActivityPanel } from '../components';
-import { compose, bindActionCreators } from 'redux';
-import { firestoreConnect } from 'react-redux-firebase'
-import { connect } from 'react-redux'
 
 //  Image url handling is convoluted in scss , much easier to set inline and get images from root
 let backgroundStyleSchematic = { background: 'url(assets/img/overall.png)', backgroundSize: '100%' };

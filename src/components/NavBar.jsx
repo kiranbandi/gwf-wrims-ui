@@ -105,7 +105,7 @@ class NavBar extends Component {
                             </li>
                         </ul>
                         <ul className='nav navbar-nav navbar-right'>
-                            {!nullUserState && logged_in &&
+                            {!nullUserState &&
                                 <li>
 
                                     <a className="mode-switch-button" onClick={this._onSwitchModeButtonClick}>
