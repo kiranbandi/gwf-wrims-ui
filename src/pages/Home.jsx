@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 let backgroundStyle = { backgroundImage: 'url(assets/img/gwf.jpg)' };
 import videoTileData from '../utils/static-reference/videoTilesData';
 import { YoutubeLayout } from '../components'
+import { Link } from 'react-router';
 
 class Home extends Component {
 
@@ -22,8 +23,8 @@ class Home extends Component {
         <div className="home-header" style={backgroundStyle}>
           <div className="container">
             <div className='col-lg-12 text-lg-left text-md-center text-sm-center text-xs-center'>
-              <h1>GWF-HCI</h1>
-              <p>Global Water Futures, User Centric Decision Support Systems</p>
+              <h1>Global Water Futures</h1>
+              <p>User Centric Decision Support Systems</p>
             </div>
           </div>
         </div>
@@ -41,20 +42,24 @@ class Home extends Component {
             The river basin, and the livelihoods it supports, are at risk from a changing climate, and
             competing visions of how to best manage and use water into the future. This decision support
             platform provides access to the innovative modelling tools developed through the Global Water
-            Futures network for exploration of management options under future water uncertainty. To access
-            the platform, login and select from one of the many options below.
+            Futures network for exploration of management options under future water uncertainty.
+            Click <Link to={'/Dashboard'}> here </Link>  to get started.
           </p>
 
           <h1 id='demo-tile'>Dashboard Demonstration</h1>
           <YoutubeLayout videoTileData={videoTileData} />
           <h1>Learn more</h1>
-          <p>The project is aimed at building decision support tools for all parties involved in the Global Water Futures
-            Project.The tools are in the form of novel visualizations and interactive decision - making systems.Global Water
-            Futures (GWF) aims to position Canada as a global leader in water science for cold regions and will address
-            the strategic needs of the Canadian economy in adapting to change and managing risks of uncertain water futures
-            extreme events. End-user needs will be our beacon and will drive strategy and shape our science.To learn more about the
-            GWF Project please visit this link - <a href='https://gwf.usask.ca/'>GWF</a>
+          <p> This project is part of the <a href="https://gwf.usask.ca/impc/">Integrated Modelling Program for Canada</a>(IMPC) which
+          delivers tools to support decision making for uncertain water resources, considering the range of stakeholder needs in
+          Canada’s major river basins. IMPC is a project of <a href='https://gwf.usask.ca/'>Global Water Futures (GWF)</a>, which aims to position Canada as a global
+          leader in water science for cold regions and provides disaster warning, improved prediction of climate and water futures,
+          and decision support tools such as interactive visualizations needed to inform adaptation to change and risk management.
           </p>
+          <p>Contributions are made by:</p>
+          <p><b>Faculty Leads - </b> Carl Gutwin, Saman Razavi, Patricia Gober </p>
+          <p><b>IMPC Manager - </b> Hayley Carlson</p>
+          <p><b>Highly Qualified Personnel - </b>Leila Eamen, Mustakim Ali Shah, Nhu Do, Ishan Saxena, Ricardo Rheeder, Venkat Bandi</p>
+
         </div>
       </div>
 
